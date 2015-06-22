@@ -12,7 +12,7 @@ public class TableClient
 	public static final String FIELD_ID = "id_cliente";
 	public static final String FIELD_NAME = "nome";
 	public static final String FIELD_SURNAME = "cognome";
-	public static final String FIELD_PWD = "pwd";
+	public static final String FIELD_PWD = "password";
 	public static final String FIELD_PHONE = "num_telefono";
 	
 	DbAccess db;

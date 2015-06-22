@@ -16,6 +16,12 @@ public class MyUtil
 	
 	MyUtil(){}
 	
+	/**
+	  * Crea una stringa codifica in md5 a partire dal parametro di 
+	  * input
+	  * @param     input la stringa da trasformare
+	  * @return    stringa in codifica md5
+	  */
 	public static String getMD5(String input) 
 	{
         try 
@@ -37,13 +43,22 @@ public class MyUtil
         }
     }
 	
+	/**
+	  * Effettua un controllo sul database per controllare
+	  * che sia un utente lecito oppure no
+	  * @param     db variabile di accesso al database
+	  * @param     name nome dell'utente
+	  * @param     pwd password dell'utente non in md5
+	  * @return    true se l'utente e' stato riconosciuto false altrimenti
+	  */
 	public static boolean login (DbAccess db, String name, String pwd) throws SQLException
 	{
 		//return true;
 		Statement st = db.getConnection().createStatement();
 		String md5 = MyUtil.getMD5(pwd);
-		ResultSet rs = st.executeQuery("SELECT * FROM "+DbString.TBL_CLIENTS+" WHERE ("+TableClient.FIELD_NAME+"="+name+
-				"&&"+TableClient.FIELD_PWD+"="+md5+");");
+		String query = "SELECT * FROM "+DbString.TBL_CLIENTS+" WHERE ("+TableClient.FIELD_NAME+"='"+name+
+				"' AND "+TableClient.FIELD_PWD+"='"+md5+"');";
+		ResultSet rs = st.executeQuery(query);
 		
 		if(rs.next())
 			return true;
