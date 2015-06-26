@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.collections.FXCollections ?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="600.0">
+         <center>
+            <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Nome Utente: ">
+                     <padding>
+                        <Insets left="25.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="nameUser_field">
+                     <FlowPane.margin>
+                        <Insets left="35.0" top="10.0" />
+                     </FlowPane.margin>
+                  </TextField>
+                  <Label text="Tipo: ">
+                     <FlowPane.margin>
+                        <Insets left="20.0" />
+                     </FlowPane.margin>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </Label>
+                  <ChoiceBox fx:id="typeUser_Choice" prefWidth="150.0">
+                     <FlowPane.margin>
+                        <Insets left="35.0" top="10.0" />
+                     </FlowPane.margin>
+                     <items>
+                     	 <FXCollections fx:factory="observableArrayList">
+          					<String fx:value="Cliente" />
+          					<String fx:value="Amministratore" />
+        				 </FXCollections>
+  					</items>
+                  </ChoiceBox>
+                  <Label text="Numero di telefono:">
+                     <FlowPane.margin>
+                        <Insets left="25.0" top="10.0" />
+                     </FlowPane.margin>
+                  </Label>
+                  <TextField fx:id="cellNumber_field">
+                     <FlowPane.margin>
+                        <Insets top="10.0" />
+                     </FlowPane.margin>
+                  </TextField>
+                  <Label text="Password: ">
+                     <FlowPane.margin>
+                        <Insets top="10.0" />
+                     </FlowPane.margin>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <PasswordField fx:id="pwdUser_field">
+                     <FlowPane.margin>
+                        <Insets top="10.0" />
+                     </FlowPane.margin>
+                  </PasswordField>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </FlowPane>
+         </center>
+         <top>
+            <Label alignment="CENTER" text="Inserisci un nuovo utente." BorderPane.alignment="TOP_LEFT">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <padding>
+                  <Insets left="2.5" top="4.0" />
+               </padding>
+            </Label>
+         </top>
+         <bottom>
+            <AnchorPane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="cancel_bttn" layoutX="368.0" layoutY="1.0" mnemonicParsing="false" prefWidth="70.0" text="Cancel" />
+                  <Button fx:id="submit_bttn" layoutX="471.0" layoutY="1.0" mnemonicParsing="false" prefWidth="70.0" text="Ok" />
+               </children>
+            </AnchorPane>
+         </bottom>
+      </BorderPane>
+   </children>
+</Pane>

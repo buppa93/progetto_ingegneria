@@ -18,6 +18,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
+import javafx.stage.Stage;
+
 public class FXMLExampleController 
 {
 	@FXML private Label actiontarget;
@@ -48,6 +50,14 @@ public class FXMLExampleController
 	@FXML protected void loginAdmin(ActionEvent event) 
 	{
 		actiontarget.setText("login admin");
+	}
+	
+	@FXML protected void newUser(ActionEvent event) throws Exception 
+	{
+		actiontarget.setText("nuovo utente");
+		//Stage stage = new Stage();
+		FXMLNewUserView newuserview =  new FXMLNewUserView();
+		newuserview.start(new Stage());
 	}
 
 	public Optional<Pair<String, String>> runLoginDialog()
