@@ -14,6 +14,7 @@ public class TableClient
 	public static final String FIELD_SURNAME = "cognome";
 	public static final String FIELD_PWD = "password";
 	public static final String FIELD_PHONE = "num_telefono";
+	public static final String FIELD_TYPE = "tipo";
 	
 	DbAccess db;
 	
@@ -26,8 +27,8 @@ public class TableClient
 		{
 			Statement st = db.getConnection().createStatement();
 			st.executeUpdate("INSERT INTO "+DbString.TBL_CLIENTS+" "
-					+ "("+FIELD_ID+","+FIELD_NAME+","+FIELD_SURNAME+","+FIELD_PHONE+") values ('" +client.getId() +",'" + client.getName() +
-							",'" + client.getSurname() + "','" + client.getTelephoneNumber() + "')");
+					+ "("+FIELD_ID+","+FIELD_NAME+","+FIELD_SURNAME+","+FIELD_PHONE+","+FIELD_PWD+","+FIELD_TYPE+") values ('" +client.getId() +",'" + client.getName() +
+							",'" + client.getSurname() + "','" + client.getTelephoneNumber() + "','" + client.getPassword() +"','" + client.getType() +"')");
 			st.close();
 		} 
 		catch (SQLException e) 

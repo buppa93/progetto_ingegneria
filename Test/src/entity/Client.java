@@ -6,6 +6,8 @@ public class Client
 	private String name;
 	private String surname;
 	private String TelephoneNumber;
+	private String Type;
+	private String pwd;
 
 	public Client()
 	{
@@ -13,13 +15,17 @@ public class Client
 		this.name="NULL";
 		this.surname="NULL";
 		this.TelephoneNumber="NULL";
+		this.Type = "NULL";
+		this.pwd = "NULL";
 	}
 
-	public Client(String name, String surname, String TelephoneNumber)
+	public Client(String name, String surname, String TelephoneNumber, String type, String pwd)
 	{
 		this.name=name;
 		this.surname=surname;
 		this.TelephoneNumber=TelephoneNumber;
+		this.Type = type;
+		this.pwd = pwd;
 	}
 
 	public String getId()
@@ -34,18 +40,32 @@ public class Client
 	public String getTelephoneNumber()
 	{return this.TelephoneNumber;}
 	
-	public String setID(String id)
-	{return this.id=id;}
+	public String getType()
+	{return this.Type;}
 	
-	public String setName(String name)
-	{return this.name=name;}
+	public String getPassword()
+	{return this.pwd;}
 	
-	public String setSurname(String surname)
-	{return this.surname=surname;}
+	public void setID(String id)
+	{this.id=id;}
 	
-	public String setTelephoneNumber(String TelephoneNumber)
-	{return this.TelephoneNumber=TelephoneNumber;}
+	public void setName(String name)
+	{this.name=name;}
 	
+	public void setSurname(String surname)
+	{this.surname=surname;}
+	
+	public void setTelephoneNumber(String TelephoneNumber)
+	{this.TelephoneNumber=TelephoneNumber;}
+	
+	public void setType(String type)
+	{this.Type=type;}
+	
+	public void setPassword(String pwd)
+	{this.pwd=pwd;}
+	
+	
+	//TODO modificare toString con tipo e password
 	public String toString()
 	{
 		return "ID of the customer:" + this.id + " ; " + "Name of the customer:" + this.name + "; "
