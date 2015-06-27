@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS user (
   id_user VARCHAR(5) NOT NULL PRIMARY KEY,
   nome VARCHAR(40) NOT NULL,
   cognome VARCHAR(40) NOT NULL,
-  num_teleono VARCHAR(10) NOT NULL,
+  num_telefono VARCHAR(10) NOT NULL,
   password TEXT NOT NULL,
   tipo VARCHAR(3) NOT NULL
   );

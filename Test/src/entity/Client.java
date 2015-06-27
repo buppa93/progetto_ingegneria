@@ -19,8 +19,9 @@ public class Client
 		this.pwd = "NULL";
 	}
 
-	public Client(String name, String surname, String TelephoneNumber, String type, String pwd)
+	public Client(String id, String name, String surname, String TelephoneNumber, String type, String pwd)
 	{
+		this.id = id;
 		this.name=name;
 		this.surname=surname;
 		this.TelephoneNumber=TelephoneNumber;

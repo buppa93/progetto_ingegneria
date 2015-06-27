@@ -9,7 +9,7 @@ import entity.Client;
 
 public class TableClient
 {
-	public static final String FIELD_ID = "id_cliente";
+	public static final String FIELD_ID = "id_user";
 	public static final String FIELD_NAME = "nome";
 	public static final String FIELD_SURNAME = "cognome";
 	public static final String FIELD_PWD = "password";
@@ -26,9 +26,12 @@ public class TableClient
 		try 
 		{
 			Statement st = db.getConnection().createStatement();
-			st.executeUpdate("INSERT INTO "+DbString.TBL_CLIENTS+" "
-					+ "("+FIELD_ID+","+FIELD_NAME+","+FIELD_SURNAME+","+FIELD_PHONE+","+FIELD_PWD+","+FIELD_TYPE+") values ('" +client.getId() +",'" + client.getName() +
-							",'" + client.getSurname() + "','" + client.getTelephoneNumber() + "','" + client.getPassword() +"','" + client.getType() +"')");
+			String query = "INSERT INTO "+DbString.TBL_CLIENTS+" "
+					+ "("+FIELD_ID+","+FIELD_NAME+","+FIELD_SURNAME+","+FIELD_PHONE+","+FIELD_PWD+","+FIELD_TYPE+") values ('" +client.getId()+"','"+ client.getName() +
+					"','" + client.getSurname() + "','" + client.getTelephoneNumber() + "','" + client.getPassword() +"','" + client.getType() +"');";
+			System.out.println(query);
+			st.executeUpdate(query);
+			System.out.println(st.toString());
 			st.close();
 		} 
 		catch (SQLException e) 

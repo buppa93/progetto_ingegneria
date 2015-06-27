@@ -1,4 +1,3 @@
-import java.awt.TextField;
 
 import database.DatabaseConnectionException;
 import database.DbAccess;
@@ -7,8 +6,9 @@ import utility.MyUtil;
 import entity.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 public class FXMLNewUserViewController 
 {
@@ -16,7 +16,7 @@ public class FXMLNewUserViewController
 	@FXML private TextField surName_field;
 	@FXML private TextField cellNumber_field;
 	@FXML private PasswordField pwdUser_field;
-	@FXML private ComboBox<String> typeUser_Choice;
+	@FXML private ChoiceBox<String> typeUser_Choice;
 	
 	@FXML protected void submit(ActionEvent event) throws DatabaseConnectionException 
 	{
@@ -26,16 +26,15 @@ public class FXMLNewUserViewController
 		else
 			type = "adm";
 		
-		
+		//TODO aggiungere il metodo di generazione id per user
 		String pwd = pwdUser_field.getText();
 		pwd = MyUtil.getMD5(pwd);
-		Client c = new Client(nameUser_field.getText(), surName_field.getText(), cellNumber_field.getText(), type, pwd);
+		Client c = new Client("12345", nameUser_field.getText(), surName_field.getText(), cellNumber_field.getText(), type, pwd);
 		
 		DbAccess db = new DbAccess();
 		db.initConnection();
 		TableClient table = new TableClient(db);
 		table.insertClient(c);
-		//TODO controllare perche' non inserisce
 	}
 
 }
