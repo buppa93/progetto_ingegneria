@@ -3,6 +3,7 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 
 import utility.MyUtil;
 import entity.Client;
@@ -56,6 +57,23 @@ public class TableClient
 			e.printStackTrace();
 		}
 		return c;
+	}
+	
+	public static String makeId()
+	{
+		Random random = new Random();
+		String id="";
+		int j = 1;
+		int n = 9-j;
+		int k = 0;
+		
+		for(int i=1; i<6; i++)
+		{
+			k = random.nextInt(n)+j;
+			id+=k;
+		}
+		System.out.println(id);
+		return id;
 	}
 
 }
