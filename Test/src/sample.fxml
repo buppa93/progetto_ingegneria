@@ -12,5 +12,6 @@
       
       <Label fx:id="actiontarget" layoutX="186.0" layoutY="238.0" text="Label" />
       <Button fx:id="newUser_bttn" layoutX="131.0" layoutY="195.0" mnemonicParsing="false" onAction="#newUser" prefHeight="26.0" prefWidth="146.0" text="Nuovo Utente" />
+      <Button fx:id="noleggia_bttn" layoutX="166.0" layoutY="14.0" mnemonicParsing="false" text="Noleggia" onAction="#noleggia"/>
    </children>
 </AnchorPane>

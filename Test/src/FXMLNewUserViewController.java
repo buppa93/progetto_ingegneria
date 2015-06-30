@@ -29,7 +29,8 @@ public class FXMLNewUserViewController
 		//TODO aggiungere il metodo di generazione id per user
 		String pwd = pwdUser_field.getText();
 		pwd = MyUtil.getMD5(pwd);
-		Client c = new Client("12345", nameUser_field.getText(), surName_field.getText(), cellNumber_field.getText(), type, pwd);
+		String id = TableClient.makeId();
+		Client c = new Client(id, nameUser_field.getText(), surName_field.getText(), cellNumber_field.getText(), type, pwd);
 		
 		DbAccess db = new DbAccess();
 		db.initConnection();
