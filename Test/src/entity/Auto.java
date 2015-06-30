@@ -69,7 +69,7 @@ public class Auto extends TypeSection
 	
 	public String toString()
 	{
-		return this.targa + "," + this.model + "," + this.brand + "," + this.km + "," + this.disp + "," + agency + "," + client+","+ contract;
+		return this.targa + "," + this.model + "," + this.brand + "," + this.km + "," + this.disp;
 	}
 }
 
