@@ -58,6 +58,14 @@ public class FXMLExampleController
 		FXMLNewUserView newuserview =  new FXMLNewUserView();
 		newuserview.start(new Stage());
 	}
+	
+	@FXML protected void noleggia(ActionEvent event) throws Exception 
+	{
+		actiontarget.setText("noleggia");
+		//Stage stage = new Stage();
+		FXMLNoleggioView newnoleggioview =  new FXMLNoleggioView();
+		newnoleggioview.start(new Stage());
+	}
 
 	public Optional<Pair<String, String>> runLoginDialog()
 	{
