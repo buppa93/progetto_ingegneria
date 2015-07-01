@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS utente (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS tipo_contratto(
   `id_tipo` INT(11) NOT NULL COMMENT '',
-  `tipo_noleggio` VARCHAR(20) NOT NULL COMMENT '',
-  `tipo_chilometraggio` VARCHAR(20) NOT NULL COMMENT '',
+  `tipo_noleggio` INT(20) NOT NULL COMMENT '',
+  `tipo_chilometraggio` INT(20) NOT NULL COMMENT '',
   PRIMARY KEY (`id_tipo`)  COMMENT '');
   
 -- -----------------------------------------------------
@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS tipo_contratto(
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS fascia (
   `nome` CHAR(1) NOT NULL COMMENT '',
-  `n_porte` INT(11) NOT NULL COMMENT '',
-  `n_posti` INT(11) NOT NULL COMMENT '',
+  `n_porte` INT NOT NULL COMMENT '',
+  `n_posti` INT NOT NULL COMMENT '',
   `tipo_vettura` VARCHAR(20) NOT NULL COMMENT '',
   PRIMARY KEY (`nome`)  COMMENT '');
 

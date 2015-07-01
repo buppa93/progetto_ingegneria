@@ -23,7 +23,15 @@ public class Contract extends TypeContract
 		//this.restit=restit;
 		this.kmmax=kmmax;
 	}
+	public String getNumberOfAgency()
+	{
+		return number.getNumber();
 	
+	}
+	
+	public String getNumberCliente(){
+		return idCliente.getId();
+	}
 	public String getNumero_ordine()
 	{return this.numero_ordine;}
 	
