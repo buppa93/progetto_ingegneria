@@ -13,7 +13,7 @@ public class TableAuto
 	public static final String FIELD_MODEL = "modello";
 	public static final String FIELD_BRAND = "marca";
 	public static final String FIELD_KM = "km";
-	public static final String FIELD_DISP = "disponibilit�";
+	public static final String FIELD_DISP = "disponibilita";
 	public static final String FIELD_AGENCY = "agenzia";
 	public static final String FIELD_CLIENT = "contratto";	
 	DbAccess db;
@@ -29,8 +29,10 @@ public class TableAuto
 			String query = "INSERT INTO "+DbString.TBL_AGENCIES+" "
 					+ "("+FIELD_TARGA+","+FIELD_MODEL+","+FIELD_BRAND+","+FIELD_KM+","+FIELD_DISP+","+FIELD_AGENCY+") values ('" +auto.getTarga()+"','"+ auto.getModel() +
 					"','" + auto.getBrand()+","+auto.getKm()+","+auto.getAvailability()+","+auto.getNumberOfAgency()+"');";
+			//TODO togliere
 			System.out.println(query);
 			st.executeUpdate(query);
+			//TODO togliere
 			System.out.println(st.toString());
 			st.close();
 		} 

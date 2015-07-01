@@ -19,7 +19,7 @@ public class TableAgency
 	public TableAgency(DbAccess db)
 	{this.db = db;}
 	
-	public void insertClient (Agency agency)
+	public void insertAgency (Agency agency)
 	{
 		try 
 		{
@@ -45,12 +45,12 @@ public class TableAgency
 		try 
 		{
 			Statement st = db.getConnection().createStatement();
-			c = (Agency) st.executeQuery("SELECT * FROM "+"agenzie"+" WHERE "+FIELD_NUMBER+"="+number+";");
+			c = (Agency) st.executeQuery("SELECT * FROM "+DbString.TBL_AGENCIES+" WHERE "+FIELD_NUMBER+"="+number+";");
 			st.close();
 		} 
 		catch (SQLException e) 
 		{ 
-			System.out.println("inserimento non eseguito"); 
+			System.out.println("query non eseguita"); 
 			e.printStackTrace();
 		}
 		return c;
@@ -60,7 +60,7 @@ public class TableAgency
 	{
 			List<String> agencies = new ArrayList<String>();
 			Statement st = db.getConnection().createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM agenzie;");
+			ResultSet rs = st.executeQuery("SELECT * FROM "+DbString.TBL_AGENCIES+";");
 			
 			
 			while(rs.next())
