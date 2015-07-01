@@ -13,7 +13,7 @@ public class FXMLAlertRegister extends Application {
 	     
 	         Scene scene = new Scene(root, 202, 213);
 	     
-	         stage.setTitle("FXML Welcome");
+	         stage.setTitle("ATTENZIONE!");
 	         stage.setScene(scene);
 	         stage.show();
 	     }

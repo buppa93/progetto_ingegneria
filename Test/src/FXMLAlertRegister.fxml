@@ -9,14 +9,9 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLAlertRegisterController">
    <children>
-      <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-        </items>
-      </SplitPane>
-      <TitledPane animated="false" text="Sei già registrato?">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <center>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <CheckBox fx:id="registered_chbox" layoutX="6.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="173.0" text="SI, SONO REGISTRATO" />
                   <CheckBox fx:id="notregistered_chbox" layoutX="6.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="193.0" text="NO, NON SONO REGISTRATO" />
@@ -24,10 +19,10 @@
                   <Button fx:id="submit_bttn" layoutX="106.0" layoutY="130.0" mnemonicParsing="false" onAction="#confirm" text="CONFERMA" />
                </children>
             </AnchorPane>
-        </content>
-         <font>
-            <Font name="Bauhaus 93" size="18.0" />
-         </font>
-      </TitledPane>
+         </center>
+         <top>
+            <Label text="SEI REGISTRATO?" BorderPane.alignment="CENTER" />
+         </top>
+      </BorderPane>
    </children>
 </AnchorPane>
