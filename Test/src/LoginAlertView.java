@@ -17,6 +17,7 @@ public class LoginAlertView
 {
 	public static Optional<Pair<String, String>> runLoginDialog()
 	{
+		//questo e il loginframe
 		// Create the custom dialog.
 		Dialog<Pair<String, String>> dialog = new Dialog<>();
 		dialog.setTitle("Login Dialog");
