@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+        </items>
+      </SplitPane>
+      <TitledPane animated="false" text="Sei già registrato?">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <CheckBox fx:id="registered_chbox" layoutX="6.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="173.0" text="SI, SONO REGISTRATO" />
+                  <CheckBox fx:id="notregistered_chbox" layoutX="6.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="193.0" text="NO, NON SONO REGISTRATO" />
+                  <Button fx:id="cancel_bttn" layoutX="14.0" layoutY="130.0" mnemonicParsing="false" text="ANNULLA" />
+                  <Button fx:id="submit_bttn" layoutX="106.0" layoutY="130.0" mnemonicParsing="false" onAction="#confirm" text="CONFERMA" />
+               </children>
+            </AnchorPane>
+        </content>
+         <font>
+            <Font name="Bauhaus 93" size="18.0" />
+         </font>
+      </TitledPane>
+   </children>
+</AnchorPane>
