@@ -59,6 +59,7 @@ public class MyUtil
 		String query = "SELECT * FROM "+DbString.TBL_CLIENTS+" WHERE ("+TableClient.FIELD_NAME+"='"+name+
 				"' AND "+TableClient.FIELD_PWD+"='"+md5+"');";
 		ResultSet rs = st.executeQuery(query);
+		st.close();
 		
 		if(rs.next())
 			return true;

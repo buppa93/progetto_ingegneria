@@ -1,7 +1,10 @@
 package database;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import entity.Agency;
 
@@ -42,7 +45,7 @@ public class TableAgency
 		try 
 		{
 			Statement st = db.getConnection().createStatement();
-			c = (Agency) st.executeQuery("SELECT * FROM "+DbString.TBL_AGENCIES+" WHERE "+FIELD_NUMBER+"="+number+";");
+			c = (Agency) st.executeQuery("SELECT * FROM "+"agenzie"+" WHERE "+FIELD_NUMBER+"="+number+";");
 			st.close();
 		} 
 		catch (SQLException e) 
@@ -51,6 +54,23 @@ public class TableAgency
 			e.printStackTrace();
 		}
 		return c;
+	}
+	
+	public List<String> getAllAgency() throws SQLException
+	{
+			List<String> agencies = new ArrayList<String>();
+			Statement st = db.getConnection().createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM agenzie;");
+			
+			
+			while(rs.next())
+			{
+				agencies.add(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3));
+				System.out.println(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3));
+			}
+			st.close();
+			rs.close();
+		return agencies;
 	}
 
 }

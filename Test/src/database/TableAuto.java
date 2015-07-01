@@ -13,7 +13,7 @@ public class TableAuto
 	public static final String FIELD_MODEL = "modello";
 	public static final String FIELD_BRAND = "marca";
 	public static final String FIELD_KM = "km";
-	public static final String FIELD_DISP = "disponibilità";
+	public static final String FIELD_DISP = "disponibilitï¿½";
 	public static final String FIELD_AGENCY = "agenzia";
 	public static final String FIELD_CLIENT = "contratto";	
 	DbAccess db;
@@ -41,7 +41,7 @@ public class TableAuto
 		}
 	}
 	
-	public Agency getAgencyByNumber (String number)
+	/*public Agency getAgencyByNumber (String number)
 	{
 		Agency c = null;
 		try 
@@ -56,6 +56,6 @@ public class TableAuto
 			e.printStackTrace();
 		}
 		return c;
-	}
+	}*/
 
 }
