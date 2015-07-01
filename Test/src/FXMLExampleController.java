@@ -27,7 +27,7 @@ public class FXMLExampleController
 	{
 		actiontarget.setText("login utente");
 		Optional<Pair<String, String>> opt;
-		opt = runLoginDialog();
+		opt = LoginAlertView.runLoginDialog();
 		Pair<String, String> pair = opt.get();
 		try
 		{
@@ -67,7 +67,7 @@ public class FXMLExampleController
 		newnoleggioview.start(new Stage());
 	}
 
-	public Optional<Pair<String, String>> runLoginDialog()
+	/*public Optional<Pair<String, String>> runLoginDialog()
 	{
 		// Create the custom dialog.
 		Dialog<Pair<String, String>> dialog = new Dialog<>();
@@ -126,6 +126,6 @@ public class FXMLExampleController
 		});
 		
 		return result;
-	}
+	}*/
 
 }
