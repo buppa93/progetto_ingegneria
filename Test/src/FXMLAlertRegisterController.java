@@ -16,7 +16,10 @@ public class FXMLAlertRegisterController
 	{
 		if(registered_chbox.isSelected())
 		{
-			LoginAlertView.runLoginDialog();
+			LoginDialog dialog = new LoginDialog();
+			dialog.start(new Stage());
+			Stage stage = (Stage) submit_bttn.getScene().getWindow();
+			stage.close();
 		}
 		else{
 			FXMLNewUserView UserView= new FXMLNewUserView();
