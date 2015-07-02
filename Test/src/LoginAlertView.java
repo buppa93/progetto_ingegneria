@@ -3,6 +3,7 @@ import java.util.Optional;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
@@ -27,8 +28,9 @@ public class LoginAlertView
 		//dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
 
 		// Set the button types.
-		ButtonType loginButtonType = new ButtonType("Login", ButtonData.OK_DONE);
-		dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+		Button loginButton = new Button("Login");
+		//ButtonType loginButtonType = new ButtonType("Login", ButtonData.OK_DONE);
+		dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
 
 		// Create the username and password labels and fields.
 		GridPane grid = new GridPane();
@@ -47,8 +49,8 @@ public class LoginAlertView
 		grid.add(password, 1, 1);
 
 		// Enable/Disable login button depending on whether a username was entered.
-		Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
-		loginButton.setDisable(true);
+		//Node loginButtonNode = dialog.getDialogPane().lookupButton(loginButton);
+		//loginButtonNode.setDisable(true);
 
 		// Do some validation (using the Java 8 lambda syntax).
 		username.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -61,12 +63,12 @@ public class LoginAlertView
 		Platform.runLater(() -> username.requestFocus());
 
 		// Convert the result to a username-password-pair when the login button is clicked.
-		dialog.setResultConverter(dialogButton -> {
-			if (dialogButton == loginButtonType) {
+		/*dialog.setResultConverter(dialogButton -> {
+			if (dialogButton == loginButton) {
 				return new Pair<>(username.getText(), password.getText());
 			}
 			return null;
-		});
+		});*/
 
 		Optional<Pair<String, String>> result = dialog.showAndWait();
 

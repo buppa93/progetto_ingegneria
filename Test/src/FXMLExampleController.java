@@ -63,8 +63,8 @@ public class FXMLExampleController
 	{
 		actiontarget.setText("noleggia");
 		//Stage stage = new Stage();
-		FXMLAlertRegister alert =  new FXMLAlertRegister();
-		alert.start(new Stage());
+		LoginDialog dialog =  new LoginDialog();
+		dialog.start(new Stage());
 	}
 
 }
