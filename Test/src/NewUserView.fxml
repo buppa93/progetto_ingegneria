@@ -97,7 +97,7 @@
          <bottom>
             <AnchorPane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="cancel_bttn" layoutX="368.0" layoutY="1.0" mnemonicParsing="false" prefWidth="70.0" text="Cancel" />
+                  <Button fx:id="cancel_bttn" layoutX="368.0" layoutY="1.0" mnemonicParsing="false" prefWidth="70.0" text="Cancel" onAction="#onCancelEvent"/>
                   <Button fx:id="submit_bttn" layoutX="471.0" layoutY="1.0" mnemonicParsing="false" onAction="#submit" prefWidth="70.0" text="Ok" />
                </children>
             </AnchorPane>

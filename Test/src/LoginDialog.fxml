@@ -35,7 +35,7 @@
           </HBox.margin>
         </HBox>
         <Pane maxWidth="+Infinity" HBox.hgrow="ALWAYS" />
-        <Button fx:id="cancel_bttn" cancelButton="true" minWidth="80.0" mnemonicParsing="false" text="Cancel" HBox.hgrow="NEVER">
+        <Button fx:id="cancel_bttn" cancelButton="true" minWidth="80.0" mnemonicParsing="false" text="Cancel" HBox.hgrow="NEVER" onAction="#onCancelEvent">
           <HBox.margin>
             <Insets />
           </HBox.margin>

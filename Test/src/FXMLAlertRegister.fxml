@@ -15,7 +15,7 @@
                <children>
                   <CheckBox fx:id="registered_chbox" layoutX="6.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="173.0" text="SI, SONO REGISTRATO" />
                   <CheckBox fx:id="notregistered_chbox" layoutX="6.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="193.0" text="NO, NON SONO REGISTRATO" />
-                  <Button fx:id="cancel_bttn" layoutX="14.0" layoutY="130.0" mnemonicParsing="false" text="ANNULLA" />
+                  <Button fx:id="cancel_bttn" layoutX="14.0" layoutY="130.0" mnemonicParsing="false" text="ANNULLA" onAction="#onCancelEvent"/>
                   <Button fx:id="submit_bttn" layoutX="106.0" layoutY="130.0" mnemonicParsing="false" onAction="#confirm" text="CONFERMA" />
                </children>
             </AnchorPane>

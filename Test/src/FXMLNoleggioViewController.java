@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -37,6 +38,7 @@ public class FXMLNoleggioViewController implements Initializable
 	@FXML private ChoiceBox<String> typeKm_chbox;
 	@FXML private TextField km_field;
 	@FXML private ChoiceBox<String> typeCar_chbox;
+	@FXML private Button cancel_bttn;
 	
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) 
@@ -88,6 +90,12 @@ public class FXMLNoleggioViewController implements Initializable
 		{selectCar.start(new Stage());} 
 		catch (Exception e) 
 		{e.printStackTrace();}
+	}
+	
+	@FXML protected void onCancelEvent(ActionEvent event)
+	{
+		Stage stage = (Stage) cancel_bttn.getScene().getWindow();
+		stage.close();
 	}
 }
 

@@ -6,9 +6,11 @@ import utility.MyUtil;
 import entity.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class FXMLNewUserViewController 
 {
@@ -17,6 +19,7 @@ public class FXMLNewUserViewController
 	@FXML private TextField cellNumber_field;
 	@FXML private PasswordField pwdUser_field;
 	@FXML private ChoiceBox<String> typeUser_Choice;
+	@FXML private Button cancel_bttn;
 	
 	@FXML protected void submit(ActionEvent event) throws DatabaseConnectionException 
 	{
@@ -36,6 +39,12 @@ public class FXMLNewUserViewController
 		db.initConnection();
 		TableClient table = new TableClient(db);
 		table.insertClient(c);
+	}
+	
+	@FXML protected void onCancelEvent(ActionEvent event)
+	{
+		Stage stage = (Stage) cancel_bttn.getScene().getWindow();
+		stage.close();
 	}
 
 }

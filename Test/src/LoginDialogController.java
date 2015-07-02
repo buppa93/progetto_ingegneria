@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 
 public class LoginDialogController implements Initializable
@@ -35,7 +36,7 @@ public class LoginDialogController implements Initializable
 	}
 	
 	@FXML
-	protected void loginAction (ActionEvent event) throws DatabaseConnectionException, SQLException
+	protected void loginAction (ActionEvent event) throws Exception
 	{
 		String usr = userName_field.getText();
 		String psswd = pwd_field.getText();
@@ -45,15 +46,23 @@ public class LoginDialogController implements Initializable
 		{
 			//TODO vai al Cerca auto
 			System.out.println("login effettuato");
+			FXMLNoleggioView search = new FXMLNoleggioView();
+			search.start(new Stage());
+			Stage stage = (Stage) cancel_bttn.getScene().getWindow();
+			stage.close();
+		
 		}
 		else
 		{
 			//TODO mostra messaggio username o password errata
 			System.out.println("login non effettuto");
+			UnregisteredUser alert = new UnregisteredUser();
 		}
-		
-		
-		
-		
+	}
+	
+	@FXML protected void onCancelEvent(ActionEvent event)
+	{
+		Stage stage = (Stage) cancel_bttn.getScene().getWindow();
+		stage.close();
 	}
 }
