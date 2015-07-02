@@ -1,11 +1,8 @@
 package database;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
-
-import utility.MyUtil;
 import entity.Client;
 
 public class TableClient

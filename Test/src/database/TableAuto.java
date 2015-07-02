@@ -3,9 +3,7 @@ package database;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import entity.Agency;
 import entity.Auto;
-import entity.Client;
 
 public class TableAuto
 {

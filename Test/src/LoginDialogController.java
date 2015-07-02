@@ -1,9 +1,7 @@
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import utility.MyUtil;
-import database.DatabaseConnectionException;
 import database.DbAccess;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

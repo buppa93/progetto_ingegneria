@@ -1,14 +1,10 @@
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.TreeMap;
 
 import javafx.collections.FXCollections;
@@ -19,11 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.util.Pair;
-import utility.MyUtil;
 import database.DatabaseConnectionException;
 import database.DbAccess;
 import database.SearchCar;
