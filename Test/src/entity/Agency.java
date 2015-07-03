@@ -1,53 +1,88 @@
 package entity;
 
-
+/**
+ * It is a rental agency characterized by name, address and identification number
+ * @author Utente
+ *
+ */
 public class Agency 
 {
 	String number;
 	String name;
 	String address;
-	
-	public Agency()
+/**
+ *  it initializes the class agency to null
+ */
+	public Agency()  
 	{
 		this.number="NULL";
 		this.name="NULL";
 		this.address="NULL";
 	}
-	
-	public Agency(String number, String name, String address)
+	/**
+	 * initializes the agency class through the input parameters
+	 * @param number
+	 * @param name
+	 * @param address
+	 */
+	public Agency(String number, String name, String address)  
 	{
 		this.number=number;
 		this.name=name;
 		this.address=address;
 	}
-	
-	public String getNumber()
+	/**
+	 * it returns number of agency
+	 * @return number
+	 */
+	public String getNumber()  
 	{return this.number;}
-	
-	public String getName()
+	/**
+	 * it returns name of agency
+	 * @return name
+	 */
+	public String getName() 
 	{return this.name;}
-	
-	public String getAddress()
+	/**
+	 * it returns address of agency
+	 * @return address
+	 */
+	public String getAddress()   
 	{return this.address;}
-	
-	public void setNumber(String number)
+	/**
+	 * it sets number of agency
+	 * @param number
+	 */
+	public void setNumber(String number) 
 	{this.number=number;}
-	
-	public void setName(String name)
+	/**
+	 * it sets name of agency
+	 * @param name
+	 */
+	public void setName(String name)  
 	{this.name=name;}
-	
-	public void setAddress(String address)
+	/**
+	 * it sets address of agency
+	 * @param address
+	 */
+	public void setAddress(String address) 
 	{this.address=address;}
-	
-	public boolean isNumberValid()
+	/**
+	 * it establishes if the number of agency is valid. The valid number must be 5 digits
+	 * @return boolean
+	 */
+	public boolean isNumberValid() 
 	{
 		boolean IsValid=false;
 		if(number.length()==5)
 			IsValid=true;
 		return IsValid;	
 	}
-	
-	public String toString()
+	/**
+	 * it returns all attributes of agency
+	 * @return tuple of agency
+	 */
+	public String toString() 
 	{return this.number + "," + this.name + "," + this.address;}
 }
 
