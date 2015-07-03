@@ -27,11 +27,8 @@ public class TableAuto
 			String query = "INSERT INTO "+DbString.TBL_AGENCIES+" "
 					+ "("+FIELD_TARGA+","+FIELD_MODEL+","+FIELD_BRAND+","+FIELD_KM+","+FIELD_DISP+","+FIELD_AGENCY+") values ('" +auto.getTarga()+"','"+ auto.getModel() +
 					"','" + auto.getBrand()+","+auto.getKm()+","+auto.getAvailability()+","+auto.getNumberOfAgency()+"');";
-			//TODO togliere
-			System.out.println(query);
+		
 			st.executeUpdate(query);
-			//TODO togliere
-			System.out.println(st.toString());
 			st.close();
 		} 
 		catch (SQLException e) 

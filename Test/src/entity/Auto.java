@@ -6,17 +6,17 @@ public class Auto extends TypeSection
 	String model;
 	String brand;
 	int km; // km traveled
-	public enum Availability {ND,NOLEGGIO, MANUTENZIONE_STRAORDINARIA, MANUTENZIONE_ORDINARIA}
-	Availability disp;
+	//public enum Availability {ND,NOLEGGIO, MANUTENZIONE_STRAORDINARIA, MANUTENZIONE_ORDINARIA}
+	/*Availability*/int disp;
 	Agency numero;
 	Client client;
 	Contract contract;
 	
 	public Auto(){};
 	
-	public Auto(Nome section, int n_porte, int n_posti, String tipo_auto,String targa, String model, String brand, int km,  Availability disp)
+	public Auto(/*Nome section*//* int n_porte, int n_posti, String tipo_auto,*/String targa, String model, String brand, int km,  /*Availability*/int disp)
 	{
-		super(section,n_porte, n_posti, tipo_auto);
+		//super(section,n_porte, n_posti, tipo_auto);
 		this.targa=targa;
 		this.model=model;
 		this.brand=brand;
@@ -41,7 +41,7 @@ public class Auto extends TypeSection
 	public int getKm()
 	{return this.km;}
 	
-	public Availability getAvailability()
+	public /*Availability*/int getAvailability()
 	{return this.disp;}
 	
 	public void setTarga(String targa)
@@ -56,7 +56,7 @@ public class Auto extends TypeSection
 	public void setKm(int km)
 	{this.km=km;}
 	
-	public void setDisp (Availability disp)
+	public void setDisp (/*Availability*/int disp)
 	{this.disp=disp;}
 	
 	public boolean isTargaValid()

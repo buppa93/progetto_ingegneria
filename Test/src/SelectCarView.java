@@ -1,22 +1,19 @@
-import java.sql.ResultSet;
+import java.util.List;
 import java.util.Map;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import entity.Auto;
 
-
-public class SelectCarView 
+public final class SelectCarView 
 {
-	private ResultSet car;
-	private Map<String, String> parameters;
-
-	SelectCarView(ResultSet car, Map<String, String> parameters)
-	{
-		this.car = car;
-		this.parameters = parameters;
-	}
+	private List<Auto> cars; //TODO Da cambiare tipo perche' non puo' essere ResultSet
+	private Map<String, String> parameters; //Parametri della finestra NoleggioView. Vedi NoleggioViewController.search()
+	private static SelectCarView instance =  new SelectCarView();
+	
+	public SelectCarView(){}
 
 	public void start(Stage stage) throws Exception 
 	{
@@ -27,5 +24,27 @@ public class SelectCarView
 		stage.setTitle("Seleziona auto");
 		stage.setScene(scene);
 		stage.show();
+	}
+	
+	public static SelectCarView getInstance() {return instance;};
+	
+	public void setCars(List<Auto> cars)
+	{
+		this.cars = cars;
+	}
+	
+	public void setParameters(Map<String, String> parameters)
+	{
+		this.parameters = parameters;
+	}
+	
+	public List<Auto> getCars()
+	{
+		return this.cars;
+	}
+	
+	public Map<String, String> getParameters()
+	{
+		return this.parameters;
 	}
 }

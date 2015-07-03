@@ -3,6 +3,11 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import entity.Auto;
+
 
 public final class SearchCar 
 {
@@ -33,17 +38,26 @@ public final class SearchCar
 	public String getTypeCar()
 	{return type_car;}
 	
-	public ResultSet search() throws DatabaseConnectionException, SQLException
+	public List<Auto> search() throws DatabaseConnectionException, SQLException
 	{
 		String query = "SELECT * FROM auto WHERE (fascia='"+this.type_car+"' AND id_agenzia='"
 					+this.taking_agency+"' AND disponibilità=1);";
 		
+		List<Auto> cars = new ArrayList<Auto>();
 		DbAccess db = new DbAccess();
 		db.initConnection();
 		Statement st = db.getConnection().createStatement();
 		ResultSet rs = st.executeQuery(query);
 		st.close();
-		return rs;
+		
+		while(rs.next())
+		{
+			//String targa, String model, String brand, int km,  Availability disp
+			cars.add(new Auto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4),rs.getInt(5)));
+		}
+		
+		rs.close();
+		return cars;
 			
 	}
 }

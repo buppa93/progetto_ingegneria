@@ -52,7 +52,6 @@ public class LoginDialogController implements Initializable
 		}
 		else
 		{
-			//TODO mostra messaggio username o password errata
 			System.out.println("login non effettuto");
 			UnregisteredUser alert = new UnregisteredUser();
 		}

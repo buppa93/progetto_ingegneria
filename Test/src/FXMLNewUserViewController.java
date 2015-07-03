@@ -29,7 +29,6 @@ public class FXMLNewUserViewController
 		else
 			type = "adm";
 		
-		//TODO aggiungere il metodo di generazione id per user
 		String pwd = pwdUser_field.getText();
 		pwd = MyUtil.getMD5(pwd);
 		String id = TableClient.makeId();

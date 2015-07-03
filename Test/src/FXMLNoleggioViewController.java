@@ -1,5 +1,4 @@
 import java.net.URL;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +20,7 @@ import database.DatabaseConnectionException;
 import database.DbAccess;
 import database.SearchCar;
 import database.TableAgency;
+import entity.Auto;
 
 public class FXMLNoleggioViewController implements Initializable
 {
@@ -70,7 +70,8 @@ public class FXMLNoleggioViewController implements Initializable
 		SearchCar.getInstance().setTakingAgency(agencyTake);
 		SearchCar.getInstance().setTypeCar(typeCar);
 		
-		ResultSet car = SearchCar.getInstance().search();
+		List<Auto> car = new ArrayList<Auto>();
+		car = SearchCar.getInstance().search();
 		
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("dataEnd", date_end);
@@ -78,9 +79,11 @@ public class FXMLNoleggioViewController implements Initializable
 		parameters.put("typeKm",typeKm);
 		parameters.put("km",km);
 		
-		SelectCarView selectCar = new SelectCarView(car, parameters);
+		SelectCarView.getInstance().setCars(car);
+		SelectCarView.getInstance().setParameters(parameters);
+		
 		try 
-		{selectCar.start(new Stage());} 
+		{SelectCarView.getInstance().start(new Stage());} 
 		catch (Exception e) 
 		{e.printStackTrace();}
 	}
