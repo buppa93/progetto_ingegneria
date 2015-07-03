@@ -16,6 +16,7 @@ public class Auto extends TypeSection
 	Agency numero;
 	Client client;
 	Contract contract;
+	
 	/**
 	 * it initializes the class Auto to null
 	 */
@@ -34,14 +35,15 @@ public class Auto extends TypeSection
 	 * @param disp
 	 */
 public Auto(/*Nome section*//* int n_porte, int n_posti, String tipo_auto,*/String targa, String model, String brand, int km,  /*Availability*/int disp)
-	{
+{
 		//super(section,n_porte, n_posti, tipo_auto);
 		this.targa=targa;
 		this.model=model;
 		this.brand=brand;
 		this.km=km;
 		this.disp=disp;
-	}
+}
+
 	/**
 	 *  get the number of agency of auto
 	 * @return number of agency 
@@ -50,24 +52,28 @@ public Auto(/*Nome section*//* int n_porte, int n_posti, String tipo_auto,*/Stri
 	{
 		return numero.getNumber();
 	}
+	
 	/**
 	 * get number plate of auto 
 	 * @return number plate
 	 */
 	public String getTarga()
 	{return this.targa;}
+	
 	/**
 	 * get model of auto
 	 * @return model
 	 */
 	public String getModel()
 	{return this.model;}
+	
 	/**
 	 * get brand of auto
 	 * @return
 	 */
 	public String getBrand()
 	{return this.brand;}
+	
 	/**
 	 * get mileage of auto
 	 * @return mileage
@@ -88,18 +94,21 @@ public Auto(/*Nome section*//* int n_porte, int n_posti, String tipo_auto,*/Stri
 	 */
 	public void setTarga(String targa)
 	{this.targa=targa;}
+	
 	/**
 	 * sets model of auto through input parameter
 	 * @param model
 	 */
 	public void setModel(String model)
 	{this.model=model;}
+	
 	/**
 	 * sets brand of auto through input parameter
 	 * @param brand
 	 */
 	public void setBrand(String brand)
 	{this.brand=brand;}
+	
 	/**
 	 * sets mileage through input parameter
 	 * @param km
@@ -113,6 +122,7 @@ public Auto(/*Nome section*//* int n_porte, int n_posti, String tipo_auto,*/Stri
 	 */
 	public void setDisp (/*Availability*/int disp)
 	{this.disp=disp;}
+	
 	/**
 	 * it establishes if number plate is valid. If his length is 7 it is valid
 	 * @return boolean
