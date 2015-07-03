@@ -1,7 +1,10 @@
+package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import utility.MyUtil;
+import view.FXMLNoleggioView;
+import view.UnregisteredUser;
 import database.DbAccess;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

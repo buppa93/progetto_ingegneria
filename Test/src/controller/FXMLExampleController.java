@@ -1,6 +1,11 @@
+package controller;
 import java.sql.SQLException;
 import java.util.Optional;
+
 import utility.MyUtil;
+import view.FXMLAlertRegister;
+import view.FXMLNewUserView;
+import view.LoginAlertView;
 import database.DatabaseConnectionException;
 import database.DbAccess;
 import javafx.event.ActionEvent;

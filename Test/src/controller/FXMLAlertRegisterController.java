@@ -1,3 +1,6 @@
+package controller;
+import view.FXMLNewUserView;
+import view.LoginDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
