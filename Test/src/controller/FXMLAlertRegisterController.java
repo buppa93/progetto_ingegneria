@@ -21,13 +21,14 @@ public class FXMLAlertRegisterController
 		{
 			LoginDialog dialog = new LoginDialog();
 			dialog.start(new Stage());
-			Stage stage = (Stage) submit_bttn.getScene().getWindow();
-			stage.close();
+			
 		}
 		else{
 			FXMLNewUserView UserView= new FXMLNewUserView();
 			UserView.start(new Stage());
 		}
+		Stage stage = (Stage) submit_bttn.getScene().getWindow();
+		stage.close();
 	}
 	
 	@FXML protected void onCancelEvent(ActionEvent event)

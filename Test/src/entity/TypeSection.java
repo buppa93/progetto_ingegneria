@@ -53,6 +53,30 @@ public class TypeSection
 	
 	public String toString()
 	{return this.section + "," + this.n_porte + "," + this.n_posti + "," + this.tipo_auto;}
+	
+	public static char resolvType(String type)
+	{
+		char t = 0;
+		switch (type)
+		{
+			case "Utilitaria":
+				t = 'A';
+				break;
+			
+			case "Autocarro":
+				t = 'C';
+				break;
+				
+			case "Berlina":
+				t = 'B';
+				break;
+			
+			case "Monovolume":
+				t = 'D';
+		}
+		return t;
+		
+	}
 
 }
 

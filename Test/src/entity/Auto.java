@@ -142,5 +142,10 @@ public Auto(/*Nome section*//* int n_porte, int n_posti, String tipo_auto,*/Stri
 	{
 		return this.targa + "," + this.model + "," + this.brand + "," + this.km + "," + this.disp;
 	}
+	
+	public String toLabel()
+	{
+		return this.targa + ", " + this.model + ", " + this.brand + ", " + this.km;
+	}
 }
 

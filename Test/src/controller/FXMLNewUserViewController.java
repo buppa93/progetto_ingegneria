@@ -1,9 +1,8 @@
 package controller;
-
-import database.DatabaseConnectionException;
 import database.DbAccess;
 import database.TableClient;
 import utility.MyUtil;
+import view.FXMLNoleggioView;
 import entity.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,8 +20,9 @@ public class FXMLNewUserViewController
 	@FXML private PasswordField pwdUser_field;
 	@FXML private ChoiceBox<String> typeUser_Choice;
 	@FXML private Button cancel_bttn;
+	@FXML private Button submit_bttn;
 	
-	@FXML protected void submit(ActionEvent event) throws DatabaseConnectionException 
+	@FXML protected void submit(ActionEvent event) throws Exception 
 	{
 		String type = typeUser_Choice.getValue();
 		if(type.equals("Cliente"))
@@ -39,6 +39,12 @@ public class FXMLNewUserViewController
 		db.initConnection();
 		TableClient table = new TableClient(db);
 		table.insertClient(c);
+		
+		FXMLNoleggioView view = new FXMLNoleggioView();
+		view.start(new Stage());
+		
+		Stage stage = (Stage) submit_bttn.getScene().getWindow();
+		stage.close();
 	}
 	
 	@FXML protected void onCancelEvent(ActionEvent event)

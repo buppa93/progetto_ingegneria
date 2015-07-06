@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="350.0" maxWidth="500.0" minHeight="350.0" minWidth="500.0" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLSysStartController">
+   <children>
+      <ImageView fx:id="image_view" fitHeight="150.0" fitWidth="200.0" layoutX="162.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/gattino.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="label" layoutX="189.0" layoutY="72.0" text="Immagine carLoan" />
+   </children>
+</AnchorPane>

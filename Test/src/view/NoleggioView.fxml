@@ -63,7 +63,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Button fx:id="submit_bttn" mnemonicParsing="false" text="Cerca" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <Button fx:id="submit_bttn" mnemonicParsing="false" text="Cerca" GridPane.columnIndex="3" GridPane.rowIndex="4" onAction="#search"/>
             <Button fx:id="cancel_bttn" mnemonicParsing="false" text="Annulla" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" onAction="#onCancelEvent"/>
             <DatePicker fx:id="start_cld" GridPane.columnIndex="1">
                <GridPane.margin>

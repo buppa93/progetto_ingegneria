@@ -7,18 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SelectCarViewController">
    <children>
       <BorderPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0">
-         <top>
-            <Label text="Seleziona l'automobile:" BorderPane.alignment="BOTTOM_LEFT">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <padding>
-                  <Insets left="10.0" />
-               </padding></Label>
-         </top>
          <bottom>
             <GridPane prefHeight="40.0" prefWidth="288.0" BorderPane.alignment="CENTER">
               <columnConstraints>
@@ -37,8 +28,30 @@
             </GridPane>
          </bottom>
          <center>
-            <ListView fx:id="listCar_lst" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <ListView fx:id="listCar_lst" prefHeight="330.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
          </center>
+         <top>
+            <VBox prefHeight="72.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Seleziona l'automobile.">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Targa, Modello, Marca, Chilometri">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" top="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </VBox>
+         </top>
       </BorderPane>
    </children>
 </AnchorPane>

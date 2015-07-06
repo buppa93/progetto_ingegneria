@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.StringTokenizer;
+
 /**
  * It is a rental agency characterized by name, address and identification number
  * @author Utente
@@ -84,5 +86,11 @@ public class Agency
 	 */
 	public String toString() 
 	{return this.number + "," + this.name + "," + this.address;}
+	
+	public static String getIdFromString(String agency)
+	{
+		StringTokenizer st = new StringTokenizer(agency);
+		return st.nextToken();
+	}
 }
 
