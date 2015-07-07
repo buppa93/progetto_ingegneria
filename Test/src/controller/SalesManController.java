@@ -19,26 +19,6 @@ public class SalesManController implements Initializable
 	@FXML private MenuBar menuBar;
 	@FXML private BorderPane rootLayout;
 	@FXML private Pane work_pane;
-	
-	public void initRootLayout() 
-	{
-        try 
-        {
-            // Load root layout from fxml file.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(SalesManView.class.getResource("SalesManView.fxml"));
-            rootLayout = (BorderPane) loader.load();
-
-            // Show the scene containing the root layout.
-            //Scene scene = new Scene(rootLayout);
-           // primaryStage.setScene(scene);
-            //primaryStage.show();
-        } 
-        catch (IOException e) 
-        {
-            e.printStackTrace();
-        }
-    }
 
 	/**
 	 * Handle action related to "Nuovo CLiente" menu item.
@@ -53,18 +33,38 @@ public class SalesManController implements Initializable
 	}
 
 	/**
+	 * Handle action related to "Nuova auto" menu item.
+	 * 
+	 * @param event Event on "Nuova auto" menu item.
+	 * @throws IOException 
+	 */
+	@FXML
+	private void handleSearchCarAction(final ActionEvent event) throws IOException
+	{
+		provideSearchCarFunctionality();
+	}
+
+	/**
 	 * Perform functionality associated with "About" menu selection or CTRL-A.
 	 * @throws IOException 
 	 */
 	private void provideNewClientFunctionality() throws IOException
 	{
 		System.out.println("You clicked on Nuovo Cliente!");
-		//work_pane.getChildren().addAll(FXMLLoader.load(SalesManView.class.getResource("LoginDialog.fxml")));
-		//rootLayout.getChildren().addAll(FXMLLoader.load(SalesManView.class.getResource("LoginDialog.fxml")));
 		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("NewUserView.fxml")));
 		System.out.println("");
 	}
 
+	/**
+	 * Perform functionality associated with "Nuova auto" menu selection or CTRL-A.
+	 * @throws IOException 
+	 */
+	private void provideSearchCarFunctionality() throws IOException
+	{
+		System.out.println("You clicked on Nuova auto!");
+		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("SearchAutoView.fxml")));
+		System.out.println("");
+	}
 
 	@Override
 	public void initialize(java.net.URL arg0, ResourceBundle arg1) 
@@ -72,10 +72,4 @@ public class SalesManController implements Initializable
 		menuBar.setFocusTraversable(true);
 
 	}
-
-	public void setVista(Node node) {
-		// TODO Auto-generated method stub
-		work_pane.getChildren().setAll(node);
-		
-	}   
 }

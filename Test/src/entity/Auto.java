@@ -12,7 +12,7 @@ public class Auto extends TypeSection
 	String brand;
 	int km; // km traveled
 	//public enum Availability {ND,NOLEGGIO, MANUTENZIONE_STRAORDINARIA, MANUTENZIONE_ORDINARIA}
-	/*Availability*/int disp;
+	int disp;
 	Agency numero;
 	Client client;
 	Contract contract;
@@ -21,7 +21,7 @@ public class Auto extends TypeSection
 	 * it initializes the class Auto to null
 	 */
 	public Auto(){};
-
+	
 	/**
 	 * it initializes the class auto through input parameters
 	 * @param section
@@ -34,18 +34,27 @@ public class Auto extends TypeSection
 	 * @param km
 	 * @param disp
 	 */
-public Auto(/*Nome section*//* int n_porte, int n_posti, String tipo_auto,*/String targa, String model, String brand, int km,  /*Availability*/int disp)
-{
-		//super(section,n_porte, n_posti, tipo_auto);
+	public Auto(Nome section, int n_porte, int n_posti, String tipo_auto,String targa, String model, String brand, int km,  /*Availability*/ int disp)
+	{
+		super(section,n_porte, n_posti, tipo_auto);
 		this.targa=targa;
 		this.model=model;
 		this.brand=brand;
 		this.km=km;
 		this.disp=disp;
-}
-
+	}
+	
+	public Auto(String targa, String model, String brand, int km, int disp)
+	{
+		this.targa = targa;
+		this.model = model;
+		this.brand = brand;
+		this.km = km;
+		this.disp = disp;
+	}
+	
 	/**
-	 *  get the number of agency of auto
+	 *  it gets the number of agency of auto
 	 * @return number of agency 
 	 */
 	public String getNumberOfAgency()
@@ -54,28 +63,28 @@ public Auto(/*Nome section*//* int n_porte, int n_posti, String tipo_auto,*/Stri
 	}
 	
 	/**
-	 * get number plate of auto 
+	 * it gets number plate of auto 
 	 * @return number plate
 	 */
 	public String getTarga()
 	{return this.targa;}
 	
 	/**
-	 * get model of auto
+	 * it gets model of auto
 	 * @return model
 	 */
 	public String getModel()
 	{return this.model;}
 	
 	/**
-	 * get brand of auto
+	 * it gets brand of auto
 	 * @return
 	 */
 	public String getBrand()
 	{return this.brand;}
 	
 	/**
-	 * get mileage of auto
+	 * it gets mileage of auto
 	 * @return mileage
 	 */
 	public int getKm()
@@ -85,7 +94,7 @@ public Auto(/*Nome section*//* int n_porte, int n_posti, String tipo_auto,*/Stri
 	 * it establishes if auto is "not available", "available", "extraordinary maintenance" or "ordinary maintenance"
 	 * @return availability
 	 */
-	public /*Availability*/int getAvailability()
+	public /*Availability*/ int getAvailability()
 	{return this.disp;}
 	
 	/**
@@ -134,6 +143,7 @@ public Auto(/*Nome section*//* int n_porte, int n_posti, String tipo_auto,*/Stri
 			IsValid=true;
 		return IsValid;	
 	}
+	
 	/**
 	 * it returns tuple of auto
 	 * @return string of attributes of auto
@@ -142,10 +152,9 @@ public Auto(/*Nome section*//* int n_porte, int n_posti, String tipo_auto,*/Stri
 	{
 		return this.targa + "," + this.model + "," + this.brand + "," + this.km + "," + this.disp;
 	}
-	
+
 	public String toLabel()
 	{
 		return this.targa + ", " + this.model + ", " + this.brand + ", " + this.km;
 	}
 }
-
