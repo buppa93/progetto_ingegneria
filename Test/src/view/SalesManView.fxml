@@ -21,19 +21,19 @@
                   <items>
                     <MenuItem fx:id="newClient_item" mnemonicParsing="false" onAction="#handleNewClientAction" text="Aggiungi cliente" />
                         <MenuItem fx:id="deleteClient_item" mnemonicParsing="false" text="Rimuovi cliente" />
-                        <MenuItem fx:id="searchClient_item" mnemonicParsing="false" text="Cerca cliente" />
+                        <MenuItem fx:id="searchClient_item" mnemonicParsing="false" onAction="#handleSearchClientAction" text="Cerca cliente" />
                   </items>
                 </Menu>
                 <Menu fx:id="cars_menu" mnemonicParsing="false" text="Automobili">
                   <items>
                     <MenuItem fx:id="addCar_item" mnemonicParsing="false" text="Aggiungi automobile" />
                     <MenuItem fx:id="deleteCar_item" mnemonicParsing="false" text="Rimuovi automobile" />
-                    <MenuItem fx:id="searchCar_item" mnemonicParsing="false" text="Cerca automobile" />
+                    <MenuItem fx:id="searchCar_item" mnemonicParsing="false" onAction="#handleSearchCarAction" text="Cerca automobile" />
                   </items>
                 </Menu>
                   <Menu fx:id="contract_menu" mnemonicParsing="false" text="Contratti">
                     <items>
-                      <MenuItem fx:id="newContract_item" mnemonicParsing="false" text="Nuovo contratto" />
+                      <MenuItem fx:id="newContract_item" mnemonicParsing="false" onAction="#handleNewContractAction" text="Nuovo contratto" />
                       <MenuItem fx:id="removeContract_item" mnemonicParsing="false" text="Rimuovi contratto" />
                       <MenuItem fx:id="searchContract_item" mnemonicParsing="false" text="Cerca contratto" />
                     </items>

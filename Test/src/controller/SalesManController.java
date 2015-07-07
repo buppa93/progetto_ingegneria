@@ -31,6 +31,18 @@ public class SalesManController implements Initializable
 	{
 		provideNewClientFunctionality();
 	}
+	
+	/**
+	 * Handle action related to "Cerca CLiente" menu item.
+	 * 
+	 * @param event Event on "Cerca Cliente" menu item.
+	 * @throws IOException 
+	 */
+	@FXML
+	private void handleSearchClientAction(final ActionEvent event) throws IOException
+	{
+		provideSearchClientFunctionality();
+	}
 
 	/**
 	 * Handle action related to "Nuova auto" menu item.
@@ -43,6 +55,18 @@ public class SalesManController implements Initializable
 	{
 		provideSearchCarFunctionality();
 	}
+	
+	/**
+	 * Handle action related to "Nuovo contratto" menu item.
+	 * 
+	 * @param event Event on "Nuovo contratto" menu item.
+	 * @throws IOException 
+	 */
+	@FXML
+	private void handleNewContractAction(final ActionEvent event) throws IOException
+	{
+		provideNewContractFunctionality();
+	}
 
 	/**
 	 * Perform functionality associated with "About" menu selection or CTRL-A.
@@ -54,6 +78,17 @@ public class SalesManController implements Initializable
 		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("NewUserView.fxml")));
 		System.out.println("");
 	}
+	
+	/**
+	 * Perform functionality associated with "About" menu selection or CTRL-A.
+	 * @throws IOException 
+	 */
+	private void provideSearchClientFunctionality() throws IOException
+	{
+		System.out.println("You clicked on Cerca Cliente!");
+		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("SearchClientView.fxml")));
+		System.out.println("");
+	}
 
 	/**
 	 * Perform functionality associated with "Nuova auto" menu selection or CTRL-A.
@@ -63,6 +98,17 @@ public class SalesManController implements Initializable
 	{
 		System.out.println("You clicked on Nuova auto!");
 		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("SearchAutoView.fxml")));
+		System.out.println("");
+	}
+	
+	/**
+	 * Perform functionality associated with "Nuova auto" menu selection or CTRL-A.
+	 * @throws IOException 
+	 */
+	private void provideNewContractFunctionality() throws IOException
+	{
+		System.out.println("You clicked on Nuova auto!");
+		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("FXMLAlertRegister.fxml")));
 		System.out.println("");
 	}
 
