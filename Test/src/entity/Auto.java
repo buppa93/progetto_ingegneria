@@ -1,4 +1,7 @@
 package entity;
+
+import utility.CarsAvailability;
+
 /**
  * is the car of agency characterized by number plate, model, brand, mileage. 
  * About the car says how is available, previous contracts, previous customers and where it is now
@@ -11,8 +14,7 @@ public class Auto extends TypeSection
 	String model;
 	String brand;
 	int km; // km traveled
-	//public enum Availability {ND,NOLEGGIO, MANUTENZIONE_STRAORDINARIA, MANUTENZIONE_ORDINARIA}
-	int disp;
+	CarsAvailability availability;
 	Agency numero;
 	Client client;
 	Contract contract;
@@ -34,14 +36,24 @@ public class Auto extends TypeSection
 	 * @param km
 	 * @param disp
 	 */
-	public Auto(Nome section, int n_porte, int n_posti, String tipo_auto,String targa, String model, String brand, int km,  /*Availability*/ int disp)
+	public Auto(Nome section, int n_porte, int n_posti, String tipo_auto,String targa, String model, String brand, int km,  String disp)
 	{
 		super(section,n_porte, n_posti, tipo_auto);
 		this.targa=targa;
 		this.model=model;
 		this.brand=brand;
 		this.km=km;
-		this.disp=disp;
+		this.availability=new CarsAvailability(disp);
+	}
+	
+	public Auto(Nome section, int n_porte, int n_posti, String tipo_auto,String targa, String model, String brand, int km,  int disp)
+	{
+		super(section,n_porte, n_posti, tipo_auto);
+		this.targa=targa;
+		this.model=model;
+		this.brand=brand;
+		this.km=km;
+		this.availability=new CarsAvailability(disp);
 	}
 	
 	public Auto(String targa, String model, String brand, int km, int disp)
@@ -50,7 +62,7 @@ public class Auto extends TypeSection
 		this.model = model;
 		this.brand = brand;
 		this.km = km;
-		this.disp = disp;
+		this.availability = new CarsAvailability(disp);
 	}
 	
 	/**
@@ -94,8 +106,8 @@ public class Auto extends TypeSection
 	 * it establishes if auto is "not available", "available", "extraordinary maintenance" or "ordinary maintenance"
 	 * @return availability
 	 */
-	public /*Availability*/ int getAvailability()
-	{return this.disp;}
+	public String getAvailability()
+	{return this.availability.getStatus();}
 	
 	/**
 	 * sets number plate of auto through input parameter
@@ -129,8 +141,15 @@ public class Auto extends TypeSection
 	 * sets availability of auto through input parameter
 	 * @param disp
 	 */
-	public void setDisp (/*Availability*/int disp)
-	{this.disp=disp;}
+	public void setDisp (int disp)
+	{this.availability.setStatus(disp);}
+	
+	/**
+	 * sets availability of auto through input parameter
+	 * @param disp
+	 */
+	public void setDisp (String disp)
+	{this.availability.setStatus(disp);}
 	
 	/**
 	 * it establishes if number plate is valid. If his length is 7 it is valid
@@ -150,11 +169,12 @@ public class Auto extends TypeSection
 	 */
 	public String toString()
 	{
-		return this.targa + "," + this.model + "," + this.brand + "," + this.km + "," + this.disp;
+		return this.targa + "," + this.model + "," + this.brand + "," + this.km + "," + this.availability.getStatus();
 	}
 
 	public String toLabel()
 	{
 		return this.targa + ", " + this.model + ", " + this.brand + ", " + this.km;
 	}
+	
 }
