@@ -6,12 +6,9 @@ package entity;
  */
 public class Client 
 {
-	private String id;
 	private String name;
 	private String surname;
-	private String TelephoneNumber;
-	private String Type;
-	private String pwd;
+	private String phone;
 
  /**
  * it initializes the client class to null
@@ -21,9 +18,7 @@ public class Client
 		//this.id="NULL";
 		this.name="NULL";
 		this.surname="NULL";
-		this.TelephoneNumber="NULL";
-		this.Type = "NULL";
-		this.pwd = "NULL";
+		this.phone="NULL";
 	}
 
  /**
@@ -35,22 +30,12 @@ public class Client
  * @param type
  * @param pwd
  */
-	public Client(String id, String name, String surname, String TelephoneNumber, String type, String pwd)
+	public Client(String name, String surname, String TelephoneNumber)
 	{
-		this.id = id;
 		this.name=name;
 		this.surname=surname;
-		this.TelephoneNumber=TelephoneNumber;
-		this.Type = type;
-		this.pwd = pwd;
+		this.phone=TelephoneNumber;
 	}
-
- /**
- * it gets customer's id
- * @return id
- */
-	public String getId()
-	{return this.id;}
      
 	/**
 	* it gets customer's name
@@ -70,29 +55,8 @@ public class Client
 	 * it gets customer's telephone number
 	 * @return number of telephone
 	 */
-	public String getTelephoneNumber()
-	{return this.TelephoneNumber;}
-	
-	/**
-	 * it establishes if client is administrator or user
-	 * @return type
-	 */
-	public String getType()
-	{return this.Type;}
-	
-	/**
-	 * it gets password of client
-	 * @return password
-	 */
-	public String getPassword()
-	{return this.pwd;}
-	
-	/**
-	 * sets id through input parameter
-	 * @param id
-	 */
-	public void setID(String id)
-	{this.id=id;}
+	public String getPhone()
+	{return this.phone;}
 	
 	/**
 	 * sets customer's name through input parameter
@@ -112,45 +76,16 @@ public class Client
 	 * sets customer's telephone number through input parameter
 	 * @param TelephoneNumber
 	 */
-	public void setTelephoneNumber(String TelephoneNumber)
-	{this.TelephoneNumber=TelephoneNumber;}
-	
-	/**
-	 * sets customer's type (admin or user) through input parameter
-	 * @param type
-	 */
-	public void setType(String type)
-	{this.Type=type;}
-	
-	/**
-	 * sets customer's password through input parameter
-	 * @param pwd
-	 */
-	public void setPassword(String pwd)
-	{this.pwd=pwd;}
-	
+	public void setPhone(String TelephoneNumber)
+	{this.phone=TelephoneNumber;}
 	/**
 	 * returns tuple of client
 	 * @return string of attribute of client
 	 */
 	public String toString()
 	{
-		return "ID of the customer:" + this.id + " ; " + "Name of the customer:" + this.name + "; "
-				+ "Surname of the customer:" + this.surname + "; " + "Telephone Number of Customer:"
-				+ this.TelephoneNumber +", Type: "+this.Type+", Password of Customer: "+this.pwd+ ". ";
-	}
-	
-	/**
-	 * establishes if customer's id is valid. If his length is 5, it is valid
-	 * @return
-	 */
-	public boolean isIdValid()
-	{ 
-		//if numbers of ID is 5, it returns true
-		boolean IsValid=false;
-		if(id.length()==5)
-			IsValid=true;
-		return IsValid;	
+		return "Name of the customer:" + this.name + "; " + "Surname of the customer:" + this.surname + "; " + "Telephone Number of Customer:"
+				+ this.phone+ ". ";
 	}
 	
 	/**
@@ -161,7 +96,7 @@ public class Client
 	{
 		//if length of telephone number is 10, it returns true
 		boolean IsValid=false;
-		if(id.length()==10)
+		if(phone.length()==10)
 			IsValid=true;
 		return IsValid;
 	}
