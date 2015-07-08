@@ -1,8 +1,10 @@
 package controller;
 import database.DbAccess;
+import database.TableClients;
 import database.TableUsers;
 import utility.MyUtil;
 import view.FXMLNoleggioView;
+import entity.Client;
 import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,41 +12,34 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class FXMLNewUserViewController 
 {
-	@FXML private TextField nameUser_field;
-	@FXML private TextField surName_field;
-	@FXML private TextField cellNumber_field;
-	@FXML private PasswordField pwdUser_field;
-	@FXML private ChoiceBox<String> typeUser_Choice;
+	@FXML private TextField name_field;
+	@FXML private TextField surname_field;
+	@FXML private TextField phone_field;
 	@FXML private Button cancel_bttn;
 	@FXML private Button submit_bttn;
+	@FXML private AnchorPane rootLayout;
 	
 	@FXML protected void submit(ActionEvent event) throws Exception 
 	{
-		String type = typeUser_Choice.getValue();
-		if(type.equals("Cliente"))
-			type = "usr";
-		else
-			type = "adm";
-		
-		String pwd = pwdUser_field.getText();
-		pwd = MyUtil.getMD5(pwd);
-		String id = TableUsers.makeId();
-		User c = new User(id, nameUser_field.getText(), surName_field.getText(), cellNumber_field.getText(), type, pwd);
+		Client c = new Client(name_field.getText(), surname_field.getText(), phone_field.getText());
 		
 		DbAccess db = new DbAccess();
 		db.initConnection();
-		TableUsers table = new TableUsers(db);
+		TableClients table = new TableClients(db);
 		table.insertClient(c);
 		
-		FXMLNoleggioView view = new FXMLNoleggioView();
+		//TODO passare il cliente a noleggioView
+		//TODO aprire noleggio view
+		/*FXMLNoleggioView view = new FXMLNoleggioView();
 		view.start(new Stage());
 		
 		Stage stage = (Stage) submit_bttn.getScene().getWindow();
-		stage.close();
+		stage.close();*/
 	}
 	
 	@FXML protected void onCancelEvent(ActionEvent event)

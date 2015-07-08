@@ -10,80 +10,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.collections.FXCollections ?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLNewUserViewController">
+
+<AnchorPane fx:id="rootLayout" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLNewUserViewController">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0">
-         <center>
-            <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label text="Nome Utente: ">
-                     <padding>
-                        <Insets left="25.0" top="10.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="nameUser_field">
-                     <FlowPane.margin>
-                        <Insets left="35.0" top="10.0" />
-                     </FlowPane.margin>
-                  </TextField>
-                  <Label text="Tipo: ">
-                     <FlowPane.margin>
-                        <Insets left="20.0" />
-                     </FlowPane.margin>
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
-                  </Label>
-                  <ChoiceBox fx:id="typeUser_Choice" prefWidth="150.0">
-                     <FlowPane.margin>
-                        <Insets left="35.0" top="10.0" />
-                     </FlowPane.margin>
-                     <items>
-                     	 <FXCollections fx:factory="observableArrayList">
-          					<String fx:value="Cliente" />
-          					<String fx:value="Amministratore" />
-        				 </FXCollections>
-  					</items>
-                  </ChoiceBox>
-                  <Label text="Cognome:">
-                     <FlowPane.margin>
-                        <Insets left="25.0" top="10.0" />
-                     </FlowPane.margin>
-                  </Label>
-                  <TextField fx:id="surName_field">
-                     <FlowPane.margin>
-                        <Insets left="63.0" top="10.0" />
-                     </FlowPane.margin>
-                  </TextField>
-                  <Label text="Password: ">
-                     <FlowPane.margin>
-                        <Insets top="10.0" />
-                     </FlowPane.margin>
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                  </Label>
-                  <PasswordField fx:id="pwdUser_field">
-                     <FlowPane.margin>
-                        <Insets top="10.0" />
-                     </FlowPane.margin>
-                  </PasswordField>
-                  <Label text="Numero di telefono:">
-                     <FlowPane.margin>
-                        <Insets left="25.0" top="10.0" />
-                     </FlowPane.margin>
-                  </Label>
-                  <TextField fx:id="cellNumber_field">
-                     <FlowPane.margin>
-                        <Insets top="10.0" />
-                     </FlowPane.margin>
-                  </TextField>
-               </children>
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin>
-            </FlowPane>
-         </center>
+      <BorderPane prefHeight="200.0" prefWidth="600.0">
          <top>
             <Label alignment="CENTER" text="Inserisci un nuovo utente." BorderPane.alignment="TOP_LEFT">
                <font>
@@ -97,11 +27,49 @@
          <bottom>
             <AnchorPane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="cancel_bttn" layoutX="368.0" layoutY="1.0" mnemonicParsing="false" prefWidth="70.0" text="Cancel" onAction="#onCancelEvent"/>
+                  <Button fx:id="cancel_bttn" layoutX="368.0" layoutY="1.0" mnemonicParsing="false" onAction="#onCancelEvent" prefWidth="70.0" text="Cancel" />
                   <Button fx:id="submit_bttn" layoutX="471.0" layoutY="1.0" mnemonicParsing="false" onAction="#submit" prefWidth="70.0" text="Ok" />
                </children>
             </AnchorPane>
          </bottom>
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Nome:">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Numero di telefono:" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Cognome:" GridPane.columnIndex="2">
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TextField fx:id="name_field" GridPane.columnIndex="1" />
+                  <TextField fx:id="surname_field" GridPane.columnIndex="3">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="phone_field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+         </center>
       </BorderPane>
    </children>
-</Pane>
+</AnchorPane>

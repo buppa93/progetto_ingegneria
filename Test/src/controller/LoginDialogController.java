@@ -4,7 +4,7 @@ import java.util.ResourceBundle;
 
 import utility.MyUtil;
 import view.SalesManView;
-import view.UnregisteredUser;
+import view.UnregisteredUserWarning;
 import database.DbAccess;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,7 +55,7 @@ public class LoginDialogController implements Initializable
 		else
 		{
 			System.out.println("login non effettuto");
-			UnregisteredUser alert = new UnregisteredUser();
+			UnregisteredUserWarning alert = new UnregisteredUserWarning();
 		}
 	}
 	

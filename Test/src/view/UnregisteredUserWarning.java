@@ -3,9 +3,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 
-public class UnregisteredUser 
+public class UnregisteredUserWarning 
 {
-	public UnregisteredUser()
+	public UnregisteredUserWarning()
 	{
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Utente non registrato");

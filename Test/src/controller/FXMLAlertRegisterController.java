@@ -26,7 +26,7 @@ public class FXMLAlertRegisterController
 		}
 		else
 		{
-			//TODO Alert cliente non registrato
+			//TODO Richiama nuovo cliente view
 			//flag = "unregistered";
 		}
 	}

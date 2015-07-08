@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import view.SalesManView;
+import view.UnregisteredClientWarning;
 import database.DatabaseConnectionException;
 import database.DbAccess;
 import database.TableClients;
@@ -48,7 +49,7 @@ public class InsertClientDataController implements Initializable
 		}
 		else
 		{
-			//TODO azioni da eseguire se il cliente non e' stato trovato
+			UnregisteredClientWarning alert = new UnregisteredClientWarning();
 		}
 	}
 	
