@@ -1,4 +1,5 @@
 package controller;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,16 +8,20 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
+import view.SalesManView;
 import view.SelectCarView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import database.DatabaseConnectionException;
 import database.DbAccess;
@@ -34,6 +39,7 @@ public class FXMLNoleggioViewController implements Initializable
 	@FXML private TextField km_field;
 	@FXML private ChoiceBox<String> typeCar_chbox;
 	@FXML private Button cancel_bttn;
+	@FXML private AnchorPane rootPane;
 	
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) 
@@ -85,15 +91,21 @@ public class FXMLNoleggioViewController implements Initializable
 		SelectCarView.getInstance().setParameters(parameters);
 		
 		try 
-		{SelectCarView.getInstance().start(new Stage());} 
+		{//SelectCarView.getInstance().start(new Stage());
+			((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("SelectCarView.fxml")));
+		} 
 		catch (Exception e) 
 		{e.printStackTrace();}
 	}
 	
-	@FXML protected void onCancelEvent(ActionEvent event)
+	@FXML protected void onCancelAction(ActionEvent event) throws IOException
 	{
-		Stage stage = (Stage) cancel_bttn.getScene().getWindow();
-		stage.close();
+		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));
+	}
+	
+	@FXML protected void onBackAction(ActionEvent event) throws IOException
+	{
+		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("InsertClientDataView.fxml")));
 	}
 }
 

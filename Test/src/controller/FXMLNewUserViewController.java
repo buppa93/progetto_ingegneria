@@ -1,9 +1,9 @@
 package controller;
 import database.DbAccess;
-import database.TableClient;
+import database.TableUsers;
 import utility.MyUtil;
 import view.FXMLNoleggioView;
-import entity.Client;
+import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,12 +32,12 @@ public class FXMLNewUserViewController
 		
 		String pwd = pwdUser_field.getText();
 		pwd = MyUtil.getMD5(pwd);
-		String id = TableClient.makeId();
-		Client c = new Client(id, nameUser_field.getText(), surName_field.getText(), cellNumber_field.getText(), type, pwd);
+		String id = TableUsers.makeId();
+		User c = new User(id, nameUser_field.getText(), surName_field.getText(), cellNumber_field.getText(), type, pwd);
 		
 		DbAccess db = new DbAccess();
 		db.initConnection();
-		TableClient table = new TableClient(db);
+		TableUsers table = new TableUsers(db);
 		table.insertClient(c);
 		
 		FXMLNoleggioView view = new FXMLNoleggioView();

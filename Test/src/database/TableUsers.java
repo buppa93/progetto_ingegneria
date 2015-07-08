@@ -3,9 +3,9 @@ package database;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
-import entity.Client;
+import entity.User;
 
-public class TableClient
+public class TableUsers
 {
 	public static final String FIELD_ID = "id_user";
 	public static final String FIELD_NAME = "nome";
@@ -16,10 +16,10 @@ public class TableClient
 	
 	DbAccess db;
 	
-	public TableClient(DbAccess db)
+	public TableUsers(DbAccess db)
 	{this.db = db;}
 	
-	public void insertClient (Client client)
+	public void insertClient (User client)
 	{
 		try 
 		{
@@ -39,13 +39,13 @@ public class TableClient
 		}
 	}
 	
-	public Client getClientById (String ID)
+	public User getClientById (String ID)
 	{
-		Client c = null;
+		User c = null;
 		try 
 		{
 			Statement st = db.getConnection().createStatement();
-			c = (Client) st.executeQuery("SELECT * FROM "+DbString.TBL_CLIENTS+" WHERE "+FIELD_ID+"="+ID+";");
+			c = (User) st.executeQuery("SELECT * FROM "+DbString.TBL_CLIENTS+" WHERE "+FIELD_ID+"="+ID+";");
 			st.close();
 		} 
 		catch (SQLException e) 

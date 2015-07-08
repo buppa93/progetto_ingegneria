@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="rootPane" maxHeight="250.0" maxWidth="500.0" minHeight="250.0" minWidth="550.0" prefHeight="250.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InsertClientDataController">
+   <children>
+      <BorderPane maxHeight="250.0" maxWidth="550.0" minHeight="250.0" minWidth="550.0" prefHeight="250.0" prefWidth="550.0">
+         <top>
+            <Label text="Inserisci i dati del cliente:" BorderPane.alignment="CENTER_LEFT">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </top>
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="101.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="159.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="157.0" minWidth="10.0" prefWidth="104.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.0" minWidth="10.0" prefWidth="164.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Nome:">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Cognome:" GridPane.columnIndex="2">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Telefono:" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Button fx:id="cancel_bttn" maxWidth="69.0" minWidth="69.0" mnemonicParsing="false" prefWidth="69.0" onAction="#onCancelAction" text="Annulla" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="back_bttn" maxWidth="69.0" minWidth="69.0" mnemonicParsing="false" prefWidth="69.0" onAction="#onBackAction" text="Indietro" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button fx:id="forward_bttn" maxWidth="69.0" minWidth="69.0" mnemonicParsing="false" prefWidth="69.0" onAction="#onForwardAction" text="Avanti" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <TextField fx:id="name_field" GridPane.columnIndex="1" />
+                  <TextField fx:id="surname_field" GridPane.columnIndex="3">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="phone_field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

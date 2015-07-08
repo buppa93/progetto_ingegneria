@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SelectCarViewController">
+<AnchorPane fx:id="rootPane" maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SelectCarViewController">
    <children>
       <BorderPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0">
          <bottom>
@@ -22,8 +22,13 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="submit_bttn" maxHeight="26.0" maxWidth="81.0" minHeight="26.0" minWidth="81.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="81.0" text="Seleziona" GridPane.columnIndex="3" />
-                  <Button fx:id="cancel_bttn" maxHeight="26.0" maxWidth="81.0" minHeight="26.0" minWidth="81.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="81.0" text="Annulla" GridPane.columnIndex="2" />
+                  <Button fx:id="submit_bttn" maxHeight="26.0" maxWidth="81.0" minHeight="26.0" minWidth="81.0" mnemonicParsing="false" onAction="#onSubmitAction" prefHeight="26.0" prefWidth="81.0" text="Seleziona" GridPane.columnIndex="3" />
+                  <Button fx:id="back_bttn" maxHeight="26.0" maxWidth="81.0" minHeight="26.0" minWidth="81.0" mnemonicParsing="false" onAction="#onBackAction" prefHeight="26.0" prefWidth="81.0" text="Indietro" GridPane.columnIndex="2" />
+                  <Button fx:id="cancel_bttn" maxWidth="81.0" minWidth="81.0" mnemonicParsing="false" onAction="#onCancelAction" prefWidth="81.0" text="Annulla">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Button>
                </children>
             </GridPane>
          </bottom>

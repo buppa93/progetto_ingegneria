@@ -8,4 +8,6 @@ public class DbString
 	public static final String TBL_TYPECONTRATC = "tipo_contratto";
 	public static final String TBL_AUTO = "auto";
 	public static final String TBL_SECTIONS = "fascia";
+	public static final String TBL_CLIENT = "clienti";
+	
 }

@@ -8,7 +8,7 @@ public class Contract extends TypeContract
 {
 	String numero_ordine;
 	Agency number;
-	Client idCliente;
+	User idCliente;
 	String data_inizio;
 	String data_fine;
 	Agency restit;
@@ -32,7 +32,7 @@ public class Contract extends TypeContract
 	 * @param typekm
 	 * @param kmmax
 	 */
-	public Contract(String numero_ordine, Agency number, Client idCliente, String data_inizio, String data_fine, Agency restit, int id, Noleggio type, Km typekm, int kmmax)
+	public Contract(String numero_ordine, Agency number, User idCliente, String data_inizio, String data_fine, Agency restit, int id, Noleggio type, Km typekm, int kmmax)
 	{
 		super(id, type, typekm );
 		this.numero_ordine=numero_ordine;

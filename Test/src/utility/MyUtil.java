@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 import database.DbAccess;
 import database.DbString;
-import database.TableClient;
+import database.TableUsers;
 
 public class MyUtil 
 {
@@ -56,8 +56,8 @@ public class MyUtil
 		//return true;
 		Statement st = db.getConnection().createStatement();
 		String md5 = MyUtil.getMD5(pwd);
-		String query = "SELECT * FROM "+DbString.TBL_CLIENTS+" WHERE ("+TableClient.FIELD_NAME+"='"+name+
-				"' AND "+TableClient.FIELD_PWD+"='"+md5+"');";
+		String query = "SELECT * FROM "+DbString.TBL_CLIENTS+" WHERE ("+TableUsers.FIELD_NAME+"='"+name+
+				"' AND "+TableUsers.FIELD_PWD+"='"+md5+"');";
 		ResultSet rs = st.executeQuery(query);
 		
 		

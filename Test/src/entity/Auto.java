@@ -16,7 +16,7 @@ public class Auto extends TypeSection
 	int km; // km traveled
 	CarsAvailability availability;
 	Agency numero;
-	Client client;
+	User client;
 	Contract contract;
 	
 	/**

@@ -8,14 +8,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 
-public class SalesManController implements Initializable
+public final class SalesManController implements Initializable
 {
+	private static SalesManController instance = new SalesManController();
 	@FXML private MenuBar menuBar;
 	@FXML private BorderPane rootLayout;
 	@FXML private Pane work_pane;
@@ -111,11 +111,31 @@ public class SalesManController implements Initializable
 		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("FXMLAlertRegister.fxml")));
 		System.out.println("");
 	}
+	
+	public final void setRootLayoutView(String fxml) throws IOException
+	{
+		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource(fxml)));
+	}
 
 	@Override
 	public void initialize(java.net.URL arg0, ResourceBundle arg1) 
 	{
 		menuBar.setFocusTraversable(true);
 
+	}
+	
+	public static SalesManController getInstance()
+	{
+		return instance;
+	}
+	
+	public BorderPane getRootLayout()
+	{
+		return rootLayout;
+	}
+	
+	public void setRootLayout(BorderPane rootLayout)
+	{
+		this.rootLayout = rootLayout;
 	}
 }

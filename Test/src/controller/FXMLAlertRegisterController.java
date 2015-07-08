@@ -1,10 +1,14 @@
 package controller;
-import view.FXMLNewUserView;
-import view.LoginDialog;
+import java.io.IOException;
+
+import view.SalesManView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 
@@ -14,26 +18,23 @@ public class FXMLAlertRegisterController
 	@FXML CheckBox notregistered_chbox;
 	@FXML Button cancel_bttn;
 	@FXML Button submit_bttn;
+	@FXML AnchorPane rootPane;
 	
 	@FXML protected void confirm(ActionEvent event) throws Exception
 	{
 		if(registered_chbox.isSelected())
 		{
-			LoginDialog dialog = new LoginDialog();
-			dialog.start(new Stage());
-			
+			((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("InsertClientDataView.fxml")));
 		}
-		else{
-			FXMLNewUserView UserView= new FXMLNewUserView();
-			UserView.start(new Stage());
+		else
+		{
+			//TODO Alert cliente non registrato
+			//flag = "unregistered";
 		}
-		Stage stage = (Stage) submit_bttn.getScene().getWindow();
-		stage.close();
 	}
 	
-	@FXML protected void onCancelEvent(ActionEvent event)
+	@FXML protected void onCancelEvent(ActionEvent event) throws IOException
 	{
-		Stage stage = (Stage) cancel_bttn.getScene().getWindow();
-		stage.close();
+		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));
 	}
 }
