@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import view.SalesManView;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.DbString;
 import database.TableClients;
 import entity.Client;
 import javafx.event.ActionEvent;
