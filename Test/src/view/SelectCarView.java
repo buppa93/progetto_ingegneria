@@ -10,7 +10,7 @@ import entity.Auto;
 
 public final class SelectCarView 
 {
-	private List<Auto> cars; //TODO Da cambiare tipo perche' non puo' essere ResultSet
+	private List<Auto> cars; 
 	private Map<String, String> parameters; //Parametri della finestra NoleggioView. Vedi NoleggioViewController.search()
 	private static SelectCarView instance =  new SelectCarView();
 	

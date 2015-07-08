@@ -15,7 +15,6 @@ public class DbAccess
 	private final String PASSWORD = "";
 	private Connection conn;
 	
-	//TODO Da sistemare quest' obrobrio
 	public void initConnection() throws DatabaseConnectionException
 	{
 		String connectionString = DBMS+"://" + SERVER + ":" + PORT + "/" + DATABASE;

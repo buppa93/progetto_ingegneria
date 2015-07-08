@@ -45,10 +45,7 @@ public class LoginDialogController implements Initializable
 		db.initConnection();
 		if(MyUtil.login(db, usr, psswd))
 		{
-			//TODO vai al Cerca auto
 			System.out.println("login effettuato");
-			//FXMLNoleggioView search = new FXMLNoleggioView();
-			//search.start(new Stage());
 			SalesManView salesman = new SalesManView();
 			salesman.start(new Stage());
 			Stage stage = (Stage) cancel_bttn.getScene().getWindow();

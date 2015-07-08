@@ -43,7 +43,7 @@ public class InsertClientDataController implements Initializable
 		Client c = tc.searchClient(name_field.getText(), surname_field.getText(), phone_field.getText());
 		if(c != null)
 		{
-			//TODO azioni da eseguire se il cliente e' stato trovato
+			//TODO passare dati utente
 			((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NoleggioView.fxml")));
 		}
 		else
@@ -54,7 +54,6 @@ public class InsertClientDataController implements Initializable
 	
 	@FXML protected void onBackAction(ActionEvent event) throws IOException
 	{
-		//TODO risolvere problema location is required
 		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("FXMLAlertRegister.fxml")));
 	}
 	

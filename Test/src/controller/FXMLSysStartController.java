@@ -18,19 +18,23 @@ public class FXMLSysStartController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
-		// TODO Auto-generated method stub
-		try {
+		try 
+		{
  			Thread.sleep(1000);
- 		} catch (InterruptedException e) {
- 			// TODO Auto-generated catch block
+ 		} 
+		catch (InterruptedException e) 
+		{
  			e.printStackTrace();
  		}
+		
 		System.out.println("Uscito dalla pausa");
 		LoginDialog login = new LoginDialog();
-		try {
+		try 
+		{
 			login.start(new Stage());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (Exception e) 
+		{
 			e.printStackTrace();
 		}
 		
