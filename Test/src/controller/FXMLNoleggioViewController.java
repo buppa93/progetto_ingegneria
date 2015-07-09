@@ -74,6 +74,9 @@ public class FXMLNoleggioViewController implements Initializable
 		String km = km_field.getText();
 		String typeCar = typeCar_chbox.getValue();
 		
+		System.out.println("Data inizio: "+date_start);
+		System.out.println("Data fine: "+date_end);
+		
 		SearchCar.getInstance().setDateStart(date_start);
 		SearchCar.getInstance().setTakingAgency(agencyTake);
 		SearchCar.getInstance().setTypeCar(typeCar);
@@ -82,17 +85,20 @@ public class FXMLNoleggioViewController implements Initializable
 		car = SearchCar.getInstance().search();
 		
 		Map<String, String> parameters = new TreeMap<String, String>();
+		parameters.put("dataStart", date_start);
 		parameters.put("dataEnd", date_end);
+		parameters.put("agencyTake", agencyTake);
 		parameters.put("agencyReturn",agencyReturn);
 		parameters.put("typeKm",typeKm);
 		parameters.put("km",km);
+		parameters.put("typeCar",typeCar);
 		
 		SelectCarView.getInstance().setCars(car);
 		SelectCarView.getInstance().setParameters(parameters);
 		SelectCarView.getInstance().setClient(FXMLNoleggioView.getInstance().getClient());
 		
 		try 
-		{//SelectCarView.getInstance().start(new Stage());
+		{
 			((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("SelectCarView.fxml")));
 		} 
 		catch (Exception e) 

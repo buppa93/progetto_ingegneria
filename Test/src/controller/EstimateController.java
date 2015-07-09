@@ -42,6 +42,15 @@ public class EstimateController implements Initializable
 		model_lbl.setText(EstimateView.getInstance().getAuto().getModel());
 		brand_lbl.setText(EstimateView.getInstance().getAuto().getBrand());
 		kmCar_lbl.setText(Integer.toString(EstimateView.getInstance().getAuto().getKm()));
+		start_lbl.setText(EstimateView.getInstance().getParameters().get("dataStart"));
+		end_lbl.setText(EstimateView.getInstance().getParameters().get("dataEnd"));
+		//TODO mostrare solo il nome dell'angenzia
+		take_lbl.setText(EstimateView.getInstance().getParameters().get("agencyTake"));
+		return_lbl.setText(EstimateView.getInstance().getParameters().get("agencyReturn"));
+		typeKm_lbl.setText(EstimateView.getInstance().getParameters().get("typeKm"));
+		km_lbl.setText(EstimateView.getInstance().getParameters().get("km"));
+		typeCar_lbl.setText(EstimateView.getInstance().getParameters().get("typeCar"));
+		
 		
 	}
 	

@@ -1,5 +1,4 @@
 package view;
-import java.util.List;
 import java.util.Map;
 
 import javafx.fxml.FXMLLoader;
@@ -11,9 +10,9 @@ import entity.Client;
 
 public final class EstimateView 
 {
-	//TODO passare parametri noleggio
 	private Client client;
 	private Auto auto;
+	private Map<String, String> parameters;
 	private static EstimateView instance =  new EstimateView();
 	
 	public EstimateView(){}
@@ -40,6 +39,12 @@ public final class EstimateView
 	{
 		this.auto = auto;
 	}
+	
+	public void setParameters(Map<String, String> parameters)
+	{
+		this.parameters = parameters;
+	}
+	
 	public Client getClient()
 	{
 		return this.client;
@@ -48,5 +53,10 @@ public final class EstimateView
 	public Auto getAuto()
 	{
 		return this.auto;
+	}
+	
+	public Map<String, String> getParameters()
+	{
+		return this.parameters;
 	}
 }
