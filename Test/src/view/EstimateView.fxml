@@ -1,8 +1,195 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane fx:id="rootPane" maxHeight="420.0" maxWidth="600.0" minHeight="420.0" minWidth="600.0" prefHeight="420.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EstimateController">
+   <children>
+      <BorderPane minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0">
+         <top>
+            <Label text="Riepilogo:" BorderPane.alignment="CENTER_LEFT">
+               <font>
+                  <Font size="28.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets left="5.0" />
+               </BorderPane.margin></Label>
+         </top>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Nome:" />
+                        <Label fx:id="name_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Cognome:" />
+                        <Label fx:id="surname_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Numero di telefono:" />
+                        <Label fx:id="phone_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="15.0" top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Data inizio noleggio:" />
+                        <Label fx:id="start_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Data fine noleggio:" />
+                        <Label fx:id="end_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Agenzia prelievo:" />
+                        <Label fx:id="take_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Agenzia restituzione:" />
+                        <Label fx:id="return_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Tipo chilometraggio:" />
+                        <Label fx:id="typeKm_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Chilometri:" />
+                        <Label fx:id="km_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Tipo autovettura:" />
+                        <Label fx:id="typeCar_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Targa:" />
+                        <Label fx:id="targa_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Modello:" />
+                        <Label fx:id="model_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Marca:" />
+                        <Label fx:id="brand_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Chilometri:" />
+                        <Label fx:id="kmCar_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Prezzo:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="price_lbl" text="Label">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="55.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+         <bottom>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="submit_bttn" mnemonicParsing="false" onAction="#onSubmitAction" text="Conferma" GridPane.columnIndex="3" />
+                  <Button fx:id="back_bttn" maxWidth="82.0" minWidth="82.0" mnemonicParsing="false" onAction="#onBackAction" prefWidth="82.0" text="Indietro" GridPane.columnIndex="2" />
+                  <Button fx:id="cancel_bttn" alignment="CENTER" maxWidth="82.0" minWidth="82.0" mnemonicParsing="false" onAction="#onCancelAction" prefWidth="82.0" text="Annulla" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+               </children>
+            </GridPane>
+         </bottom>
+      </BorderPane>
+   </children>
 </AnchorPane>
-

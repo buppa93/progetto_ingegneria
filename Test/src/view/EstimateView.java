@@ -11,6 +11,7 @@ import entity.Client;
 
 public final class EstimateView 
 {
+	//TODO passare parametri noleggio
 	private Client client;
 	private Auto auto;
 	private static EstimateView instance =  new EstimateView();
