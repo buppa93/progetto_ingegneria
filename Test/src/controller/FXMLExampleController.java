@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import utility.MyUtil;
 import view.FXMLAlertRegister;
-import view.FXMLNewUserView;
+import view.FXMLNewClientView;
 import view.LoginAlertView;
 import database.DatabaseConnectionException;
 import database.DbAccess;
@@ -50,7 +50,7 @@ public class FXMLExampleController
 	{
 		actiontarget.setText("nuovo utente");
 		//Stage stage = new Stage();
-		FXMLNewUserView newuserview =  new FXMLNewUserView();
+		FXMLNewClientView newuserview =  new FXMLNewClientView();
 		newuserview.start(new Stage());
 	}
 	

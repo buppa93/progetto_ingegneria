@@ -10,12 +10,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.collections.FXCollections ?>
 
-
-<AnchorPane fx:id="rootLayout" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLNewUserViewController">
+<AnchorPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLNewClientController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="600.0">
          <top>
-            <Label alignment="CENTER" text="Inserisci un nuovo utente." BorderPane.alignment="TOP_LEFT">
+            <Label alignment="CENTER" text="Inserisci un nuovo cliente." BorderPane.alignment="TOP_LEFT">
                <font>
                   <Font size="25.0" />
                </font>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import view.FXMLNoleggioView;
 import view.SalesManView;
 import view.UnregisteredClientWarning;
 import database.DatabaseConnectionException;
@@ -32,7 +33,17 @@ public class InsertClientDataController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
-		// TODO fare in modo che nessun campo sia vuoto
+		name_field.textProperty().addListener((observable, oldValue, newValue) -> {
+			forward_bttn.setDisable(newValue.trim().isEmpty());
+		});
+		
+		surname_field.textProperty().addListener((observable, oldValue, newValue) -> {
+			forward_bttn.setDisable(newValue.trim().isEmpty());
+		});
+		
+		phone_field.textProperty().addListener((observable, oldValue, newValue) -> {
+			forward_bttn.setDisable(newValue.trim().isEmpty());
+		});
 		
 	}
 	
@@ -44,7 +55,7 @@ public class InsertClientDataController implements Initializable
 		Client c = tc.searchClient(name_field.getText(), surname_field.getText(), phone_field.getText());
 		if(c != null)
 		{
-			//TODO passare dati utente
+			FXMLNoleggioView.getInstance().setClient(c);
 			((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NoleggioView.fxml")));
 		}
 		else

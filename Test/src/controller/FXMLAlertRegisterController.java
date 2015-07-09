@@ -26,8 +26,7 @@ public class FXMLAlertRegisterController
 		}
 		else
 		{
-			//TODO Richiama nuovo cliente view
-			//flag = "unregistered";
+			((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NewClientView.fxml")));
 		}
 	}
 	

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import view.EstimateView;
 import view.SalesManView;
 import view.SelectCarView;
 import entity.Auto;
@@ -27,12 +28,13 @@ public class SelectCarViewController implements Initializable
 	@FXML private Button submit_bttn;
 	@FXML private Button cancel_bttn;
 	@FXML private AnchorPane rootPane;
+	List<Auto> carss;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		List<String> carsString = new ArrayList<String>();
-		List<Auto> carss = new ArrayList<Auto>();
+		carss = new ArrayList<Auto>();
 		carss = SelectCarView.getInstance().getCars();
 		
 		Iterator<Auto> it = carss.iterator();
@@ -47,7 +49,14 @@ public class SelectCarViewController implements Initializable
 	
 	@FXML protected void onSubmitAction(ActionEvent event) throws IOException
 	{
-		//TODO passare la macchina selezionata al prossimo frame
+		EstimateView.getInstance().setClient(SelectCarView.getInstance().getClient());
+		String carSelected = listCar_lst.getSelectionModel().selectedItemProperty().get();
+		carSelected = Auto.getTargaFromString(carSelected);
+		int i = listCar_lst.getSelectionModel().getSelectedIndex();
+		Auto a = carss.get(i);
+		EstimateView.getInstance().setAuto(a);
+		System.out.println("Auto selezionata: "+a.toLabel());
+		System.out.println("Cliente: "+SelectCarView.getInstance().getClient().toString());
 		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("EstimateView.fxml")));
 	}
 	

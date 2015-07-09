@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.StringTokenizer;
+
 import utility.CarsAvailability;
 
 /**
@@ -175,6 +177,12 @@ public class Auto extends TypeSection
 	public String toLabel()
 	{
 		return this.targa + ", " + this.model + ", " + this.brand + ", " + this.km;
+	}
+	
+	public static String getTargaFromString(String auto)
+	{
+		StringTokenizer st = new StringTokenizer(auto, "; ");
+		return st.nextToken();
 	}
 	
 }

@@ -7,9 +7,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import entity.Auto;
+import entity.Client;
 
 public final class SelectCarView 
 {
+	private Client client;
 	private List<Auto> cars; 
 	private Map<String, String> parameters; //Parametri della finestra NoleggioView. Vedi NoleggioViewController.search()
 	private static SelectCarView instance =  new SelectCarView();
@@ -38,6 +40,16 @@ public final class SelectCarView
 	public void setParameters(Map<String, String> parameters)
 	{
 		this.parameters = parameters;
+	}
+	
+	public void setClient(Client client)
+	{
+		this.client = client;
+	}
+	
+	public Client getClient()
+	{
+		return this.client;
 	}
 	
 	public List<Auto> getCars()

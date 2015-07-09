@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
+import view.FXMLNoleggioView;
 import view.SalesManView;
 import view.SelectCarView;
 import javafx.collections.FXCollections;
@@ -88,6 +89,7 @@ public class FXMLNoleggioViewController implements Initializable
 		
 		SelectCarView.getInstance().setCars(car);
 		SelectCarView.getInstance().setParameters(parameters);
+		SelectCarView.getInstance().setClient(FXMLNoleggioView.getInstance().getClient());
 		
 		try 
 		{//SelectCarView.getInstance().start(new Stage());

@@ -7,12 +7,12 @@ import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
 
-public class FXMLNewUserView extends Application 
+public class FXMLNewClientView extends Application 
 {
 	
 	public void start(Stage stage) throws Exception 
 	{
-		Parent root = FXMLLoader.load(getClass().getResource("NewUserView.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("NewClientView.fxml"));
 
 		Scene scene = new Scene(root, 600, 400);
 		ChoiceBox<String> typeUser_Choice = new ChoiceBox<String>();
