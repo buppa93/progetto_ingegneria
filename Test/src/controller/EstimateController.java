@@ -1,10 +1,15 @@
 package controller;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 
+import database.DatabaseConnectionException;
+import database.DbAccess;
+import database.TablePrices;
+import entity.Price;
 import entity.TypeSection;
 import utility.MyUtil;
 import view.EstimateView;
@@ -68,7 +73,31 @@ public class EstimateController implements Initializable
 			e.printStackTrace();
 		}
 		System.out.println("Numero giorni: "+days);
-		double price = quote(fascia, EstimateView.getInstance().getParameters().get("typeKm"), days);
+		
+		double price = 0.0;
+		try 
+		{
+			price = quote(fascia, EstimateView.getInstance().getParameters().get("typeKm"), days);
+		} 
+		catch (DatabaseConnectionException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(EstimateView.getInstance().getParameters().get("typeKm").equals("illitato"))
+		{
+			price_lbl.setText(price+" + 0.5 * N km percorsi");
+		}
+		else
+		{
+			price_lbl.setText(price+" + conguaglio km alla restituzione");
+		}
 	}
 	
 	@FXML protected void onSubmitAction(ActionEvent event){}
@@ -80,11 +109,20 @@ public class EstimateController implements Initializable
 	/**
 	 * Calcola il preventivo
 	 * @return
+	 * @throws DatabaseConnectionException 
+	 * @throws SQLException 
 	 */
-	public double quote(char facsia, String tipo_km, int n_giorni)
+	public double quote(char fascia, String tipo_km, int n_giorni) throws DatabaseConnectionException, SQLException
 	{
-		double price = 0.0;
-		return price;
+		double cost = 0.0;
+		DbAccess db = new DbAccess();
+		db.initConnection();
+		TablePrices tableprice = new TablePrices(db);
+		Price tuple = tableprice.getPrice(fascia, tipo_km);
+		cost = tuple.getCostGg()*n_giorni;
+		return cost;
 	}
+	
+	
 
 }
