@@ -1,8 +1,12 @@
 package controller;
 
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 
+import entity.TypeSection;
+import utility.MyUtil;
 import view.EstimateView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,14 +48,27 @@ public class EstimateController implements Initializable
 		kmCar_lbl.setText(Integer.toString(EstimateView.getInstance().getAuto().getKm()));
 		start_lbl.setText(EstimateView.getInstance().getParameters().get("dataStart"));
 		end_lbl.setText(EstimateView.getInstance().getParameters().get("dataEnd"));
-		//TODO mostrare solo il nome dell'angenzia
-		take_lbl.setText(EstimateView.getInstance().getParameters().get("agencyTake"));
-		return_lbl.setText(EstimateView.getInstance().getParameters().get("agencyReturn"));
+		StringTokenizer token = new StringTokenizer(EstimateView.getInstance().getParameters().get("agencyTake"), ", ");
+		token.nextToken();
+		take_lbl.setText(token.nextToken());
+		token = new StringTokenizer(EstimateView.getInstance().getParameters().get("agencyReturn"), ", ");
+		token.nextToken();
+		return_lbl.setText(token.nextToken());
 		typeKm_lbl.setText(EstimateView.getInstance().getParameters().get("typeKm"));
 		km_lbl.setText(EstimateView.getInstance().getParameters().get("km"));
 		typeCar_lbl.setText(EstimateView.getInstance().getParameters().get("typeCar"));
 		
-		
+		char fascia = TypeSection.resolvType(EstimateView.getInstance().getParameters().get("typeCar"));
+		//TODO calcolare il prezzo
+		int days = 0;
+		try {
+			days = MyUtil.estimatedNumberOfDays(EstimateView.getInstance().getParameters().get("dataStart"),EstimateView.getInstance().getParameters().get("dataEnd"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Numero giorni: "+days);
+		double price = quote(fascia, EstimateView.getInstance().getParameters().get("typeKm"), days);
 	}
 	
 	@FXML protected void onSubmitAction(ActionEvent event){}
@@ -59,5 +76,15 @@ public class EstimateController implements Initializable
 	@FXML protected void onBackAction(ActionEvent event){}
 	
 	@FXML protected void onCancelAction(ActionEvent event){}
+	
+	/**
+	 * Calcola il preventivo
+	 * @return
+	 */
+	public double quote(char facsia, String tipo_km, int n_giorni)
+	{
+		double price = 0.0;
+		return price;
+	}
 
 }

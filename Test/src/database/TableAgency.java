@@ -65,7 +65,7 @@ public class TableAgency
 			
 			while(rs.next())
 			{
-				agencies.add(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3));
+				agencies.add(rs.getString(1)+", "+rs.getString(2)+", "+rs.getString(3));
 				System.out.println(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3));
 			}
 			st.close();

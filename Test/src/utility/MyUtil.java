@@ -6,6 +6,10 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import database.DbAccess;
 import database.DbString;
@@ -75,6 +79,35 @@ public class MyUtil
 		}
 		
 		
+	}
+	
+	public static int estimatedNumberOfDays(String data1, String data2) throws ParseException
+	{
+		int gg = 0;
+
+		java.text.SimpleDateFormat df =  
+				new java.text.SimpleDateFormat("yyyy-MM-dd");  
+		java.util.Date dt1 = new java.util.Date();  
+		java.util.Date dt2 = new java.util.Date();  
+		dt1 = df.parse(data1);  
+		dt2 = df.parse(data2);  
+		java.util.GregorianCalendar c1 =  
+				new java.util.GregorianCalendar();  
+		c1.setTime(dt1);  
+		java.util.GregorianCalendar c2 =  
+				new java.util.GregorianCalendar();  
+		c2.setTime(dt2);  
+		long dallaDataMilliSecondi = c1.getTimeInMillis();  
+		long allaDataMilliSecondi = c2.getTimeInMillis();  
+		long millisecondiFraDueDate =  
+				allaDataMilliSecondi - dallaDataMilliSecondi;  
+		// conversione in giorni con la divisione intera  
+		double giorniFraDueDate =  
+				millisecondiFraDueDate / 86400000; 
+		gg = (int)giorniFraDueDate;
+
+
+		return gg;
 	}
 
 }

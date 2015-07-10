@@ -100,7 +100,7 @@ public class Agency
 	
 	public static String getIdFromString(String agency)
 	{
-		StringTokenizer st = new StringTokenizer(agency);
+		StringTokenizer st = new StringTokenizer(agency, ", ");
 		return st.nextToken();
 	}
 }
