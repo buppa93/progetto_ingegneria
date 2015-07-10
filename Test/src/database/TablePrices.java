@@ -22,7 +22,6 @@ public class TablePrices
 	public Price getPrice(char fascia, String type_km) throws SQLException
 	{
 		String query = "SELECT * FROM "+DbString.TBL_PRICES+" WHERE ("+FIELD_FASCIA+"='"+fascia+"' AND "+FIELD_TYPEKM+"='"+type_km.toLowerCase()+"');";
-		System.out.println(query);
 		Statement st = db.getConnection().createStatement();
 		ResultSet rs = st.executeQuery(query);
 		

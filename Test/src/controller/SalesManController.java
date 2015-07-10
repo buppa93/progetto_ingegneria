@@ -74,7 +74,6 @@ public final class SalesManController implements Initializable
 	 */
 	private void provideNewClientFunctionality() throws IOException
 	{
-		System.out.println("You clicked on Nuovo Cliente!");
 		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("NewUserView.fxml")));
 		System.out.println("");
 	}
@@ -85,7 +84,6 @@ public final class SalesManController implements Initializable
 	 */
 	private void provideSearchClientFunctionality() throws IOException
 	{
-		System.out.println("You clicked on Cerca Cliente!");
 		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("SearchClientView.fxml")));
 		System.out.println("");
 	}
@@ -96,7 +94,6 @@ public final class SalesManController implements Initializable
 	 */
 	private void provideSearchCarFunctionality() throws IOException
 	{
-		System.out.println("You clicked on Nuova auto!");
 		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("SearchAutoView.fxml")));
 		System.out.println("");
 	}
@@ -107,7 +104,6 @@ public final class SalesManController implements Initializable
 	 */
 	private void provideNewContractFunctionality() throws IOException
 	{
-		System.out.println("You clicked on Nuova auto!");
 		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("FXMLAlertRegister.fxml")));
 		System.out.println("");
 	}

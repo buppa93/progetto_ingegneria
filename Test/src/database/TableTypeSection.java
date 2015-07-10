@@ -24,9 +24,7 @@ public class TableTypeSection
 					String query = "INSERT INTO "+DbString.TBL_SECTIONS+" "
 							+ "("+FIELD_NOME+","+FIELD_N_PORTE+","+FIELD_N_POSTI+") values ('" +typesection.getFascia()+"','"+ typesection.getN_porte() +
 							"','" + typesection.getN_posti()+"');";
-					System.out.println(query);
 					st.executeUpdate(query);
-					System.out.println(st.toString());
 					st.close();
 				} 
 				catch (SQLException e) 

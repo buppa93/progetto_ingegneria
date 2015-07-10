@@ -27,9 +27,7 @@ public class TableAgency
 			String query = "INSERT INTO "+DbString.TBL_AGENCIES+" "
 					+ "("+FIELD_NUMBER+","+FIELD_NAME+","+FIELD_ADDRESS+") values ('" +agency.getNumber()+"','"+ agency.getName() +
 					"','" + agency.getAddress() +"');";
-			System.out.println(query);
 			st.executeUpdate(query);
-			System.out.println(st.toString());
 			st.close();
 		} 
 		catch (SQLException e) 
@@ -66,7 +64,6 @@ public class TableAgency
 			while(rs.next())
 			{
 				agencies.add(rs.getString(1)+", "+rs.getString(2)+", "+rs.getString(3));
-				System.out.println(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3));
 			}
 			st.close();
 			rs.close();

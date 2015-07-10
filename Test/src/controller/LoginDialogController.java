@@ -45,7 +45,6 @@ public class LoginDialogController implements Initializable
 		db.initConnection();
 		if(MyUtil.login(db, usr, psswd))
 		{
-			System.out.println("login effettuato");
 			SalesManView salesman = new SalesManView();
 			salesman.start(new Stage());
 			Stage stage = (Stage) cancel_bttn.getScene().getWindow();
@@ -54,7 +53,6 @@ public class LoginDialogController implements Initializable
 		}
 		else
 		{
-			System.out.println("login non effettuto");
 			UnregisteredUserWarning alert = new UnregisteredUserWarning();
 		}
 	}

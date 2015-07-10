@@ -29,9 +29,7 @@ public class TableContract
 					String query = "INSERT INTO "+DbString.TBL_CONTRACTS+" "
 							+ "("+FIELD_NUMBER_ORDINE+","+FIELD_NUM_AGENCY+","+FIELD_CLIENTE+","+FIELD_INIZIO_NOLEGGIO+","+FIELD__FINE_NOLEGGIO+","+FIELD_AGENZIA_RESTIT+","+FIELD_MAX_KM +") values ('" +contract.getNumero_ordine()+"','"+ contract.getNumberOfAgency() +
 							"','" + contract.getNumberCliente()+","+contract.getData_inizio()+","+contract.getData_fine()+","+ contract.getNumberOfAgency()+","+contract.getKmmax()+"');";
-					System.out.println(query);
 					st.executeUpdate(query);
-					System.out.println(st.toString());
 					st.close();
 				} 
 				catch (SQLException e) 

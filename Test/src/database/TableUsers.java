@@ -27,9 +27,7 @@ public class TableUsers
 			String query = "INSERT INTO "+DbString.TBL_CLIENTS+" "
 					+ "("+FIELD_ID+","+FIELD_NAME+","+FIELD_SURNAME+","+FIELD_PHONE+","+FIELD_PWD+","+FIELD_TYPE+") values ('" +client.getId()+"','"+ client.getName() +
 					"','" + client.getSurname() + "','" + client.getTelephoneNumber() + "','" + client.getPassword() +"','" + client.getType() +"');";
-			System.out.println(query);
 			st.executeUpdate(query);
-			System.out.println(st.toString());
 			st.close();
 		} 
 		catch (SQLException e) 
@@ -59,18 +57,17 @@ public class TableUsers
 	public static String makeId()
 	{
 		Random random = new Random();
-		String id="";
 		int j = 1;
 		int n = 9-j;
 		int k = 0;
 		
+		StringBuffer result = new StringBuffer (5);
 		for(int i=1; i<6; i++)
 		{
 			k = random.nextInt(n)+j;
-			id+=k;
+			result.append(k);
 		}
-		System.out.println(id);
-		return id;
+		return result.toString();
 	}
 
 }

@@ -56,8 +56,6 @@ public class SelectCarViewController implements Initializable
 		Auto a = carss.get(i);
 		EstimateView.getInstance().setAuto(a);
 		EstimateView.getInstance().setParameters(SelectCarView.getInstance().getParameters());
-		System.out.println("Auto selezionata: "+a.toLabel());
-		System.out.println("Cliente: "+SelectCarView.getInstance().getClient().toString());
 		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("EstimateView.fxml")));
 	}
 	

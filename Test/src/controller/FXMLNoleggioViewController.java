@@ -74,9 +74,6 @@ public class FXMLNoleggioViewController implements Initializable
 		String km = km_field.getText();
 		String typeCar = typeCar_chbox.getValue();
 		
-		System.out.println("Data inizio: "+date_start);
-		System.out.println("Data fine: "+date_end);
-		
 		SearchCar.getInstance().setDateStart(date_start);
 		SearchCar.getInstance().setTakingAgency(agencyTake);
 		SearchCar.getInstance().setTypeCar(typeCar);

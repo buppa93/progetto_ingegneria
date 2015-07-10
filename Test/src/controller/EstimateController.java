@@ -41,6 +41,7 @@ public class EstimateController implements Initializable
 	@FXML private Button back_bttn;
 	@FXML private Button submit_bttn;
 	@FXML private AnchorPane rootPane;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
@@ -64,29 +65,28 @@ public class EstimateController implements Initializable
 		typeCar_lbl.setText(EstimateView.getInstance().getParameters().get("typeCar"));
 		
 		char fascia = TypeSection.resolvType(EstimateView.getInstance().getParameters().get("typeCar"));
-		//TODO calcolare il prezzo
 		int days = 0;
-		try {
+		try 
+		{
 			days = MyUtil.estimatedNumberOfDays(EstimateView.getInstance().getParameters().get("dataStart"),EstimateView.getInstance().getParameters().get("dataEnd"));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (ParseException e) 
+		{
 			e.printStackTrace();
 		}
-		System.out.println("Numero giorni: "+days);
 		
 		double price = 0.0;
+		
 		try 
 		{
 			price = quote(fascia, EstimateView.getInstance().getParameters().get("typeKm"), days);
 		} 
 		catch (DatabaseConnectionException e) 
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		catch (SQLException e) 
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

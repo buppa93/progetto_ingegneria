@@ -25,7 +25,6 @@ public class TableClients
 			String query = "INSERT INTO "+DbString.TBL_CLIENT+" "
 					+ "("+FIELD_NAME+","+FIELD_SURNAME+","+FIELD_PHONE+") values ('"+ client.getName() +
 					"','" + client.getSurname() + "','" + client.getPhone() +"');";
-			System.out.println(query);
 			st.executeUpdate(query);
 			System.out.println(st.toString());
 			st.close();
@@ -44,8 +43,6 @@ public class TableClients
 				"' AND cognome='"+surname+"' AND telefono='"+phone+"');";
 		try
 		{
-			System.out.println(db.getConnection());
-			System.out.println(db.getConnection().createStatement());
 			Statement st = db.getConnection().createStatement();
 			ResultSet rs = st.executeQuery(query);
 			

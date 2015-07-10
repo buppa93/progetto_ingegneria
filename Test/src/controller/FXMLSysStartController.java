@@ -26,8 +26,6 @@ public class FXMLSysStartController implements Initializable
 		{
  			e.printStackTrace();
  		}
-		
-		System.out.println("Uscito dalla pausa");
 		LoginDialog login = new LoginDialog();
 		try 
 		{

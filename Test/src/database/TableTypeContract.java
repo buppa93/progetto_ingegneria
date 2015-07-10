@@ -24,9 +24,7 @@ public class TableTypeContract
 				String query = "INSERT INTO "+DbString.TBL_TYPECONTRATC+" "
 						+ "("+FIELD_ID+","+FIELD_TYPE_NOLEGGIO+","+FIELD_TYPE_KM+") values ('" +typecontract.getTypeContract()+"','"+ typecontract.getTypeContract() +
 						"','" + typecontract.getChilometraggio()+","+"');";
-				System.out.println(query);
 				st.executeUpdate(query);
-				System.out.println(st.toString());
 				st.close();
 			} 
 			catch (SQLException e) 

@@ -44,26 +44,21 @@ public final class SearchCar
 	{
 		String query = "SELECT * FROM auto WHERE (fascia='"+TypeSection.resolvType(this.type_car)+"' AND id_agenzia='"
 					+Agency.getIdFromString(this.taking_agency)+"' AND disponibilita=1);";
-		System.out.println(query);
 		
 		List<Auto> cars = new ArrayList<Auto>();
 		DbAccess db = new DbAccess();
 		db.initConnection();
 		Statement st = db.getConnection().createStatement();
 		ResultSet rs = st.executeQuery(query);
-		System.out.println(rs.getFetchSize());
-		System.out.println(rs);
 		
 		while(rs.next())
 		{
 			//String targa, String model, String brand, int km,  Availability disp
 			cars.add(new Auto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4),rs.getInt(5)));
-			System.out.println(rs.getString(1)+rs.getString(2)+rs.getString(3)+rs.getInt(4)+rs.getInt(5));
 		}
 
 		st.close();
 		rs.close();
-		System.out.println(cars.size());
 		return cars;
 			
 	}
