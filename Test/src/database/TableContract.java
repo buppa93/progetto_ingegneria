@@ -8,20 +8,23 @@ import entity.Contract;
 
 public class TableContract 
 {
-			public static final String FIELD_NUMBER_ORDINE = "numero ordine";
-			public static final String FIELD_NUM_AGENCY = "numero agenzia";
-			public static final String FIELD_CLIENTE = "cliente";
-			public static final String FIELD_INIZIO_NOLEGGIO = "inizio noleggio";
-			public static final String FIELD__FINE_NOLEGGIO = "fine noleggio";
-			public static final String FIELD_AGENZIA_RESTIT = "agenzia restituzione";
-			public static final String FIELD_MAX_KM = "massimo chilometraggio";
+			public static final String FIELD_NUMBERORDINE = "numero_ordine";
+			public static final String FIELD_NUMAGENCY = "id_agenzia";
+			public static final String FIELD_CLIENTE = "id_cliente";
+			public static final String FIELD_INIZIONOLEGGIO = "data_inizio";
+			public static final String FIELD__FINENOLEGGIO = "data_fine";
+			public static final String FIELD_AGENZIARESTITUZIONE = "agenzia_rest";
+			public static final String FIELD_KM = "km";
+			public static final String FIELD_TYPEKM = "tipo_km";
+			public static final String FIELD_PRICE = "prezzo";
+			public static final String FIELD_DEPOSIT = "acconto";
 			
 			DbAccess db;
 			
 			public TableContract(DbAccess db)
 			{this.db = db;}
 			
-			public void insertContract (Contract contract)
+			/*public void insertContract (Contract contract)
 			{
 				try 
 				{
@@ -37,9 +40,9 @@ public class TableContract
 					System.out.println("inserimento non eseguito"); 
 					e.printStackTrace();
 				}
-			}
+			}*/
 			
-			public Contract getContractByNumeroOrdine (int numOrdine)
+			/*public Contract getContractByNumeroOrdine (int numOrdine)
 			{
 				Contract c = null;
 				try 
@@ -54,6 +57,6 @@ public class TableContract
 					e.printStackTrace();
 				}
 				return c;
-			}
+			}*/
 
 		}

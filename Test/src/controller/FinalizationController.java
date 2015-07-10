@@ -10,8 +10,12 @@ import javafx.fxml.Initializable;
 
 public class FinalizationController implements Initializable {
 	
-	@FXML protected void onSubmitAction(ActionEvent event){}
+	@FXML protected void onSubmitAction(ActionEvent event)
+	{
+		
+	}
 	@FXML protected void onCancelAction(ActionEvent event){}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
