@@ -7,9 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
 
 import database.DbAccess;
 import database.DbString;
@@ -35,8 +32,7 @@ public class MyUtil
             BigInteger number = new BigInteger(1, messageDigest);
             String hashtext = number.toString(16);
             // Now we need to zero pad it if you actually want the full 32 chars.
-            int len = hashtext.length();
-            while (/*hashtext.length()*/len < 32) 
+            while (hashtext.length() < 32) 
             {
                 hashtext = "0" + hashtext;
             }
@@ -59,10 +55,14 @@ public class MyUtil
 	public static boolean login (DbAccess db, String name, String pwd) throws SQLException
 	{
 		//return true;
+		System.out.println("Sto per fare il login");
 		Statement st = db.getConnection().createStatement();
+		System.out.println("Ho creato lo statement");
 		String md5 = MyUtil.getMD5(pwd);
+		System.out.println("Ho creato l' md5");
 		String query = "SELECT * FROM "+DbString.TBL_CLIENTS+" WHERE ("+TableUsers.FIELD_NAME+"='"+name+
 				"' AND "+TableUsers.FIELD_PWD+"='"+md5+"');";
+		System.out.println(query);
 		ResultSet rs = st.executeQuery(query);
 		
 		

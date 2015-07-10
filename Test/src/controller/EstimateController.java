@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -13,12 +14,16 @@ import entity.Price;
 import entity.TypeSection;
 import utility.MyUtil;
 import view.EstimateView;
+import view.FinalizationView;
+import view.SalesManView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 public class EstimateController implements Initializable
 {
@@ -98,9 +103,17 @@ public class EstimateController implements Initializable
 		{
 			price_lbl.setText(price+" + conguaglio km alla restituzione");
 		}
+		
+		EstimateView.getInstance().getParameters().put("price", Double.toString(price));
 	}
 	
-	@FXML protected void onSubmitAction(ActionEvent event){}
+	@FXML protected void onSubmitAction(ActionEvent event) throws IOException
+	{
+		FinalizationView.getInstance().setAuto(EstimateView.getInstance().getAuto());
+		FinalizationView.getInstance().setClient(EstimateView.getInstance().getClient());
+		FinalizationView.getInstance().setParameters(EstimateView.getInstance().getParameters());
+		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("FinalizationView.fxml")));
+	}
 	
 	@FXML protected void onBackAction(ActionEvent event){}
 	

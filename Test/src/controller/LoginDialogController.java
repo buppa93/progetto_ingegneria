@@ -43,8 +43,10 @@ public class LoginDialogController implements Initializable
 		String psswd = pwd_field.getText();
 		DbAccess db = new DbAccess();
 		db.initConnection();
+		System.out.println("sono qui");
 		if(MyUtil.login(db, usr, psswd))
 		{
+			System.out.println("sono qui");
 			SalesManView salesman = new SalesManView();
 			salesman.start(new Stage());
 			Stage stage = (Stage) cancel_bttn.getScene().getWindow();
