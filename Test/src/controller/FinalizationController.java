@@ -12,7 +12,8 @@ public class FinalizationController implements Initializable {
 	
 	@FXML protected void onSubmitAction(ActionEvent event)
 	{
-		
+		//TODO devo gestire l'acconto
+		System.out.println("devo gestire l'acconto");
 	}
 	@FXML protected void onCancelAction(ActionEvent event){}
 	
