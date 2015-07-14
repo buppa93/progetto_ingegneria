@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="187.0" minWidth="500.0" prefHeight="187.0" prefWidth="502.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.2918918918918919" orientation="VERTICAL" prefHeight="187.0" prefWidth="502.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="96.0" prefWidth="283.0">
+               <children>
+                  <Label alignment="BOTTOM_LEFT" layoutX="8.0" layoutY="3.0" prefHeight="46.0" prefWidth="317.0" text="Rimuovi Automobile:">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <SplitPane dividerPositions="0.49206349206349204" layoutY="1.0" orientation="VERTICAL" prefHeight="128.0" prefWidth="500.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="60.0" prefWidth="158.0">
+                           <children>
+                              <Label layoutX="30.0" layoutY="-4.0" prefHeight="68.0" prefWidth="126.0" text="Targa">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <TextField layoutX="211.0" layoutY="18.0" prefHeight="25.0" prefWidth="196.0" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <Button layoutX="350.0" layoutY="18.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Rimuovi" />
+                              <Button layoutX="68.0" layoutY="18.0" minHeight="25.0" minWidth="84.0" mnemonicParsing="false" text="Annulla" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

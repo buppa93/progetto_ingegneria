@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="512.0" minWidth="550.0" prefHeight="326.0" prefWidth="325.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane prefHeight="512.0" prefWidth="550.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="550.0">
+               <children>
+                  <BorderPane prefHeight="363.0" prefWidth="340.0">
+                     <center>
+                        <TreeTableView minHeight="512.0" minWidth="550.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TreeTableColumn prefWidth="51.0" text="Num. Contratto" />
+                            <TreeTableColumn prefWidth="101.0" text="Agenzia" />
+                              <TreeTableColumn prefWidth="95.0" text="Cliente" />
+                              <TreeTableColumn prefWidth="60.0" text="Inizio" />
+                              <TreeTableColumn prefWidth="54.0" text="Fine" />
+                              <TreeTableColumn prefWidth="108.0" text="Ag. restit." />
+                              <TreeTableColumn text="Km massimo" />
+                          </columns>
+                        </TreeTableView>
+                     </center>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

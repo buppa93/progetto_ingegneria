@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="rootPane" prefHeight="537.0" prefWidth="683.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane fx:id="rootLayout" layoutY="2.0" prefHeight="537.0" prefWidth="683.0">
+         <top>
+            <MenuBar fx:id="MenuBar" BorderPane.alignment="CENTER">
+              <menus>
+                <Menu fx:id="file_menu" mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Esci" />
+                  </items>
+                </Menu>
+                <Menu fx:id="cliente_menu" mnemonicParsing="false" text="Cliente">
+                  <items>
+                    <MenuItem fx:id="showClient_item" mnemonicParsing="false" text="Visualizza Clienti" />
+                        <MenuItem fx:id="deleteClient_item" mnemonicParsing="false" text="Rimuovi Cliente" />
+                  </items>
+                </Menu>
+                <Menu fx:id="agency_menu" mnemonicParsing="false" text="Agenzie">
+                  <items>
+                    <MenuItem fx:id="showAgency_item" mnemonicParsing="false" text="Visualizza Agenzia" />
+                        <MenuItem fx:id="searcAgency_item" mnemonicParsing="false" text="Cerca Agenzia" />
+                        <MenuItem fx:id="deleteAgency_item" mnemonicParsing="false" text="Rimuovi Agenzia" />
+                        <MenuItem fx:id="newAgency_item" mnemonicParsing="false" text="Aggiungi Agenzia" />
+                  </items>
+                </Menu>
+                  <Menu fx:id="auto_menu" mnemonicParsing="false" text="Automobili">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Visualizza Automobili" />
+                        <MenuItem fx:id="newAuto_item" mnemonicParsing="false" text="Aggiungi Automobili" />
+                        <MenuItem fx:id="deleteAuto_item" mnemonicParsing="false" text="Rimuovi Automobili" />
+                     </items>
+                  </Menu>
+                  <Menu fx:id="Contract_menu" mnemonicParsing="false" text="Contratti">
+                     <items>
+                        <MenuItem fx:id="showContracts_item" mnemonicParsing="false" text="Visualizza Contratti" />
+                        <MenuItem fx:id="deleteExpiredContracts_item" mnemonicParsing="false" text="Rimuovi Contratti Scaduti" />
+                     </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+         <center>
+            <Pane fx:id="adminPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </center>
+         <left>
+            <VBox alignment="CENTER" prefHeight="512.0" prefWidth="133.0">
+               <children>
+                  <Button fx:id="recentContracts_bttn" alignment="BOTTOM_CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="126.0" text="Contratti recenti">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="searchAgency_bttn" layoutX="10.0" layoutY="254.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="126.0" text="Cerca Agenzia">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="showClients_bttn" alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="221.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="126.0" text="Visualizza Clienti">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="showContracts_bttn" alignment="BOTTOM_CENTER" layoutX="26.0" layoutY="209.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="126.0" text="Visualizza Contratti" />
+               </children>
+            </VBox>
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>
