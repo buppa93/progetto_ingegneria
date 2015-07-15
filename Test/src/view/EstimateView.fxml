@@ -56,8 +56,14 @@
                               <Insets left="5.0" right="20.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Data fine noleggio:" />
-                        <Label fx:id="end_lbl" text="Label">
+                        <Label text="Durata:" />
+                        <Label fx:id="during_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Tarfiffa:" />
+                        <Label fx:id="base_lbl" text="Label">
                            <HBox.margin>
                               <Insets left="5.0" right="20.0" />
                            </HBox.margin>

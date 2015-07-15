@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 import database.DatabaseConnectionException;
 import database.DbAccess;
 import database.TablePrices;
+import database.TableTypeContract;
 import entity.Price;
 import entity.TypeSection;
 import utility.MyUtil;
@@ -42,6 +43,8 @@ public class EstimateController implements Initializable
 	@FXML private Label brand_lbl;
 	@FXML private Label kmCar_lbl;
 	@FXML private Label price_lbl;
+	@FXML private Label during_lbl;
+	@FXML private Label base_lbl;
 	@FXML private Button cancel_bttn;
 	@FXML private Button back_bttn;
 	@FXML private Button submit_bttn;
@@ -58,7 +61,8 @@ public class EstimateController implements Initializable
 		brand_lbl.setText(EstimateView.getInstance().getAuto().getBrand());
 		kmCar_lbl.setText(Integer.toString(EstimateView.getInstance().getAuto().getKm()));
 		start_lbl.setText(EstimateView.getInstance().getParameters().get("dataStart"));
-		end_lbl.setText(EstimateView.getInstance().getParameters().get("dataEnd"));
+		during_lbl.setText(EstimateView.getInstance().getParameters().get("during"));
+		base_lbl.setText(EstimateView.getInstance().getParameters().get("base"));
 		StringTokenizer token = new StringTokenizer(EstimateView.getInstance().getParameters().get("agencyTake"), ", ");
 		token.nextToken();
 		take_lbl.setText(token.nextToken());
@@ -70,41 +74,33 @@ public class EstimateController implements Initializable
 		typeCar_lbl.setText(EstimateView.getInstance().getParameters().get("typeCar"));
 		
 		char fascia = TypeSection.resolvType(EstimateView.getInstance().getParameters().get("typeCar"));
-		int days = 0;
-		try 
-		{
-			days = MyUtil.estimatedNumberOfDays(EstimateView.getInstance().getParameters().get("dataStart"),EstimateView.getInstance().getParameters().get("dataEnd"));
-		} 
-		catch (ParseException e) 
-		{
-			e.printStackTrace();
+		
+		DbAccess db = new DbAccess();
+		try {
+			db.initConnection();
+		} catch (DatabaseConnectionException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-		
-		double price = 0.0;
-		
+		TableTypeContract table = new TableTypeContract(db);
+		String tContract = "";
 		try 
 		{
-			price = quote(fascia, EstimateView.getInstance().getParameters().get("typeKm"), days);
-		} 
-		catch (DatabaseConnectionException e) 
-		{
-			e.printStackTrace();
+			tContract = table.getTypeContract(EstimateView.getInstance().getParameters().get("base"), 
+					EstimateView.getInstance().getParameters().get("typeKm"), 
+					TypeSection.resolvType(EstimateView.getInstance().getParameters().get("typeCar")),
+					EstimateView.getInstance().getParameters().get("km"));
+			System.out.println(tContract);
 		} 
 		catch (SQLException e) 
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		if(EstimateView.getInstance().getParameters().get("typeKm").equals("illitato"))
-		{
-			price_lbl.setText(price+" + 0.5 * N km percorsi");
-		}
-		else
-		{
-			price_lbl.setText(price+" + conguaglio km alla restituzione");
-		}
+		double unit = table.getPrice(tContract);
+		price_lbl.setText(Double.toString(quote(unit, Integer.parseInt(EstimateView.getInstance().getParameters().get("during")))));
 		
-		EstimateView.getInstance().getParameters().put("price", Double.toString(price));
 	}
 	
 	@FXML protected void onSubmitAction(ActionEvent event) throws IOException
@@ -125,14 +121,10 @@ public class EstimateController implements Initializable
 	 * @throws DatabaseConnectionException 
 	 * @throws SQLException 
 	 */
-	public double quote(char fascia, String tipo_km, int n_giorni) throws DatabaseConnectionException, SQLException
+	public double quote(double unit, int n)
 	{
 		double cost = 0.0;
-		DbAccess db = new DbAccess();
-		db.initConnection();
-		TablePrices tableprice = new TablePrices(db);
-		Price tuple = tableprice.getPrice(fascia, tipo_km);
-		cost = tuple.getCostGg()*n_giorni;
+		cost = unit*n;
 		return cost;
 	}
 	

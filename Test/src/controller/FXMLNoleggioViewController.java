@@ -118,7 +118,7 @@ public class FXMLNoleggioViewController implements Initializable
 	{
 		String date_start = start_cld.getValue().toString();
 		String agencyReturn = return_chbox.getValue();
-		String typeKm = typeKm_chbox.getValue();
+		String typeKm = typeKm_chbox.getValue().toLowerCase();
 		String typeCar = typeCar_chbox.getValue();
 		String base = base_chbox.getValue().toLowerCase();
 		String during = duration_field.getText();
