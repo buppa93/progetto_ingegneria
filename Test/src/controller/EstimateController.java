@@ -99,7 +99,13 @@ public class EstimateController implements Initializable
 		}
 		
 		double unit = table.getPrice(tContract);
-		price_lbl.setText(Double.toString(quote(unit, Integer.parseInt(EstimateView.getInstance().getParameters().get("during")))));
+		String price = Double.toString(quote(unit, Integer.parseInt(EstimateView.getInstance().getParameters().get("during"))));
+		price_lbl.setText(price);
+		
+		System.out.println(table.getId(tContract));
+		EstimateView.getInstance().getParameters().put("price", price);
+		String idContract = table.getId(tContract);
+		EstimateView.getInstance().getParameters().put("idTypeContrat", idContract);
 		
 	}
 	

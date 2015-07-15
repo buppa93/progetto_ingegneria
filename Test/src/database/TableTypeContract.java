@@ -101,5 +101,11 @@ public class TableTypeContract
 			}
 			return Double.parseDouble(result);
 		}
+		
+		public String getId(String tContract) 
+		{
+			StringTokenizer st = new StringTokenizer(tContract, ", ");
+			return st.nextToken();
+		}
 
 	}
