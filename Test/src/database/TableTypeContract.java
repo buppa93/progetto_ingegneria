@@ -59,9 +59,20 @@ public class TableTypeContract
 		
 		public String getTypeContract (String tipoNoleggio, String tipoChilometraggio, char fascia, String km) throws SQLException
 		{
-			String query = "SELECT * FROM "+DbString.TBL_TYPECONTRATC+" WHERE ("+FIELD_TYPE_NOLEGGIO+"='"+tipoNoleggio+
-					"' AND "+FIELD_TYPE_KM+"='"+tipoChilometraggio+"' AND "+FIELD_FASCIA+"='"+fascia+"' AND "+FIELD_KM+
-					"="+Integer.parseInt(km)+");";
+			String query = "";
+			if(tipoChilometraggio.equals("illimitato"))
+			{
+				query = "SELECT * FROM "+DbString.TBL_TYPECONTRATC+" WHERE ("+FIELD_TYPE_NOLEGGIO+"='"+tipoNoleggio+
+						"' AND "+FIELD_TYPE_KM+"='"+tipoChilometraggio+"' AND "+FIELD_FASCIA+"='"+fascia+"' AND "+FIELD_KM+
+						"="+0+");";
+			}
+			else
+			{
+				query = "SELECT * FROM "+DbString.TBL_TYPECONTRATC+" WHERE ("+FIELD_TYPE_NOLEGGIO+"='"+tipoNoleggio+
+						"' AND "+FIELD_TYPE_KM+"='"+tipoChilometraggio+"' AND "+FIELD_FASCIA+"='"+fascia+"' AND "+FIELD_KM+
+						"="+Integer.parseInt(km)+");";
+			}
+			
 			System.out.println(query);
 			String result = "";
 			
