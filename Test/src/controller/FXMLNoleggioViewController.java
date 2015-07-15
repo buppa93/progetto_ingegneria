@@ -11,16 +11,21 @@ import java.util.TreeMap;
 import view.FXMLNoleggioView;
 import view.SalesManView;
 import view.SelectCarView;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import database.DatabaseConnectionException;
@@ -31,13 +36,16 @@ import entity.Auto;
 
 public class FXMLNoleggioViewController implements Initializable
 {
-	@FXML private DatePicker start_cld 	;
+	@FXML private DatePicker start_cld;
 	@FXML private DatePicker end_cld;
-	@FXML private ChoiceBox<String> taking_chbox;
+	@FXML private ChoiceBox<String> base_chbox;
 	@FXML private ChoiceBox<String> return_chbox;
+	@FXML private ChoiceBox<String> take_chbox;
 	@FXML private ChoiceBox<String> typeKm_chbox;
-	@FXML private TextField km_field;
+	@FXML private ChoiceBox<String> km_chbox;
 	@FXML private ChoiceBox<String> typeCar_chbox;
+	@FXML private TextField duration_field;
+	@FXML private Label base_lbl;
 	@FXML private Button cancel_bttn;
 	@FXML private AnchorPane rootPane;
 	
@@ -60,19 +68,62 @@ public class FXMLNoleggioViewController implements Initializable
         {e.printStackTrace();}
         
         ObservableList<String> agenzie = FXCollections.observableArrayList(agencies);
-        taking_chbox.getItems().addAll(agenzie);
         return_chbox.setItems(agenzie);
+        take_chbox.setItems(agenzie);
+        
+        typeKm_chbox.valueProperty().addListener(new ChangeListener<String>()
+        		{
+
+					@Override
+					public void changed(
+							ObservableValue<? extends String> observable,
+							String oldValue, String newValue) 
+					{
+						// TODO Auto-generated method stub
+						if(newValue.equals("Illimitato"))
+							km_chbox.setDisable(true);
+						if(newValue.equals("Limitato"))
+							km_chbox.setDisable(false);
+					}
+        	
+        		});
+        base_chbox.valueProperty().addListener(new ChangeListener<String>()
+        		{
+        			@Override
+        			public void changed(ObservableValue<? extends String> observable,
+        					String oldValue, String newValue)
+        			{
+        				// TODO Auto-generated method stub
+        				 System.out.println(observable.toString());
+        		            System.out.println(oldValue);
+        		            System.out.println(newValue);
+        		            if(newValue.equals("Giornaliero"))
+        		            {
+        		            	ObservableList<String> kms = FXCollections.observableArrayList("100","200","300");
+        		            	km_chbox.setItems(kms);
+        		            	base_lbl.setText("Giorni");
+        		            }
+        		            if(newValue.equals("Settimanale"))
+        		            {
+        		            	ObservableList<String> kms = FXCollections.observableArrayList("400","500","600");
+        		            	km_chbox.setItems(kms);
+        		            	base_lbl.setText("Settimane");
+        		            }
+        				
+        			}
+        		});
     }
 
 	@FXML protected void search(ActionEvent event) throws DatabaseConnectionException, SQLException 
 	{
 		String date_start = start_cld.getValue().toString();
-		String date_end = end_cld.getValue().toString();
-		String agencyTake = taking_chbox.getValue();
 		String agencyReturn = return_chbox.getValue();
 		String typeKm = typeKm_chbox.getValue();
-		String km = km_field.getText();
 		String typeCar = typeCar_chbox.getValue();
+		String base = base_chbox.getValue().toLowerCase();
+		String during = duration_field.getText();
+		String km = km_chbox.getValue();
+		String agencyTake= take_chbox.getValue();
 		
 		SearchCar.getInstance().setDateStart(date_start);
 		SearchCar.getInstance().setTakingAgency(agencyTake);
@@ -83,12 +134,13 @@ public class FXMLNoleggioViewController implements Initializable
 		
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("dataStart", date_start);
-		parameters.put("dataEnd", date_end);
 		parameters.put("agencyTake", agencyTake);
 		parameters.put("agencyReturn",agencyReturn);
 		parameters.put("typeKm",typeKm);
 		parameters.put("km",km);
 		parameters.put("typeCar",typeCar);
+		parameters.put("base",base);
+		parameters.put("during",during);
 		
 		SelectCarView.getInstance().setCars(car);
 		SelectCarView.getInstance().setParameters(parameters);
