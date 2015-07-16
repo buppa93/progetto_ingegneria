@@ -38,6 +38,19 @@ public class TableAuto
 		}
 	}
 	
+	public void deleteAutoByTarga(String targa)
+	{
+		try {
+			Statement st= db.getConnection().createStatement();
+			String query="DELETE* FROM"+ DbString.TBL_AUTO + "WHERE"+ FIELD_TARGA+ "="+ targa+";";
+			st.execute(query);
+			st.close();
+		} catch (SQLException e) {
+			System.out.println("eliminazione non eseguita"); 
+			e.printStackTrace();
+		}
+		
+	}
 	/*public Agency getAgencyByNumber (String number)
 	{
 		Agency c = null;

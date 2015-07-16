@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="512.0" minWidth="550.0" prefHeight="423.0" prefWidth="571.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootPane" minHeight="512.0" minWidth="550.0" prefHeight="423.0" prefWidth="571.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane minHeight="512.0" minWidth="550.0" prefHeight="423.0" prefWidth="571.0">
          <top>
@@ -28,9 +28,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField GridPane.columnIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField prefHeight="25.0" prefWidth="265.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="number_field" GridPane.columnIndex="1" />
+                  <TextField fx:id="name_field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="address_field" prefHeight="25.0" prefWidth="265.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label alignment="CENTER" prefHeight="48.0" prefWidth="299.0" text="Numero Agenzia">
                      <font>
                         <Font size="31.0" />
@@ -52,8 +52,8 @@
          <bottom>
             <Pane prefHeight="71.0" prefWidth="571.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutX="384.0" layoutY="6.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="111.0" text="Aggiungi" />
-                  <Button layoutX="88.0" layoutY="6.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="111.0" text="Annulla" />
+                  <Button fx:id="insert_bttn" layoutX="384.0" layoutY="6.0" mnemonicParsing="false" onAction="#OnInsertAction" prefHeight="42.0" prefWidth="111.0" text="Aggiungi" />
+                  <Button fx:id="cancel_bttn" layoutX="88.0" layoutY="6.0" mnemonicParsing="false" onAction="#OnCancelAction" prefHeight="42.0" prefWidth="111.0" text="Annulla" />
                </children>
             </Pane>
          </bottom>
