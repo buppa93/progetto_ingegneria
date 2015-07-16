@@ -3,17 +3,13 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TablePrices;
 import database.TableTypeContract;
-import entity.Price;
 import entity.TypeSection;
-import utility.MyUtil;
 import view.EstimateView;
 import view.FinalizationView;
 import view.SalesManView;

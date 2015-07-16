@@ -3,8 +3,6 @@ package database;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import entity.Contract;
-
 
 public class TableContract 
 {
