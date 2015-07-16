@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import entity.Auto;
 import entity.Client;
 
 public class TableClients
@@ -61,4 +62,17 @@ public class TableClients
 		return client;
 	}
 
+	public void deleteClientByPhone(String phone)
+	{
+		try {
+			Statement st= db.getConnection().createStatement();
+			String query="DELETE* FROM"+ DbString.TBL_CLIENTS + "WHERE"+ FIELD_PHONE+ "="+ phone+";";
+			st.execute(query);
+			st.close();
+		} catch (SQLException e) {
+			System.out.println("eliminazione non eseguita"); 
+			e.printStackTrace();
+		}
+		
+	}
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 import entity.Agency;
 
+
 public class TableAgency
 {
 	public static final String FIELD_NUMBER = "numero";
@@ -37,6 +38,20 @@ public class TableAgency
 		}
 	}
 	
+	public void deleteAgencyById(String id)
+	{
+		try {
+			Statement st= db.getConnection().createStatement();
+			String query="DELETE* FROM"+ DbString.TBL_AGENCIES + "WHERE"+ FIELD_NUMBER+ "="+ id+";";
+			st.execute(query);
+			st.close();
+		} catch (SQLException e) {
+		
+			System.out.println("eliminazione non eseguita"); 
+			e.printStackTrace();
+		}
+		
+	}
 	public Agency getAgencyByNumber (String number)
 	{
 		Agency c = null;

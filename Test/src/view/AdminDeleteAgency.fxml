@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane minHeight="187.0" minWidth="500.0" prefHeight="187.0" prefWidth="502.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane fx:id="rootPane" minHeight="187.0" minWidth="500.0" prefHeight="187.0" prefWidth="502.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.2918918918918919" orientation="VERTICAL" prefHeight="187.0" prefWidth="502.0">
         <items>
@@ -31,13 +30,13 @@
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="211.0" layoutY="18.0" prefHeight="25.0" prefWidth="196.0" />
+                              <TextField fx:id="id_field" layoutX="211.0" layoutY="18.0" prefHeight="25.0" prefWidth="196.0" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <Button layoutX="350.0" layoutY="18.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Rimuovi" />
-                              <Button layoutX="68.0" layoutY="18.0" minHeight="25.0" minWidth="84.0" mnemonicParsing="false" text="Annulla" />
+                              <Button fx:id="delete_bttn" layoutX="350.0" layoutY="18.0" mnemonicParsing="false" onAction="#onDeleteAction" prefHeight="25.0" prefWidth="84.0" text="Rimuovi" />
+                              <Button fx:id="cancel_bttn" layoutX="68.0" layoutY="18.0" minHeight="25.0" minWidth="84.0" mnemonicParsing="false" onAction="#onCancelAction" text="Annulla" />
                            </children>
                         </AnchorPane>
                     </items>
