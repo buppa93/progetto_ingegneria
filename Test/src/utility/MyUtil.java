@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
+import java.util.Random;
 
 import database.DbAccess;
 import database.DbString;
@@ -109,6 +110,22 @@ public class MyUtil
 
 
 		return gg;
+	}
+	
+	public static String makeId()
+	{
+		Random random = new Random();
+		int j = 1;
+		int n = 9-j;
+		int k = 0;
+		
+		StringBuffer result = new StringBuffer (5);
+		for(int i=1; i<6; i++)
+		{
+			k = random.nextInt(n)+j;
+			result.append(k);
+		}
+		return result.toString();
 	}
 
 }

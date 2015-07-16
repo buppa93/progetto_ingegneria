@@ -3,6 +3,7 @@ package database;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import utility.CarsAvailability;
 import entity.Auto;
 
 public class TableAuto
@@ -54,5 +55,16 @@ public class TableAuto
 		}
 		return c;
 	}*/
+	
+	public void setInNoleggio(String targa) throws SQLException
+	{
+		CarsAvailability status = new CarsAvailability("noleggio");
+		String query = "UPDATE auto SET disponibilita="+ CarsAvailability.toInt("noleggio") +" WHERE targa='"
+				+targa+"';";
+		System.out.println(query);
+		Statement st = db.getConnection().createStatement();
+		st.executeUpdate(query);
+		st.close();
+	}
 
 }

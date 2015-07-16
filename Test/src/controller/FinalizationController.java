@@ -1,16 +1,31 @@
 package controller;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import database.DatabaseConnectionException;
+import database.DbAccess;
+import database.TableAuto;
+import database.TableContract;
+import entity.Agency;
+import utility.MyUtil;
 import view.FinalizationView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-public class FinalizationController implements Initializable {
+public class FinalizationController implements Initializable 
+{
+	@FXML private TextField acconto_field;
+	@FXML private ImageView image_view;
+	@FXML private Label success_lbl;
 	
-	@FXML protected void onSubmitAction(ActionEvent event)
+	@FXML protected void onSubmitAction(ActionEvent event) throws DatabaseConnectionException, SQLException
 	{
 		//TODO devo gestire l'acconto
 		System.out.println("devo gestire l'acconto");
@@ -27,8 +42,28 @@ public class FinalizationController implements Initializable {
 		System.out.println("prezzo: "+FinalizationView.getInstance().getParameters().get("price"));
 		System.out.println("id tipo contratto: "+FinalizationView.getInstance().getParameters().get("idTypeContrat"));
 		
+		String acconto = acconto_field.getText();
+		
+		DbAccess db = new DbAccess();
+		db.initConnection();
+		TableContract tc = new TableContract(db);
+		
+		String agenziaPrelievo = Agency.getIdFromString(FinalizationView.getInstance().getParameters().get("agencyTake"));
+		String agenziaRitorno = Agency.getIdFromString(FinalizationView.getInstance().getParameters().get("agencyReturn"));
+		tc.insert(MyUtil.makeId(), agenziaPrelievo, FinalizationView.getInstance().getClient().getPhone(), FinalizationView.getInstance().getParameters().get("dataStart"), 
+				FinalizationView.getInstance().getParameters().get("during"), agenziaRitorno, 
+				FinalizationView.getInstance().getParameters().get("idTypeContrat"), 
+				FinalizationView.getInstance().getParameters().get("price"), acconto);
+		//Devo mettere la macchina "in noleggio" nel databese
+		TableAuto ta = new TableAuto(db);
+		ta.setInNoleggio(FinalizationView.getInstance().getAuto().getTarga());
+		/*Image value = new Image("../img/business_success.png");
+		image_view.setImage(value);*/
+		
+		success_lbl.setText("Transazione eseguita con successo!");
 		
 	}
+	
 	@FXML protected void onCancelAction(ActionEvent event){}
 	
 	@Override

@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane fx:id="rootPane" maxHeight="350.0" maxWidth="400.0" minHeight="350.0" minWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40" fx:controller="controller.FinalizationController">
+<AnchorPane fx:id="rootPane" maxHeight="350.0" maxWidth="400.0" minHeight="350.0" minWidth="400.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FinalizationController">
    <children>
       <VBox maxWidth="400.0" minHeight="350.0" minWidth="400.0">
          <children>
@@ -53,7 +52,7 @@
                   <ImageView fx:id="image_view" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" />
                   <Label fx:id="success_lbl" text="Label" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="18.0" />
                      </font>
                   </Label>
                </children>
