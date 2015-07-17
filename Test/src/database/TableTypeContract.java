@@ -151,6 +151,23 @@ public class TableTypeContract
 			return Double.parseDouble(result);
 		}
 		
+		public double getPricePerKmById(String id) throws SQLException 
+		{
+			String query = "SELECT * FROM "+DbString.TBL_TYPECONTRATC+" WHERE "+FIELD_ID+"='"+id+"';";
+			Statement st = db.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			double result = 0.0;
+			while(rs.next())
+			{
+				result = rs.getDouble(7);
+			}
+			rs.close();
+			st.close();
+			
+			return result;
+		}
+		
 		public String getId(String tContract) 
 		{
 			StringTokenizer st = new StringTokenizer(tContract, ", ");

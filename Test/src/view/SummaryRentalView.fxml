@@ -9,7 +9,6 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="300.0" minWidth="500.0" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SummaryRentalController">
    <children>
       <BorderPane maxHeight="300.0" maxWidth="500.0" minHeight="300.0" minWidth="500.0" prefHeight="300.0" prefWidth="500.0">
@@ -149,8 +148,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="submit_bttn" mnemonicParsing="false" text="Elabora" GridPane.columnIndex="3" />
-                  <Button fx:id="cancel_bttn" maxWidth="68.0" minWidth="68.0" mnemonicParsing="false" prefWidth="68.0" text="Annulla" GridPane.columnIndex="2" />
+                  <Button fx:id="submit_bttn" mnemonicParsing="false" onAction="#onSubmitAction" text="Elabora" GridPane.columnIndex="3" />
+                  <Button fx:id="cancel_bttn" maxWidth="68.0" minWidth="68.0" mnemonicParsing="false" onAction="#onCancelAction" prefWidth="68.0" text="Annulla" GridPane.columnIndex="2" />
                </children>
             </GridPane>
          </bottom>

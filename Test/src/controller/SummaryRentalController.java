@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import utility.MyUtil;
+import view.SQLWarning;
 import view.SummaryRentalView;
 import view.SalesManView;
 import view.UnregisteredUserWarning;
@@ -47,42 +48,35 @@ public class SummaryRentalController implements Initializable
 		
 		String targa = SummaryRentalView.getInstance().getContract().getTarga();
 		DbAccess db = new DbAccess();
+		
 		try 
-		{
-			db.initConnection();
-		} 
+		{db.initConnection();} 
 		catch (DatabaseConnectionException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		{}
 		
 		Auto auto = null;
 		TableAuto ta = new TableAuto(db);
 		
 		try 
-		{
-			auto = ta.searchAutoByTarga(targa);
-		} 
+		{auto = ta.searchAutoByTarga(targa);} 
 		catch (SQLException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		{SQLWarning warning = new SQLWarning();}
+		
 		TableTypeContract tc = new TableTypeContract(db);
 		String typeContract = "";
 		String typeKm = "";
 		
 		int kmPrev = 0;
 		
-		try {
+		try 
+		{
 			typeContract = tc.getTypeContractNameById(SummaryRentalView.getInstance().getContract().getTypeContract());
 			typeKm = tc.getTypeKmById(SummaryRentalView.getInstance().getContract().getTypeContract());
 			kmPrev = tc.getKmById(SummaryRentalView.getInstance().getContract().getTypeContract());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
+		catch (SQLException e) 
+		{SQLWarning warning = new SQLWarning();}
+		
 		kmCar_lbl.setText(Integer.toString(auto.getKm()));
 		typeNoleggio_lbl.setText(typeContract);
 		typeKm_lbl.setText(typeKm);
@@ -94,36 +88,41 @@ public class SummaryRentalController implements Initializable
 	}
 	
 	@FXML
-	protected void loginAction (ActionEvent event) throws Exception
+	protected void onSubmitAction (ActionEvent event) throws Exception
 	{
+		int kmPre = 0;
+		int kmPost = 0;
 		DbAccess db = new DbAccess();
 		db.initConnection();
 		TableAuto ta = new TableAuto(db);
-		ta.setKm(SummaryRentalView.getInstance().getContract().getTarga(), Integer.parseInt(newKm_field.getText()));
-		
-		/*String usr = userName_field.getText();
-		String psswd = pwd_field.getText();
-		DbAccess db = new DbAccess();
-		db.initConnection();
-		System.out.println("sono qui");
-		if(MyUtil.login(db, usr, psswd))
+		Auto auto = ta.searchAutoByTarga(SummaryRentalView.getInstance().getContract().getTarga());
+		kmPre = auto.getKm();
+		kmPost = Integer.parseInt((newKm_field.getText()));
+		String idTypeContract = SummaryRentalView.getInstance().getContract().getTypeContract();
+		TableTypeContract tc = new TableTypeContract(db);
+		double totale = 0.0;
+		if(tc.getTypeKmById(idTypeContract).equals("limitato"))
 		{
-			System.out.println("sono qui");
-			SalesManView salesman = new SalesManView();
-			salesman.start(new Stage());
-			Stage stage = (Stage) cancel_bttn.getScene().getWindow();
-			stage.close();
-		
+			double pricePerKm = tc.getPricePerKmById(idTypeContract);
+			totale = getDifference(pricePerKm, kmPost-kmPre);
+			//TODO settare nuova finestra pagamento conguaglio
 		}
-		else
-		{
-			UnregisteredUserWarning alert = new UnregisteredUserWarning();
-		}*/
+		
+		//TODO mostrare finestra "coferma e paga"
+		
+		
+		
+		
 	}
 	
-	@FXML protected void onCancelEvent(ActionEvent event)
+	@FXML protected void onCancelAction(ActionEvent event)
 	{
 		Stage stage = (Stage) cancel_bttn.getScene().getWindow();
 		stage.close();
+	}
+	
+	public double getDifference(double pricePerKm, int km)
+	{
+		return km*pricePerKm;
 	}
 }
