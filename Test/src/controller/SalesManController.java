@@ -67,6 +67,18 @@ public final class SalesManController implements Initializable
 	{
 		provideNewContractFunctionality();
 	}
+	
+	/**
+	 * Handle action related to "Rimuovi contratto" menu item.
+	 * 
+	 * @param event Event on "Rimuovi contratto" menu item.
+	 * @throws IOException 
+	 */
+	@FXML
+	private void handleRemoveContractAction(final ActionEvent event) throws IOException
+	{
+		provideRemoveContractFunctionality();
+	}
 
 	/**
 	 * Perform functionality associated with "About" menu selection or CTRL-A.
@@ -105,6 +117,16 @@ public final class SalesManController implements Initializable
 	private void provideNewContractFunctionality() throws IOException
 	{
 		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("FXMLAlertRegister.fxml")));
+		System.out.println("");
+	}
+	
+	/**
+	 * Perform functionality associated with "Nuova auto" menu selection or CTRL-A.
+	 * @throws IOException 
+	 */
+	private void provideRemoveContractFunctionality() throws IOException
+	{
+		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("RemoveContractView.fxml")));
 		System.out.println("");
 	}
 	

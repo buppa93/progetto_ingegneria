@@ -1,5 +1,6 @@
 package database;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -78,6 +79,33 @@ public class TableAuto
 		Statement st = db.getConnection().createStatement();
 		st.executeUpdate(query);
 		st.close();
+	}
+	
+	public void setKm(String targa, int km) throws SQLException
+	{
+		String query = "UPDATE "+DbString.TBL_AUTO+" SET "+FIELD_KM+"="+km+" WHERE "+FIELD_TARGA+"='"+targa+"';";
+		Statement st = db.getConnection().createStatement();
+		
+		st.executeUpdate(query);
+		st.close();
+		
+	}
+	
+	public Auto searchAutoByTarga(String targa) throws SQLException
+	{
+		String query = "SELECT * FROM "+DbString.TBL_AUTO+" WHERE "+FIELD_TARGA+"='"+targa+"';";
+		Statement st = db.getConnection().createStatement();
+		ResultSet rs = st.executeQuery(query);
+		
+		Auto auto = null;
+		while(rs.next())
+		{
+			auto = new Auto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5),
+					rs.getString(6), rs.getString(7), rs.getString(8).charAt(0), rs.getInt(9));
+		}
+		rs.close();
+		st.close();
+		return auto;
 	}
 
 }

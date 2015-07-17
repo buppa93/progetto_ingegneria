@@ -11,11 +11,14 @@ public class Contract
 	String idCliente;
 	String data_inizio;
 	String data_fine;
+	int duration;
 	String agency_return;
 	int km;
+	String type;
 	String type_km;
 	double price;
 	double deposit;
+	String targa;
 	
 	/**
 	 * it initializes class Type Contract to null
@@ -50,6 +53,23 @@ public class Contract
 		this.deposit = deposit;
 	}
 	
+	public Contract(String numero_ordine, String agency_number, String idCliente, String data_inizio, 
+			int duration, String agency_return, String type, double price, double deposit, 
+			String targa)
+	{
+		
+		this.numero_ordine=numero_ordine;
+		this.agency_number=agency_number;
+		this.idCliente=idCliente;
+		this.data_inizio=data_inizio;
+		this.duration = duration;
+		this.agency_return=agency_return;
+		this.type = type;
+		this.price = price;
+		this.deposit = deposit;
+		this.targa = targa;
+	}
+	
 	/**
 	 * it gets number of agency of contract
 	 * @return number 
@@ -73,6 +93,11 @@ public class Contract
 	 */
 	public String getNumeroOrdine()
 	{return this.numero_ordine;}
+	
+	public int getDuration()
+	{
+		return this.duration;
+	}
 	
 	/**
 	 * it gets start date of contract
@@ -112,6 +137,16 @@ public class Contract
 	public double getDeposit()
 	{
 		return this.deposit;
+	}
+	
+	public String getTarga()
+	{
+		return this.targa;
+	}
+	
+	public String getTypeContract()
+	{
+		return this.type;
 	}
 	
 	/**

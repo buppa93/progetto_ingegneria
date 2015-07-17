@@ -20,7 +20,11 @@ public class Auto extends TypeSection
 	Agency numero;
 	User client;
 	Contract contract;
-	
+	String id_cliente;
+	String id_contratto;
+	String id_agenzia;
+	String fascia;
+	String disp;
 	/**
 	 * it initializes the class Auto to null
 	 */
@@ -65,6 +69,21 @@ public class Auto extends TypeSection
 		this.brand = brand;
 		this.km = km;
 		this.availability = new CarsAvailability(disp);
+	}
+	
+	public Auto(String targa, String modello, String marca, int km, String id_cliente, String id_contratto, 
+			String id_agenzia, char fascia, int disp)
+	{
+		this.targa = targa;
+		this.model = modello;
+		this.brand = marca;
+		this.km = km;
+		this.id_cliente = id_cliente;
+		this.id_contratto = id_contratto;
+		this.id_agenzia = id_agenzia;
+		this.fascia = TypeSection.resolvName(fascia);
+		this.disp = CarsAvailability.toString(disp);
+		
 	}
 	
 	/**

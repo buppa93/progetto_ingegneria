@@ -77,6 +77,30 @@ public class TypeSection
 		return t;
 		
 	}
+	
+	public static String resolvName(char type)
+	{
+		String t = "";
+		switch (type)
+		{
+			case 'A':
+				t = "Utilitaria";
+				break;
+			
+			case 'C':
+				t = "Autocarro";
+				break;
+				
+			case 'B':
+				t = "Berlina";
+				break;
+			
+			case 'D':
+				t = "Monovolume";
+		}
+		return t;
+		
+	}
 
 }
 

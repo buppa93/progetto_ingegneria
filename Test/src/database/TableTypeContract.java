@@ -9,7 +9,7 @@ import entity.TypeContract;
 
 public class TableTypeContract 
 {
-		public static final String FIELD_ID = "num_contratto";
+		public static final String FIELD_ID = "id_tipo";
 		public static final String FIELD_TYPE_NOLEGGIO = "tipo_noleggio";
 		public static final String FIELD_TYPE_KM = "tipo_chilometraggio";
 		public static final String FIELD_FASCIA = "fascia";
@@ -40,13 +40,13 @@ public class TableTypeContract
 			}
 		}*/
 		
-		public TypeContract getTypeContractById (int id)
+		public TypeContract getTypeContractById (String id)
 		{
 			TypeContract c = null;
 			try 
 			{
 				Statement st = db.getConnection().createStatement();
-				c = (TypeContract) st.executeQuery("SELECT * FROM "+DbString.TBL_TYPECONTRATC+" WHERE "+FIELD_ID+"="+id+";");
+				c = (TypeContract) st.executeQuery("SELECT * FROM "+DbString.TBL_TYPECONTRATC+" WHERE "+FIELD_ID+"='"+id+"';");
 				st.close();
 			} 
 			catch (SQLException e) 
@@ -55,6 +55,55 @@ public class TableTypeContract
 				e.printStackTrace();
 			}
 			return c;
+		}
+		
+		
+		public String getTypeContractNameById(String id) throws SQLException
+		{
+			String query = "SELECT * FROM "+DbString.TBL_TYPECONTRATC+" WHERE "+FIELD_ID+"='"+id+"';";
+			Statement st = db.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			String type = "";
+			
+			while(rs.next())
+			{
+				type = rs.getString(2);
+			}
+			
+			return type;
+		}
+		
+		public int getKmById(String id) throws SQLException
+		{
+			String query = "SELECT * FROM "+DbString.TBL_TYPECONTRATC+" WHERE "+FIELD_ID+"='"+id+"';";
+			Statement st = db.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			int km = 0;
+			
+			while(rs.next())
+			{
+				km = rs.getInt(5);
+			}
+			
+			return km;
+		}
+		
+		public String getTypeKmById(String id) throws SQLException
+		{
+			String query = "SELECT * FROM "+DbString.TBL_TYPECONTRATC+" WHERE "+FIELD_ID+"='"+id+"';";
+			Statement st = db.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			String type = "";
+			
+			while(rs.next())
+			{
+				type = rs.getString(3);
+			}
+			
+			return type;
 		}
 		
 		public String getTypeContract (String tipoNoleggio, String tipoChilometraggio, char fascia, String km) throws SQLException

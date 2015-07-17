@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -11,20 +12,25 @@ import database.TableContract;
 import entity.Agency;
 import utility.MyUtil;
 import view.FinalizationView;
+import view.SalesManView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 public class FinalizationController implements Initializable 
 {
 	@FXML private TextField acconto_field;
 	@FXML private ImageView image_view;
 	@FXML private Label success_lbl;
+	@FXML private AnchorPane rootPane;
 	
-	@FXML protected void onSubmitAction(ActionEvent event) throws DatabaseConnectionException, SQLException
+	@FXML protected void onSubmitAction(ActionEvent event) throws DatabaseConnectionException, SQLException, IOException
 	{
 		//TODO devo gestire l'acconto
 		System.out.println("devo gestire l'acconto");
@@ -52,7 +58,8 @@ public class FinalizationController implements Initializable
 		tc.insert(MyUtil.makeId(), agenziaPrelievo, FinalizationView.getInstance().getClient().getPhone(), FinalizationView.getInstance().getParameters().get("dataStart"), 
 				FinalizationView.getInstance().getParameters().get("during"), agenziaRitorno, 
 				FinalizationView.getInstance().getParameters().get("idTypeContrat"), 
-				FinalizationView.getInstance().getParameters().get("price"), acconto);
+				FinalizationView.getInstance().getParameters().get("price"), acconto,
+				FinalizationView.getInstance().getAuto().getTarga());
 		//Devo mettere la macchina "in noleggio" nel databese
 		TableAuto ta = new TableAuto(db);
 		ta.setInNoleggio(FinalizationView.getInstance().getAuto().getTarga());
@@ -61,9 +68,14 @@ public class FinalizationController implements Initializable
 		
 		success_lbl.setText("Transazione eseguita con successo!");
 		
+		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));
+		
 	}
 	
-	@FXML protected void onCancelAction(ActionEvent event){}
+	@FXML protected void onCancelAction(ActionEvent event) throws IOException
+	{
+		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 

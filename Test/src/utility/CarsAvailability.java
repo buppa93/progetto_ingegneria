@@ -112,5 +112,30 @@ public class CarsAvailability
 		}
 		return rtrn;
 	}
+	
+	public static String toString(int disp)
+	{
+		String rtrn = "";
+		
+		switch(disp)
+		{
+			case 1:
+				rtrn = "disponiblile";
+				break;
+			case 2:
+				rtrn = "noleggio";
+				break;
+			case 3:
+				rtrn = "manutenzione_straordinaria";
+				break;
+			case 4:
+				rtrn = "manutenzione_ordinaria";
+				break;
+			default:
+				rtrn = "N/D";
+				break;
+		}
+		return rtrn;
+	}
 
 }
