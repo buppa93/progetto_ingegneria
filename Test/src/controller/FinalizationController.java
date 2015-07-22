@@ -32,7 +32,6 @@ public class FinalizationController implements Initializable
 	
 	@FXML protected void onSubmitAction(ActionEvent event) throws DatabaseConnectionException, SQLException, IOException
 	{
-		//TODO devo gestire l'acconto
 		System.out.println("devo gestire l'acconto");
 		System.out.println(FinalizationView.getInstance().getAuto().toLabel());
 		System.out.println(FinalizationView.getInstance().getClient().toString());

@@ -12,6 +12,7 @@ import database.TableTypeContract;
 import entity.TypeSection;
 import view.EstimateView;
 import view.FinalizationView;
+import view.SQLWarning;
 import view.SalesManView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -90,8 +91,7 @@ public class EstimateController implements Initializable
 		} 
 		catch (SQLException e) 
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			SQLWarning warning = new SQLWarning();
 		}
 		
 		double unit = table.getPrice(tContract);

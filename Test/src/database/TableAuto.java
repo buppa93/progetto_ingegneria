@@ -81,6 +81,17 @@ public class TableAuto
 		st.close();
 	}
 	
+	public void setDisponibile(String targa) throws SQLException
+	{
+		CarsAvailability status = new CarsAvailability("noleggio");
+		String query = "UPDATE auto SET disponibilita="+ CarsAvailability.toInt("disponibile") +" WHERE targa='"
+				+targa+"';";
+		System.out.println(query);
+		Statement st = db.getConnection().createStatement();
+		st.executeUpdate(query);
+		st.close();
+	}
+	
 	public void setKm(String targa, int km) throws SQLException
 	{
 		String query = "UPDATE "+DbString.TBL_AUTO+" SET "+FIELD_KM+"="+km+" WHERE "+FIELD_TARGA+"='"+targa+"';";

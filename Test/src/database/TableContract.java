@@ -25,42 +25,6 @@ public class TableContract
 			public TableContract(DbAccess db)
 			{this.db = db;}
 			
-			/*public void insertContract (Contract contract)
-			{
-				try 
-				{
-					Statement st = db.getConnection().createStatement();
-					String query = "INSERT INTO "+DbString.TBL_CONTRACTS+" "
-							+ "("+FIELD_NUMBER_ORDINE+","+FIELD_NUM_AGENCY+","+FIELD_CLIENTE+","+FIELD_INIZIO_NOLEGGIO+","+FIELD__FINE_NOLEGGIO+","+FIELD_AGENZIA_RESTIT+","+FIELD_MAX_KM +") values ('" +contract.getNumero_ordine()+"','"+ contract.getNumberOfAgency() +
-							"','" + contract.getNumberCliente()+","+contract.getData_inizio()+","+contract.getData_fine()+","+ contract.getNumberOfAgency()+","+contract.getKmmax()+"');";
-					st.executeUpdate(query);
-					st.close();
-				} 
-				catch (SQLException e) 
-				{ 
-					System.out.println("inserimento non eseguito"); 
-					e.printStackTrace();
-				}
-			}*/
-			
-			/*public Contract getContractByNumeroOrdine (int numOrdine)
-			{
-				Contract c = null;
-				try 
-				{
-					Statement st = db.getConnection().createStatement();
-					c = (Contract) st.executeQuery("SELECT * FROM "+DbString.TBL_CONTRACTS+" WHERE "+FIELD_NUMBER_ORDINE+"="+numOrdine+";");
-					st.close();
-				} 
-				catch (SQLException e) 
-				{ 
-					System.out.println("inserimento non eseguito"); 
-					e.printStackTrace();
-				}
-				return c;
-			}*/
-			
-			
 			public void insert(String id, String agencyTakeId, String phoneClient, String dateStart, String duration,
 									String agencyReturnId, String typeId, String price, String deposit, String targa) throws SQLException
 			{
@@ -92,6 +56,15 @@ public class TableContract
 				rs.close();
 				st.close();
 				return con;
+			}
+			
+			public void remove(String id) throws SQLException
+			{
+				String query = "DELETE FROM "+DbString.TBL_CONTRACTS+" WHERE "+FIELD_NUMBERORDINE+"='"+id+"';";
+				System.out.println(query);
+				Statement st = db.getConnection().createStatement();
+				st.executeUpdate(query);
+				st.close();
 			}
 
 		}

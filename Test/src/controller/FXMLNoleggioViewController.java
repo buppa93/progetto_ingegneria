@@ -2,13 +2,17 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
 import view.FXMLNoleggioView;
+import view.SQLWarning;
 import view.SalesManView;
 import view.SelectCarView;
 import javafx.beans.value.ChangeListener;
@@ -21,11 +25,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.util.Callback;
 import database.DatabaseConnectionException;
 import database.DbAccess;
 import database.SearchCar;
@@ -63,12 +69,34 @@ public class FXMLNoleggioViewController implements Initializable
         try 
         {agencies = tableagency.getAllAgency();} 
         catch (SQLException e) 
-        {e.printStackTrace();}
+        {new SQLWarning();}
         
         ObservableList<String> agenzie = FXCollections.observableArrayList(agencies);
         return_chbox.setItems(agenzie);
         take_chbox.setItems(agenzie);
         
+        final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() 
+        {
+            @Override
+            public DateCell call(final DatePicker datePicker) 
+            {
+              return new DateCell() 
+              {
+                @Override
+                public void updateItem(LocalDate item, boolean empty) 
+                {
+                  super.updateItem(item, empty);
+
+                  if (item.isBefore(/*start_cld.getValue().plusDays(1))*/ LocalDate.now()))
+                  {
+                    setDisable(true);
+                    setStyle("-fx-background-color: #EEEEEE;");
+                  }
+                }
+              };
+            }
+          };
+          start_cld.setDayCellFactory(dayCellFactory);
         typeKm_chbox.valueProperty().addListener(new ChangeListener<String>()
         		{
 
