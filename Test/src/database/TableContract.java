@@ -58,6 +58,7 @@ public class TableContract
 				return con;
 			}
 			
+			
 			public void remove(String id) throws SQLException
 			{
 				String query = "DELETE FROM "+DbString.TBL_CONTRACTS+" WHERE "+FIELD_NUMBERORDINE+"='"+id+"';";

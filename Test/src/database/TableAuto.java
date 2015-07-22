@@ -14,7 +14,7 @@ public class TableAuto
 	public static final String FIELD_BRAND = "marca";
 	public static final String FIELD_KM = "km";
 	public static final String FIELD_DISP = "disponibilita";
-	public static final String FIELD_AGENCY = "agenzia";
+	public static final String FIELD_AGENCY = "id_agenzia";
 	public static final String FIELD_CLIENT = "contratto";	
 	DbAccess db;
 	
@@ -95,6 +95,16 @@ public class TableAuto
 	public void setKm(String targa, int km) throws SQLException
 	{
 		String query = "UPDATE "+DbString.TBL_AUTO+" SET "+FIELD_KM+"="+km+" WHERE "+FIELD_TARGA+"='"+targa+"';";
+		Statement st = db.getConnection().createStatement();
+		
+		st.executeUpdate(query);
+		st.close();
+		
+	}
+	
+	public void setAgencyReturn(String targa, String idAgency) throws SQLException
+	{
+		String query = "UPDATE "+DbString.TBL_AUTO+" SET "+FIELD_AGENCY+"='"+idAgency+"' WHERE "+FIELD_TARGA+"='"+targa+"';";
 		Statement st = db.getConnection().createStatement();
 		
 		st.executeUpdate(query);

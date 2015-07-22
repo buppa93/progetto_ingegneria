@@ -13,6 +13,7 @@ import view.UnregisteredUserWarning;
 import database.DatabaseConnectionException;
 import database.DbAccess;
 import database.TableAuto;
+import database.TableContract;
 import database.TableTypeContract;
 import entity.Auto;
 import javafx.event.ActionEvent;
@@ -113,6 +114,16 @@ public class SummaryRentalController implements Initializable
 		String idTypeContract = SummaryRentalView.getInstance().getContract().getTypeContract();
 		TableTypeContract tc = new TableTypeContract(db);
 		
+		
+		//setto i nuovi km dell'auto
+		ta.setKm(auto.getTarga(), Integer.parseInt(newKm_field.getText()));
+		
+		//setto l'auto di nuovo a disponibile
+		ta.setDisponibile(auto.getTarga());
+		
+		auto.setIdAgenzia(SummaryRentalView.getInstance().getContract().getAgencyReturn());
+		ta.setAgencyReturn(auto.getTarga(), auto.getIdAgenzia());
+		
 		//calcolo la differenza se il chilometraggio settato == "limitato"
 		double difference = 0.0;
 		if(tc.getTypeKmById(idTypeContract).equals("limitato"))
@@ -126,11 +137,7 @@ public class SummaryRentalController implements Initializable
 			//Setto i parametri perla finestra di pagamento
 			setPayementParameters(difference);
 			
-			//setto i nuovi km dell'auto
-			ta.setKm(auto.getTarga(), Integer.parseInt(newKm_field.getText()));
 			
-			//setto l'auto di nuovo a disponibile
-			ta.setDisponibile(auto.getTarga());
 			
 			//lancio la finestra di pagamento
 			PayementDialog.getInstance().start(new Stage());

@@ -109,6 +109,11 @@ public class Auto extends TypeSection
 	public String getModel()
 	{return this.model;}
 	
+	public String getIdAgenzia()
+	{
+		return this.id_agenzia;
+	}
+	
 	/**
 	 * it gets brand of auto
 	 * @return
@@ -136,6 +141,11 @@ public class Auto extends TypeSection
 	 */
 	public void setTarga(String targa)
 	{this.targa=targa;}
+	
+	public void setIdAgenzia(String id)
+	{
+		this.id_agenzia = id;
+	}
 	
 	/**
 	 * sets model of auto through input parameter

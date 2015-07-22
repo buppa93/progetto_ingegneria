@@ -25,14 +25,6 @@ public class LoginDialogController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
-		//oscurano il buttone "ok" se i campi sono vuoti
-		userName_field.textProperty().addListener((observable, oldValue, newValue) -> {
-			submit_bttn.setDisable(newValue.trim().isEmpty());
-		});
-		
-		pwd_field.textProperty().addListener((observable, oldValue, newValue) -> {
-			submit_bttn.setDisable(newValue.trim().isEmpty());
-		});
 	
 	}
 	
