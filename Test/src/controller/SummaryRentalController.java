@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import utility.MyUtil;
+import view.KmInvalidWarning;
 import view.PayementDialog;
 import view.SQLWarning;
 import view.SummaryRentalView;
@@ -16,6 +17,8 @@ import database.TableAuto;
 import database.TableContract;
 import database.TableTypeContract;
 import entity.Auto;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,8 +54,12 @@ public class SummaryRentalController implements Initializable
 			submit_bttn.setDisable(newValue.trim().isEmpty());
 		});
 		
+		
+		
 		String targa = SummaryRentalView.getInstance().getContract().getTarga();
 		DbAccess db = new DbAccess();
+		
+		
 		
 		try 
 		{db.initConnection();} 
@@ -89,7 +96,6 @@ public class SummaryRentalController implements Initializable
 		kmPrevent_lbl.setText(String.valueOf(kmPrev));
 		pricePrevent_lbl.setText(String.valueOf(SummaryRentalView.getInstance().getContract().getPrice()));
 		deposit_lbl.setText(String.valueOf(SummaryRentalView.getInstance().getContract().getDeposit()));
-	
 	}
 	
 	@FXML
@@ -110,46 +116,52 @@ public class SummaryRentalController implements Initializable
 		//ricavo i km fatti dal cliente
 		kmPost = Integer.parseInt((newKm_field.getText()));
 		
-		//ricavo l'id del tipo di contratto
-		String idTypeContract = SummaryRentalView.getInstance().getContract().getTypeContract();
-		TableTypeContract tc = new TableTypeContract(db);
-		
-		
-		//setto i nuovi km dell'auto
-		ta.setKm(auto.getTarga(), Integer.parseInt(newKm_field.getText()));
-		
-		//setto l'auto di nuovo a disponibile
-		ta.setDisponibile(auto.getTarga());
-		
-		auto.setIdAgenzia(SummaryRentalView.getInstance().getContract().getAgencyReturn());
-		ta.setAgencyReturn(auto.getTarga(), auto.getIdAgenzia());
-		
-		//calcolo la differenza se il chilometraggio settato == "limitato"
-		double difference = 0.0;
-		if(tc.getTypeKmById(idTypeContract).equals("limitato"))
+		if(kmPost <= kmPre)
 		{
-			double pricePerKm = tc.getPricePerKmById(idTypeContract);
-			int kmContr = tc.getKmById(idTypeContract);
-			difference = getDifference(pricePerKm, estimateKm(kmPost, kmPre, kmContr)) + 
-					(Double.parseDouble(pricePrevent_lbl.getText()) - Double.parseDouble(deposit_lbl.getText()));
-			System.out.println("Differenza: "+ difference);
-			
-			//Setto i parametri perla finestra di pagamento
-			setPayementParameters(difference);
-			
-			
-			
-			//lancio la finestra di pagamento
-			PayementDialog.getInstance().start(new Stage());
+			new KmInvalidWarning();
+			((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("SummaryRentalView.fxml")));
 		}
 		else
 		{
-			difference = Double.parseDouble(pricePrevent_lbl.getText()) - Double.parseDouble(deposit_lbl.getText());
-			setPayementParameters(difference);
-			PayementDialog.getInstance().start(new Stage());
-		}
+			//ricavo l'id del tipo di contratto
+			String idTypeContract = SummaryRentalView.getInstance().getContract().getTypeContract();
+			TableTypeContract tc = new TableTypeContract(db);
 		
-		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));
+		
+			//setto i nuovi km dell'auto
+			ta.setKm(auto.getTarga(), Integer.parseInt(newKm_field.getText()));
+		
+			//setto l'auto di nuovo a disponibile
+			ta.setDisponibile(auto.getTarga());
+		
+			auto.setIdAgenzia(SummaryRentalView.getInstance().getContract().getAgencyReturn());
+			ta.setAgencyReturn(auto.getTarga(), auto.getIdAgenzia());
+		
+			//calcolo la differenza se il chilometraggio settato == "limitato"
+			double difference = 0.0;
+			if(tc.getTypeKmById(idTypeContract).equals("limitato"))
+			{
+				double pricePerKm = tc.getPricePerKmById(idTypeContract);
+				int kmContr = tc.getKmById(idTypeContract);
+				difference = getDifference(pricePerKm, estimateKm(kmPost, kmPre, kmContr)) + 
+					(Double.parseDouble(pricePrevent_lbl.getText()) - Double.parseDouble(deposit_lbl.getText()));
+				System.out.println("Differenza: "+ difference);
+			
+				//Setto i parametri perla finestra di pagamento
+				setPayementParameters(difference);
+			
+				//lancio la finestra di pagamento
+				PayementDialog.getInstance().start(new Stage());
+			}
+			else
+			{
+				difference = Double.parseDouble(pricePrevent_lbl.getText()) - Double.parseDouble(deposit_lbl.getText());
+				setPayementParameters(difference);
+				PayementDialog.getInstance().start(new Stage());
+			}
+		
+			((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));
+		}
 	}
 	
 	@FXML protected void onCancelAction(ActionEvent event) throws IOException

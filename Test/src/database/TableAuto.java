@@ -70,6 +70,22 @@ public class TableAuto
 		return c;
 	}*/
 	
+	public int getKm(String targa) throws SQLException
+	{
+		int km = 0;
+		String query = "SELECT * FROM "+DbString.TBL_AUTO+" WHERE "+FIELD_TARGA+"='"+targa+"';";
+		Statement st = db.getConnection().createStatement();
+		ResultSet rs = st.executeQuery(query);
+		
+		while(rs.next())
+		{
+			km = rs.getInt(4);
+		}
+		rs.close();
+		st.close();
+		return km;
+	}
+	
 	public void setInNoleggio(String targa) throws SQLException
 	{
 		CarsAvailability status = new CarsAvailability("noleggio");
