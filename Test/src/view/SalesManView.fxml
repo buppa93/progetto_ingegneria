@@ -14,13 +14,13 @@
               <menus>
                 <Menu fx:id="file_menu" mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem fx:id="close_item" mnemonicParsing="false" onAction="#handleCloseAction" text="Close" />
                   </items>
                 </Menu>
                 <Menu fx:id="client_menu" mnemonicParsing="false" text="Cliente">
                   <items>
                     <MenuItem fx:id="newClient_item" mnemonicParsing="false" onAction="#handleNewClientAction" text="Aggiungi cliente" />
-                        <MenuItem fx:id="deleteClient_item" mnemonicParsing="false" text="Rimuovi cliente" />
+                        <MenuItem fx:id="deleteClient_item" mnemonicParsing="false" onAction="#handleRemoveClientAction" text="Rimuovi cliente" />
                         <MenuItem fx:id="searchClient_item" mnemonicParsing="false" onAction="#handleSearchClientAction" text="Cerca cliente" />
                   </items>
                 </Menu>

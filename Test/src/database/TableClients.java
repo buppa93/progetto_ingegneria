@@ -60,12 +60,37 @@ public class TableClients
 		}
 		return client;
 	}
+	
+	public Client searchClientByPhone(String phone)
+	{
+		Client client = null;
+		String query = "SELECT * FROM "+DbString.TBL_CLIENT+" WHERE telefono='"+phone+"';";
+		try
+		{
+			Statement st = db.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			while(rs.next())
+			{
+				client = new Client(rs.getString(1), rs.getString(2), rs.getString(3));
+			}
+			rs.close();
+			st.close();
+		}
+		catch (SQLException e) 
+		{ 
+			System.out.println("query non eseguita"); 
+			e.printStackTrace();
+		}
+		return client;
+	}
 
 	public void deleteClientByPhone(String phone)
 	{
 		try {
 			Statement st= db.getConnection().createStatement();
-			String query="DELETE* FROM"+ DbString.TBL_CLIENTS + "WHERE"+ FIELD_PHONE+ "="+ phone+";";
+			String query="DELETE FROM "+ DbString.TBL_CLIENT + " WHERE "+ FIELD_PHONE+ "='"+phone+"';";
+			System.out.println(query);
 			st.execute(query);
 			st.close();
 		} catch (SQLException e) {

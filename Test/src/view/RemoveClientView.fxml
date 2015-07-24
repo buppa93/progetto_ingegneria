@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane fx:id="rootPane" maxWidth="500.0" minHeight="150.0" minWidth="500.0" prefHeight="150.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40" fx:controller="controller.RemoveClientController">
+   <children>
+      <BorderPane maxHeight="150.0" maxWidth="500.0" minHeight="150.0" minWidth="500.0" prefHeight="150.0" prefWidth="500.0">
+         <top>
+            <Label text="Inserisci il numero di telefono del cliente:" BorderPane.alignment="CENTER_LEFT">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets left="10.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <center>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Numero di telefono:">
+                     <HBox.margin>
+                        <Insets left="30.0" top="4.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="phone_field">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <BorderPane.margin>
+                  <Insets top="20.0" />
+               </BorderPane.margin>
+            </HBox>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="cancel_bttn" maxWidth="82.0" minWidth="82.0" mnemonicParsing="false" onAction="#handleCancelAction" prefWidth="82.0" text="Annulla" />
+                  <Button fx:id="submit_bttn" mnemonicParsing="false" onAction="#handleSubmitAction" text="Conferma">
+                     <HBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

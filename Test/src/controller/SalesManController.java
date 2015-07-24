@@ -9,8 +9,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 
 public final class SalesManController implements Initializable
@@ -19,6 +21,7 @@ public final class SalesManController implements Initializable
 	@FXML private MenuBar menuBar;
 	@FXML private BorderPane rootLayout;
 	@FXML private Pane work_pane;
+	@FXML private AnchorPane mainPane;
 
 	/**
 	 * Handle action related to "Nuovo CLiente" menu item.
@@ -32,6 +35,13 @@ public final class SalesManController implements Initializable
 		provideNewClientFunctionality();
 	}
 	
+	@FXML private void handleCloseAction(final ActionEvent event)
+	{
+		provideCloseFunctionality();
+	}
+	
+	
+
 	/**
 	 * Handle action related to "Cerca CLiente" menu item.
 	 * 
@@ -43,6 +53,21 @@ public final class SalesManController implements Initializable
 	{
 		provideSearchClientFunctionality();
 	}
+
+
+	/**
+	 * Handle action related to "Cerca CLiente" menu item.
+	 * 
+	 * @param event Event on "Cerca Cliente" menu item.
+	 * @throws IOException 
+	 */
+	@FXML
+	private void handleRemoveClientAction(final ActionEvent event) throws IOException
+	{
+		provideRemoveClientFunctionality();
+	}
+
+	
 
 	/**
 	 * Handle action related to "Nuova auto" menu item.
@@ -86,10 +111,20 @@ public final class SalesManController implements Initializable
 	 */
 	private void provideNewClientFunctionality() throws IOException
 	{
-		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("NewUserView.fxml")));
+		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("NewClientView.fxml")));
 		System.out.println("");
 	}
 	
+	private void provideRemoveClientFunctionality() throws IOException 
+	{
+		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("RemoveClientView.fxml")));
+		
+	}
+	private void provideCloseFunctionality() 
+	{
+		Stage stage = (Stage) mainPane.getScene().getWindow();
+		stage.close();
+	}
 	/**
 	 * Perform functionality associated with "About" menu selection or CTRL-A.
 	 * @throws IOException 
