@@ -1,10 +1,8 @@
 package controller;
 
-import java.sql.SQLException;
 
 import view.SummaryRentalView;
 import view.SalesManView;
-import database.DatabaseConnectionException;
 import database.DbAccess;
 import database.TableContract;
 import entity.Contract;
@@ -14,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 public class RemoveContractController 
 {

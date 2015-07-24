@@ -60,7 +60,7 @@ public class InsertClientDataController implements Initializable
 		}
 		else
 		{
-			UnregisteredClientWarning alert = new UnregisteredClientWarning();
+			new UnregisteredClientWarning();
 		}
 	}
 	

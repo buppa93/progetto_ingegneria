@@ -47,7 +47,7 @@ public class LoginDialogController implements Initializable
 		}
 		else
 		{
-			UnregisteredUserWarning alert = new UnregisteredUserWarning();
+			new UnregisteredUserWarning();
 		}
 	}
 	

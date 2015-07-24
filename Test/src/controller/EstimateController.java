@@ -91,7 +91,7 @@ public class EstimateController implements Initializable
 		} 
 		catch (SQLException e) 
 		{
-			SQLWarning warning = new SQLWarning();
+			new SQLWarning();
 		}
 		
 		double unit = table.getPrice(tContract);
