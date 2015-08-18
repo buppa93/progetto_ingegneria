@@ -1,19 +1,25 @@
 package controller;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import database.DbAccess;
 import database.TableClients;
 import view.FXMLNoleggioView;
 import view.SalesManView;
 import entity.Client;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class FXMLNewClientController 
+public class FXMLNewClientController implements Initializable
 {
 	@FXML private TextField name_field;
 	@FXML private TextField surname_field;
@@ -39,6 +45,107 @@ public class FXMLNewClientController
 	{
 		Stage stage = (Stage) cancel_bttn.getScene().getWindow();
 		stage.close();
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) 
+	{
+		submit_bttn.setDisable(true);
+		
+		/*name_field.textProperty().addListener(new ChangeListener<String>()
+				{
+					@Override
+					public void changed(
+							ObservableValue<? extends String> observable,
+							String oldValue, String newValue) 
+					{
+						// TODO Auto-generated method stub
+						if(!newValue.equals(""))
+							submit_bttn.setDisable(false);
+						
+					}
+				});
+		
+		surname_field.textProperty().addListener(new ChangeListener<String>()
+				{
+					@Override
+					public void changed(
+							ObservableValue<? extends String> observable,
+							String oldValue, String newValue) 
+					{
+						// TODO Auto-generated method stub
+						if(!newValue.equals(""))
+							submit_bttn.setDisable(false);
+						
+					}
+				});
+		
+		phone_field.textProperty().addListener(new ChangeListener<String>()
+				{
+					@Override
+					public void changed(
+							ObservableValue<? extends String> observable,
+							String oldValue, String newValue) 
+					{
+						// TODO Auto-generated method stub
+						if(!newValue.equals(""))
+							submit_bttn.setDisable(false);
+						
+					}
+				});
+		*/
+		
+		//TODO corregere bug
+		name_field.textProperty().addListener(new ChangeListener<String>()
+				{
+
+					@Override
+					public void changed(
+							ObservableValue<? extends String> observable,
+							String oldValue, String newValue) 
+					{
+						// TODO Auto-generated method stub
+						if(newValue.equals(""))
+							submit_bttn.setDisable(true);
+						surname_field.textProperty().addListener(new ChangeListener<String>()
+								{
+
+									@Override
+									public void changed(
+											ObservableValue<? extends String> observable,
+											String oldValue, String newValue) 
+									{
+										// TODO Auto-generated method stub
+										if(newValue.equals(""))
+											submit_bttn.setDisable(true);
+										phone_field.textProperty().addListener(new ChangeListener<String>()
+												{
+
+													@Override
+													public void changed(
+															ObservableValue<? extends String> observable,
+															String oldValue,
+															String newValue) 
+													{
+														// TODO Auto-generated method stub
+														if((!name_field.getText().equals(""))&&(!surname_field.getText().equals(""))
+																&&(!phone_field.getText().equals("")))
+															submit_bttn.setDisable(false);
+														if(newValue.equals(""))
+															submit_bttn.setDisable(true);
+														
+													}
+											
+												});
+										
+									}
+							
+								});
+						
+					}
+			
+				});
+		
 	}
 
 }

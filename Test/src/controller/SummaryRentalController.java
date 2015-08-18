@@ -14,6 +14,8 @@ import database.DbAccess;
 import database.TableAuto;
 import database.TableTypeContract;
 import entity.Auto;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,9 +46,26 @@ public class SummaryRentalController implements Initializable
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		//oscurano il buttone "ok" se i campi sono vuoti
-		newKm_field.textProperty().addListener((observable, oldValue, newValue) -> {
-			submit_bttn.setDisable(newValue.trim().isEmpty());
-		});
+		/*newKm_field.textProperty().addListener((observable, oldValue, newValue) -> {
+			submit_bttn.setDisable(newValue.isEmpty() && newValue.isEmpty());
+		});*/
+		submit_bttn.setDisable(true);
+		newKm_field.textProperty().addListener(new ChangeListener<String>()
+        		{
+
+					@Override
+					public void changed(
+							ObservableValue<? extends String> observable,
+							String oldValue, String newValue) 
+					{
+						// TODO Auto-generated method stub
+						if(newValue.equals(""))
+							submit_bttn.setDisable(true);
+						else
+							submit_bttn.setDisable(false);
+					}
+        	
+        		});
 		
 		
 		

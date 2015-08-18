@@ -88,6 +88,11 @@ public class Client
 				+ this.phone+ ". ";
 	}
 	
+	public String toLabel()
+	{
+		return this.name + ", " + this.surname + ", " + this.phone; 
+	}
+	
 	/**
 	 * establishes if customer's telephone number is valid. If his length is 10, it is valid
 	 * @return

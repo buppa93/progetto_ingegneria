@@ -3,6 +3,7 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import entity.Client;
 
@@ -98,5 +99,181 @@ public class TableClients
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public ArrayList<Client> searchByName(String name)
+	{
+		ArrayList<Client> list = new ArrayList<Client>();
+		String query = "SELECT * FROM "+DbString.TBL_CLIENT+" WHERE nome='"+name+"';";
+		try
+		{
+			Statement st = db.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			while(rs.next())
+			{
+				Client c = new Client(rs.getString(1), rs.getString(2), rs.getString(3));
+				list.add(c);
+			}
+			rs.close();
+			st.close();
+		}
+		catch (SQLException e) 
+		{ 
+			System.out.println("query non eseguita"); 
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Client> searchBySurname(String surname)
+	{
+		ArrayList<Client> list = new ArrayList<Client>();
+		String query = "SELECT * FROM "+DbString.TBL_CLIENT+" WHERE cognome='"+surname+"';";
+		try
+		{
+			Statement st = db.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			while(rs.next())
+			{
+				Client c = new Client(rs.getString(1), rs.getString(2), rs.getString(3));
+				list.add(c);
+			}
+			rs.close();
+			st.close();
+		}
+		catch (SQLException e) 
+		{ 
+			System.out.println("query non eseguita"); 
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Client> searchByPhone(String phone)
+	{
+		ArrayList<Client> list = new ArrayList<Client>();
+		String query = "SELECT * FROM "+DbString.TBL_CLIENT+" WHERE telefono='"+phone+"';";
+		try
+		{
+			Statement st = db.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			while(rs.next())
+			{
+				Client c = new Client(rs.getString(1), rs.getString(2), rs.getString(3));
+				list.add(c);
+			}
+			rs.close();
+			st.close();
+		}
+		catch (SQLException e) 
+		{ 
+			System.out.println("query non eseguita"); 
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Client> searchByNameAndSurname(String name, String surname)
+	{
+		ArrayList<Client> list = new ArrayList<Client>();
+		String query = "SELECT * FROM "+DbString.TBL_CLIENT+" WHERE (nome='"+name+"' AND cognome='"+surname+"');";
+		try
+		{
+			Statement st = db.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			while(rs.next())
+			{
+				Client c = new Client(rs.getString(1), rs.getString(2), rs.getString(3));
+				list.add(c);
+			}
+			rs.close();
+			st.close();
+		}
+		catch (SQLException e) 
+		{ 
+			System.out.println("query non eseguita"); 
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Client> searchByNameAndPhone(String name, String phone)
+	{
+		ArrayList<Client> list = new ArrayList<Client>();
+		String query = "SELECT * FROM "+DbString.TBL_CLIENT+" WHERE (nome='"+name+"' AND telefono='"+phone+"');";
+		try
+		{
+			Statement st = db.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			while(rs.next())
+			{
+				Client c = new Client(rs.getString(1), rs.getString(2), rs.getString(3));
+				list.add(c);
+			}
+			rs.close();
+			st.close();
+		}
+		catch (SQLException e) 
+		{ 
+			System.out.println("query non eseguita"); 
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Client> searchBySurnameAndPhone(String surname, String phone)
+	{
+		ArrayList<Client> list = new ArrayList<Client>();
+		String query = "SELECT * FROM "+DbString.TBL_CLIENT+" WHERE (cognome='"+surname+"' AND telefono='"+phone+"');";
+		try
+		{
+			Statement st = db.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			while(rs.next())
+			{
+				Client c = new Client(rs.getString(1), rs.getString(2), rs.getString(3));
+				list.add(c);
+			}
+			rs.close();
+			st.close();
+		}
+		catch (SQLException e) 
+		{ 
+			System.out.println("query non eseguita"); 
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Client> searchByAllField(String name, String surname, String phone)
+	{
+		ArrayList<Client> list = new ArrayList<Client>();
+		String query = "SELECT * FROM "+DbString.TBL_CLIENT+" WHERE (nome='"+name+"' AND cognome='"+surname+"'"
+				+ " AND telefono='"+phone+"');";
+		try
+		{
+			Statement st = db.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			while(rs.next())
+			{
+				Client c = new Client(rs.getString(1), rs.getString(2), rs.getString(3));
+				list.add(c);
+			}
+			rs.close();
+			st.close();
+		}
+		catch (SQLException e) 
+		{ 
+			System.out.println("query non eseguita"); 
+			e.printStackTrace();
+		}
+		return list;
 	}
 }

@@ -18,14 +18,14 @@ public class FXMLSysStartController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
-		try 
+		/*try 
 		{
  			Thread.sleep(1000);
  		} 
 		catch (InterruptedException e) 
 		{
  			e.printStackTrace();
- 		}
+ 		}*/
 		LoginDialog login = new LoginDialog();
 		try 
 		{

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="345.0" minWidth="600.0" prefHeight="345.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootPane" maxHeight="400.0" maxWidth="600.0" minHeight="345.0" minWidth="600.0" prefHeight="345.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SearchClientCrontoller">
    <children>
       <BorderPane maxHeight="350.0" maxWidth="600.0" minHeight="350.0" minWidth="600.0" prefHeight="350.0" prefWidth="600.0">
          <top>
@@ -34,10 +34,6 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="CENTER" text="ID:">
-                     <GridPane.margin>
-                        <Insets left="10.0" />
-                     </GridPane.margin></Label>
                   <Label text="Nome:" GridPane.columnIndex="2">
                      <GridPane.margin>
                         <Insets left="30.0" />
@@ -46,22 +42,21 @@
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin></Label>
-                  <Label text="Telefono:" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Label text="Telefono:">
                      <GridPane.margin>
-                        <Insets left="30.0" />
+                        <Insets left="10.0" />
                      </GridPane.margin></Label>
-                  <TextField GridPane.columnIndex="1" />
-                  <TextField GridPane.columnIndex="3">
+                  <TextField fx:id="name_field" GridPane.columnIndex="3">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></TextField>
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <TextField fx:id="surname_field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="phone_field" GridPane.columnIndex="1">
                      <GridPane.margin>
-                        <Insets right="10.0" />
+                        <Insets />
                      </GridPane.margin></TextField>
-                  <Button minWidth="67.0" mnemonicParsing="false" prefWidth="67.0" text="Cerca" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                  <Button mnemonicParsing="false" text="Annulla" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Button fx:id="submit_bttn" minWidth="67.0" mnemonicParsing="false" onAction="#onSubmitAction" prefWidth="67.0" text="Cerca" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <Button fx:id="cancel_bttn" mnemonicParsing="false" onAction="#onCancelAction" text="Annulla" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </center>
