@@ -6,11 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import view.SearchClientResultView;
 import view.SearchContractResultView;
-import view.SelectCarView;
-import entity.Auto;
-import entity.Client;
 import entity.Contract;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
