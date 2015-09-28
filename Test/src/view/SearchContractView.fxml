@@ -106,7 +106,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="search_bttn" minWidth="67.0" mnemonicParsing="false" text="Cerca" GridPane.columnIndex="3" />
+                  <Button fx:id="search_bttn" minWidth="67.0" mnemonicParsing="false" onAction="#onSubmitAction" text="Cerca" GridPane.columnIndex="3" />
                   <Button fx:id="cancel_bttn" mnemonicParsing="false" text="Annulla" GridPane.columnIndex="2" />
                </children>
             </GridPane>

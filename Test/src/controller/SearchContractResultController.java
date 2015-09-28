@@ -24,6 +24,7 @@ public class SearchContractResultController implements Initializable
 	@FXML private ListView<String> contract_lst;
 	@FXML private Button close_bttn;
 	ArrayList<Contract> contracts;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{

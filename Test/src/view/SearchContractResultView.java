@@ -30,7 +30,7 @@ public final class SearchContractResultView
 	
 	public void start(Stage stage) throws Exception 
 	{
-		Parent root = FXMLLoader.load(getClass().getResource("SearchClientResultView.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("SearchContractResultView.fxml"));
 
 		Scene scene = new Scene(root, 600, 400);
 

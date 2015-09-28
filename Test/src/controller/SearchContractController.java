@@ -61,31 +61,48 @@ public class SearchContractController implements Initializable
         List<String> agencies = new ArrayList<String>();
         
         try 
-        {agencies = tableagency.getAllAgency();} 
+        {
+        	agencies = tableagency.getAllAgency();
+        	agencies.add("");
+        } 
         catch (SQLException e) 
         {e.printStackTrace();}
         
         ObservableList<String> agenzie = FXCollections.observableArrayList(agencies);
         agency_chbox.setItems(agenzie);
+        agency_chbox.getSelectionModel().selectLast();
+        
         
         TableTypeContract ttc = new TableTypeContract(db);
         List<String> typeContract = new ArrayList<String>();
         
         try 
-        {typeContract = ttc.getAll();} 
+        {
+        	typeContract = ttc.getAll();
+        	typeContract.add("");
+        } 
         catch (SQLException e) 
         {e.printStackTrace();}
         
         ObservableList<String> choiceboxlst = FXCollections.observableArrayList(typeContract);
         type_chbox.setItems(choiceboxlst);
+        type_chbox.getSelectionModel().selectLast();
 	}
 	
 	@FXML protected void onSubmitAction(ActionEvent event) throws Exception
 	{	
+		System.out.println("nOrder_field -> "+nOrder_field.getText());
+		System.out.println("client_field -> "+client_field.getText());
+		System.out.println("targa_field -> "+targa_field.getText());
+		System.out.println("agency_chbox -> "+agency_chbox.getValue());
+		System.out.println("type_chbox -> "+type_chbox.getValue());
+		System.out.println("data_field -> "+data_field.getValue());
+		search();
 		SearchContractResultView.getInstance().setSearchResult(result);
 		SearchContractResultView.getInstance().start(new Stage());
 	}
-	public ArrayList<Contract> search() throws DatabaseConnectionException, SQLException
+	
+	public void search() throws DatabaseConnectionException, SQLException
 	{
 		int tot = calculate();
 		
@@ -475,7 +492,6 @@ public class SearchContractController implements Initializable
 				break;
 		}
 		
-		return result;
 	}
 	
 	public int calculate()
@@ -485,248 +501,254 @@ public class SearchContractController implements Initializable
 		//1
 		if((!nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = nof; // 1
 		
 		//2
 		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = cf; // 2
 		
 		//3
 		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = tf; // 4
 		
 		//4
 		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field == null))
+		{
+			//TODO vedere perche' non entra qui!!!!!!!
+			System.out.println("sono qui 2");
 			tot = acb; // 8
+		}
 		
 		//5
 		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = tcb; // 16
 		
 		//6
 		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(!data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() != null))
 			tot = df; // 32
 		
 		//7
 		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = nof + cf; // 3
 		
 		//8
 		if((!nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = nof + tf; // 5
 		
 		//9
 		if((!nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = nof + acb;  // 9
 		
 		//10
 		if((!nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = nof + tcb; // 17
 		
 		//11
 		if((!nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = nof + df; // 33
 		
 		//12
 		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = cf + tf; // 6
 		
 		//13
 		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = cf + acb; // 10
 		
 		//14
 		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = cf + tcb; // 18
 		
 		//15
 		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(!data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() != null))
 			tot = cf + df; // 34
 		
 		//16
 		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = tf + acb; // 12
 		
 		//17
 		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = tf + tcb; // 20
 		
 		//18
 		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(!data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() != null))
 			tot = tf + df; // 38
 		
 		//19
 		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = acb + tcb; // 24
 		
 		//20
 		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(!data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() != null))
 			tot = acb + df; // 40
 		
 		//21
 		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(!data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() != null))
 			tot = tcb + df; // 48
 		
 		//22
 		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = nof + cf + tf; // 7
 		
 		//23
 		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = nof + cf + acb; // 11
 		
 		//24
 		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = nof + cf + tcb; // 19
 		
 		//25
 		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(!data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() != null))
 			tot = nof + cf + df; // 35
 		
 		//26
 		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = cf + tf + acb; // 14
 		
 		//27
 		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = cf + tf + tcb; // 22
 		
 		//28
 		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(!data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() != null))
 			tot = cf + tf + df; // 38
 		
 		//29
 		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = tf + acb + tcb; // 28
 		
 		//30
 		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(!data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() != null))
 			tot = tf + acb + df; // 44
 		
 		//31
 		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(!data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() != null))
 			tot = acb + tcb + df; // 56
 		
 		//32
 		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = nof + cf + tf + acb; // 15
 		
 		//33
 		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = nof + cf + tf + tcb; // 23
 		
 		//34
 		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(!data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() != null))
 			tot = nof + cf + tf + df; // 39
 		
 		//35
 		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = cf + tf + acb + tcb; // 30
 		
 		//36
 		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(!data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() != null))
 			tot = cf + tf + acb + df; // 46
 		
 		//37
 		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(!data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() != null))
 			tot = tf + acb + tcb + df; // 60
 		
 		//38
 		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() == null))
 			tot = nof + cf + tf + acb + tcb; // 31
 		
 		//39
 		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(type_chbox.getValue().equals(""))
-				&&(!data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() != null))
 			tot = nof + cf + tf + acb + df; // 47
 		
 		//40
 		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(!data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() != null))
 			tot = cf + tf + acb + tcb + df; // 62
 		
 		//41
 		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
 				&&(!agency_chbox.getValue().equals(""))&&(!type_chbox.getValue().equals(""))
-				&&(!data_field.getValue().toString().equals("")))
+				&&(data_field.getValue() != null))
 			tot = nof + cf + tf + acb + tcb + df; // 63
+		
+		System.out.println(tot);
 		return tot;
 	}
 }

@@ -90,6 +90,8 @@ public class TableContract
 				query += parameters.get(parameters.size()-1).getValue();
 				query += "');";
 				
+				System.out.println(query);
+				
 				/******** esecuzione della query *****************/
 				Statement st = db.getConnection().createStatement();
 				ResultSet rs = st.executeQuery(query);
