@@ -3,6 +3,7 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import entity.TypeContract;
@@ -21,24 +22,6 @@ public class TableTypeContract
 		
 		public TableTypeContract(DbAccess db)
 		{this.db = db;}
-		
-		/*public void insertTypeContract (TypeContract typecontract)
-		{
-			try 
-			{
-				Statement st = db.getConnection().createStatement();
-				String query = "INSERT INTO "+DbString.TBL_TYPECONTRATC+" "
-						+ "("+FIELD_ID+","+FIELD_TYPE_NOLEGGIO+","+FIELD_TYPE_KM+") values ('" +typecontract.getTypeContract()+"','"+ typecontract.getTypeContract() +
-						"','" + typecontract.getChilometraggio()+","+"');";
-				st.executeUpdate(query);
-				st.close();
-			} 
-			catch (SQLException e) 
-			{ 
-				System.out.println("inserimento non eseguito"); 
-				e.printStackTrace();
-			}
-		}*/
 		
 		public TypeContract getTypeContractById (String id)
 		{
@@ -104,6 +87,24 @@ public class TableTypeContract
 			}
 			
 			return type;
+		}
+		
+		public ArrayList<String> getAll() throws SQLException
+		{
+			ArrayList<String> list = new ArrayList<String>();
+			String query = "SELECT * FROM "+DbString.TBL_TYPECONTRATC+";";
+			
+			Statement st = db.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			while(rs.next())
+			{
+				list.add(rs.getString(1)+", "+rs.getString(2)+", "+rs.getString(3)+", "+rs.getString(4));
+			}
+			
+			rs.close();
+			st.close();
+			return list;
 		}
 		
 		public String getTypeContract (String tipoNoleggio, String tipoChilometraggio, char fascia, String km) throws SQLException

@@ -104,6 +104,17 @@ public final class SalesManController implements Initializable
 	{
 		provideRemoveContractFunctionality();
 	}
+	
+	@FXML
+	private void handleSearchContractAction(final ActionEvent event) throws IOException
+	{
+		provideSearchContractFunctionality();
+	}
+
+	private void provideSearchContractFunctionality() throws IOException 
+	{
+		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("SearchContractView.fxml")));
+	}
 
 	/**
 	 * Perform functionality associated with "About" menu selection or CTRL-A.

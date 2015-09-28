@@ -208,6 +208,13 @@ public class Contract
 			isValid=false;
 		return isValid;
 	}
+
+	public String toLabel()
+	{
+		return this.numero_ordine + ", " + this.agency_number + ", " + this.idCliente + ", " + this.data_inizio
+				 + ", " + this.duration + ", " + this.agency_return + ", " + this.type + ", " + this.price
+				 + ", " + this.deposit + ", " + this.targa; 
+	}
 	
 	/**
 	 * return tuple of contract

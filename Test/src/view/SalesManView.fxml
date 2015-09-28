@@ -35,7 +35,7 @@
                     <items>
                       <MenuItem fx:id="newContract_item" mnemonicParsing="false" onAction="#handleNewContractAction" text="Nuovo contratto" />
                       <MenuItem fx:id="removeContract_item" mnemonicParsing="false" onAction="#handleRemoveContractAction" text="Rimuovi contratto" />
-                      <MenuItem fx:id="searchContract_item" mnemonicParsing="false" text="Cerca contratto" />
+                      <MenuItem fx:id="searchContract_item" mnemonicParsing="false" onAction="#handleSearchContractAction" text="Cerca contratto" />
                     </items>
                   </Menu>
               </menus>

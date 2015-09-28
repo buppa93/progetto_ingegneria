@@ -3,7 +3,9 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import utility.KeyValuePair;
 import entity.Contract;
 
 
@@ -66,6 +68,44 @@ public class TableContract
 				Statement st = db.getConnection().createStatement();
 				st.executeUpdate(query);
 				st.close();
+			}
+			
+			public ArrayList<Contract> dynamicSearch(ArrayList<KeyValuePair<String, String>> parameters) throws SQLException
+			{
+				ArrayList<Contract> result = new ArrayList<Contract>();
+				Contract con = null;
+				
+				/***** Costruzione delle query ******/
+				String query = "SELECT * FROM "+ DbString.TBL_CONTRACTS+" WHERE (";
+				for(int i=0; i<parameters.size()-1; i++)
+				{
+					query += parameters.get(i).getKey();
+					query += "='";
+					query += parameters.get(i).getValue();
+					query += "' AND ";
+				}
+				
+				query += parameters.get(parameters.size()-1).getKey();
+				query += "='";
+				query += parameters.get(parameters.size()-1).getValue();
+				query += "');";
+				
+				/******** esecuzione della query *****************/
+				Statement st = db.getConnection().createStatement();
+				ResultSet rs = st.executeQuery(query);
+				
+				
+				/*************** elaborazione dei risultati ***************/
+				while(rs.next())
+				{
+					con = new Contract(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), 
+							rs.getString(6), rs.getString(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10));
+					result.add(con);
+				}
+				
+				st.close();
+				rs.close();
+				return result;
 			}
 
 		}

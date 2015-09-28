@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.StringTokenizer;
+
 public class TypeContract 
 {
 	int id;
@@ -46,4 +48,10 @@ public class TypeContract
 	
 	public String toString()
 	{return this.id + "," + this.type + "," + this.typekm;}
+	
+	public static String getIdFromString(String type)
+	{
+		StringTokenizer st = new StringTokenizer(type, ", ");
+		return st.nextToken();
+	}
 }
