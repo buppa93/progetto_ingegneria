@@ -7,15 +7,9 @@
 
 <AnchorPane minHeight="512.0" minWidth="550.0" prefHeight="388.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane layoutY="-2.0" prefHeight="400.0" prefWidth="336.0">
+      <BorderPane layoutY="-2.0" prefHeight="512.0" prefWidth="550.0">
          <center>
-            <TreeTableView fx:id="Tableview" minHeight="512.0" minWidth="550.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TreeTableColumn fx:id="ClientName_tablecolumn" prefWidth="157.0" text="Nome" />
-                <TreeTableColumn fx:id="ClientSurname_tablecolumn" prefWidth="169.0" text="Cognome" />
-                  <TreeTableColumn fx:id="ClientTelephone_tablecolumn" prefWidth="223.0" text="Numero Telefono" />
-              </columns>
-            </TreeTableView>
+            <ListView fx:id="showClients_list" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>

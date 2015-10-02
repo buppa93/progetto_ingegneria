@@ -19,29 +19,29 @@
                 </Menu>
                 <Menu fx:id="cliente_menu" mnemonicParsing="false" text="Cliente">
                   <items>
-                    <MenuItem fx:id="showClient_item" mnemonicParsing="false" text="Visualizza Clienti" />
-                        <MenuItem fx:id="deleteClient_item" mnemonicParsing="false" text="Rimuovi Cliente" />
+                    <MenuItem fx:id="showClient_item" mnemonicParsing="false" onAction="#handleAdminShowClientsAction" text="Visualizza Clienti" />
+                        <MenuItem fx:id="deleteClient_item" mnemonicParsing="false" onAction="#handleAdminDeleteClientAction" text="Rimuovi Cliente" />
                   </items>
                 </Menu>
                 <Menu fx:id="agency_menu" mnemonicParsing="false" text="Agenzie">
                   <items>
-                    <MenuItem fx:id="showAgency_item" mnemonicParsing="false" text="Visualizza Agenzia" />
-                        <MenuItem fx:id="searcAgency_item" mnemonicParsing="false" text="Cerca Agenzia" />
-                        <MenuItem fx:id="deleteAgency_item" mnemonicParsing="false" text="Rimuovi Agenzia" />
-                        <MenuItem fx:id="newAgency_item" mnemonicParsing="false" text="Aggiungi Agenzia" />
+                    <MenuItem fx:id="showAgency_item" mnemonicParsing="false" onAction="#handleAdminShowAgencyAction" text="Visualizza Agenzia" />
+                        <MenuItem fx:id="searcAgency_item" mnemonicParsing="false" onAction="#handleAdminSearchAgencyAction" text="Cerca Agenzia" />
+                        <MenuItem fx:id="deleteAgency_item" mnemonicParsing="false" onAction="#handleAdminDeleteAgencyAction" text="Rimuovi Agenzia" />
+                        <MenuItem fx:id="newAgency_item" mnemonicParsing="false" onAction="#handleAdminNewAgencyAction" text="Aggiungi Agenzia" />
                   </items>
                 </Menu>
                   <Menu fx:id="auto_menu" mnemonicParsing="false" text="Automobili">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Visualizza Automobili" />
-                        <MenuItem fx:id="newAuto_item" mnemonicParsing="false" text="Aggiungi Automobili" />
-                        <MenuItem fx:id="deleteAuto_item" mnemonicParsing="false" text="Rimuovi Automobili" />
+                        <MenuItem fx:id="showAuto_item" mnemonicParsing="false" onAction="#handleAdminShowCarAction" text="Visualizza Automobili" />
+                        <MenuItem fx:id="newAuto_item" mnemonicParsing="false" onAction="#handleAdminNewCarAction" text="Aggiungi Automobili" />
+                        <MenuItem fx:id="deleteAuto_item" mnemonicParsing="false" onAction="#handleAdminDeleteCarAction" text="Rimuovi Automobili" />
                      </items>
                   </Menu>
                   <Menu fx:id="Contract_menu" mnemonicParsing="false" text="Contratti">
                      <items>
-                        <MenuItem fx:id="showContracts_item" mnemonicParsing="false" text="Visualizza Contratti" />
-                        <MenuItem fx:id="deleteExpiredContracts_item" mnemonicParsing="false" text="Rimuovi Contratti Scaduti" />
+                        <MenuItem fx:id="showContracts_item" mnemonicParsing="false" onAction="#handleAdminShowContractsAction" text="Visualizza Contratti" />
+                        <MenuItem fx:id="deleteExpiredContracts_item" mnemonicParsing="false" onAction="#handleAdminDeleteExpiredContractsAction" text="Rimuovi Contratti Scaduti" />
                      </items>
                   </Menu>
               </menus>
@@ -58,12 +58,12 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="searchAgency_bttn" layoutX="10.0" layoutY="254.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="126.0" text="Cerca Agenzia">
+                  <Button fx:id="searchAgency_bttn" layoutX="10.0" layoutY="254.0" mnemonicParsing="false" onAction="#onSearchAction" prefHeight="26.0" prefWidth="126.0" text="Cerca Agenzia">
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="showClients_bttn" alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="221.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="126.0" text="Visualizza Clienti">
+                  <Button fx:id="showClients_bttn" alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="221.0" mnemonicParsing="false" onAction="#handleAdminShowClientsAction" prefHeight="26.0" prefWidth="126.0" text="Visualizza Clienti">
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>

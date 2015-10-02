@@ -7,29 +7,10 @@
 
 <AnchorPane minHeight="512.0" minWidth="550.0" prefHeight="388.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ScrollPane prefHeight="512.0" prefWidth="550.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="518.0" prefWidth="553.0">
-               <children>
-                  <BorderPane prefHeight="501.0" prefWidth="550.0">
-                     <center>
-                        <TreeTableView fx:id="Tableview" minHeight="512.0" minWidth="550.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                          <columns>
-                            <TreeTableColumn fx:id="ClientName_tablecolumn" prefWidth="78.0" text="Targa" />
-                            <TreeTableColumn fx:id="ClientSurname_tablecolumn" prefWidth="75.0" text="Modello" />
-                              <TreeTableColumn fx:id="ClientTelephone_tablecolumn" prefWidth="70.0" text="Marca" />
-                              <TreeTableColumn fx:id="ClientTelephone_tablecolumn1" minWidth="-1.0" prefWidth="60.0" text="Km percorsi" />
-                              <TreeTableColumn fx:id="ClientTelephone_tablecolumn11" minWidth="-1.0" prefWidth="63.0" text="Disponibilità" />
-                              <TreeTableColumn fx:id="ClientTelephone_tablecolumn111" minWidth="-1.0" prefWidth="92.0" text="Agenzia" />
-                              <TreeTableColumn fx:id="ClientTelephone_tablecolumn1111" minWidth="-1.0" prefWidth="58.0" text="Cliente" />
-                              <TreeTableColumn fx:id="ClientTelephone_tablecolumn1112" minWidth="-1.0" prefWidth="49.0" text="Contratto" />
-                          </columns>
-                        </TreeTableView>
-                     </center>
-                  </BorderPane>
-               </children>
-            </AnchorPane>
-        </content>
-      </ScrollPane>
+      <BorderPane prefHeight="501.0" prefWidth="550.0">
+         <center>
+            <ListView fx:id="showcar_list" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>

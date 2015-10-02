@@ -3,9 +3,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import utility.MyUtil;
+import view.AdminView;
 import view.SalesManView;
 import view.UnregisteredUserWarning;
 import database.DbAccess;
+import database.TableUsers;
+import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,20 +42,35 @@ public class LoginDialogController implements Initializable
 	@FXML
 	protected void loginAction (ActionEvent event) throws Exception
 	{
+		
 		String usr = userName_field.getText();
 		String psswd = pwd_field.getText();
 		DbAccess db = new DbAccess();
 		db.initConnection();
 		System.out.println("sono qui");
+		TableUsers user=new TableUsers(db);
+
 		if(MyUtil.login(db, usr, psswd))
 		{
+			if(user.getTypeUserBynamepass(usr, psswd)=="adm")
+			{
+				System.out.println("sono admin");
+
+				AdminView adminview= new AdminView();
+				adminview.start(new Stage());
+				Stage stage = (Stage) cancel_bttn.getScene().getWindow();
+				stage.close();
+			}	
+			
 			System.out.println("sono qui");
+			
 			SalesManView salesman = new SalesManView();
 			salesman.start(new Stage());
 			Stage stage = (Stage) cancel_bttn.getScene().getWindow();
 			stage.close();
-		
 		}
+		
+	
 		else
 		{
 			UnregisteredUserWarning alert = new UnregisteredUserWarning();

@@ -1,8 +1,10 @@
 package database;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
+
 import entity.User;
 
 public class TableUsers
@@ -69,5 +71,28 @@ public class TableUsers
 		}
 		return result.toString();
 	}
-
+	
+	public String getTypeUserBynamepass (String name, String passw)
+	{
+		String result = "";
+		String c="";
+		try 
+		{
+			Statement st = db.getConnection().createStatement();
+			
+			c = "SELECT "+FIELD_TYPE +" FROM "+DbString.TBL_CLIENTS+" WHERE "+FIELD_NAME+"='"+name+"' AND "+FIELD_PWD+"='"+passw+"';";
+			ResultSet rs = st.executeQuery(c);
+			result=rs.getString(1);
+			rs.close();
+			st.close();
+			
+		} 
+		catch (SQLException e) 
+		{ 
+			System.out.println("query del tipo non eseguita"); 
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		return result;
+	}
 }

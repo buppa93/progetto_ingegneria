@@ -1,32 +1,25 @@
 package controller;
 
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import entity.Client;
-import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
-import javafx.stage.Stage;
+import javafx.scene.control.ListView;
 
-public class AdminShowClientsController implements Initializable{
-//	@FXML private TreeTableView<Client> Tableview;
-//	@FXML private TreeTableColumn<TreeTableView<Client>,String> ClientName_tablecolumn;
-//	@FXML private TreeTableColumn<TreeTableView<Client>,String> ClientSurname_tablecolumn;
-//	@FXML private TreeTableColumn<TreeTableView<Client>,String> ClientTelephone_tablecolumn;
-	
-@FXML	TreeTableView<Client> treeTable = new TreeTableView<>();
-@FXML	TreeTableColumn<Client,String> ClientName_tablecolumn;
-@FXML	TreeTableColumn<Client,String> ClientSurname_tablecolumn;
-@FXML	TreeTableColumn<Client,String> ClientTelephone_tablecolumn;
-@Override
-public void initialize(URL location, ResourceBundle resources) {
-	// TODO Auto-generated method stub
-	
-}
+public class AdminShowClientsController implements Initializable
+{
+	@FXML private ListView<String> showClients_list;
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		Client client= new Client();
+		showClients_list = new ListView<>();		
+		ObservableList<String> items =FXCollections.observableArrayList(client.toString());
+		showClients_list.setItems(items);
+	}
 	
 }

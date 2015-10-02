@@ -52,6 +52,32 @@ public class TableAgency
 		}
 		
 	}
+	
+	public String searchAgency(String number, String name)
+	{
+		String agency = "";
+		String query = "SELECT * FROM "+DbString.TBL_AGENCIES+" WHERE (numero='"+number+
+				"' AND nome='"+name+"');";
+		try
+		{
+			Statement st = db.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			while(rs.next())
+			{
+				 agency = rs.getString(1) + rs.getString(2)+ rs.getString(3);
+			}
+			rs.close();
+			st.close();
+		}
+		catch (SQLException e) 
+		{ 
+			System.out.println("query non eseguita"); 
+			e.printStackTrace();
+		}
+		return agency;
+	}
+	
 	public Agency getAgencyByNumber (String number)
 	{
 		Agency c = null;

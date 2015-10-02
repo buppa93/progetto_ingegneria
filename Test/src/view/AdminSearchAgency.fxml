@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="512.0" minWidth="550.0" prefHeight="423.0" prefWidth="571.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootPane" minHeight="512.0" minWidth="550.0" prefHeight="423.0" prefWidth="571.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane minHeight="512.0" minWidth="550.0" prefHeight="423.0" prefWidth="571.0">
+      <BorderPane minHeight="344.0" minWidth="550.0" prefHeight="512.0" prefWidth="571.0">
          <top>
             <Label prefHeight="71.0" prefWidth="292.0" text="Cerca Agenzia:" BorderPane.alignment="TOP_LEFT">
                <font>
@@ -16,8 +16,25 @@
                </font>
             </Label>
          </top>
+         <bottom>
+            <Pane prefHeight="250.0" prefWidth="571.0" BorderPane.alignment="CENTER">
+               <children>
+                  <BorderPane layoutY="59.0" prefHeight="192.0" prefWidth="571.0">
+                     <bottom>
+                        <Pane prefHeight="193.0" prefWidth="571.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button layoutX="76.0" layoutY="145.0" mnemonicParsing="false" onAction="#onCancelAction" prefHeight="42.0" prefWidth="111.0" text="Annulla" />
+                              <Button layoutX="391.0" layoutY="145.0" mnemonicParsing="false" onAction="#onSearchAction" prefHeight="42.0" prefWidth="111.0" text="Cerca" />
+                           </children>
+                        </Pane>
+                     </bottom>
+                  </BorderPane>
+                  <Label fx:id="result_label" layoutY="42.0" prefHeight="105.0" prefWidth="571.0" />
+               </children>
+            </Pane>
+         </bottom>
          <center>
-            <GridPane prefHeight="275.0" prefWidth="568.0" BorderPane.alignment="CENTER">
+            <GridPane prefHeight="307.0" prefWidth="466.0" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="286.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="285.0" />
@@ -25,12 +42,10 @@
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField GridPane.columnIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField prefHeight="25.0" prefWidth="265.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="number_field" GridPane.columnIndex="1" />
+                  <TextField fx:id="name_field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label alignment="CENTER" prefHeight="48.0" prefWidth="299.0" text="Numero Agenzia">
                      <font>
                         <Font size="31.0" />
@@ -41,22 +56,9 @@
                         <Font size="31.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="BOTTOM" prefHeight="46.0" prefWidth="356.0" text="Indirizzo" GridPane.rowIndex="2">
-                     <font>
-                        <Font size="31.0" />
-                     </font>
-                  </Label>
                </children>
             </GridPane>
          </center>
-         <bottom>
-            <Pane prefHeight="71.0" prefWidth="571.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button layoutX="384.0" layoutY="6.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="111.0" text="Cerca" />
-                  <Button layoutX="88.0" layoutY="6.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="111.0" text="Annulla" />
-               </children>
-            </Pane>
-         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>
