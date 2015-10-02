@@ -7,6 +7,7 @@ import database.DatabaseConnectionException;
 import database.DbAccess;
 import database.TableAgency;
 import view.AdminView;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +25,7 @@ public class AdminDeleteAgencyController {
 	Button delete_bttn;
 	Button cancel_bttn;
 	
-	@FXML protected void onCancelAction(Event event) throws IOException
+	@FXML protected void onCancelAction(ActionEvent event) throws IOException
 	{
 	((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(AdminView.class.getResource("FXMLAdminView.fxml")));
 	}

@@ -134,6 +134,29 @@ public class FXMLAdminViewController implements Initializable
 		provideAdminShowContractsFunctionality();
 	}
 
+/**
+ * Handle action related to "Rimuovi Contratti Scaduti" menu item.
+ * 
+ * @param event Event on "Rimuovi Contratti Scaduti" menu item.
+ * @throws IOException 
+ */
+@FXML
+private void handleAdminDeleteExpiredContractsAction(final ActionEvent event) throws IOException
+{
+	provideAdminDeleteExpiredContractsFunctionality();
+}
+
+/**
+ * Perform functionality associated with "Rimuovi Contratti Scaduti" menu selection or CTRL-A.
+ * @throws IOException 
+ */
+private void provideAdminDeleteExpiredContractsFunctionality() throws IOException
+{
+	System.out.println("You clicked on Rimuovi Contratti Scaduti!");
+	rootLayout.setCenter(FXMLLoader.load(AdminView.class.getResource(/*"AdminShowClients.fxml"*/)));
+	System.out.println("");
+}
+
 	/**
 	 * Perform functionality associated with "Visualizza Clienti" menu selection or CTRL-A.
 	 * @throws IOException 
