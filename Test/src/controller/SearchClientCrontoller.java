@@ -26,9 +26,9 @@ public class SearchClientCrontoller
 	@FXML private Button submit_bttn;
 	@FXML private Button cancel_bttn;
 	
-	public static int nf = 1; //name_field value
-	public static int sf = 2; //surname_field value
-	public static int pf = 4; //phone_field value
+	public static final int nf = 1; //name_field value
+	public static final int sf = 2; //surname_field value
+	public static final int pf = 4; //phone_field value
 	
 	
 	@FXML protected void onSubmitAction(ActionEvent event) throws Exception

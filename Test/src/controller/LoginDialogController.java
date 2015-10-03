@@ -8,7 +8,6 @@ import view.SalesManView;
 import view.UnregisteredUserWarning;
 import database.DbAccess;
 import database.TableUsers;
-import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -64,11 +63,8 @@ public class LoginDialogController implements Initializable
 				Stage stage = (Stage) cancel_bttn.getScene().getWindow();
 				stage.close();
 			}
-			
-			
 		}
 		
-	
 		else
 		{
 			new UnregisteredUserWarning();

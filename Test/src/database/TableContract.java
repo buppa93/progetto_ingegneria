@@ -76,25 +76,26 @@ public class TableContract
 				Contract con = null;
 				
 				/***** Costruzione delle query ******/
-				String query = "SELECT * FROM "+ DbString.TBL_CONTRACTS+" WHERE (";
+				StringBuffer query = new StringBuffer();
+				query.append("SELECT * FROM "+ DbString.TBL_CONTRACTS+" WHERE (");
 				for(int i=0; i<parameters.size()-1; i++)
 				{
-					query += parameters.get(i).getKey();
-					query += "='";
-					query += parameters.get(i).getValue();
-					query += "' AND ";
+					query.append(parameters.get(i).getKey());
+					query.append("='");
+					query.append(parameters.get(i).getValue());
+					query.append("' AND ");
 				}
 				
-				query += parameters.get(parameters.size()-1).getKey();
-				query += "='";
-				query += parameters.get(parameters.size()-1).getValue();
-				query += "');";
+				query.append(parameters.get(parameters.size()-1).getKey());
+				query.append("='");
+				query.append(parameters.get(parameters.size()-1).getValue());
+				query.append("');");
 				
 				System.out.println(query);
 				
 				/******** esecuzione della query *****************/
 				Statement st = db.getConnection().createStatement();
-				ResultSet rs = st.executeQuery(query);
+				ResultSet rs = st.executeQuery(query.toString());
 				
 				
 				/*************** elaborazione dei risultati ***************/

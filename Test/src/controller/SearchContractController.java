@@ -37,12 +37,12 @@ public class SearchContractController implements Initializable
 	@FXML private ChoiceBox<String> type_chbox;
 	@FXML private DatePicker data_field;
 	
-	public static int nof = 1;  //nOrder_field value
-	public static int cf = 2;   //client_field value
-	public static int tf = 4;   //targa_field value
-	public static int acb = 8;  //agency_chbox value
-	public static int tcb = 16; //type_chbox value
-	public static int df = 32;  //data_field value
+	public static final int nof = 1;  //nOrder_field value
+	public static final int cf = 2;   //client_field value
+	public static final int tf = 4;   //targa_field value
+	public static final int acb = 8;  //agency_chbox value
+	public static final int tcb = 16; //type_chbox value
+	public static final int df = 32;  //data_field value
 	
 	ArrayList<Contract> result = new ArrayList<Contract>();
 	
