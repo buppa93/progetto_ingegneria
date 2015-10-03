@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="rootPane" prefHeight="537.0" prefWidth="683.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootPane" prefHeight="537.0" prefWidth="683.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLAdminViewController">
    <children>
       <BorderPane fx:id="rootLayout" layoutY="2.0" prefHeight="537.0" prefWidth="683.0">
          <top>
@@ -58,7 +58,7 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="searchAgency_bttn" layoutX="10.0" layoutY="254.0" mnemonicParsing="false" onAction="#onSearchAction" prefHeight="26.0" prefWidth="126.0" text="Cerca Agenzia">
+                  <Button fx:id="searchAgency_bttn" layoutX="10.0" layoutY="254.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="126.0" text="Cerca Agenzia">
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>

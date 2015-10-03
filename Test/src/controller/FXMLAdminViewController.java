@@ -153,7 +153,7 @@ private void handleAdminDeleteExpiredContractsAction(final ActionEvent event) th
 private void provideAdminDeleteExpiredContractsFunctionality() throws IOException
 {
 	System.out.println("You clicked on Rimuovi Contratti Scaduti!");
-	rootLayout.setCenter(FXMLLoader.load(AdminView.class.getResource(/*"AdminShowClients.fxml"*/)));
+	rootLayout.setCenter(FXMLLoader.load(AdminView.class.getResource("AdminShowClients.fxml")));
 	System.out.println("");
 }
 

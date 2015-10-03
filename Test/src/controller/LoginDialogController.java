@@ -44,7 +44,9 @@ public class LoginDialogController implements Initializable
 
 		if(MyUtil.login(db, usr, psswd))
 		{
-			if(user.getTypeUserBynamepass(usr, psswd)=="adm")
+			System.out.println("Sono: "+user.getTypeUserBynamepass(usr, psswd));
+			
+			if(user.getTypeUserBynamepass(usr, psswd).equals("adm"))
 			{
 				System.out.println("sono admin");
 
@@ -52,14 +54,18 @@ public class LoginDialogController implements Initializable
 				adminview.start(new Stage());
 				Stage stage = (Stage) cancel_bttn.getScene().getWindow();
 				stage.close();
-			}	
+			}
+			else if(user.getTypeUserBynamepass(usr, psswd).equals("usr"))
+			{
+				System.out.println("sono user");
+				
+				SalesManView salesman = new SalesManView();
+				salesman.start(new Stage());
+				Stage stage = (Stage) cancel_bttn.getScene().getWindow();
+				stage.close();
+			}
 			
-			System.out.println("sono qui");
 			
-			SalesManView salesman = new SalesManView();
-			salesman.start(new Stage());
-			Stage stage = (Stage) cancel_bttn.getScene().getWindow();
-			stage.close();
 		}
 		
 	
