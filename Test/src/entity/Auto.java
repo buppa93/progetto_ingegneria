@@ -5,10 +5,9 @@ import java.util.StringTokenizer;
 import utility.CarsAvailability;
 
 /**
- * is the car of agency characterized by number plate, model, brand, mileage. 
- * About the car says how is available, previous contracts, previous customers and where it is now
+ * Classe che astrae un'automobile secondo gli attributi di: targa, modello, marca,
+ * chilometri, disponibilita', fascia.
  * @author Utente
- *
  */
 public class Auto extends TypeSection
 {
@@ -25,13 +24,15 @@ public class Auto extends TypeSection
 	String id_agenzia;
 	String fascia;
 	String disp;
+	
 	/**
-	 * it initializes the class Auto to null
+	 * Costruttore che inizializza tutti i parametri della classe a null
 	 */
 	public Auto(){};
 	
 	/**
-	 * it initializes the class auto through input parameters
+	 * Costruttore che inizialliza gli attributi della classe
+	 * in accordo con i parametri passati.
 	 * @param section
 	 * @param n_porte
 	 * @param n_posti
@@ -52,6 +53,19 @@ public class Auto extends TypeSection
 		this.availability=new CarsAvailability(disp);
 	}
 	
+	/**
+	 * Costruttore che inizialliza gli attributi della classe
+	 * in accordo con i parametri passati.
+	 * @param section
+	 * @param n_porte
+	 * @param n_posti
+	 * @param tipo_auto
+	 * @param targa
+	 * @param model
+	 * @param brand
+	 * @param km
+	 * @param disp
+	 */
 	public Auto(Nome section, int n_porte, int n_posti, String tipo_auto,String targa, String model, String brand, int km,  int disp)
 	{
 		super(section,n_porte, n_posti, tipo_auto);
@@ -61,7 +75,15 @@ public class Auto extends TypeSection
 		this.km=km;
 		this.availability=new CarsAvailability(disp);
 	}
-	
+	/**
+	 * Costruttore che inizialliza gli attributi della classe
+	 * in accordo con i parametri passati.
+	 * @param targa
+	 * @param model
+	 * @param brand
+	 * @param km
+	 * @param disp
+	 */
 	public Auto(String targa, String model, String brand, int km, int disp)
 	{
 		this.targa = targa;
@@ -71,6 +93,19 @@ public class Auto extends TypeSection
 		this.availability = new CarsAvailability(disp);
 	}
 	
+	/**
+	 * Costruttore che inizialliza gli attributi della classe
+	 * in accordo con i parametri passati.
+	 * @param targa
+	 * @param modello
+	 * @param marca
+	 * @param km
+	 * @param id_cliente
+	 * @param id_contratto
+	 * @param id_agenzia
+	 * @param fascia
+	 * @param disp
+	 */
 	public Auto(String targa, String modello, String marca, int km, String id_cliente, String id_contratto, 
 			String id_agenzia, char fascia, int disp)
 	{
@@ -87,7 +122,8 @@ public class Auto extends TypeSection
 	}
 	
 	/**
-	 *  it gets the number of agency of auto
+	 * Metodo che ritorna il numero dell'agenia in cui
+	 * si trova l'auto
 	 * @return number of agency 
 	 */
 	public String getNumberOfAgency()
@@ -96,94 +132,106 @@ public class Auto extends TypeSection
 	}
 	
 	/**
-	 * it gets number plate of auto 
+	 * Metodo che ritorna la targa dell'auto
 	 * @return number plate
 	 */
 	public String getTarga()
 	{return this.targa;}
 	
 	/**
-	 * it gets model of auto
+	 * Metodo che ritorna il modello dell'auto
 	 * @return model
 	 */
 	public String getModel()
 	{return this.model;}
 	
+	/**
+	 * Metodo che ritorna il numero dell'agenzia in cui
+	 * si trova l'auto
+	 * @return id_agenzia
+	 */
 	public String getIdAgenzia()
 	{
 		return this.id_agenzia;
 	}
 	
 	/**
-	 * it gets brand of auto
+	 * Metodo che ritorna la marc dell'auto
 	 * @return
 	 */
 	public String getBrand()
 	{return this.brand;}
 	
 	/**
-	 * it gets mileage of auto
+	 * Metodo che ritorna i chilometri dell'auto
 	 * @return mileage
 	 */
 	public int getKm()
 	{return this.km;}
 	
 	/**
-	 * it establishes if auto is "not available", "available", "extraordinary maintenance" or "ordinary maintenance"
+	 * Metodo che ritorna lo stato dell'auto
 	 * @return availability
 	 */
 	public String getAvailability()
 	{return this.availability.getStatus();}
 	
 	/**
-	 * sets number plate of auto through input parameter
+	 * Metodo che setta la targa dell'auto
 	 * @param targa
 	 */
 	public void setTarga(String targa)
 	{this.targa=targa;}
 	
+	/**
+	 * Metodo che setta il numero dell'agenzia in cui
+	 * si trova l'auto
+	 * @param id
+	 */
 	public void setIdAgenzia(String id)
 	{
 		this.id_agenzia = id;
 	}
 	
 	/**
-	 * sets model of auto through input parameter
+	 * Metodo che setta il modello dell'auto
 	 * @param model
 	 */
 	public void setModel(String model)
 	{this.model=model;}
 	
 	/**
-	 * sets brand of auto through input parameter
+	 * Metodo che setta la marca dell'auto
 	 * @param brand
 	 */
 	public void setBrand(String brand)
 	{this.brand=brand;}
 	
 	/**
-	 * sets mileage through input parameter
+	 * Metodo che setta i chilometri dell'auto
 	 * @param km
 	 */
 	public void setKm(int km)
 	{this.km=km;}
 	
 	/**
-	 * sets availability of auto through input parameter
+	 * Metodo che setta la disponibilita' dell'auto
+	 * (input numerico)
 	 * @param disp
 	 */
 	public void setDisp (int disp)
 	{this.availability.setStatus(disp);}
 	
 	/**
-	 * sets availability of auto through input parameter
+	 * Metodo che setta la disponibilita' dell'auto
+	 * (input testuale)
 	 * @param disp
 	 */
 	public void setDisp (String disp)
 	{this.availability.setStatus(disp);}
 	
 	/**
-	 * it establishes if number plate is valid. If his length is 7 it is valid
+	 * Metodo che stabilisce se la targa dell'auto e' valida
 	 * @return boolean
 	 */
 	public boolean isTargaValid()
@@ -195,19 +243,32 @@ public class Auto extends TypeSection
 	}
 	
 	/**
-	 * it returns tuple of auto
+	 * Metodo che ritorna una descrizione dell'auto
+	 * sottoforma di stringa
 	 * @return string of attributes of auto
 	 */
 	public String toString()
 	{
 		return this.targa + "," + this.model + "," + this.brand + "," + this.km + "," + this.availability.getStatus();
 	}
-
+	
+	/**
+	 * Metodo che ritorna una descrizione dell'auto
+	 * sottoforma di striga appositamente preparata
+	 * per essere usata in un'etichetta
+	 * @return string of attributes of auto
+	 */
 	public String toLabel()
 	{
 		return this.targa + ", " + this.model + ", " + this.brand + ", " + this.km;
 	}
 	
+	/**
+	 * Metodo che ritorna la targa di un auto da una
+	 * stringa formattata che ne rappresenta gli attributi
+	 * @param auto
+	 * @return targaOfAuto
+	 */
 	public static String getTargaFromString(String auto)
 	{
 		StringTokenizer st = new StringTokenizer(auto, "; ");
