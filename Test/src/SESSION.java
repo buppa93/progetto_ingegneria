@@ -1,4 +1,3 @@
-package model;
 import entity.Agency;
 
 import org.w3c.dom.*;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 
 public class SESSION 
 {
-	public Agency filiale;
+	Agency filiale;
 	
 	public SESSION() throws ParserConfigurationException, SAXException, IOException
 	{
@@ -45,8 +44,8 @@ public class SESSION
         
 		return properties;
 	}
-
-	public void printAgencyProperties()
+	
+	public void printAgencyProperies()
 	{
 		System.out.println("Numero: "+filiale.getNumber());
 		System.out.println("Nome: "+filiale.getName());
@@ -60,5 +59,4 @@ public class SESSION
 		System.out.println("Nome: "+sessione.filiale.getName());
 		System.out.println("Indirizzo: "+sessione.filiale.getAddress());
 	}*/
-	//TODO memorizzare il nome utente dell'utente connesso
 }

@@ -8,7 +8,7 @@ import javafx.stage.Stage;
  
 public class SalesManView extends Application 
 {
-	SESSION session;
+	public static SESSION session;
     
     public void start(Stage stage) throws Exception 
     {
@@ -22,4 +22,9 @@ public class SalesManView extends Application
          stage.setScene(scene);
          stage.show();
      }
+    
+    public SESSION getSession()
+    {
+    	return this.session;
+    }
 }

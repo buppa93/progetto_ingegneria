@@ -39,17 +39,12 @@
                         <Insets left="20.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Agenzia:" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets left="20.0" />
-                     </GridPane.margin>
-                  </Label>
                   <Label text="Data inizio:" GridPane.columnIndex="2">
                      <padding>
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label text="Tipo:" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Label text="Tipo:" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin>
@@ -70,8 +65,7 @@
                         <Insets right="20.0" />
                      </GridPane.margin>
                   </DatePicker>
-                  <ChoiceBox fx:id="agency_chbox" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ChoiceBox fx:id="type_chbox" prefWidth="180.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <ChoiceBox fx:id="type_chbox" prefWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
