@@ -1,4 +1,5 @@
 package view;
+import model.SESSION;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,9 +8,12 @@ import javafx.stage.Stage;
  
 public class SalesManView extends Application 
 {
+	SESSION session;
     
     public void start(Stage stage) throws Exception 
     {
+    	session = new SESSION();
+    	session.printAgencyProperties();
         Parent root = FXMLLoader.load(getClass().getResource("SalesManView.fxml"));
      
          Scene scene = new Scene(root, 900, 500);
