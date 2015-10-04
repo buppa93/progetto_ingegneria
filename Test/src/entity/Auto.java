@@ -26,7 +26,7 @@ public class Auto extends TypeSection
 	String disp;
 	
 	/**
-	 * Costruttore che inizializza tutti i parametri della classe a null
+	 * Costruttore vuoto
 	 */
 	public Auto(){};
 	
