@@ -26,7 +26,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-//TODO da testare
 public class SearchContractController implements Initializable 
 {
 	@FXML private AnchorPane rootPane;
