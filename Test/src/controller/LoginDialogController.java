@@ -16,7 +16,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-
+/**
+ * 
+ * @author giuseppe
+ *
+ */
 public class LoginDialogController implements Initializable
 {
 	@FXML private Button submit_bttn;
