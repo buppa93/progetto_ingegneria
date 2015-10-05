@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 /**
  * 
  * @author giuseppe
- *
+ *abcc
  */
 public class LoginDialogController implements Initializable
 {
