@@ -3,7 +3,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 
-public class SQLWarning 
+public class SQLWarning
 {
 	public SQLWarning()
 	{

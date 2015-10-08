@@ -3,9 +3,11 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import utility.CarsAvailability;
 import entity.Auto;
+import utility.KeyValuePair;
 
 public class TableAuto
 {
@@ -38,6 +40,41 @@ public class TableAuto
 			System.out.println("inserimento non eseguito"); 
 			e.printStackTrace();
 		}
+	}
+	
+	public int genericInsertAuto(ArrayList<KeyValuePair<String,?>> values) throws SQLException
+	{
+		Statement st = db.getConnection().createStatement();
+		StringBuffer query = new StringBuffer("INSERT INTO "+DbString.TBL_AUTO+"(");
+		for(int i=0;i<values.size()-1;i++)
+		{
+			query.append(values.get(i).getKey());
+			query.append(",");
+		}
+		query.append(values.get(values.size()-1).getKey());
+		query.append(") VALUES (");
+		for(int i=0;i<values.size()-1;i++)
+		{
+			if((values.get(i).getKey().equals("km"))||(values.get(i).getKey().equals("disponibilita")))
+			{
+				query.append(values.get(i).getValue());
+				query.append(",");
+			}
+			else
+			{
+				query.append("'"+values.get(i).getValue()+"'");
+				query.append(",");
+			}
+		}
+		query.append("'"+values.get(values.size()-1).getValue()+"'");
+		query.append(");");
+		System.out.println(query);
+		System.out.println("In stringa: "+query);
+		
+		
+		int result = st.executeUpdate(query.toString());
+		st.close();
+		return result;
 	}
 	
 	public void deleteAutoByTarga(String targa)

@@ -26,7 +26,7 @@
                 </Menu>
                 <Menu fx:id="cars_menu" mnemonicParsing="false" text="Automobili">
                   <items>
-                    <MenuItem fx:id="addCar_item" mnemonicParsing="false" text="Aggiungi automobile" />
+                    <MenuItem fx:id="addCar_item" mnemonicParsing="false" onAction="#handleAddCarAction" text="Aggiungi automobile" />
                     <MenuItem fx:id="deleteCar_item" mnemonicParsing="false" text="Rimuovi automobile" />
                     <MenuItem fx:id="searchCar_item" mnemonicParsing="false" onAction="#handleSearchCarAction" text="Cerca automobile" />
                   </items>

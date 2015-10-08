@@ -40,6 +40,11 @@ public final class SalesManController implements Initializable
 		provideCloseFunctionality();
 	}
 	
+	@FXML private void handleAddCarAction(final ActionEvent event) throws IOException
+	{
+		provideAddCarFunctionality();
+	}
+	
 	
 
 	/**
@@ -135,6 +140,11 @@ public final class SalesManController implements Initializable
 	{
 		Stage stage = (Stage) mainPane.getScene().getWindow();
 		stage.close();
+	}
+	
+	private void provideAddCarFunctionality() throws IOException 
+	{
+		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("AddCarView.fxml")));
 	}
 	/**
 	 * Perform functionality associated with "About" menu selection or CTRL-A.

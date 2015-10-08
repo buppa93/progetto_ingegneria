@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="rootPane" minHeight="187.0" minWidth="500.0" prefHeight="187.0" prefWidth="502.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootPane" minHeight="187.0" minWidth="500.0" prefHeight="187.0" prefWidth="502.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminDeleteClientController">
    <children>
       <SplitPane dividerPositions="0.2918918918918919" orientation="VERTICAL" prefHeight="187.0" prefWidth="502.0">
         <items>

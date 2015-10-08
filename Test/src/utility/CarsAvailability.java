@@ -67,7 +67,7 @@ public class CarsAvailability
 	{
 		int rtrn = 0;
 		
-		switch(this.getStatus())
+		switch(status)
 		{
 			case "disponibile":
 				rtrn = 1;
