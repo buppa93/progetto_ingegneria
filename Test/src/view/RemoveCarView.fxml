@@ -1,31 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane fx:id="rootLayout" maxHeight="250.0" maxWidth="600.0" minHeight="250.0" minWidth="600.0" prefHeight="250.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40">
+<AnchorPane fx:id="rootLayout" maxHeight="250.0" maxWidth="600.0" minHeight="250.0" minWidth="600.0" prefHeight="250.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane maxHeight="250.0" maxWidth="600.0" minHeight="250.0" minWidth="600.0" prefHeight="250.0" prefWidth="600.0">
          <top>
-            <Label text="Label" BorderPane.alignment="CENTER" />
+            <Label text="Rimuovi auto:" BorderPane.alignment="CENTER_LEFT">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets left="15.0" />
+               </BorderPane.margin></Label>
          </top>
          <center>
-            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Label" />
-                  <TextField />
+                  <Label text="Targa: ">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></Label>
+                  <TextField fx:id="targa_field" />
                </children>
             </HBox>
          </center>
          <bottom>
-            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" text="Button" />
-                  <Button mnemonicParsing="false" text="Button" />
+                  <Button fx:id="cancel_bttn" mnemonicParsing="false" onAction="#onCancelAction" text="Cancella">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin></Button>
+                  <Button fx:id="submit_bttn" alignment="CENTER" maxWidth="74.0" minWidth="74.0" mnemonicParsing="false" onAction="#onSubmitAction" prefWidth="74.0" text="Rimuovi" />
                </children>
+               <BorderPane.margin>
+                  <Insets right="20.0" />
+               </BorderPane.margin>
             </HBox>
          </bottom>
       </BorderPane>

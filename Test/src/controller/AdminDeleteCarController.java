@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 import database.DatabaseConnectionException;
@@ -30,7 +31,7 @@ public class AdminDeleteCarController {
 	((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(AdminView.class.getResource("FXMLAdminView.fxml")));
 	}
 	
-	@FXML protected void OnConfirmAction (Event event) throws DatabaseConnectionException, IOException{
+	@FXML protected void OnConfirmAction (Event event) throws DatabaseConnectionException, IOException, SQLException{
 	
 
 		Alert alert = new Alert(AlertType.CONFIRMATION);
