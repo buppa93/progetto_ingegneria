@@ -12,7 +12,10 @@ import database.TableAuto;
 import entity.Auto;
 import entity.TypeSection;
 import utility.KeyValuePair;
+import view.GenericDialogView;
 import view.SalesManView;
+import view.SearchCarsResultView;
+import view.SearchContractResultView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,6 +26,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class SearchAutoController implements Initializable
 {
@@ -41,7 +45,7 @@ public class SearchAutoController implements Initializable
 		type_chbox.getSelectionModel().selectLast();
 	}
 	
-	@FXML protected void onSubmitAction(ActionEvent event) throws DatabaseConnectionException, SQLException
+	@FXML protected void onSubmitAction(ActionEvent event) throws Exception
 	{
 		ArrayList<KeyValuePair<String,?>> parameters = getSearchParameters();
 		DbAccess db = new DbAccess();
@@ -50,11 +54,12 @@ public class SearchAutoController implements Initializable
 		ArrayList<Auto> cars = ta.dynamicSearch(parameters);
 		if(cars.size()!=0)
 		{
-			//TODO show cars view window
+			SearchCarsResultView.getInstance().setSearchResult(cars);
+			SearchCarsResultView.getInstance().start(new Stage());
 		}
 		else
 		{
-			//TODO show warning message about no cars found
+			new GenericDialogView("Auto non trovate", "Non sono presenti auto corrispondenti nel database.");
 		}
 	}
 	

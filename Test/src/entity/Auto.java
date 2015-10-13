@@ -263,6 +263,12 @@ public class Auto extends TypeSection
 		return this.targa + ", " + this.model + ", " + this.brand + ", " + this.km;
 	}
 	
+	public String toLabelAllAttribute()
+	{
+		return this.targa + ", " + this.model + ", " + this.brand + ", " + this.km + ", " + this.id_cliente + ", " + 
+				this.id_contratto + ", " + this.id_agenzia + ", " + this.fascia + ", " + this.disp;
+	}
+	
 	/**
 	 * Metodo che ritorna la targa di un auto da una
 	 * stringa formattata che ne rappresenta gli attributi
