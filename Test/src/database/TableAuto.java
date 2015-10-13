@@ -88,6 +88,19 @@ public class TableAuto
 			return result;
 	}
 	
+	public int deleteAutoByTargaAndAgency(String targa, String agency) throws SQLException
+	{
+			int result = 0;
+			
+			Statement st= db.getConnection().createStatement();
+			String query="DELETE FROM "+ DbString.TBL_AUTO + " WHERE ("+FIELD_TARGA+"='"+targa+"' AND "+FIELD_AGENCY+
+					" = '"+agency+"');";
+			result = st.executeUpdate(query);
+			st.close();
+			return result;
+	}
+	
+	
 	/*public Agency getAgencyByNumber (String number)
 	{
 		Agency c = null;

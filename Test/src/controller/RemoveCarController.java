@@ -37,10 +37,12 @@ public class RemoveCarController
 			DbAccess db = new DbAccess();
 			db.initConnection();
 			TableAuto ta = new TableAuto(db);
-			boolean result = false;
-			result = ta.deleteAutoByTarga(targa_field.getText());
+			int result = 0;
+			
+			result = ta.deleteAutoByTargaAndAgency(targa_field.getText(),SalesManView.session.filiale.getNumber());
+			System.out.println("Risulta della query di rimozione auto: "+result);
 
-			if(result)
+			if(result!=0)
 			{
 				targa_field.setText("");
 				new GenericDialogView("Transazione eseguita con sussesso.", "Automobile rimossa con successo.").start();
