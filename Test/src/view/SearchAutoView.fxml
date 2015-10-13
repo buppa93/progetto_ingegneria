@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="345.0" minWidth="600.0" prefHeight="345.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootLayout" maxHeight="400.0" maxWidth="600.0" minHeight="345.0" minWidth="600.0" prefHeight="345.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SearchCarController">
    <children>
       <BorderPane maxHeight="350.0" maxWidth="600.0" minHeight="350.0" minWidth="600.0" prefHeight="350.0" prefWidth="600.0">
          <top>
@@ -50,32 +50,26 @@
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin></Label>
-                  <Label text="Agenzia" GridPane.rowIndex="2">
+                  <Label text="Tipo:" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="Tipo:" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets left="30.0" />
                      </GridPane.margin></Label>
-                  <TextField GridPane.columnIndex="1" />
-                  <TextField GridPane.columnIndex="3">
+                  <TextField fx:id="targa_field" GridPane.columnIndex="1" />
+                  <TextField fx:id="model_field" GridPane.columnIndex="3">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></TextField>
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <TextField fx:id="brand_field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="km_field" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></TextField>
-                  <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <ChoiceBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                  <ChoiceBox fx:id="type_chbox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></ChoiceBox>
-                  <Button minWidth="67.0" mnemonicParsing="false" prefWidth="67.0" text="Cerca" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                  <Button mnemonicParsing="false" text="Annulla" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Button fx:id="submit_bttn" minWidth="67.0" mnemonicParsing="false" onAction="#onSubmitAction" prefWidth="67.0" text="Cerca" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <Button fx:id="cancel_bttn" mnemonicParsing="false" onAction="#onCancelAction" text="Annulla" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </center>

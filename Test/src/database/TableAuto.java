@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import utility.CarsAvailability;
 import entity.Auto;
+import entity.Contract;
 import utility.KeyValuePair;
 
 public class TableAuto
@@ -175,7 +176,45 @@ public class TableAuto
 		st.close();
 		
 	}
-	
+
+	public ArrayList<Auto> dynamicSearch(ArrayList<KeyValuePair<String,?>> searchParameters) throws SQLException
+	{
+		ArrayList<Auto> cars = new ArrayList<Auto>();
+		Statement st = db.getConnection().createStatement();
+		StringBuffer query = new StringBuffer();
+		query.append("SELECT * FROM "+DbString.TBL_AUTO+" WHERE (");
+		
+		for(int i=0; i<searchParameters.size()-1;i++)
+		{
+			if(searchParameters.get(i).getKey().equals("km"))
+			{
+				query.append(searchParameters.get(i).getKey());
+				query.append(searchParameters.get(i).getValue()+" AND ");
+			}
+			else
+			{
+				query.append(searchParameters.get(i).getKey());
+				query.append("='");
+				query.append(searchParameters.get(i).getValue()+"' AND ");	
+			}
+		}
+		
+		query.append(searchParameters.get(searchParameters.size()-1).getKey());
+		query.append("='");
+		query.append(searchParameters.get(searchParameters.size()-1).getValue());
+		query.append("');");
+		System.out.println("Query: "+query);
+		
+		ResultSet rs = st.executeQuery(query.toString());
+		
+		while(rs.next())
+		{
+			cars.add(new Auto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5),
+					rs.getString(6), rs.getString(7), rs.getString(8).charAt(0), rs.getInt(9)));
+		}
+		
+		return cars;
+	}
 	public Auto searchAutoByTarga(String targa) throws SQLException
 	{
 		String query = "SELECT * FROM "+DbString.TBL_AUTO+" WHERE "+FIELD_TARGA+"='"+targa+"';";
