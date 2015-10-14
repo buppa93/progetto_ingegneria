@@ -62,6 +62,19 @@
                               <Insets left="5.0" right="20.0" />
                            </HBox.margin>
                         </Label>
+                        <Label text="Data fine:" />
+                        <Label fx:id="end_lbl" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
                         <Label text="Tarfiffa:" />
                         <Label fx:id="base_lbl" text="Label">
                            <HBox.margin>

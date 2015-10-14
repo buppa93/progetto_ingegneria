@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -10,36 +11,71 @@
    <children>
       <BorderPane fx:id="rootLayout" maxHeight="500.0" maxWidth="900.0" minHeight="500.0" minWidth="900.0" prefHeight="500.0" prefWidth="900.0">
          <top>
-            <MenuBar fx:id="menuBar" maxWidth="900.0" minWidth="900.0" prefWidth="900.0" BorderPane.alignment="CENTER">
-              <menus>
-                <Menu fx:id="file_menu" mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem fx:id="close_item" mnemonicParsing="false" onAction="#handleCloseAction" text="Close" />
-                  </items>
-                </Menu>
-                <Menu fx:id="client_menu" mnemonicParsing="false" text="Cliente">
-                  <items>
-                    <MenuItem fx:id="newClient_item" mnemonicParsing="false" onAction="#handleNewClientAction" text="Aggiungi cliente" />
-                        <MenuItem fx:id="deleteClient_item" mnemonicParsing="false" onAction="#handleRemoveClientAction" text="Rimuovi cliente" />
-                        <MenuItem fx:id="searchClient_item" mnemonicParsing="false" onAction="#handleSearchClientAction" text="Cerca cliente" />
-                  </items>
-                </Menu>
-                <Menu fx:id="cars_menu" mnemonicParsing="false" text="Automobili">
-                  <items>
-                    <MenuItem fx:id="addCar_item" mnemonicParsing="false" onAction="#handleAddCarAction" text="Aggiungi automobile" />
-                    <MenuItem fx:id="deleteCar_item" mnemonicParsing="false" onAction="#handleRemoveCarAction" text="Rimuovi automobile" />
-                    <MenuItem fx:id="searchCar_item" mnemonicParsing="false" onAction="#handleSearchCarAction" text="Cerca automobile" />
-                  </items>
-                </Menu>
-                  <Menu fx:id="contract_menu" mnemonicParsing="false" text="Contratti">
-                    <items>
-                      <MenuItem fx:id="newContract_item" mnemonicParsing="false" onAction="#handleNewContractAction" text="Nuovo contratto" />
-                      <MenuItem fx:id="removeContract_item" mnemonicParsing="false" onAction="#handleRemoveContractAction" text="Rimuovi contratto" />
-                      <MenuItem fx:id="searchContract_item" mnemonicParsing="false" onAction="#handleSearchContractAction" text="Cerca contratto" />
-                    </items>
-                  </Menu>
-              </menus>
-            </MenuBar>
+            <VBox BorderPane.alignment="CENTER">
+               <children>
+                  <MenuBar fx:id="menuBar" maxWidth="900.0" minWidth="900.0" prefWidth="900.0">
+                    <menus>
+                      <Menu fx:id="file_menu" mnemonicParsing="false" text="File">
+                        <items>
+                          <MenuItem fx:id="close_item" mnemonicParsing="false" onAction="#handleCloseAction" text="Close" />
+                        </items>
+                      </Menu>
+                      <Menu fx:id="client_menu" mnemonicParsing="false" text="Cliente">
+                        <items>
+                          <MenuItem fx:id="newClient_item" mnemonicParsing="false" onAction="#handleNewClientAction" text="Aggiungi cliente" />
+                              <MenuItem fx:id="deleteClient_item" mnemonicParsing="false" onAction="#handleRemoveClientAction" text="Rimuovi cliente" />
+                              <MenuItem fx:id="searchClient_item" mnemonicParsing="false" onAction="#handleSearchClientAction" text="Cerca cliente" />
+                        </items>
+                      </Menu>
+                      <Menu fx:id="cars_menu" mnemonicParsing="false" text="Automobili">
+                        <items>
+                          <MenuItem fx:id="addCar_item" mnemonicParsing="false" onAction="#handleAddCarAction" text="Aggiungi automobile" />
+                          <MenuItem fx:id="deleteCar_item" mnemonicParsing="false" onAction="#handleRemoveCarAction" text="Rimuovi automobile" />
+                          <MenuItem fx:id="searchCar_item" mnemonicParsing="false" onAction="#handleSearchCarAction" text="Cerca automobile" />
+                        </items>
+                      </Menu>
+                        <Menu fx:id="contract_menu" mnemonicParsing="false" text="Contratti">
+                          <items>
+                            <MenuItem fx:id="newContract_item" mnemonicParsing="false" onAction="#handleNewContractAction" text="Nuovo contratto" />
+                            <MenuItem fx:id="removeContract_item" mnemonicParsing="false" onAction="#handleRemoveContractAction" text="Rimuovi contratto" />
+                            <MenuItem fx:id="searchContract_item" mnemonicParsing="false" onAction="#handleSearchContractAction" text="Cerca contratto" />
+                          </items>
+                        </Menu>
+                    </menus>
+                  </MenuBar>
+                  <HBox fx:id="bttn_menu" prefHeight="25.0" prefWidth="900.0">
+                     <children>
+                        <Button mnemonicParsing="false">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../img/new_contract.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../img/add_car.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../img/search_contract.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </top>
          <left>
             <VBox alignment="CENTER" prefHeight="371.0" prefWidth="145.0" BorderPane.alignment="CENTER">

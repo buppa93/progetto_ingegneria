@@ -59,6 +59,7 @@ public class EstimateController implements Initializable
 		kmCar_lbl.setText(Integer.toString(EstimateView.getInstance().getAuto().getKm()));
 		start_lbl.setText(EstimateView.getInstance().getParameters().get("dataStart"));
 		during_lbl.setText(EstimateView.getInstance().getParameters().get("during"));
+		end_lbl.setText(EstimateView.getInstance().getParameters().get("dataEnd"));
 		base_lbl.setText(EstimateView.getInstance().getParameters().get("base"));
 		StringTokenizer token = new StringTokenizer(EstimateView.getInstance().getParameters().get("agencyTake"), ", ");
 		token.nextToken();

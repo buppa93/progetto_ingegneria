@@ -16,6 +16,7 @@ public class TableContract
 			public static final String FIELD_CLIENTE = "id_cliente";
 			public static final String FIELD_INIZIONOLEGGIO = "data_inizio";
 			public static final String FIELD__DURATION = "duration";
+			public static final String FIELD__FINENOLEGGIO = "data_fine";
 			public static final String FIELD_AGENZIARESTITUZIONE = "agenzia_rest";
 			public static final String FIELD_TYPE = "tipo";
 			public static final String FIELD_PRICE = "prezzo";
@@ -27,12 +28,12 @@ public class TableContract
 			public TableContract(DbAccess db)
 			{this.db = db;}
 			
-			public void insert(String id, String agencyTakeId, String phoneClient, String dateStart, String duration,
+			public void insert(String id, String agencyTakeId, String phoneClient, String dateStart, String duration, String dateEnd,
 									String agencyReturnId, String typeId, String price, String deposit, String targa) throws SQLException
 			{
-				String query = "INSERT INTO contratto (numero_ordine, id_agenzia, id_cliente, data_inizio, durata, agenzia_rest,"
+				String query = "INSERT INTO contratto (numero_ordine, id_agenzia, id_cliente, data_inizio, durata, data_fine, agenzia_rest,"
 						+ " tipo, prezzo, acconto, targa) VALUES ('"+id+"', '"+agencyTakeId+"', '"+phoneClient+"', '"+dateStart+"', '"
-						+duration+"', '"+agencyReturnId+"', '"+typeId+"', '"+price+"', '"+deposit+"', '"+targa+"');";
+						+duration+"', '"+dateEnd+"', '"+agencyReturnId+"', '"+typeId+"', '"+price+"', '"+deposit+"', '"+targa+"');";
 				System.out.println(query);
 				
 				Statement st = db.getConnection().createStatement();

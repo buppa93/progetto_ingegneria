@@ -4,9 +4,11 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 import java.util.TreeMap;
 
 import view.FXMLNoleggioView;
@@ -148,6 +150,7 @@ public class FXMLNoleggioViewController implements Initializable
 		String during = duration_field.getText();
 		String km = km_chbox.getValue();
 		String agencyTake= take_chbox.getValue();
+		String endDate = "";
 		
 		SearchCar.getInstance().setDateStart(date_start);
 		SearchCar.getInstance().setTakingAgency(agencyTake);
@@ -165,6 +168,9 @@ public class FXMLNoleggioViewController implements Initializable
 		parameters.put("typeCar",typeCar);
 		parameters.put("base",base);
 		parameters.put("during",during);
+		parameters.put("dataEnd",estimatedEndDate(date_start,base,Integer.parseInt(during)));
+		
+		System.out.println("Data fine: "+estimatedEndDate(date_start,base,Integer.parseInt(during)));
 		
 		SelectCarView.getInstance().setCars(car);
 		SelectCarView.getInstance().setParameters(parameters);
@@ -186,6 +192,31 @@ public class FXMLNoleggioViewController implements Initializable
 	@FXML protected void onBackAction(ActionEvent event) throws IOException
 	{
 		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("InsertClientDataView.fxml")));
+	}
+	
+	public String estimatedEndDate(String date_start, String base, int n)
+	{
+		String endDate = "";
+		Calendar data = Calendar.getInstance();
+		int year = 0;
+		int month = 0;
+		int day = 0;
+		StringTokenizer tokens = new StringTokenizer(date_start,"-");
+		year = Integer.parseInt(tokens.nextToken());
+		month = Integer.parseInt(tokens.nextToken());
+		day = Integer.parseInt(tokens.nextToken());
+		data.set(year, month, day);
+		
+		if(base.equals("settimanale"))
+		{
+			data.add(Calendar.WEEK_OF_MONTH, n);
+		}
+		else
+		{
+			data.add(Calendar.DAY_OF_YEAR, n);
+		}
+		endDate = data.get(Calendar.YEAR)+"-"+data.get(Calendar.MONTH)+"-"+data.get(Calendar.DAY_OF_MONTH);
+		return endDate;
 	}
 }
 

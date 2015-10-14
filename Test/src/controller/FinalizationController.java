@@ -3,7 +3,10 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 
 import database.DatabaseConnectionException;
 import database.DbAccess;
@@ -55,7 +58,9 @@ public class FinalizationController implements Initializable
 		String agenziaPrelievo = Agency.getIdFromString(FinalizationView.getInstance().getParameters().get("agencyTake"));
 		String agenziaRitorno = Agency.getIdFromString(FinalizationView.getInstance().getParameters().get("agencyReturn"));
 		tc.insert(MyUtil.makeId(), agenziaPrelievo, FinalizationView.getInstance().getClient().getPhone(), FinalizationView.getInstance().getParameters().get("dataStart"), 
-				FinalizationView.getInstance().getParameters().get("during"), agenziaRitorno, 
+				FinalizationView.getInstance().getParameters().get("during"),
+				FinalizationView.getInstance().getParameters().get("dataEnd"),
+				agenziaRitorno, 
 				FinalizationView.getInstance().getParameters().get("idTypeContrat"), 
 				FinalizationView.getInstance().getParameters().get("price"), acconto,
 				FinalizationView.getInstance().getAuto().getTarga());
@@ -83,5 +88,30 @@ public class FinalizationController implements Initializable
 		System.out.println(FinalizationView.getInstance().getParameters().get("price"));
 		
 	}
+	
+	/*public String EstimatedEndDate(String date_start, String base, int n)
+	{
+		String endDate = "";
+		Calendar data = Calendar.getInstance();
+		int year = 0;
+		int month = 0;
+		int day = 0;
+		StringTokenizer tokens = new StringTokenizer(date_start,"-");
+		year = Integer.parseInt(tokens.nextToken());
+		month = Integer.parseInt(tokens.nextToken());
+		day = Integer.parseInt(tokens.nextToken());
+		data.set(year, month, day);
+		
+		if(base.equals("settimanale"))
+		{
+			data.add(Calendar.WEEK_OF_MONTH, n);
+		}
+		else
+		{
+			data.add(Calendar.DAY_OF_YEAR, n);
+		}
+		endDate = data.get(Calendar.YEAR)+"-"+data.get(Calendar.MONTH)+"-"+data.get(Calendar.DAY_OF_MONTH);
+		return endDate;
+	}*/
 
 }
