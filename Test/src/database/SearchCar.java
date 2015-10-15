@@ -53,10 +53,6 @@ public final class SearchCar
 		String query = "SELECT * FROM auto WHERE (fascia='"+TypeSection.resolvType(this.type_car)+"' AND id_agenzia='"
 					+Agency.getIdFromString(this.taking_agency)+"' AND disponibilita=1);";
 		
-		/*String query = "SELECT auto.targa, auto.modello, auto.marca, auto.km FROM auto, contratto WHERE "
-				+ "(auto.fascia='"+TypeSection.resolvType(this.type_car)+"' AND auto.id_agenzia='"
-				+Agency.getIdFromString(this.taking_agency)+"' AND auto.disponibilita=1 AND contratto.data_fine<'"+
-				date_start+"' AND contratto.agenzia_rest='"+SalesManView.session.filiale.getNumber()+"');";*/
 		System.out.println(query);
 		
 		List<Auto> cars = new ArrayList<Auto>();
