@@ -44,6 +44,15 @@ public class User
 		this.Type = type;
 		this.pwd = pwd;
 	}
+	
+	public User(String id, String name, String surname, String TelephoneNumber, String type)
+	{
+		this.id = id;
+		this.name=name;
+		this.surname=surname;
+		this.TelephoneNumber=TelephoneNumber;
+		this.Type = type;
+	}
 
  /**
  * it gets customer's id

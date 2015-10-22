@@ -8,6 +8,7 @@ import view.SalesManView;
 import view.UnregisteredUserWarning;
 import database.DbAccess;
 import database.TableUsers;
+import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,8 +49,9 @@ public class LoginDialogController implements Initializable
 		if(MyUtil.login(db, usr, psswd))
 		{
 			System.out.println("Sono: "+user.getTypeUserBynamepass(usr, psswd));
+			User gen = user.getTypeUserByNamePass(usr, psswd);
 			
-			if(user.getTypeUserBynamepass(usr, psswd).equals("adm"))
+			/*if(user.getTypeUserBynamepass(usr, psswd).equals("adm"))
 			{
 				System.out.println("sono admin");
 
@@ -62,8 +64,30 @@ public class LoginDialogController implements Initializable
 			{
 				System.out.println("sono user");
 				
-				SalesManView salesman = new SalesManView();
-				salesman.start(new Stage());
+				//SalesManView salesman = new SalesManView();
+				//salesman.session.setUsrProperties()
+				//salesman.start(new Stage());
+				new SalesManView().start(new Stage());
+				Stage stage = (Stage) cancel_bttn.getScene().getWindow();
+				stage.close();
+			}*/
+			if(gen.getType().equals("adm"))
+			{
+				System.out.println("sono admin");
+
+				AdminView adminview= new AdminView();
+				adminview.start(new Stage());
+				Stage stage = (Stage) cancel_bttn.getScene().getWindow();
+				stage.close();
+			}
+			else if(gen.getType().equals("usr"))
+			{
+				System.out.println("sono user");
+				
+				//SalesManView salesman = new SalesManView();
+				//salesman.session.setUsrProperties()
+				//salesman.start(new Stage());
+				new SalesManView(gen).start(new Stage());
 				Stage stage = (Stage) cancel_bttn.getScene().getWindow();
 				stage.close();
 			}

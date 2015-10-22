@@ -6,7 +6,10 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Random;
 
 import database.DbAccess;
@@ -126,6 +129,13 @@ public class MyUtil
 			result.append(k);
 		}
 		return result.toString();
+	}
+	
+	public static String getDate()
+	{
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		return (dateFormat.format(cal.getTime()));
 	}
 
 }

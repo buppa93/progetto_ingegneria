@@ -88,4 +88,22 @@ public class TableUsers
 		
 		return result;
 	}
+	
+	public User getTypeUserByNamePass (String name, String passw) throws SQLException
+	{
+		User result = null;
+		String c="";
+		passw = MyUtil.getMD5(passw);
+		Statement st = db.getConnection().createStatement();
+		c = "SELECT * FROM "+DbString.TBL_CLIENTS+" WHERE ("+FIELD_NAME+"='"+name+"' AND "+FIELD_PWD+"='"+passw+"');";
+		System.out.println("Ecco la query gay: "+c);
+		ResultSet rs = st.executeQuery(c);
+		rs.next();
+		result = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(6), rs.getString(5));
+		System.out.println(result.toString());
+		rs.close();
+		st.close();
+		
+		return result;
+	}
 }

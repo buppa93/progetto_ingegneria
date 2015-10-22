@@ -1,5 +1,6 @@
 package model;
 import entity.Agency;
+import entity.User;
 
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
@@ -15,12 +16,14 @@ import java.util.ArrayList;
 public class SESSION 
 {
 	public Agency filiale;
+	public User usr;
 	
-	public SESSION() throws ParserConfigurationException, SAXException, IOException
+	public SESSION(User usr) throws ParserConfigurationException, SAXException, IOException
 	{
 		ArrayList<KeyValuePair<String,String>> agencyProperties = getPropertiesFromXML();
 		filiale = new Agency(agencyProperties.get(0).getValue(), agencyProperties.get(1).getValue(),
 				agencyProperties.get(2).getValue());
+		this.usr = usr;
 	}
 	
 	public ArrayList<KeyValuePair<String,String>> getPropertiesFromXML() throws ParserConfigurationException, SAXException, IOException
@@ -51,6 +54,11 @@ public class SESSION
 		System.out.println("Numero: "+filiale.getNumber());
 		System.out.println("Nome: "+filiale.getName());
 		System.out.println("Indirizzo: "+filiale.getAddress());
+	}
+	
+	public void printUsrProperties()
+	{
+		System.out.println(usr.toString());
 	}
 	
 	/*public static void main(String args[]) throws ParserConfigurationException, SAXException, IOException

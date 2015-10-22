@@ -12,6 +12,7 @@ import database.DatabaseConnectionException;
 import database.DbAccess;
 import database.TableAuto;
 import database.TableContract;
+import utility.PDFFunctionality;
 import entity.Agency;
 import utility.MyUtil;
 import view.FinalizationView;
@@ -69,7 +70,8 @@ public class FinalizationController implements Initializable
 		ta.setInNoleggio(FinalizationView.getInstance().getAuto().getTarga());
 		/*Image value = new Image("../img/business_success.png");
 		image_view.setImage(value);*/
-		
+		PDFFunctionality pdf = new PDFFunctionality();
+		pdf.creaPrestampato(pdf.crateFileUrl());
 		success_lbl.setText("Transazione eseguita con successo!");
 		
 		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));
