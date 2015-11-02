@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="extLibs/mysql-connector-java-3.1.14-bin.jar"/>
 	<classpathentry kind="lib" path="extLibs/jfxrt.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-8-oracle"/>
+	<classpathentry kind="lib" path="/home/giuseppe/git/progetto_ingegneria/Test/extLibs/itextpdf-5.5.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

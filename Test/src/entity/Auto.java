@@ -9,20 +9,18 @@ import utility.CarsAvailability;
  * chilometri, disponibilita', fascia.
  * @author Utente
  */
-public class Auto extends TypeSection
+public class Auto
 {
 	String targa;
 	String model;
 	String brand;
 	int km; // km traveled
 	CarsAvailability availability;
-	Agency numero;
-	User client;
-	Contract contract;
 	String id_cliente;
 	String id_contratto;
 	String id_agenzia;
-	String fascia;
+	//String fascia;
+	TypeSection fascia;
 	String disp;
 	
 	/**
@@ -30,51 +28,6 @@ public class Auto extends TypeSection
 	 */
 	public Auto(){};
 	
-	/**
-	 * Costruttore che inizialliza gli attributi della classe
-	 * in accordo con i parametri passati.
-	 * @param section
-	 * @param n_porte
-	 * @param n_posti
-	 * @param tipo_auto
-	 * @param targa
-	 * @param model
-	 * @param brand
-	 * @param km
-	 * @param disp
-	 */
-	public Auto(Nome section, int n_porte, int n_posti, String tipo_auto,String targa, String model, String brand, int km,  String disp)
-	{
-		super(section,n_porte, n_posti, tipo_auto);
-		this.targa=targa;
-		this.model=model;
-		this.brand=brand;
-		this.km=km;
-		this.availability=new CarsAvailability(disp);
-	}
-	
-	/**
-	 * Costruttore che inizialliza gli attributi della classe
-	 * in accordo con i parametri passati.
-	 * @param section
-	 * @param n_porte
-	 * @param n_posti
-	 * @param tipo_auto
-	 * @param targa
-	 * @param model
-	 * @param brand
-	 * @param km
-	 * @param disp
-	 */
-	public Auto(Nome section, int n_porte, int n_posti, String tipo_auto,String targa, String model, String brand, int km,  int disp)
-	{
-		super(section,n_porte, n_posti, tipo_auto);
-		this.targa=targa;
-		this.model=model;
-		this.brand=brand;
-		this.km=km;
-		this.availability=new CarsAvailability(disp);
-	}
 	/**
 	 * Costruttore che inizialliza gli attributi della classe
 	 * in accordo con i parametri passati.
@@ -107,7 +60,7 @@ public class Auto extends TypeSection
 	 * @param disp
 	 */
 	public Auto(String targa, String modello, String marca, int km, String id_cliente, String id_contratto, 
-			String id_agenzia, char fascia, int disp)
+			String id_agenzia, TypeSection fascia, int disp)
 	{
 		this.targa = targa;
 		this.model = modello;
@@ -116,20 +69,26 @@ public class Auto extends TypeSection
 		this.id_cliente = id_cliente;
 		this.id_contratto = id_contratto;
 		this.id_agenzia = id_agenzia;
-		this.fascia = TypeSection.resolvName(fascia);
+		this.fascia = fascia;
 		this.disp = CarsAvailability.toString(disp);
-		
+		availability = new CarsAvailability(disp);
 	}
 	
-	/**
-	 * Metodo che ritorna il numero dell'agenia in cui
-	 * si trova l'auto
-	 * @return number of agency 
-	 */
-	public String getNumberOfAgency()
+	public Auto(String targa, String modello, String marca, int km, String id_agenzia, TypeSection fascia, int disp)
 	{
-		return numero.getNumber();
+		this.targa = targa;
+		this.model = modello;
+		this.brand = marca;
+		this.km = km;
+		this.id_cliente = null;
+		this.id_contratto = null;
+		this.id_agenzia = id_agenzia;
+		this.fascia = fascia;
+		this.disp = CarsAvailability.toString(disp);
+
+		availability = new CarsAvailability(disp);
 	}
+	
 	
 	/**
 	 * Metodo che ritorna la targa dell'auto
@@ -175,6 +134,14 @@ public class Auto extends TypeSection
 	 */
 	public String getAvailability()
 	{return this.availability.getStatus();}
+	
+	public int getAvailabilityNumber()
+	{
+		return this.availability.toInt();
+	}
+	
+	public TypeSection getFascia()
+	{return this.fascia;}
 	
 	/**
 	 * Metodo che setta la targa dell'auto
@@ -230,6 +197,9 @@ public class Auto extends TypeSection
 	public void setDisp (String disp)
 	{this.availability.setStatus(disp);}
 	
+	public void setFascia(TypeSection fascia)
+	{this.fascia = fascia;}
+	
 	/**
 	 * Metodo che stabilisce se la targa dell'auto e' valida
 	 * @return boolean
@@ -266,7 +236,7 @@ public class Auto extends TypeSection
 	public String toLabelAllAttribute()
 	{
 		return this.targa + ", " + this.model + ", " + this.brand + ", " + this.km + ", " + this.id_cliente + ", " + 
-				this.id_contratto + ", " + this.id_agenzia + ", " + this.fascia + ", " + this.disp;
+				this.id_contratto + ", " + this.id_agenzia + ", " + this.fascia.toString() + ", " + this.disp;
 	}
 	
 	/**

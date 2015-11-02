@@ -12,6 +12,7 @@ import java.util.StringTokenizer;
 import java.util.TreeMap;
 
 import view.FXMLNoleggioView;
+import view.GenericWarning;
 import view.SQLWarning;
 import view.SalesManView;
 import view.SelectCarView;
@@ -32,11 +33,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
+import database.DAOTableAgency;
+import database.DAOTableAuto;
+import database.DAOTableTypeSection;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.SearchCar;
-import database.TableAgency;
+import entity.Agency;
 import entity.Auto;
+import entity.TypeSection;
 
 public class FXMLNoleggioViewController implements Initializable
 {
@@ -60,18 +64,27 @@ public class FXMLNoleggioViewController implements Initializable
         
         try 
         {db.initConnection();} 
-        catch (DatabaseConnectionException e1) 
-        {e1.printStackTrace();}
+        catch (DatabaseConnectionException e1) {new SQLWarning();}
         
-        TableAgency tableagency = new TableAgency(db);
-        List<String> agencies = new ArrayList<String>();
+        DAOTableAgency tableagency = null;
+		try {
+			tableagency = new DAOTableAgency(db);
+		} catch (DatabaseConnectionException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        ArrayList<Agency> agencies = new ArrayList<Agency>();
         
         try 
         {agencies = tableagency.getAllAgency();} 
-        catch (SQLException e) 
-        {new SQLWarning();}
+        catch (SQLException e) {new SQLWarning();}
         
-        ObservableList<String> agenzie = FXCollections.observableArrayList(agencies);
+        ArrayList<String> agenciesString = new ArrayList<String>();
+        for(int i=0; i<agencies.size();i++)
+        {
+        	agenciesString.add(agencies.get(i).toString());
+        }
+        ObservableList<String> agenzie = FXCollections.observableArrayList(agenciesString);
         return_chbox.setItems(agenzie);
         take_chbox.setItems(agenzie);
         
@@ -87,7 +100,7 @@ public class FXMLNoleggioViewController implements Initializable
                 {
                   super.updateItem(item, empty);
 
-                  if (item.isBefore(/*start_cld.getValue().plusDays(1))*/ LocalDate.now()))
+                  if (item.isBefore(LocalDate.now()))
                   {
                     setDisable(true);
                     setStyle("-fx-background-color: #EEEEEE;");
@@ -105,7 +118,6 @@ public class FXMLNoleggioViewController implements Initializable
 							ObservableValue<? extends String> observable,
 							String oldValue, String newValue) 
 					{
-						// TODO Auto-generated method stub
 						if(newValue.equals("Illimitato"))
 							km_chbox.setDisable(true);
 						if(newValue.equals("Limitato"))
@@ -119,10 +131,6 @@ public class FXMLNoleggioViewController implements Initializable
         			public void changed(ObservableValue<? extends String> observable,
         					String oldValue, String newValue)
         			{
-        				// TODO Auto-generated method stub
-        				 System.out.println(observable.toString());
-        		            System.out.println(oldValue);
-        		            System.out.println(newValue);
         		            if(newValue.equals("Giornaliero"))
         		            {
         		            	ObservableList<String> kms = FXCollections.observableArrayList("100","200","300");
@@ -152,12 +160,13 @@ public class FXMLNoleggioViewController implements Initializable
 		String agencyTake= take_chbox.getValue();
 		String endDate = "";
 		
-		SearchCar.getInstance().setDateStart(date_start);
-		SearchCar.getInstance().setTakingAgency(agencyTake);
-		SearchCar.getInstance().setTypeCar(typeCar);
-		
 		List<Auto> car = new ArrayList<Auto>();
-		car = SearchCar.getInstance().search();
+		DbAccess db = new DbAccess();
+		db.initConnection();
+		DAOTableTypeSection tts = new DAOTableTypeSection();
+		TypeSection type = tts.findByType(typeCar);
+		DAOTableAuto ta = new DAOTableAuto(db);
+		car = ta.searchFree(type, date_start);
 		
 		Map<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("dataStart", date_start);
@@ -170,29 +179,23 @@ public class FXMLNoleggioViewController implements Initializable
 		parameters.put("during",during);
 		parameters.put("dataEnd",estimatedEndDate(date_start,base,Integer.parseInt(during)));
 		
-		System.out.println("Data fine: "+estimatedEndDate(date_start,base,Integer.parseInt(during)));
-		
 		SelectCarView.getInstance().setCars(car);
 		SelectCarView.getInstance().setParameters(parameters);
 		SelectCarView.getInstance().setClient(FXMLNoleggioView.getInstance().getClient());
+		tts.closeConncetion();
+		ta.closeConncetion();
+		db.closeConnection();
 		
 		try 
-		{
-			((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("SelectCarView.fxml")));
-		} 
-		catch (Exception e) 
-		{e.printStackTrace();}
+		{((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("SelectCarView.fxml")));} 
+		catch (Exception e) {new GenericWarning("Attenzione!", "Impossibile aprire la nuova finestra.").start();}
 	}
 	
 	@FXML protected void onCancelAction(ActionEvent event) throws IOException
-	{
-		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));
-	}
+	{((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));}
 	
 	@FXML protected void onBackAction(ActionEvent event) throws IOException
-	{
-		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("InsertClientDataView.fxml")));
-	}
+	{((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("InsertClientDataView.fxml")));}
 	
 	public String estimatedEndDate(String date_start, String base, int n)
 	{

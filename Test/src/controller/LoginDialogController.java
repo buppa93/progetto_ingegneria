@@ -6,8 +6,8 @@ import utility.MyUtil;
 import view.AdminView;
 import view.SalesManView;
 import view.UnregisteredUserWarning;
+import database.DAOTableUsers;
 import database.DbAccess;
-import database.TableUsers;
 import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,10 +30,7 @@ public class LoginDialogController implements Initializable
 	@FXML private PasswordField pwd_field;
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources) 
-	{
-	
-	}
+	public void initialize(URL location, ResourceBundle resources) {}
 	
 	@FXML
 	protected void loginAction (ActionEvent event) throws Exception
@@ -44,33 +41,12 @@ public class LoginDialogController implements Initializable
 		DbAccess db = new DbAccess();
 		db.initConnection();
 		System.out.println("sono qui");
-		TableUsers user=new TableUsers(db);
+		DAOTableUsers user = new DAOTableUsers(db);
 
 		if(MyUtil.login(db, usr, psswd))
 		{
-			System.out.println("Sono: "+user.getTypeUserBynamepass(usr, psswd));
-			User gen = user.getTypeUserByNamePass(usr, psswd);
+			User gen = user.searchTypeUserByNamePass(usr, psswd);
 			
-			/*if(user.getTypeUserBynamepass(usr, psswd).equals("adm"))
-			{
-				System.out.println("sono admin");
-
-				AdminView adminview= new AdminView();
-				adminview.start(new Stage());
-				Stage stage = (Stage) cancel_bttn.getScene().getWindow();
-				stage.close();
-			}
-			else if(user.getTypeUserBynamepass(usr, psswd).equals("usr"))
-			{
-				System.out.println("sono user");
-				
-				//SalesManView salesman = new SalesManView();
-				//salesman.session.setUsrProperties()
-				//salesman.start(new Stage());
-				new SalesManView().start(new Stage());
-				Stage stage = (Stage) cancel_bttn.getScene().getWindow();
-				stage.close();
-			}*/
 			if(gen.getType().equals("adm"))
 			{
 				System.out.println("sono admin");
@@ -83,20 +59,15 @@ public class LoginDialogController implements Initializable
 			else if(gen.getType().equals("usr"))
 			{
 				System.out.println("sono user");
-				
-				//SalesManView salesman = new SalesManView();
-				//salesman.session.setUsrProperties()
-				//salesman.start(new Stage());
 				new SalesManView(gen).start(new Stage());
 				Stage stage = (Stage) cancel_bttn.getScene().getWindow();
 				stage.close();
 			}
 		}
 		
-		else
-		{
-			new UnregisteredUserWarning();
-		}
+		else {new UnregisteredUserWarning();}
+		user.closeConncetion();
+		db.closeConnection();
 	}
 	
 	@FXML protected void onCancelEvent(ActionEvent event)

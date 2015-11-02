@@ -6,8 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.sql.SQLException;
 
 import view.EstimateView;
+import view.FinalizationView;
 import view.GenericWarning;
 import view.SalesManView;
 
@@ -16,11 +18,16 @@ import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 
+import database.DAOTableTypeSection;
+import database.DatabaseConnectionException;
+import database.DbAccess;
+import entity.TypeSection;
+
 
 public class PDFFunctionality 
 {
 	public void riempiAcroPDF(String percorsoPrestampato, OutputStream out)
-			throws IOException, DocumentException
+			throws IOException, DocumentException, DatabaseConnectionException, SQLException
 	{
 
 		// Leggo il prestampato
@@ -35,11 +42,10 @@ public class PDFFunctionality
 		// Reader
 		AcroFields form = stamper.getAcroFields();
 		
-		//TODO inserire parametro numero contratto
 		/*
 		 * Parametri generali
 		 */
-		form.setField("contract_number", /**/"");
+		form.setField("contract_number", FinalizationView.getInstance().getParameters().get("idContract"));
 		form.setField("data", MyUtil.getDate());
 		
 		/*
@@ -64,7 +70,13 @@ public class PDFFunctionality
 		form.setField("duration", EstimateView.getInstance().getParameters().get("during"));
 		form.setField("fact_type", EstimateView.getInstance().getParameters().get("base"));
 		form.setField("km_type", EstimateView.getInstance().getParameters().get("typeKm"));
-		form.setField("fascia", EstimateView.getInstance().getParameters().get("typeCar"));
+		DbAccess db = new DbAccess();
+		db.initConnection();
+		DAOTableTypeSection tts = new DAOTableTypeSection();
+		TypeSection ts = tts.findByType(EstimateView.getInstance().getParameters().get("typeCar"));
+		tts.closeConncetion();
+		db.closeConnection();
+		form.setField("fascia", ts.getSFascia());
 		form.setField("agency_return", EstimateView.getInstance().getParameters().get("agencyReturn"));
 		if(EstimateView.getInstance().getParameters().get("typeKm").equals("limitato"))
 		{
@@ -82,9 +94,15 @@ public class PDFFunctionality
 		form.setField("model", EstimateView.getInstance().getAuto().getModel());
 		form.setField("targa", EstimateView.getInstance().getAuto().getTarga());
 		form.setField("km", String.valueOf(EstimateView.getInstance().getAuto().getKm()));
-		form.setField("posti", String.valueOf(EstimateView.getInstance().getAuto().getN_posti()));
-		form.setField("porte", String.valueOf(EstimateView.getInstance().getAuto().getN_porte()));
-		form.setField("category", EstimateView.getInstance().getAuto().getTipo_vettura());
+		form.setField("posti", String.valueOf(/*EstimateView.getInstance().getAuto().getFascia().getN_posti())*/ts.getN_posti()));
+		form.setField("porte", String.valueOf(/*EstimateView.getInstance().getAuto().getFascia().getN_porte())*/ts.getN_porte()));
+		form.setField("category", ts.getTipo_vettura());
+		
+		/*
+		 * Parametri monetari
+		 */
+		form.setField("acconto", FinalizationView.getInstance().getParameters().get("acconto"));
+		form.setField("price", FinalizationView.getInstance().getParameters().get("price"));
 
 		// Questo metodo è molto importante perchè serve a chiudere il form in
 		// modo che non sia modificabile dall'utente
@@ -114,7 +132,7 @@ public class PDFFunctionality
 	public String crateFileUrl()
 	{return MyUtil.getDate()+"_"+EstimateView.getInstance().getClient().getPhone()+".pdf";}
 	
-	public void creaPrestampato(String url) throws FileNotFoundException, SecurityException
+	public void creaPrestampato(String url) throws FileNotFoundException, SecurityException, DatabaseConnectionException, SQLException
 	{
 		FileOutputStream fout;
 				

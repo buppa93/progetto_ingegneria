@@ -2,14 +2,15 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import view.FXMLNoleggioView;
 import view.SalesManView;
 import view.UnregisteredClientWarning;
+import database.DAOTableClients;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TableClients;
 import entity.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,32 +48,27 @@ public class InsertClientDataController implements Initializable
 		
 	}
 	
-	@FXML protected void onForwardAction(ActionEvent event) throws IOException, DatabaseConnectionException
+	@FXML protected void onForwardAction(ActionEvent event) throws IOException, DatabaseConnectionException, SQLException
 	{
 		DbAccess db = new DbAccess();
 		db.initConnection();
-		TableClients tc = new TableClients(db);
-		Client c = tc.searchClient(name_field.getText(), surname_field.getText(), phone_field.getText());
+		DAOTableClients tc = new DAOTableClients(db);
+		Client c = tc.search(name_field.getText(), surname_field.getText(), phone_field.getText());
 		if(c != null)
 		{
 			FXMLNoleggioView.getInstance().setClient(c);
 			((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NoleggioView.fxml")));
 		}
-		else
-		{
-			new UnregisteredClientWarning();
-		}
+		else{new UnregisteredClientWarning();}
+		tc.closeConncetion();
+		db.closeConnection();
 	}
 	
 	@FXML protected void onBackAction(ActionEvent event) throws IOException
-	{
-		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("FXMLAlertRegister.fxml")));
-	}
+	{((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("FXMLAlertRegister.fxml")));}
 	
 	@FXML protected void onCancelAction(ActionEvent event) throws IOException
-	{
-		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));
-	}
+	{((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));}
 	
 
 }

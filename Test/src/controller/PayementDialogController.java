@@ -4,9 +4,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import database.DAOTableContract;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TableContract;
 import view.PayementDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,17 +22,20 @@ public class PayementDialogController implements Initializable
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
-	{
-		price_lbl.setText(String.valueOf(PayementDialog.getInstance().getPayoff()));
-	}
+	{price_lbl.setText(String.valueOf(PayementDialog.getInstance().getPayoff()));}
 	
 	@FXML protected void onSubmitAction(ActionEvent event) throws DatabaseConnectionException, SQLException
 	{
 		//rimuovo il contratto
 		DbAccess db = new DbAccess();
 		db.initConnection();
-		TableContract tc = new TableContract(db);
+		/*TableContract tc = new TableContract(db);
+		tc.remove(PayementDialog.getInstance().getIdContract());*/
+		DAOTableContract tc = new DAOTableContract(db);
 		tc.remove(PayementDialog.getInstance().getIdContract());
+		
+		tc.closeConncetion();
+		db.closeConnection();
 		
 		Stage stage = (Stage) cancel_bttn.getScene().getWindow();
 		stage.close();

@@ -7,12 +7,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import utility.KeyValuePair;
+import view.GenericDialogView;
+import view.GenericWarning;
 import view.SalesManView;
+import view.SearchCarsResultView;
 import view.SearchContractResultView;
+import database.DAOTableContract;
+import database.DAOTableTypeContract;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TableContract;
-import database.TableTypeContract;
 import entity.Contract;
 import entity.TypeContract;
 import javafx.collections.FXCollections;
@@ -26,6 +29,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/*
+ * TODO migliorare come la ricerca auto
+ * TODO passare in DAO
+ */
 public class SearchContractController implements Initializable 
 {
 	@FXML private AnchorPane rootPane;
@@ -34,12 +41,6 @@ public class SearchContractController implements Initializable
 	@FXML private TextField targa_field;
 	@FXML private ChoiceBox<String> type_chbox;
 	@FXML private DatePicker data_field;
-	
-	public static final int nof = 1;  //nOrder_field value
-	public static final int cf = 2;   //client_field value
-	public static final int tf = 4;   //targa_field value
-	public static final int tcb = 8; //type_chbox value
-	public static final int df = 16;  //data_field value
 	
 	ArrayList<Contract> result = new ArrayList<Contract>();
 	String nAgency = SalesManView.session.filiale.getNumber();
@@ -55,18 +56,28 @@ public class SearchContractController implements Initializable
         catch (DatabaseConnectionException e) 
         {e.printStackTrace();}
         
-        TableTypeContract ttc = new TableTypeContract(db);
-        List<String> typeContract = new ArrayList<String>();
+        DAOTableTypeContract ttc = null;
+		try {
+			ttc = new DAOTableTypeContract(db);
+		} catch (DatabaseConnectionException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        ArrayList<TypeContract> typeContract = new ArrayList<TypeContract>();
         
         try 
         {
         	typeContract = ttc.getAll();
-        	typeContract.add("");
         } 
         catch (SQLException e) 
         {e.printStackTrace();}
-        
-        ObservableList<String> choiceboxlst = FXCollections.observableArrayList(typeContract);
+        ArrayList<String> typeContractString = new ArrayList<String>();
+        for(int i=0;i<typeContract.size();i++)
+        {
+        	typeContractString.add(typeContract.get(i).toString());
+        }
+        typeContractString.add("");
+        ObservableList<String> choiceboxlst = FXCollections.observableArrayList(typeContractString);
         type_chbox.setItems(choiceboxlst);
         type_chbox.getSelectionModel().selectLast();
 	}
@@ -79,310 +90,50 @@ public class SearchContractController implements Initializable
 		System.out.println("type_chbox -> "+type_chbox.getValue());
 		System.out.println("data_field -> "+data_field.getValue());
 		search();
-		SearchContractResultView.getInstance().setSearchResult(result);
-		SearchContractResultView.getInstance().start(new Stage());
+		
+		
 	}
 	
-	public void search() throws DatabaseConnectionException, SQLException
+	public void search() throws Exception
 	{
-		int tot = calculate();
+		ArrayList<KeyValuePair<String,?>> params = getParameters();
 		
 		DbAccess db = new DbAccess();
 		db.initConnection();
-		TableContract tc = new TableContract(db);
+		DAOTableContract tc = new DAOTableContract(db);
 	
-		ArrayList<KeyValuePair<String,String>> searchParameters = new ArrayList<KeyValuePair<String,String>>();
+		ArrayList<KeyValuePair<String,?>> searchParameters = new ArrayList<KeyValuePair<String,?>>();
+		searchParameters = getParameters();
 		searchParameters.add(new KeyValuePair<String, String>("id_agenzia", nAgency));
-		
-		switch(tot)
+		if(searchParameters.size()>1)
 		{
-			case 1:
-				//cerca per numero ordine
-				searchParameters.add(new KeyValuePair<String, String>("numero_ordine", nOrder_field.getText()));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-			
-			case 2:
-				//cerca per cliente
-				searchParameters.add(new KeyValuePair<String, String>("id_cliente", client_field.getText()));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-			
-			case 3:
-				//cerca per numero ordine + codice cliente
-				searchParameters.add(new KeyValuePair<String, String>("numero_ordine", nOrder_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("id_cliente", client_field.getText()));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-				
-			case 4:
-				//cerca per targa;
-				searchParameters.add(new KeyValuePair<String, String>("targa", targa_field.getText()));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-			
-			case 5:
-				//cerca per numero ordine + targa
-				searchParameters.add(new KeyValuePair<String, String>("numero_ordine", nOrder_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("targa", targa_field.getText()));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-			
-			case 6:
-				//cerca per codice cliente + targa
-				searchParameters.add(new KeyValuePair<String, String>("id_cliente", client_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("targa", targa_field.getText()));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-				
-			case 7:
-				//cerca per numero ordine + codice cliente + targa
-				searchParameters.add(new KeyValuePair<String, String>("numero_ordine", nOrder_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("id_cliente", client_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("targa", targa_field.getText()));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-
-			case 8:
-				//cerca per tipo
-				String type = type_chbox.getValue();
-				type = TypeContract.getIdFromString(type);
-				searchParameters.add(new KeyValuePair<String, String>("tipo", type));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-			
-			case 9:
-				//cerca per numero ordine + tipo contratto
-				searchParameters.add(new KeyValuePair<String, String>("numero_ordine", nOrder_field.getText()));
-				type = type_chbox.getValue();
-				type = TypeContract.getIdFromString(type);
-				searchParameters.add(new KeyValuePair<String, String>("tipo", type));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-				
-			case 10:
-				//cerca per codice cliente + tipo contratto
-				searchParameters.add(new KeyValuePair<String, String>("id_cliente", client_field.getText()));
-				type = type_chbox.getValue();
-				type = TypeContract.getIdFromString(type);
-				result = tc.dynamicSearch(searchParameters);
-				break;
-			
-			case 11:
-				//cerca per numero ordine + codice cliente + tipo contratto
-				searchParameters.add(new KeyValuePair<String, String>("numero_ordine", nOrder_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("id_cliente", client_field.getText()));
-				type = type_chbox.getValue();
-				type = TypeContract.getIdFromString(type);
-				result = tc.dynamicSearch(searchParameters);
-				break;
-				
-			case 12:
-				//cerca per targa + tipo contratto
-				searchParameters.add(new KeyValuePair<String, String>("targa", targa_field.getText()));
-				type = type_chbox.getValue();
-				type = TypeContract.getIdFromString(type);
-				result = tc.dynamicSearch(searchParameters);
-				break;
-				
-			case 14:
-				//cerca per codice cliente + targa + tipo contratto
-				searchParameters.add(new KeyValuePair<String, String>("id_cliente", client_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("targa", targa_field.getText()));
-				type = type_chbox.getValue();
-				type = TypeContract.getIdFromString(type);
-				result = tc.dynamicSearch(searchParameters);
-				break;
-				
-			case 15:
-				//cerca per numero ordine + codice cliente + targa + tipo contratto
-				searchParameters.add(new KeyValuePair<String, String>("numero_ordine", nOrder_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("id_cliente", client_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("targa", targa_field.getText()));
-				type = type_chbox.getValue();
-				type = TypeContract.getIdFromString(type);
-				result = tc.dynamicSearch(searchParameters);
-				break;
-				
-			case 16:
-				//cerca per data
-				searchParameters.add(new KeyValuePair<String, String>("data_inizio", data_field.getValue().toString()));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-			
-			case 17:
-				//cerca per numero ordine + data
-				searchParameters.add(new KeyValuePair<String, String>("numero_ordine", nOrder_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("data_inizio", data_field.getValue().toString()));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-			
-			case 18:
-				//cerca per codice cliente + data
-				searchParameters.add(new KeyValuePair<String, String>("id_cliente", client_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("data_inizio", data_field.getValue().toString()));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-			
-			case 19:
-				//cerca per numero ordine + codice cliente + data
-				searchParameters.add(new KeyValuePair<String, String>("numero_ordine", nOrder_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("id_cliente", client_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("data_inizio", data_field.getValue().toString()));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-				
-			case 20:
-				//cerca per targa + data
-				searchParameters.add(new KeyValuePair<String, String>("targa", targa_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("data_inizio", data_field.getValue().toString()));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-			
-			case 22:
-				//cerca per codice cliente + targa + data
-				searchParameters.add(new KeyValuePair<String, String>("id_cliente", client_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("targa", targa_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("data_inizio", data_field.getValue().toString()));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-				
-			case 23:
-				//cerca per numero ordine + codice cliente + targa + data
-				searchParameters.add(new KeyValuePair<String, String>("numero_ordine", nOrder_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("id_cliente", client_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("targa", targa_field.getText()));
-				searchParameters.add(new KeyValuePair<String, String>("data_inizio", data_field.getValue().toString()));
-				result = tc.dynamicSearch(searchParameters);
-				break;
-			
-			case 24:
-				//cerca per tipo + dataì
-				type = type_chbox.getValue();
-				type = TypeContract.getIdFromString(type);
-				searchParameters.add(new KeyValuePair<String, String>("tipo", type));
-				searchParameters.add(new KeyValuePair<String, String>("data_inizio", data_field.getValue().toString()));
-				result = tc.dynamicSearch(searchParameters);
-				break;
+			result = tc.dynamicSearch(searchParameters);
+			if(result.size()>0)
+			{
+				SearchContractResultView.getInstance().setSearchResult(result);
+				SearchContractResultView.getInstance().start(new Stage());
+			}
+			else
+			{new GenericDialogView("Contratti non trovati", "Non sono presenti contratti corrispondenti nel database.").start();}
 		}
+		else
+		{new GenericWarning("Attenzione","Deve essere riempito almeno un campo.").start();}
 		
 	}
 	
-	public int calculate()
+	public ArrayList<KeyValuePair<String,?>> getParameters()
 	{
-		int tot = 0;
-		
-		//1
-		if((!nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
-				&&(type_chbox.getValue().equals(""))&&(data_field.getValue() == null))
-			tot = nof; // 1
-		
-		//2
-		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(targa_field.getText().equals(""))
-				&&(type_chbox.getValue().equals(""))&&(data_field.getValue() == null))
-			tot = cf; // 2
-		
-		//3
-		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
-				&&(type_chbox.getValue().equals(""))&&(data_field.getValue() == null))
-			tot = tf; // 4
-		
-		//4
-		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
-				&&(!type_chbox.getValue().equals(""))&&(data_field.getValue() == null))
-			tot = tcb; // 8
-		
-		//5
-		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
-				&&(type_chbox.getValue().equals(""))&&(data_field.getValue() != null))
-			tot = df; // 16
-		
-		//6
-		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(targa_field.getText().equals(""))
-				&&(type_chbox.getValue().equals(""))&&(data_field.getValue() == null))
-			tot = nof + cf; // 3
-		
-		//7
-		if((!nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
-				&&(type_chbox.getValue().equals(""))&&(data_field.getValue() == null))
-			tot = nof + tf; // 5
-		
-		//8
-		if((!nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
-				&&(!type_chbox.getValue().equals(""))&&(data_field.getValue() == null))
-			tot = nof + tcb; // 9
-		
-		//9
-		if((!nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
-				&&(type_chbox.getValue().equals(""))&&(data_field.getValue() == null))
-			tot = nof + df; // 17
-		
-		//10
-		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
-				&&(type_chbox.getValue().equals(""))&&(data_field.getValue() == null))
-			tot = cf + tf; // 6
-		
-		//11
-		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(targa_field.getText().equals(""))
-				&&(!type_chbox.getValue().equals(""))&&(data_field.getValue() == null))
-			tot = cf + tcb; // 10
-		
-		//12
-		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(targa_field.getText().equals(""))
-				&&(type_chbox.getValue().equals(""))&&(data_field.getValue() != null))
-			tot = cf + df; // 18
-	
-		//13
-		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
-				&&(!type_chbox.getValue().equals(""))&&(data_field.getValue() == null))
-			tot = tf + tcb; // 12
-		
-		//14
-		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
-				&&(type_chbox.getValue().equals(""))&&(data_field.getValue() != null))
-			tot = tf + df; // 20
-		
-		//15
-		if((nOrder_field.getText().equals(""))&&(client_field.getText().equals(""))&&(targa_field.getText().equals(""))
-				&&(!type_chbox.getValue().equals(""))&&(data_field.getValue() != null))
-			tot = tcb + df; // 24
-		
-		//16
-		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
-				&&(type_chbox.getValue().equals(""))&&(data_field.getValue() == null))
-			tot = nof + cf + tf; // 7
-		
-		//17
-		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(targa_field.getText().equals(""))
-				&&(!type_chbox.getValue().equals(""))&&(data_field.getValue() == null))
-			tot = nof + cf + tcb; // 11
-		
-		//18
-		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(targa_field.getText().equals(""))
-				&&(type_chbox.getValue().equals(""))&&(data_field.getValue() != null))
-			tot = nof + cf + df; // 19
-		
-		//19
-		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
-				&&(!type_chbox.getValue().equals(""))&&(data_field.getValue() == null))
-			tot = cf + tf + tcb; // 14
-		
-		//20
-		if((nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
-				&&(type_chbox.getValue().equals(""))&&(data_field.getValue() != null))
-			tot = cf + tf + df; // 22
-		
-		//21
-		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
-				&&(!type_chbox.getValue().equals(""))&&(data_field.getValue() == null))
-			tot = nof + cf + tf + tcb; // 15
-		
-		//22
-		if((!nOrder_field.getText().equals(""))&&(!client_field.getText().equals(""))&&(!targa_field.getText().equals(""))
-				&&(type_chbox.getValue().equals(""))&&(data_field.getValue() != null))
-			tot = nof + cf + tf + df; // 23
-		
-		System.out.println(tot);
-		return tot;
+		ArrayList<KeyValuePair<String,?>> params = new ArrayList<KeyValuePair<String,?>>();
+		if(!nOrder_field.getText().equals(""))
+			params.add(new KeyValuePair<String, Object>("numero_ordine",nOrder_field.getText()));
+		if(!client_field.getText().equals(""))
+			params.add(new KeyValuePair<String, Object>("id_cliente",client_field.getText()));
+		if(!targa_field.getText().equals(""))
+			params.add(new KeyValuePair<String, Object>("targa",targa_field.getText()));
+		if(!type_chbox.getValue().equals(""))
+			params.add(new KeyValuePair<String, Object>("tipo",TypeContract.getIdFromString(type_chbox.getValue())));
+		if(!(data_field.getValue()==null))
+			params.add(new KeyValuePair<String, Object>("data_inizio",data_field.getValue().toString()));
+		return params;
 	}
 }

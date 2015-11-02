@@ -2,14 +2,14 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 import view.DeleteClientWarning;
 import view.NotFoundClientWarning;
 import view.SalesManView;
+import database.DAOTableClients;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TableClients;
 import entity.Client;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -29,29 +29,23 @@ public class RemoveClientController implements Initializable
 	@FXML private Button submit_bttn;
 	@FXML private Button cancel_bttn;
 	
-	@FXML protected void handleSubmitAction(ActionEvent event) throws DatabaseConnectionException
+	@FXML protected void handleSubmitAction(ActionEvent event) throws DatabaseConnectionException, SQLException
 	{
 		String phone = phone_field.getText();
 		DbAccess db = new DbAccess();
 		db.initConnection();
-		TableClients tc = new TableClients(db);
+		DAOTableClients tc = new DAOTableClients(db);
 		Client c = tc.searchClientByPhone(phone);
-		if(c == null)
-		{
-			new NotFoundClientWarning();
-		}
+		if(c == null) {new NotFoundClientWarning();}
 		else
 		{
 			DeleteClientWarning.getInstance().setClient(c);
 			DeleteClientWarning.getInstance().show();
 		}
-		
 	}
 	
 	@FXML protected void handleCancelAction(ActionEvent event) throws IOException
-	{
-		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));
-	}
+	{((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
@@ -68,7 +62,6 @@ public class RemoveClientController implements Initializable
 						}
 	        	
 	        		});
-		
 	}
 
 }

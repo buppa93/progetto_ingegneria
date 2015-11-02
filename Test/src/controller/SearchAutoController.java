@@ -6,13 +6,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import database.DAOTableAuto;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TableAuto;
 import entity.Auto;
 import entity.TypeSection;
 import utility.KeyValuePair;
 import view.GenericDialogView;
+import view.GenericWarning;
 import view.SalesManView;
 import view.SearchCarsResultView;
 import view.SearchContractResultView;
@@ -28,6 +29,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+/*
+ * TODO passare in DAO
+ */
 public class SearchAutoController implements Initializable
 {
 	@FXML private AnchorPane rootLayout;
@@ -50,24 +54,29 @@ public class SearchAutoController implements Initializable
 		ArrayList<KeyValuePair<String,?>> parameters = getSearchParameters();
 		DbAccess db = new DbAccess();
 		db.initConnection();
-		TableAuto ta = new TableAuto(db);
+		DAOTableAuto ta = new DAOTableAuto(db);
 		ArrayList<Auto> cars = ta.dynamicSearch(parameters);
-		if(cars.size()!=0)
+		if(parameters.size()>1)
 		{
-			SearchCarsResultView.getInstance().setSearchResult(cars);
-			SearchCarsResultView.getInstance().start(new Stage());
+			if(cars!=null)
+			{
+				SearchCarsResultView.getInstance().setSearchResult(cars);
+				SearchCarsResultView.getInstance().start(new Stage());
+			}
+			else
+			{new GenericDialogView("Auto non trovate", "Non sono presenti auto corrispondenti nel database.").start();}
 		}
 		else
-		{
-			new GenericDialogView("Auto non trovate", "Non sono presenti auto corrispondenti nel database.");
-		}
+		{new GenericWarning("Attenzione","Deve essere riempito almeno un campo.").start();}
 	}
 	
 	@FXML protected void onCancelAction(ActionEvent event) throws IOException
-	{
-		((BorderPane) rootLayout.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));
-	}
+	{((BorderPane) rootLayout.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));}
 	
+	/*
+	 * TODO risolvere bug campo disponibilita' che e' sempre
+	 * uguale ad A
+	 */
 	public ArrayList<KeyValuePair<String,?>> getSearchParameters()
 	{
 		ArrayList<KeyValuePair<String,?>> searchParameters = new ArrayList<KeyValuePair<String,?>>();
@@ -87,6 +96,7 @@ public class SearchAutoController implements Initializable
 		{
 			char section = TypeSection.resolvType(type_chbox.getValue());
 			searchParameters.add(new KeyValuePair<String,Character>("fascia",section));
+			System.out.println("Fascia: "+ section);
 		}
 		
 		searchParameters.add(new KeyValuePair<String,String>("id_agenzia",SalesManView.session.filiale.getNumber()));

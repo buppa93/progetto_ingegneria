@@ -60,12 +60,8 @@ public class SelectCarViewController implements Initializable
 	}
 	
 	@FXML protected void onCancelAction(ActionEvent event) throws IOException
-	{
-		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));
-	}
+	{((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));}
 	
 	@FXML protected void onBackAction(ActionEvent event) throws IOException
-	{
-		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NoleggioView.fxml")));
-	}
+	{((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NoleggioView.fxml")));}
 }

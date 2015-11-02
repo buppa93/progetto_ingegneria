@@ -3,8 +3,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import database.DAOTableClients;
 import database.DbAccess;
-import database.TableClients;
 import view.FXMLNoleggioView;
 import view.SalesManView;
 import entity.Client;
@@ -28,14 +28,17 @@ public class FXMLNewClientController implements Initializable
 	@FXML private Button submit_bttn;
 	@FXML private AnchorPane rootPane;
 	
+	/*
+	 * TODO passare in DAO
+	 */
 	@FXML protected void submit(ActionEvent event) throws Exception 
 	{
 		Client c = new Client(name_field.getText(), surname_field.getText(), phone_field.getText());
 		
 		DbAccess db = new DbAccess();
 		db.initConnection();
-		TableClients table = new TableClients(db);
-		table.insertClient(c);
+		DAOTableClients table = new DAOTableClients(db);
+		table.insert(c);
 		
 		FXMLNoleggioView.getInstance().setClient(c);
 		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NoleggioView.fxml")));

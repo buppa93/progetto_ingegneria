@@ -33,9 +33,7 @@ public class SearchClientResultController implements Initializable
 		
 		Iterator<Client> it = clients.iterator();
 		while(it.hasNext())
-		{
-			clientString.add(it.next().toLabel());
-		}
+		{clientString.add(it.next().toLabel());}
 		
 		ObservableList<String> clients_list = FXCollections.observableArrayList(clientString);
 		client_lst.setItems(clients_list);

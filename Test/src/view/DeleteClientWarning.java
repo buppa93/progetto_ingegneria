@@ -1,9 +1,11 @@
 package view;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
+import database.DAOTableClients;
+import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TableClients;
 import entity.Client;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;import javafx.scene.control.ButtonType;
@@ -31,7 +33,7 @@ public final class DeleteClientWarning
 		this.client = client;
 	}
 	
-	public void show()
+	public void show() throws DatabaseConnectionException, SQLException
 	{
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("ATTENZIONE!");
@@ -50,8 +52,8 @@ public final class DeleteClientWarning
 			{
 				e.printStackTrace();
 			}
-			TableClients tc = new TableClients(db);
-			tc.deleteClientByPhone(client.getPhone());
+			DAOTableClients tc = new DAOTableClients(db);
+			tc.delete(client.getPhone());
 		} 
 		else 
 		{

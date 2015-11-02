@@ -3,15 +3,15 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import database.DAOTableAuto;
+import database.DAOTableTypeSection;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TableAuto;
+import entity.Auto;
 import entity.TypeSection;
 import utility.CarsAvailability;
-import utility.KeyValuePair;
 import view.GenericDialogView;
 import view.GenericWarning;
 import view.SQLWarning;
@@ -57,16 +57,19 @@ public class AddCarController implements Initializable
 	{
 		if(verificationFields())
 		{
-			ArrayList<KeyValuePair<String,?>> value = new ArrayList<KeyValuePair<String,?>>();
-			value.add(new KeyValuePair<String,String>("targa",targa_field.getText()));
-			value.add(new KeyValuePair<String,String>("modello",model_field.getText()));
-			value.add(new KeyValuePair<String,String>("marca",brand_field.getText()));
-			value.add(new KeyValuePair<String,String>("km",km_field.getText()));
-			value.add(new KeyValuePair<String,String>("fascia",Character.toString(TypeSection.resolvType(fascia_chbox.getValue()))));
 			CarsAvailability ca = new CarsAvailability(state_chbox.getValue());
-			value.add(new KeyValuePair<String,Integer>("disponibilita",ca.toInt()));
-			value.add(new KeyValuePair<String,String>("id_agenzia",SalesManView.session.filiale.getNumber()));
-			if(insert(value)==1)
+			
+			DbAccess db = new DbAccess();
+			db.initConnection();
+			DAOTableTypeSection tts = new DAOTableTypeSection();
+			TypeSection ts = tts.findByName(Character.toString(TypeSection.resolvType(fascia_chbox.getValue())));
+			tts.closeConncetion();
+			db.closeConnection();
+			
+			Auto auto = new Auto(targa_field.getText(),model_field.getText(),brand_field.getText(),
+					Integer.valueOf(km_field.getText()),SalesManView.session.filiale.getNumber(),ts,
+					ca.toInt());
+			if(insert(auto)==1)
 			{
 				new GenericDialogView("Transazione eseguita con sussesso.", "Automobile aggiunta con successo.").start();
 				targa_field.setText("");
@@ -76,10 +79,7 @@ public class AddCarController implements Initializable
 				state_chbox.getSelectionModel().selectLast();
 				fascia_chbox.getSelectionModel().selectLast();
 			}
-			else
-			{
-				new SQLWarning();
-			}
+			else {new SQLWarning();}
 		}
 		else
 		{
@@ -89,9 +89,8 @@ public class AddCarController implements Initializable
 	}
 	
 	@FXML protected void onCancelAction(ActionEvent event) throws IOException
-	{
-		((BorderPane) rootLayout.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));
-	}
+	{((BorderPane) rootLayout.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));}
+	
 	protected boolean verificationFields()
 	{
 		if((brand_field.getText().equals(""))||(model_field.getText().equals(""))||(targa_field.getText().equals(""))
@@ -104,13 +103,12 @@ public class AddCarController implements Initializable
 		
 	}
 	
-	public int insert(ArrayList<KeyValuePair<String,?>> values) throws SQLException, DatabaseConnectionException
+	public int insert(Auto auto) throws SQLException, DatabaseConnectionException
 	{
 		DbAccess db = new DbAccess();
 		db.initConnection();
-		TableAuto ta = new TableAuto(db);
-		int result = ta.genericInsertAuto(values);
-		return result;
+		DAOTableAuto ta = new DAOTableAuto(db);
+		return ta.insert(auto);
 	}
 
 }

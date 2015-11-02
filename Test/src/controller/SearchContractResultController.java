@@ -34,9 +34,7 @@ public class SearchContractResultController implements Initializable
 		
 		Iterator<Contract> it = contracts.iterator();
 		while(it.hasNext())
-		{
-			contractString.add(it.next().toLabel());
-		}
+		{contractString.add(it.next().toLabel());}
 		
 		ObservableList<String> contract_list = FXCollections.observableArrayList(contractString);
 		contract_lst.setItems(contract_list);

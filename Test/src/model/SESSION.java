@@ -68,5 +68,4 @@ public class SESSION
 		System.out.println("Nome: "+sessione.filiale.getName());
 		System.out.println("Indirizzo: "+sessione.filiale.getAddress());
 	}*/
-	//TODO memorizzare il nome utente dell'utente connesso
 }

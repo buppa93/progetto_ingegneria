@@ -4,6 +4,7 @@ public class TypeSection
 {
 	public enum Nome{A, B, C, D}
 	Nome section;
+	String fascia;
 	int n_porte;
 	int n_posti;
 	String tipo_auto;
@@ -18,6 +19,17 @@ public class TypeSection
 		this.tipo_auto=tipo_auto;
 	}
 	
+	public TypeSection(String fascia, int n_porte, int n_posti, String tipo_auto)
+	{
+		this.fascia=fascia;
+		this.n_porte=n_porte;
+		this.n_posti=n_posti;
+		this.tipo_auto=tipo_auto;
+	}
+	
+	public String getSFascia()
+	{return this.fascia;}
+	
 	public Nome getFascia()
 	{return this.section;}
 	
@@ -29,6 +41,9 @@ public class TypeSection
 	
 	public String getTipo_vettura()
 	{return this.tipo_auto;}
+	
+	public void setSFascia(String fascia)
+	{this.fascia=fascia;}
 	
 	public void setFascia(Nome section)
 	{this.section=section;}
@@ -51,8 +66,12 @@ public class TypeSection
 		return isValid;	
 	}
 	
+	/*public String toString()
+	{return this.section + "," + this.n_porte + "," + this.n_posti + "," + this.tipo_auto;}*/
 	public String toString()
-	{return this.section + "," + this.n_porte + "," + this.n_posti + "," + this.tipo_auto;}
+	{
+		return this.fascia+", "+this.n_porte+", "+this.n_posti+", "+this.tipo_auto+";";
+	}
 	
 	public static char resolvType(String type)
 	{

@@ -6,8 +6,8 @@ import java.util.ResourceBundle;
 
 import view.SummaryRentalView;
 import view.SalesManView;
+import database.DAOTableContract;
 import database.DbAccess;
-import database.TableContract;
 import entity.Contract;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -36,9 +36,11 @@ public class RemoveContractController implements Initializable
 		
 		DbAccess db = new DbAccess();
 		db.initConnection();
-		TableContract tc = new TableContract(db);
+		DAOTableContract tc = new DAOTableContract(db);
 		
 		Contract contratto = tc.searchContract(phone, targa);
+		
+		System.out.println("------- Contratto --------: "+contratto.toLabel());
 		
 		SummaryRentalView.getInstance().setContract(contratto);
 		//TODO se il contratto non viene trovato, mostrare messagio errore
@@ -61,7 +63,6 @@ public class RemoveContractController implements Initializable
 							ObservableValue<? extends String> observable,
 							String oldValue, String newValue) 
 					{
-						// TODO Auto-generated method stub
 						if(newValue.equals(""))
 							submit_bttn.setDisable(true);
 						else
@@ -78,7 +79,6 @@ public class RemoveContractController implements Initializable
 							ObservableValue<? extends String> observable,
 							String oldValue, String newValue) 
 					{
-						// TODO Auto-generated method stub
 						if(newValue.equals(""))
 							submit_bttn.setDisable(true);
 						else

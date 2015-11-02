@@ -53,6 +53,23 @@ public class Contract
 		this.deposit = deposit;
 	}
 	
+	public Contract(String numero_ordine, String agency_number, String idCliente, String data_inizio, int duration,
+			String data_fine, String agency_return, String targa, String type, double deposit, double price)
+	{
+		
+		this.numero_ordine=numero_ordine;
+		this.agency_number=agency_number;
+		this.idCliente=idCliente;
+		this.data_inizio=data_inizio;
+		this.data_fine=data_fine;
+		this.agency_return=agency_return;
+		this.targa=targa;
+		this.type = type;
+		this.price = price;
+		this.deposit = deposit;
+		this.duration = duration;
+	}
+	
 	public Contract(String numero_ordine, String agency_number, String idCliente, String data_inizio, 
 			int duration, String agency_return, String type, double price, double deposit, 
 			String targa)
@@ -212,7 +229,7 @@ public class Contract
 	public String toLabel()
 	{
 		return this.numero_ordine + ", " + this.agency_number + ", " + this.idCliente + ", " + this.data_inizio
-				 + ", " + this.duration + ", " + this.agency_return + ", " + this.type + ", " + this.price
+				 + ", " + this.duration + ", " + this.data_fine + ", " + this.agency_return + ", " + this.type + ", " + this.price
 				 + ", " + this.deposit + ", " + this.targa; 
 	}
 	

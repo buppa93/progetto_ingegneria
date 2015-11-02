@@ -6,9 +6,10 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 
+import database.DAOTableTypeContract;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TableTypeContract;
+import entity.TypeContract;
 import entity.TypeSection;
 import view.EstimateView;
 import view.FinalizationView;
@@ -74,36 +75,41 @@ public class EstimateController implements Initializable
 		char fascia = TypeSection.resolvType(EstimateView.getInstance().getParameters().get("typeCar"));
 		
 		DbAccess db = new DbAccess();
-		try {
-			db.initConnection();
-		} catch (DatabaseConnectionException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		TableTypeContract table = new TableTypeContract(db);
-		String tContract = "";
+		try 
+		{db.initConnection();} 
+		catch (DatabaseConnectionException e1) {new SQLWarning();}
+		
+		DAOTableTypeContract table = null;
+		
+		try 
+		{table = new DAOTableTypeContract(db);}
+		catch (DatabaseConnectionException e2) {new SQLWarning();}
+		
+		TypeContract tContract = null;
 		try 
 		{
-			tContract = table.getTypeContract(EstimateView.getInstance().getParameters().get("base"), 
+			tContract = table.selectTypeContract(EstimateView.getInstance().getParameters().get("base"), 
 					EstimateView.getInstance().getParameters().get("typeKm"), 
-					TypeSection.resolvType(EstimateView.getInstance().getParameters().get("typeCar")),
-					EstimateView.getInstance().getParameters().get("km"));
-			System.out.println(tContract);
+					String.valueOf(TypeSection.resolvType(EstimateView.getInstance().getParameters().get("typeCar"))),
+					Integer.parseInt(EstimateView.getInstance().getParameters().get("km")));
 		} 
-		catch (SQLException e) 
-		{
-			new SQLWarning();
-		}
+		catch (SQLException e) {new SQLWarning();}
 		
-		double unit = table.getPrice(tContract);
+		double unit = tContract.getPrice();
 		String price = Double.toString(quote(unit, Integer.parseInt(EstimateView.getInstance().getParameters().get("during"))));
 		price_lbl.setText(price);
 		
-		System.out.println(table.getId(tContract));
 		EstimateView.getInstance().getParameters().put("price", price);
-		String idContract = table.getId(tContract);
+		String idContract = tContract.getId();
 		EstimateView.getInstance().getParameters().put("idTypeContrat", idContract);
 		
+		try 
+		{table.closeConncetion();} 
+		catch (SQLException e1) {new SQLWarning();}
+		
+		try 
+		{db.closeConnection();} 
+		catch (SQLException e) {new SQLWarning();}
 	}
 	
 	@FXML protected void onSubmitAction(ActionEvent event) throws IOException

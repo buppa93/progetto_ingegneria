@@ -3,6 +3,8 @@ package utility;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,10 +16,10 @@ import java.util.Random;
 
 import database.DbAccess;
 import database.DbString;
-import database.TableUsers;
 
 public class MyUtil 
 {
+	private static final String query = "SELECT * FROM user WHERE (nome= ? AND password= ?);";
 	
 	MyUtil(){}
 	
@@ -60,25 +62,27 @@ public class MyUtil
 	{
 		//return true;
 		System.out.println("Sto per fare il login");
-		Statement st = db.getConnection().createStatement();
 		System.out.println("Ho creato lo statement");
+		Connection con = db.getConnection();
 		String md5 = MyUtil.getMD5(pwd);
 		System.out.println("Ho creato l' md5");
-		String query = "SELECT * FROM "+DbString.TBL_CLIENTS+" WHERE ("+TableUsers.FIELD_NAME+"='"+name+
-				"' AND "+TableUsers.FIELD_PWD+"='"+md5+"');";
-		System.out.println(query);
-		ResultSet rs = st.executeQuery(query);
-		
+		PreparedStatement stat = con.prepareStatement(query);
+		stat.setString(1, name);
+		stat.setString(2, md5);
+		System.out.println("Nome utente: "+name);
+		System.out.println("Password: "+md5);
+		System.out.println(stat.toString());
+		ResultSet rs = stat.executeQuery();
 		
 		if(rs.next())
 		{
-			st.close();
+			stat.close();
 			rs.close();
 			return true;
 		}
 		else
 		{
-			st.close();
+			stat.close();
 			rs.close();
 			return false;
 		}

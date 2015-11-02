@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import view.SearchCarsResultView;
-import view.SearchContractResultView;
 import entity.Auto;
-import entity.Contract;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,9 +34,7 @@ public class SearchCarsResultController implements Initializable
 		
 		Iterator<Auto> it = cars.iterator();
 		while(it.hasNext())
-		{
-			carsString.add(it.next().toLabelAllAttribute());
-		}
+		{carsString.add(it.next().toLabelAllAttribute());}
 		
 		ObservableList<String> cars_list = FXCollections.observableArrayList(carsString);
 		cars_lst.setItems(cars_list);

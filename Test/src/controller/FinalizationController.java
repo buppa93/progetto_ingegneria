@@ -3,17 +3,16 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.StringTokenizer;
-
+import database.DAOTableAuto;
+import database.DAOTableContract;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TableAuto;
-import database.TableContract;
+import utility.CarsAvailability;
 import utility.PDFFunctionality;
 import entity.Agency;
+import entity.Contract;
 import utility.MyUtil;
 import view.FinalizationView;
 import view.SalesManView;
@@ -36,38 +35,33 @@ public class FinalizationController implements Initializable
 	
 	@FXML protected void onSubmitAction(ActionEvent event) throws DatabaseConnectionException, SQLException, IOException
 	{
-		System.out.println("devo gestire l'acconto");
-		System.out.println(FinalizationView.getInstance().getAuto().toLabel());
-		System.out.println(FinalizationView.getInstance().getClient().toString());
-		System.out.println("data inizio: "+FinalizationView.getInstance().getParameters().get("dataStart"));
-		System.out.println("durata: "+FinalizationView.getInstance().getParameters().get("during"));
-		System.out.println("base: "+FinalizationView.getInstance().getParameters().get("base"));
-		System.out.println("agenzia prelievo: "+FinalizationView.getInstance().getParameters().get("agencyTake"));
-		System.out.println("agenzia ritorno: "+FinalizationView.getInstance().getParameters().get("agencyReturn"));
-		System.out.println("tipo chilometraggio: "+FinalizationView.getInstance().getParameters().get("typeKm"));
-		System.out.println("chilometri: "+FinalizationView.getInstance().getParameters().get("km"));
-		System.out.println("tipo macchina: "+FinalizationView.getInstance().getParameters().get("typeCar"));
-		System.out.println("prezzo: "+FinalizationView.getInstance().getParameters().get("price"));
-		System.out.println("id tipo contratto: "+FinalizationView.getInstance().getParameters().get("idTypeContrat"));
-		
 		String acconto = acconto_field.getText();
-		
 		DbAccess db = new DbAccess();
-		db.initConnection();
-		TableContract tc = new TableContract(db);
+		
+		DAOTableContract tc = new DAOTableContract(db);
+		String idContratto = MyUtil.makeId();
+		Map<String, String> param = FinalizationView.getInstance().getParameters();
+		param.put("idContract", idContratto);
+		param.put("acconto", acconto);
+		FinalizationView.getInstance().setParameters(param);
 		
 		String agenziaPrelievo = Agency.getIdFromString(FinalizationView.getInstance().getParameters().get("agencyTake"));
 		String agenziaRitorno = Agency.getIdFromString(FinalizationView.getInstance().getParameters().get("agencyReturn"));
-		tc.insert(MyUtil.makeId(), agenziaPrelievo, FinalizationView.getInstance().getClient().getPhone(), FinalizationView.getInstance().getParameters().get("dataStart"), 
-				FinalizationView.getInstance().getParameters().get("during"),
-				FinalizationView.getInstance().getParameters().get("dataEnd"),
-				agenziaRitorno, 
-				FinalizationView.getInstance().getParameters().get("idTypeContrat"), 
-				FinalizationView.getInstance().getParameters().get("price"), acconto,
-				FinalizationView.getInstance().getAuto().getTarga());
-		//Devo mettere la macchina "in noleggio" nel databese
-		TableAuto ta = new TableAuto(db);
-		ta.setInNoleggio(FinalizationView.getInstance().getAuto().getTarga());
+		Contract nuovo = new Contract(idContratto,agenziaPrelievo,FinalizationView.getInstance().getClient().getPhone(),
+				FinalizationView.getInstance().getParameters().get("dataStart"),
+				Integer.parseInt(FinalizationView.getInstance().getParameters().get("during")),
+				FinalizationView.getInstance().getParameters().get("dataEnd"),agenziaRitorno,
+				FinalizationView.getInstance().getAuto().getTarga(),
+				FinalizationView.getInstance().getParameters().get("idTypeContrat"),
+				Double.parseDouble(acconto),
+				Double.parseDouble(FinalizationView.getInstance().getParameters().get("price"))
+	);
+		tc.insert(nuovo);
+		tc.closeConncetion();
+		DAOTableAuto ta = new DAOTableAuto(db);
+		ta.updateState(CarsAvailability.toInt("noleggio"), FinalizationView.getInstance().getAuto().getTarga());
+		ta.closeConncetion();
+		db.closeConnection();
 		/*Image value = new Image("../img/business_success.png");
 		image_view.setImage(value);*/
 		PDFFunctionality pdf = new PDFFunctionality();
@@ -79,41 +73,8 @@ public class FinalizationController implements Initializable
 	}
 	
 	@FXML protected void onCancelAction(ActionEvent event) throws IOException
-	{
-		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));
-	}
+	{((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));}
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources) 
-	{
-		// TODO Auto-generated method stub
-		System.out.println(FinalizationView.getInstance().getParameters().get("price"));
-		
-	}
-	
-	/*public String EstimatedEndDate(String date_start, String base, int n)
-	{
-		String endDate = "";
-		Calendar data = Calendar.getInstance();
-		int year = 0;
-		int month = 0;
-		int day = 0;
-		StringTokenizer tokens = new StringTokenizer(date_start,"-");
-		year = Integer.parseInt(tokens.nextToken());
-		month = Integer.parseInt(tokens.nextToken());
-		day = Integer.parseInt(tokens.nextToken());
-		data.set(year, month, day);
-		
-		if(base.equals("settimanale"))
-		{
-			data.add(Calendar.WEEK_OF_MONTH, n);
-		}
-		else
-		{
-			data.add(Calendar.DAY_OF_YEAR, n);
-		}
-		endDate = data.get(Calendar.YEAR)+"-"+data.get(Calendar.MONTH)+"-"+data.get(Calendar.DAY_OF_MONTH);
-		return endDate;
-	}*/
-
+	public void initialize(URL location, ResourceBundle resources) {}
 }

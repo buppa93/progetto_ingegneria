@@ -9,10 +9,11 @@ import view.PayementDialog;
 import view.SQLWarning;
 import view.SummaryRentalView;
 import view.SalesManView;
+import database.CustomSQLException;
+import database.DAOTableAuto;
+import database.DAOTableTypeContract;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TableAuto;
-import database.TableTypeContract;
 import entity.Auto;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -46,9 +47,6 @@ public class SummaryRentalController implements Initializable
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		//oscurano il buttone "ok" se i campi sono vuoti
-		/*newKm_field.textProperty().addListener((observable, oldValue, newValue) -> {
-			submit_bttn.setDisable(newValue.isEmpty() && newValue.isEmpty());
-		});*/
 		submit_bttn.setDisable(true);
 		newKm_field.textProperty().addListener(new ChangeListener<String>()
         		{
@@ -58,7 +56,6 @@ public class SummaryRentalController implements Initializable
 							ObservableValue<? extends String> observable,
 							String oldValue, String newValue) 
 					{
-						// TODO Auto-generated method stub
 						if(newValue.equals(""))
 							submit_bttn.setDisable(true);
 						else
@@ -67,27 +64,33 @@ public class SummaryRentalController implements Initializable
         	
         		});
 		
-		
-		
 		String targa = SummaryRentalView.getInstance().getContract().getTarga();
+		
 		DbAccess db = new DbAccess();
-		
-		
 		
 		try 
 		{db.initConnection();} 
 		catch (DatabaseConnectionException e) 
-		{}
-		
-		Auto auto = null;
-		TableAuto ta = new TableAuto(db);
-		
-		try 
-		{auto = ta.searchAutoByTarga(targa);} 
-		catch (SQLException e) 
 		{new SQLWarning();}
 		
-		TableTypeContract tc = new TableTypeContract(db);
+		Auto auto = null;
+		DAOTableAuto ta = null;
+		try 
+		{ta = new DAOTableAuto(db);} 
+		catch (DatabaseConnectionException e1) 
+		{new SQLWarning();}
+		
+		try 
+		{auto = ta.selectByTarga(targa);} 
+		catch (SQLException e) {new SQLWarning();} 
+		catch (DatabaseConnectionException e) {new SQLWarning();} 
+		
+		DAOTableTypeContract tc = null;
+		
+		try 
+		{tc = new DAOTableTypeContract(db);} 
+		catch (DatabaseConnectionException e1) {new SQLWarning();}
+		
 		String typeContract = "";
 		String typeKm = "";
 		
@@ -99,8 +102,7 @@ public class SummaryRentalController implements Initializable
 			typeKm = tc.getTypeKmById(SummaryRentalView.getInstance().getContract().getTypeContract());
 			kmPrev = tc.getKmById(SummaryRentalView.getInstance().getContract().getTypeContract());
 		} 
-		catch (SQLException e) 
-		{new SQLWarning();}
+		catch (SQLException e) {new SQLWarning();}
 		
 		kmCar_lbl.setText(Integer.toString(auto.getKm()));
 		typeNoleggio_lbl.setText(typeContract);
@@ -120,8 +122,8 @@ public class SummaryRentalController implements Initializable
 		db.initConnection();
 		
 		//ricavo la targa dell'auto
-		TableAuto ta = new TableAuto(db);
-		Auto auto = ta.searchAutoByTarga(SummaryRentalView.getInstance().getContract().getTarga());
+		DAOTableAuto ta = new DAOTableAuto(db);
+		Auto auto = ta.selectByTarga(SummaryRentalView.getInstance().getContract().getTarga());
 		
 		//ricavo i km precedenti al noleggio
 		kmPre = auto.getKm();
@@ -138,24 +140,29 @@ public class SummaryRentalController implements Initializable
 		{
 			//ricavo l'id del tipo di contratto
 			String idTypeContract = SummaryRentalView.getInstance().getContract().getTypeContract();
-			TableTypeContract tc = new TableTypeContract(db);
-		
+			DAOTableTypeContract tc = new DAOTableTypeContract(db);
 		
 			//setto i nuovi km dell'auto
-			ta.setKm(auto.getTarga(), Integer.parseInt(newKm_field.getText()));
+			ta.updateKm(Integer.parseInt(newKm_field.getText()), auto.getTarga());
 		
 			//setto l'auto di nuovo a disponibile
-			ta.setDisponibile(auto.getTarga());
+			ta.updateState(1, auto.getTarga());
 		
 			auto.setIdAgenzia(SummaryRentalView.getInstance().getContract().getAgencyReturn());
-			ta.setAgencyReturn(auto.getTarga(), auto.getIdAgenzia());
+			ta.updateAgency(auto.getIdAgenzia(), auto.getTarga());
 		
 			//calcolo la differenza se il chilometraggio settato == "limitato"
 			double difference = 0.0;
-			if(tc.getTypeKmById(idTypeContract).equals("limitato"))
+			if(tc.getTypeKmById(idTypeContract).equalsIgnoreCase("limitato"))
 			{
 				double pricePerKm = tc.getPricePerKmById(idTypeContract);
 				int kmContr = tc.getKmById(idTypeContract);
+				System.out.println("kmPost: "+kmPost);
+				System.out.println("pricePerKm: "+pricePerKm);
+				System.out.println("kmPre: "+kmPre);
+				System.out.println("kmContr: "+kmContr);
+				System.out.println("pricePrevent: "+pricePrevent_lbl.getText());
+				System.out.println("deposit: "+deposit_lbl.getText());
 				difference = getDifference(pricePerKm, estimateKm(kmPost, kmPre, kmContr)) + 
 					(Double.parseDouble(pricePrevent_lbl.getText()) - Double.parseDouble(deposit_lbl.getText()));
 				System.out.println("Differenza: "+ difference);
@@ -178,13 +185,10 @@ public class SummaryRentalController implements Initializable
 	}
 	
 	@FXML protected void onCancelAction(ActionEvent event) throws IOException
-	{
-		((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));
-	}
+	{((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));}
 	
 	public void setPayementParameters(double price)
 	{
-
 		PayementDialog.getInstance().setPayoff(price);
 		PayementDialog.getInstance().setIdContract(SummaryRentalView.getInstance().getContract().getNumeroOrdine());
 		PayementDialog.getInstance().setPhoneClient(SummaryRentalView.getInstance().getContract().getClientId());
@@ -192,12 +196,8 @@ public class SummaryRentalController implements Initializable
 	}
 	
 	public double getDifference(double pricePerKm, int km)
-	{
-		return km*pricePerKm;
-	}
+	{return km*pricePerKm;}
 	
 	public int estimateKm(int kmPost, int kmPre, int kmContr)
-	{
-		return kmPost-kmPre-kmContr;
-	}
+	{return kmPost-kmPre-kmContr;}
 }

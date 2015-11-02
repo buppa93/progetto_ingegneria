@@ -1,5 +1,5 @@
 package database;
-
+//TODO questa classe si puo' eliminare
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -109,4 +109,6 @@ public final class SearchCar
 		st.close();
 		return auto;
 	}
+	
+	
 }

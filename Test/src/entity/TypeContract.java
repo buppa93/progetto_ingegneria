@@ -4,50 +4,89 @@ import java.util.StringTokenizer;
 
 public class TypeContract 
 {
-	int id;
-	public enum Noleggio { GIORNALIERO, SETTIMANALE}
-	Noleggio type;
-	public enum Km { LIMITATO, ILLIMITATO}
-	Km typekm;
+	String id;
+	String tipo_nol;
+	String tipo_km;
+	String fascia;
+	int km;
+	double prezzo;
+	double prezzo_km;
 	
 	public TypeContract(){};
 	
-	public TypeContract(int id, Noleggio type, Km typekm)
+	public TypeContract(String id, String tipo_nol, String tipo_km, String fascia, int km, double prezzo,
+			double prezzo_km)
 	{
 		this.id=id;
-		this.type=type;
-		this.typekm=typekm;
+		this.tipo_nol = tipo_nol;
+		this.tipo_km = tipo_km;
+		this.fascia = fascia;
+		this.km = km;
+		this.prezzo = prezzo;
+		this.prezzo_km = prezzo_km;
 	}
 	
-	public int getId()
+	public TypeContract(String tipo_nol, String tipo_km, String fascia, int km)
+	{
+		this.tipo_nol = tipo_nol;
+		this.tipo_km = tipo_km;
+		this.fascia = fascia;
+		this.km = km;
+	}
+	
+	public String getId()
 	{return this.id;}
 	
-	public Noleggio getTypeContract()
-	{return this.type;}
+	public String getTypeNol()
+	{return this.tipo_nol;}
 	
-	public Km getChilometraggio()
-	{return this.typekm;}
+	public String getChilometraggio()
+	{return this.tipo_km;}
 	
-	public void setId(int id)
+	public String getFascia()
+	{return this.fascia;}
+	
+	public int getKm()
+	{return this.km;}
+	
+	public double getPrice()
+	{return this.prezzo;}
+	
+	public double getPricePerKm()
+	{return this.prezzo_km;}
+	
+	public void setId(String id)
 	{this.id=id;}
 	
-	public void setTipo(Noleggio type)
-	{this.type=type;}
+	public void setTipoNol(String type)
+	{this.tipo_nol=type;}
 	
-	public void setChilometraggio(Km typekm)
-	{this.typekm=typekm;}
+	public void setChilometraggio(String typekm)
+	{this.tipo_km=typekm;}
 	
-	public boolean isFasciavalid()
+	public void setFascia(String fascia)
+	{this.fascia = fascia;}
+	
+	public void setKm(int km)
+	{this.km = km;}
+	
+	public void setPrice(double price)
+	{this.prezzo = price;}
+	
+	public void setPricePerKm(double prezzo_km)
+	{this.prezzo_km = prezzo_km;}
+	
+	/*public boolean isFasciavalid()
 	{
 		boolean isValid=false;
 		if(this.type==Noleggio.GIORNALIERO || this.type==Noleggio.SETTIMANALE || this.typekm==Km.LIMITATO|| this.typekm==Km.ILLIMITATO)	
 			isValid=true;
 		
 		return isValid;
-	}
+	}*/
 	
 	public String toString()
-	{return this.id + "," + this.type + "," + this.typekm;}
+	{return this.id + "," + this.tipo_nol + "," + this.tipo_km;}
 	
 	public static String getIdFromString(String type)
 	{

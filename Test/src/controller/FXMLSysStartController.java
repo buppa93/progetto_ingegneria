@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import view.GenericWarning;
 import view.LoginDialog;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,19 +28,10 @@ public class FXMLSysStartController implements Initializable
  			e.printStackTrace();
  		}*/
 		LoginDialog login = new LoginDialog();
-		try 
-		{
-			login.start(new Stage());
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
+		try {login.start(new Stage());} 
+		catch (Exception e) {new GenericWarning("Errore!","impossibile aprire il programma.").start();}
 		
 		//Stage stage = (Stage) label.getScene().getWindow();
 		//stage.close();
-		
-		
 	}
-
 }
