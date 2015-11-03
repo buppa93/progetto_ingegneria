@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import utility.KeyValuePair;
+import view.SQLWarning;
 import entity.Client;
 
 public class DAOTableClients 
@@ -106,6 +107,9 @@ public class DAOTableClients
 				{clients.add(new Client(rs.getString(1),rs.getString(2),rs.getString(3)));}
 				rs.close();
 				stat.close();
+				break;
+			default:
+				new SQLWarning();
 				break;
 		}
 		return clients;

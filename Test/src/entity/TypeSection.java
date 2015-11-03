@@ -92,6 +92,11 @@ public class TypeSection
 			
 			case "Monovolume":
 				t = 'D';
+				break;
+				
+			default:
+				t = '0';
+				break;
 		}
 		return t;
 		
@@ -116,6 +121,11 @@ public class TypeSection
 			
 			case 'D':
 				t = "Monovolume";
+				break;
+			
+			default:
+				t = "null";
+				break;
 		}
 		return t;
 		

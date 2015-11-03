@@ -12,13 +12,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
+
+import view.GenericWarning;
 import database.DbAccess;
 
 public class MyUtil 
 {
 	private static final String query = "SELECT * FROM user WHERE (nome= ? AND password= ?);";
 	
-	MyUtil(){}
+	public MyUtil(){}
 	
 	/**
 	  * Crea una stringa codifica in md5 a partire dal parametro di 
@@ -28,24 +30,28 @@ public class MyUtil
 	  */
 	public static String getMD5(String input) 
 	{
-        try 
+		MessageDigest md = null;
+		try 
+		{
+			md = MessageDigest.getInstance("MD5");
+		} 
+		catch (NoSuchAlgorithmException e1) 
+		{
+			// TODO Auto-generated catch block
+			new GenericWarning("Errore Runtime", "Errore di Runtime").start();
+		}
+		byte[] messageDigest = md.digest(input.getBytes());
+        BigInteger number = new BigInteger(1, messageDigest);
+		StringBuffer hashtext = new StringBuffer(number.toString(16));
+        // Now we need to zero pad it if you actually want the full 32 chars.
+        int length = hashtext.length();
+        while (length < 32) 
         {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] messageDigest = md.digest(input.getBytes());
-            BigInteger number = new BigInteger(1, messageDigest);
-            String hashtext = number.toString(16);
-            // Now we need to zero pad it if you actually want the full 32 chars.
-            int length = hashtext.length();
-            while (length < 32) 
-            {
-                hashtext = "0" + hashtext;
-            }
-            return hashtext;
+            StringBuffer tmp = new StringBuffer("0");
+            tmp.append(hashtext);
+            hashtext = tmp;
         }
-        catch (NoSuchAlgorithmException e) 
-        {
-            throw new RuntimeException(e);
-        }
+        return hashtext.toString();
     }
 	
 	/**

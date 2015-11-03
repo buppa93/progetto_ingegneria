@@ -164,14 +164,17 @@ public class DAOTableAuto
 		{
 			if(params.get(i).getKey().equals("km"))
 			{
-				SEARCH_DYNAMIC.append(params.get(i).getKey()+"=");
-				SEARCH_DYNAMIC.append(params.get(i).getValue()+" AND ");
+				SEARCH_DYNAMIC.append(params.get(i).getKey());
+				SEARCH_DYNAMIC.append("=");
+				SEARCH_DYNAMIC.append(params.get(i).getValue());
+				SEARCH_DYNAMIC.append(" AND ");
 			}
 			else
 			{
 				SEARCH_DYNAMIC.append(params.get(i).getKey());
 				SEARCH_DYNAMIC.append("='");
-				SEARCH_DYNAMIC.append(params.get(i).getValue()+"' AND ");	
+				SEARCH_DYNAMIC.append(params.get(i).getValue());	
+				SEARCH_DYNAMIC.append("' AND ");
 			}
 		}
 		

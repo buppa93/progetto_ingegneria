@@ -152,9 +152,7 @@ private void handleAdminDeleteExpiredContractsAction(final ActionEvent event) th
  */
 private void provideAdminDeleteExpiredContractsFunctionality() throws IOException
 {
-	System.out.println("You clicked on Rimuovi Contratti Scaduti!");
 	rootLayout.setCenter(FXMLLoader.load(AdminView.class.getResource("AdminShowClients.fxml")));
-	System.out.println("");
 }
 
 	/**
@@ -163,9 +161,7 @@ private void provideAdminDeleteExpiredContractsFunctionality() throws IOExceptio
 	 */
 	private void provideAdminShowClientsFunctionality() throws IOException
 	{
-		System.out.println("You clicked on Visualizza clienti!");
 		rootLayout.setCenter(FXMLLoader.load(AdminView.class.getResource("AdminShowClients.fxml")));
-		System.out.println("");
 	}
 
 	@Override
@@ -180,9 +176,7 @@ private void provideAdminDeleteExpiredContractsFunctionality() throws IOExceptio
 	 */
 	private void provideAdminDeleteClientFunctionality() throws IOException
 	{
-		System.out.println("You clicked on Rimuovi Cliente!");
 		rootLayout.setCenter(FXMLLoader.load(AdminView.class.getResource("FXMLAdminDeleteClient.fxml")));
-		System.out.println("");
 	}
 
 	/**
@@ -191,9 +185,7 @@ private void provideAdminDeleteExpiredContractsFunctionality() throws IOExceptio
 	 */
 	private void provideAdminShowAgencyFunctionality() throws IOException
 	{
-		System.out.println("You clicked on Visualizza Agenzia!");
 		rootLayout.setCenter(FXMLLoader.load(AdminView.class.getResource("AdminShowAgency.fxml")));
-		System.out.println("");
 	}
 	
 	/**
@@ -202,9 +194,7 @@ private void provideAdminDeleteExpiredContractsFunctionality() throws IOExceptio
 	 */
 	private void provideAdminSearchAgencyFunctionality() throws IOException
 	{
-		System.out.println("You clicked on Cerca Agenzia!");
 		rootLayout.setCenter(FXMLLoader.load(AdminView.class.getResource("AdminSearchAgency.fxml")));
-		System.out.println("");
 	}
 	
 	/**
@@ -213,9 +203,7 @@ private void provideAdminDeleteExpiredContractsFunctionality() throws IOExceptio
 	 */
 	private void provideAdminDeleteAgencyFunctionality() throws IOException
 	{
-		System.out.println("You clicked on Rimuovi Agenzia!");
 		rootLayout.setCenter(FXMLLoader.load(AdminView.class.getResource("AdminDeleteAgency.fxml")));
-		System.out.println("");
 	}
 	
 	/**
@@ -224,9 +212,7 @@ private void provideAdminDeleteExpiredContractsFunctionality() throws IOExceptio
 	 */
 	private void provideAdminNewAgencyFunctionality() throws IOException
 	{
-		System.out.println("You clicked on Aggiungi Agenzia!");
 		rootLayout.setCenter(FXMLLoader.load(AdminView.class.getResource("AdminNewAgency.fxml")));
-		System.out.println("");
 	}
 
 	/**
@@ -235,9 +221,7 @@ private void provideAdminDeleteExpiredContractsFunctionality() throws IOExceptio
 	 */
 	private void provideAdminShowCarFunctionality() throws IOException
 	{
-		System.out.println("You clicked on Visualizza automobili!");
 		rootLayout.setCenter(FXMLLoader.load(AdminView.class.getResource("AdminShowCar.fxml")));
-		System.out.println("");
 	}
 
 	/**
@@ -246,9 +230,7 @@ private void provideAdminDeleteExpiredContractsFunctionality() throws IOExceptio
 	 */
 	private void provideAdminNewCarFunctionality() throws IOException
 	{
-		System.out.println("You clicked on Aggiungi Automobile!");
 		rootLayout.setCenter(FXMLLoader.load(AdminView.class.getResource("AdminNewCar.fxml")));
-		System.out.println("");
 	}
 	
 	/**
@@ -257,9 +239,7 @@ private void provideAdminDeleteExpiredContractsFunctionality() throws IOExceptio
 	 */
 	private void provideAdminDeleteCarFunctionality() throws IOException
 	{
-		System.out.println("You clicked on Rimuovi Automobile!");
 		rootLayout.setCenter(FXMLLoader.load(AdminView.class.getResource("AdminDeleteCar.fxml")));
-		System.out.println("");
 	}
 	
 	/**
@@ -268,9 +248,7 @@ private void provideAdminDeleteExpiredContractsFunctionality() throws IOExceptio
 	 */
 	private void provideAdminShowContractsFunctionality() throws IOException
 	{
-		System.out.println("You clicked on Visualizza contratti!");
 		rootLayout.setCenter(FXMLLoader.load(AdminView.class.getResource("AdminShowContracts.fxml")));
-		System.out.println("");
 	}
 	
 	public final void setRootLayoutView(String fxml) throws IOException

@@ -36,7 +36,7 @@ public class FXMLExampleController
 				actiontarget.setText("login user ok");
 			}
 		}
-		catch(SQLException e){}
+		catch(SQLException e){new SQLException();}
 	}
 
 	@FXML protected void loginAdmin(ActionEvent event) 

@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import utility.KeyValuePair;
+import view.SQLWarning;
 import entity.Contract;
 
 public class DAOTableContract 
@@ -157,6 +159,9 @@ public class DAOTableContract
 				}
 				rs.close();
 				stat.close();
+				break;
+			default:
+				new SQLWarning();
 				break;
 		}
 		return contracts;
