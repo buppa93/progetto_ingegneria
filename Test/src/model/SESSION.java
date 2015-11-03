@@ -48,24 +48,4 @@ public class SESSION
         
 		return properties;
 	}
-
-	public void printAgencyProperties()
-	{
-		System.out.println("Numero: "+filiale.getNumber());
-		System.out.println("Nome: "+filiale.getName());
-		System.out.println("Indirizzo: "+filiale.getAddress());
-	}
-	
-	public void printUsrProperties()
-	{
-		System.out.println(usr.toString());
-	}
-	
-	/*public static void main(String args[]) throws ParserConfigurationException, SAXException, IOException
-	{
-		SESSION sessione = new SESSION();
-		System.out.println("Numero: "+sessione.filiale.getNumber());
-		System.out.println("Nome: "+sessione.filiale.getName());
-		System.out.println("Indirizzo: "+sessione.filiale.getAddress());
-	}*/
 }

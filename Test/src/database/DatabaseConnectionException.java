@@ -1,5 +1,7 @@
 package database;
 
+import view.SQLWarning;
+
 public class DatabaseConnectionException extends Exception {
 
 	/**
@@ -14,6 +16,6 @@ public class DatabaseConnectionException extends Exception {
 	public DatabaseConnectionException() {}
 
 	public void NoValue()
-	{System.out.println("Attenction! Connection refused.");}
+	{new SQLWarning();}
 
 }

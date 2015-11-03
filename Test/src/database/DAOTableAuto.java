@@ -6,11 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import utility.KeyValuePair;
 import view.SalesManView;
 import entity.Auto;
-import entity.Client;
 import entity.TypeSection;
 
 public class DAOTableAuto 
@@ -38,7 +36,6 @@ public class DAOTableAuto
 	
 	public int insert(Auto auto) throws SQLException
 	{
-		System.out.println(auto.toLabelAllAttribute());
 		PreparedStatement stat = con.prepareStatement(INSERT);
 		stat.setString(1, auto.getTarga());
 		stat.setString(2, auto.getModel());
@@ -69,7 +66,8 @@ public class DAOTableAuto
 		{targhe.add(rs.getString(1));}
 		
 		stat = con.prepareStatement(SELECT_BY_TARGA);
-		for(int i=0; i<targhe.size();i++)
+		int size = targhe.size();
+		for(int i=0; i<size;i++)
 		{
 			stat.setString(1,targhe.get(i));
 			rs = stat.executeQuery();
@@ -137,7 +135,6 @@ public class DAOTableAuto
 		ResultSet rs = null;
 		PreparedStatement stat =con.prepareStatement(SELECT_BY_TARGA);
 		stat.setString(1, targa);
-		System.out.println("Ecco sta cazzo di query: "+stat.toString());
 		rs = stat.executeQuery();
 		rs.next();
 		tsrs = ts.findByName(rs.getString(8));
@@ -154,7 +151,6 @@ public class DAOTableAuto
 			PreparedStatement stat = con.prepareStatement(DELETE_BY_TARGA_AGENCY);
 			stat.setString(1, targa);
 			stat.setString(2, agency);
-			System.out.println("Query: "+stat.toString());
 			result = stat.executeUpdate();
 			stat.close();
 			return result;
@@ -163,7 +159,8 @@ public class DAOTableAuto
 	public ArrayList<Auto> dynamicSearch(ArrayList<KeyValuePair<String,?>> params) throws SQLException, DatabaseConnectionException
 	{
 		ArrayList<Auto> cars = new ArrayList<Auto>();
-		for(int i=0; i<params.size()-1;i++)
+		int size = params.size();
+		for(int i=0; i<size-1;i++)
 		{
 			if(params.get(i).getKey().equals("km"))
 			{
@@ -182,7 +179,6 @@ public class DAOTableAuto
 		SEARCH_DYNAMIC.append("='");
 		SEARCH_DYNAMIC.append(params.get(params.size()-1).getValue());
 		SEARCH_DYNAMIC.append("');");
-		System.out.println("Query: "+SEARCH_DYNAMIC);
 		PreparedStatement stat =con.prepareStatement(SEARCH_DYNAMIC.toString());
 		ResultSet rs = stat.executeQuery();
 		if(!rs.first())

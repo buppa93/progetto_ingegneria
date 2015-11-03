@@ -133,7 +133,6 @@ public final class SalesManController implements Initializable
 	private void provideNewClientFunctionality() throws IOException
 	{
 		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("NewClientView.fxml")));
-		System.out.println("");
 	}
 	
 	private void provideRemoveClientFunctionality() throws IOException 
@@ -162,7 +161,6 @@ public final class SalesManController implements Initializable
 	private void provideSearchClientFunctionality() throws IOException
 	{
 		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("SearchClientView.fxml")));
-		System.out.println("");
 	}
 
 	/**
@@ -172,7 +170,6 @@ public final class SalesManController implements Initializable
 	private void provideSearchCarFunctionality() throws IOException
 	{
 		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("SearchAutoView.fxml")));
-		System.out.println("");
 	}
 	
 	/**
@@ -182,7 +179,6 @@ public final class SalesManController implements Initializable
 	private void provideNewContractFunctionality() throws IOException
 	{
 		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("FXMLAlertRegister.fxml")));
-		System.out.println("");
 	}
 	
 	/**
@@ -192,7 +188,6 @@ public final class SalesManController implements Initializable
 	private void provideRemoveContractFunctionality() throws IOException
 	{
 		rootLayout.setCenter(FXMLLoader.load(SalesManView.class.getResource("RemoveContractView.fxml")));
-		System.out.println("");
 	}
 	
 	public final void setRootLayoutView(String fxml) throws IOException

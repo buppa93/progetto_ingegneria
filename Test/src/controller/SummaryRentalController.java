@@ -3,13 +3,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 import view.KmInvalidWarning;
 import view.PayementDialog;
 import view.SQLWarning;
 import view.SummaryRentalView;
 import view.SalesManView;
-import database.CustomSQLException;
 import database.DAOTableAuto;
 import database.DAOTableTypeContract;
 import database.DatabaseConnectionException;
@@ -157,15 +155,8 @@ public class SummaryRentalController implements Initializable
 			{
 				double pricePerKm = tc.getPricePerKmById(idTypeContract);
 				int kmContr = tc.getKmById(idTypeContract);
-				System.out.println("kmPost: "+kmPost);
-				System.out.println("pricePerKm: "+pricePerKm);
-				System.out.println("kmPre: "+kmPre);
-				System.out.println("kmContr: "+kmContr);
-				System.out.println("pricePrevent: "+pricePrevent_lbl.getText());
-				System.out.println("deposit: "+deposit_lbl.getText());
 				difference = getDifference(pricePerKm, estimateKm(kmPost, kmPre, kmContr)) + 
 					(Double.parseDouble(pricePrevent_lbl.getText()) - Double.parseDouble(deposit_lbl.getText()));
-				System.out.println("Differenza: "+ difference);
 			
 				//Setto i parametri perla finestra di pagamento
 				setPayementParameters(difference);

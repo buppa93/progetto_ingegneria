@@ -40,7 +40,6 @@ public class RemoveContractController implements Initializable
 		
 		Contract contratto = tc.searchContract(phone, targa);
 		
-		System.out.println("------- Contratto --------: "+contratto.toLabel());
 		
 		SummaryRentalView.getInstance().setContract(contratto);
 		//TODO se il contratto non viene trovato, mostrare messagio errore

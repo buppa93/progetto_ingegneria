@@ -50,7 +50,7 @@ public final class DeleteClientWarning
 			} 
 			catch (Exception e) 
 			{
-				e.printStackTrace();
+				new SQLWarning();
 			}
 			DAOTableClients tc = new DAOTableClients(db);
 			tc.delete(client.getPhone());

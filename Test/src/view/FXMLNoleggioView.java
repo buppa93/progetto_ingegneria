@@ -34,8 +34,6 @@ public final class FXMLNoleggioView extends Application
 
 		Scene scene = new Scene(root, 600, 400);
 		
-		System.out.println("base_chbox: ");
-		System.out.println(base_chbox);
 		
 
 		stage.setTitle("Noleggio");

@@ -4,11 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-
 import utility.KeyValuePair;
-import entity.Client;
 import entity.Contract;
 
 public class DAOTableContract 
@@ -60,7 +57,6 @@ public class DAOTableContract
 		PreparedStatement stat = con.prepareStatement(SEARCH);
 		stat.setString(1, phoneCli);
 		stat.setString(2, targa);
-		System.out.println(stat.toString());
 		rs = stat.executeQuery();	
 		rs.next();
 		contract = new Contract(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), 
@@ -85,7 +81,6 @@ public class DAOTableContract
 				SEARCH_DYNAMIC.append(params.get(0).getKey()+"='"+params.get(0).getValue()+"';");
 				stat = con.prepareStatement(SEARCH_DYNAMIC.toString());
 				rs = stat.executeQuery();
-				System.out.println("Ecco la query: "+stat.toString());
 				while(rs.next())
 				{
 					contracts.add(new Contract(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),
@@ -100,7 +95,6 @@ public class DAOTableContract
 				SEARCH_DYNAMIC.append(params.get(1).getKey()+"='"+params.get(1).getValue()+"');");
 				stat = con.prepareStatement(SEARCH_DYNAMIC.toString());
 				rs = stat.executeQuery();
-				System.out.println("Ecco la query: "+stat.toString());
 				while(rs.next())
 				{
 				
@@ -117,7 +111,6 @@ public class DAOTableContract
 				SEARCH_DYNAMIC.append(params.get(2).getKey()+"='"+params.get(2).getValue()+"');");
 				stat = con.prepareStatement(SEARCH_DYNAMIC.toString());
 				rs = stat.executeQuery();
-				System.out.println("Ecco la query: "+stat.toString());
 				while(rs.next())
 				{
 				
@@ -136,7 +129,6 @@ public class DAOTableContract
 				SEARCH_DYNAMIC.append(params.get(3).getKey()+"='"+params.get(3).getValue()+"');");
 				stat = con.prepareStatement(SEARCH_DYNAMIC.toString());
 				rs = stat.executeQuery();
-				System.out.println("Ecco la query: "+stat.toString());
 				while(rs.next())
 				{
 				
@@ -156,7 +148,6 @@ public class DAOTableContract
 				SEARCH_DYNAMIC.append(params.get(4).getKey()+"='"+params.get(4).getValue()+"');");
 				stat = con.prepareStatement(SEARCH_DYNAMIC.toString());
 				rs = stat.executeQuery();
-				System.out.println("Ecco la query: "+stat.toString());
 				while(rs.next())
 				{
 				

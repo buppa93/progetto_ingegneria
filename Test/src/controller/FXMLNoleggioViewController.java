@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
-
 import view.FXMLNoleggioView;
 import view.GenericWarning;
 import view.SQLWarning;
@@ -71,7 +70,7 @@ public class FXMLNoleggioViewController implements Initializable
 			tableagency = new DAOTableAgency(db);
 		} catch (DatabaseConnectionException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			new SQLWarning();
 		}
         ArrayList<Agency> agencies = new ArrayList<Agency>();
         
@@ -80,7 +79,8 @@ public class FXMLNoleggioViewController implements Initializable
         catch (SQLException e) {new SQLWarning();}
         
         ArrayList<String> agenciesString = new ArrayList<String>();
-        for(int i=0; i<agencies.size();i++)
+        int size = agencies.size();
+        for(int i=0; i<size;i++)
         {
         	agenciesString.add(agencies.get(i).toString());
         }
@@ -158,7 +158,6 @@ public class FXMLNoleggioViewController implements Initializable
 		String during = duration_field.getText();
 		String km = km_chbox.getValue();
 		String agencyTake= take_chbox.getValue();
-		String endDate = "";
 		
 		List<Auto> car = new ArrayList<Auto>();
 		DbAccess db = new DbAccess();

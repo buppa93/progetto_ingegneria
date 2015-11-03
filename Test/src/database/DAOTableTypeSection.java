@@ -56,11 +56,8 @@ public class DAOTableTypeSection
 		PreparedStatement stat = null;
 		ResultSet rs = null;
 		TypeSection result = null;
-		System.out.println("****"+db+"****");
-		System.out.println("****"+con+"*****");
 		stat = con.prepareStatement(FIND_BY_NAME);
 		stat.setString(1, name);
-		System.out.println("ECCO: "+stat.toString());
 		rs = stat.executeQuery();
 		rs.next();
 		result = new TypeSection(rs.getString("nome"), rs.getInt("n_porte"), 

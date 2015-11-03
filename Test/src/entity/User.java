@@ -12,6 +12,7 @@ public class User
 	private String TelephoneNumber;
 	private String Type;
 	private String pwd;
+	private String id_agenzia;
 
  /**
  * it initializes the client class to null
@@ -35,7 +36,7 @@ public class User
  * @param type
  * @param pwd
  */
-	public User(String id, String name, String surname, String TelephoneNumber, String type, String pwd)
+	public User(String id, String id_agenzia, String name, String surname, String TelephoneNumber, String pwd, String type)
 	{
 		this.id = id;
 		this.name=name;
@@ -43,6 +44,7 @@ public class User
 		this.TelephoneNumber=TelephoneNumber;
 		this.Type = type;
 		this.pwd = pwd;
+		this.id_agenzia = id_agenzia;
 	}
 	
 	public User(String id, String name, String surname, String TelephoneNumber, String type)
@@ -96,12 +98,18 @@ public class User
 	public String getPassword()
 	{return this.pwd;}
 	
+	public String getIdAgency()
+	{return this.id_agenzia;}
+	
 	/**
 	 * sets id through input parameter
 	 * @param id
 	 */
 	public void setID(String id)
 	{this.id=id;}
+	
+	public void setIdAgency(String id)
+	{this.id_agenzia=id;}
 	
 	/**
 	 * sets customer's name through input parameter

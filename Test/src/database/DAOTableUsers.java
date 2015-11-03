@@ -46,8 +46,7 @@ public class DAOTableUsers
 		stat.setString(2, passw);
 		ResultSet rs = stat.executeQuery();
 		rs.next();
-		result = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(6), rs.getString(5));
-		System.out.println(result.toString());
+		result = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
 		rs.close();
 		stat.close();
 		return result;
@@ -61,8 +60,8 @@ public class DAOTableUsers
 		stat.setString(1, id);
 		rs = stat.executeQuery();
 		rs.next();
-		c = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(6),
-				rs.getString(5));
+		c = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+				rs.getString(6), rs.getString(7));
 		rs.close();
 		stat.close();
 		return c;

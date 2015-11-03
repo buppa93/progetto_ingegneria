@@ -72,7 +72,7 @@ public class EstimateController implements Initializable
 		km_lbl.setText(EstimateView.getInstance().getParameters().get("km"));
 		typeCar_lbl.setText(EstimateView.getInstance().getParameters().get("typeCar"));
 		
-		char fascia = TypeSection.resolvType(EstimateView.getInstance().getParameters().get("typeCar"));
+		//char fascia = TypeSection.resolvType(EstimateView.getInstance().getParameters().get("typeCar"));
 		
 		DbAccess db = new DbAccess();
 		try 
