@@ -53,7 +53,6 @@ public class RemoveContractController implements Initializable
 	{
 		submit_bttn.setDisable(true);
 		
-		//TODO risolvere perche' non funziona correttamente
 		phoneClient_field.textProperty().addListener(new ChangeListener<String>()
         		{
 

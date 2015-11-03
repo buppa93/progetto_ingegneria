@@ -1,11 +1,27 @@
 package entity;
+
 /**
- * represent contract between customer and agency
+ * Classe che astrae un'contratto
  * @author Utente
  *
  */
 public class Contract 
 {
+	
+	/**
+	 * @param numero_ordine numero di contratto
+	 * @param agency_number numero di agenzia che ha stipulato il contratto
+	 * @param idCliente il numero di telefono del cliente
+	 * @param data_inizio la data di inizio contratto
+	 * @param data_fine la data di fine contratto
+	 * @param duration la durata in giorni/settimane
+	 * @param agency_return numero dell'agenzia in cui si desidera restituire l'auto
+	 * @param km il numero di chilometri da percorrere
+	 * @param type tipo di contratto (giornaliero/settimanale)
+	 * @param type_km il tipo di chilometraggio (limitato/illimitato)
+	 * @param price il costo del noleggio
+	 * @param deposit acconto lasciato dal cliente
+	 */
 	String numero_ordine;
 	String agency_number;
 	String idCliente;
@@ -21,22 +37,22 @@ public class Contract
 	String targa;
 	
 	/**
-	 * it initializes class Type Contract to null
+	 * Costruttore vuoto
 	 */
 	public Contract(){};
 	
 	/**
-	 * it initializes class type contract through input parameter
-	 * @param numero_ordine
-	 * @param number
-	 * @param idCliente
-	 * @param data_inizio
-	 * @param data_fine
-	 * @param restit
-	 * @param id
-	 * @param type
-	 * @param typekm
-	 * @param kmmax
+	 * Costruttore per la classe Contract
+	 * @param numero_ordine numero di contratto
+	 * @param agency_number il numero di agenzia
+	 * @param idCliente il numero di telefono del cliente
+	 * @param data_inizio data inizio contratto
+	 * @param data_fine data fine contratto
+	 * @param agency_return agenzia in cui lasciare l'auto
+	 * @param km i chilometri da percorrere
+	 * @param type_km tipo di chilometraggio (limitato/illimitato)
+	 * @param price costo del noleggio
+	 * @param deposit acconto versato
 	 */
 	public Contract(String numero_ordine, String agency_number, String idCliente, String data_inizio, String data_fine, String agency_return, int km, String type_km, double price, double deposit)
 	{
@@ -53,6 +69,20 @@ public class Contract
 		this.deposit = deposit;
 	}
 	
+	/**
+	 * Costruttore per la classe Contract
+	 * @param numero_ordine numero di contratto
+	 * @param agency_number il numero di agenzia
+	 * @param idCliente il numero di telefono del cliente
+	 * @param data_inizio data inizio contratto
+	 * @param duration la durata delnoleggio (giorni/settimane)
+	 * @param data_fine data_fine data fine contratto
+	 * @param agency_return agenzia in cui lasciare l'auto
+	 * @param targa targa dell'auto
+	 * @param type tipo di noleggio (giornaliero/settimanale)
+	 * @param deposit deposit acconto versato 
+	 * @param price costo del noleggio
+	 */
 	public Contract(String numero_ordine, String agency_number, String idCliente, String data_inizio, int duration,
 			String data_fine, String agency_return, String targa, String type, double deposit, double price)
 	{
@@ -70,6 +100,20 @@ public class Contract
 		this.duration = duration;
 	}
 	
+	
+	/**
+	 * Costruttore per la classe Contract
+	 * @param numero_ordine numero di contratto
+	 * @param agency_number il numero di agenzia
+	 * @param idCliente il numero di telefono del cliente
+	 * @param data_inizio data inizio contratto
+	 * @param duration la durata delnoleggio (giorni/settimane)
+	 * @param agency_return agenzia in cui lasciare l'auto
+	 * @param type tipo di noleggio (giornaliero/settimanale)
+	 * @param price costo del noleggio
+	 * @param deposit deposit deposit acconto versato 
+	 * @param targa targa dell'auto
+	 */
 	public Contract(String numero_ordine, String agency_number, String idCliente, String data_inizio, 
 			int duration, String agency_return, String type, double price, double deposit, 
 			String targa)
@@ -88,8 +132,9 @@ public class Contract
 	}
 	
 	/**
-	 * it gets number of agency of contract
-	 * @return number 
+	 * Metodo che ritorna il numero di agenzia
+	 * dove e' stato stipulato il contratto
+	 * @return number  numero di agenzia
 	 */
 	public String getAgencyId()
 	{
@@ -97,126 +142,182 @@ public class Contract
 	}
 	
 	/**
-	 * it gets number of customer of contract
-	 * @return id
+	 * Metodo che ritorna il numero di telefono
+	 * del cliente
+	 * @return idCliente numero di telefono del cliente
 	 */
 	public String getClientId(){
 		return idCliente;
 	}
 	
 	/** 
-	 * it gets number of contract
-	 * @return number of contract
+	 * Metodo che ritorna il numero di contratto
+	 * @return numero_ordine numero contratto
 	 */
 	public String getNumeroOrdine()
 	{return this.numero_ordine;}
 	
+	/**
+	 * Metodo che ritorna il numero di giorni/settimane 
+	 * di durata del noleggio
+	 * @return duration numero di giorni/settimane
+	 */
 	public int getDuration()
 	{
 		return this.duration;
 	}
 	
 	/**
-	 * it gets start date of contract
-	 * @return start date
+	 * Metodo che ritorna la data di inizio del contratto
+	 * @return data_inizio data inizio
 	 */
 	public String getDataInizio()
 	{return this.data_inizio;}
 	
 	/**
-	 * it gets end date of contract
-	 * @return end data
+	 * Metodo che ritorna la data di termine del contratto
+	 * @return data_fine data fine
 	 */
 	public String getDataFine()
 	{return this.data_fine;}
 	
+	/**
+	 * Metodo che ritorna il numero di agenzia nella quale
+	 * verra' restituita l'auto
+	 * @return agency_return agenzia ritorno
+	 */
 	public String getAgencyReturn()
 	{
 		return this.agency_return;
 	}
+	
 	/**
-	 * it gets maximum mileage
-	 * @return maximum mileage
+	 * Metodo che ritorna il numero massimo di km che si
+	 * possono percorrere
+	 * @return km km massimi
 	 */
 	public int getKm()
 	{return this.km;}
 	
+	/**
+	 * Metodo che ritorna il tipo di chilometraggio
+	 * (limitato/illimitato)
+	 * @return type_km tipo chilometraggio (limitato/illimitato)
+	 */
 	public String getTypeKm()
 	{
 		return this.type_km;
 	}
 	
+	/**
+	 * Metodo che ritorna il costo del noleggio
+	 * @return price costo del noleggio
+	 */
 	public double getPrice()
 	{
 		return this.price;
 	}
 	
+	/**
+	 * Metodo che ritorna l'acconto versato
+	 * @return deposit acconto versato 
+	 */
 	public double getDeposit()
 	{
 		return this.deposit;
 	}
 	
+	/**
+	 * Metodo che ritorna il numero di targa 
+	 * dell'auto
+	 * @return targa targa
+	 */
 	public String getTarga()
 	{
 		return this.targa;
 	}
 	
+	/**
+	 * Metodo che ritorna il tipo di contratto
+	 * (giornaliero/settimanale)
+	 * @return type tipo contratto (giornaliero/settimanale)
+	 */
 	public String getTypeContract()
 	{
 		return this.type;
 	}
 	
 	/**
-	 * sets contract's number through input parameter
-	 * @param numero_ordine
+	 * Metodo che setta il numero di contratto
+	 * @param numero_ordine numero di contratto
 	 */
 	public void setNumero_ordine(String numero_ordine)
 	{this.numero_ordine=numero_ordine;}
 	
 	/**
-	 * sets start data through input parameter
-	 * @param data_inizio
+	 * Metodo che setta la data di inizio contratto
+	 * @param data_inizio data inizio contratto
 	 */
 	public void setData_inizio(String data_inizio)
 	{this.data_inizio=data_inizio;}
 	
 	/**
-	 * sets end data through input parameter
-	 * @param data_fine
+	 * Metodo che setta la data termine del contratto
+	 * @param data_fine data termine contratto
 	 */
 	public void setData_fine(String data_fine)
 	{this.data_fine=data_fine;}
 	
 	/**
-	 * sets maximum mileage through input parameter
-	 * @param kmmax
+	 * Metodo che setta il numero massimo di km 
+	 * percorribili
+	 * @param km km percorribili
 	 */
 	public void setKm(int km)
 	{this.km=km;}
 	
+	/**
+	 * Metodo che setta il numero dell'agenzia
+	 * di restituzione dell'auto
+	 * @param agency_return numero agenzia di restituzione
+	 */
 	public void setAgencyReturn(String agency_return)
 	{
 		this.agency_return = agency_return;
 	}
 	
+	/**
+	 * Metodo che setta il tipo di chilometraggio
+	 * (giornaliero/settimanale)
+	 * @param type_km tipo di chilometraggio (giornaliero/settimanale)
+	 */
 	public void setTypeKm(String type_km)
 	{
 		this.type_km = type_km;
 	}
 	
+	/**
+	 * Metodo che setta il costo del contratto
+	 * @param price costo del contratto
+	 */
 	public void setPrice(double price)
 	{
 		this.price = price;
 	}
 	
+	/**
+	 * Metodo che setta l'acconto versato
+	 * @param deposit acconto versato
+	 */
 	public void setDeposit(double deposit)
 	{
 		this.deposit = deposit;
 	}
 	
 	/**
-	 * establishes if number of contract is valid. If his length is 5, it is valid
-	 * @return boolean
+	 * Stabilisce se il numero di contratto e'
+	 * valido
+	 * @return boolean vero se e' valido, falso altrimenti
 	 */
 	public boolean isValid()
 	{
@@ -226,6 +327,11 @@ public class Contract
 		return isValid;
 	}
 
+	/**
+	 * Metodo che ritorna una stringa che descrive un'oggetto
+	 * della classe
+	 * @return String numeroOrdine, numeroAgenzia, numeroTelefonoCliente, dataInizio, durata, dataFine, agenziaRitorno, tipo, prezzo, acconto, targa
+	 */
 	public String toLabel()
 	{
 		return this.numero_ordine + ", " + this.agency_number + ", " + this.idCliente + ", " + this.data_inizio
@@ -233,13 +339,4 @@ public class Contract
 				 + ", " + this.deposit + ", " + this.targa; 
 	}
 	
-	/**
-	 * return tuple of contract
-	 * @return attributes of contract
-	 */
-	/*public String toString()
-	{
-		return this.numero_ordine + "," + this.number + "," + this.idCliente + "," + this.data_inizio + "," + this.data_fine + "," +this.restit+","+this.kmmax;
-	}*/
-		
 }

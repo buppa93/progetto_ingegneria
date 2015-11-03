@@ -19,10 +19,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-/*
- * TODO migliorare come la ricerca auto
- * TODO passare in DAO
- */
 public class SearchClientCrontoller 
 {
 	@FXML private AnchorPane rootPane;

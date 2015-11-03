@@ -37,7 +37,6 @@ public class MyUtil
 		} 
 		catch (NoSuchAlgorithmException e1) 
 		{
-			// TODO Auto-generated catch block
 			new GenericWarning("Errore Runtime", "Errore di Runtime").start();
 		}
 		byte[] messageDigest = md.digest(input.getBytes());

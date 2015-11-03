@@ -69,7 +69,6 @@ public class FXMLNoleggioViewController implements Initializable
 		try {
 			tableagency = new DAOTableAgency(db);
 		} catch (DatabaseConnectionException e1) {
-			// TODO Auto-generated catch block
 			new SQLWarning();
 		}
         ArrayList<Agency> agencies = new ArrayList<Agency>();

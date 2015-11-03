@@ -27,10 +27,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/*
- * TODO migliorare come la ricerca auto
- * TODO passare in DAO
- */
 public class SearchContractController implements Initializable 
 {
 	@FXML private AnchorPane rootPane;
@@ -58,7 +54,6 @@ public class SearchContractController implements Initializable
 		try {
 			ttc = new DAOTableTypeContract(db);
 		} catch (DatabaseConnectionException e1) {
-			// TODO Auto-generated catch block
 			new SQLWarning();
 		}
         ArrayList<TypeContract> typeContract = new ArrayList<TypeContract>();

@@ -25,9 +25,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-/*
- * TODO passare in DAO
- */
 public class SearchAutoController implements Initializable
 {
 	@FXML private AnchorPane rootLayout;
@@ -69,10 +66,6 @@ public class SearchAutoController implements Initializable
 	@FXML protected void onCancelAction(ActionEvent event) throws IOException
 	{((BorderPane) rootLayout.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));}
 	
-	/*
-	 * TODO risolvere bug campo disponibilita' che e' sempre
-	 * uguale ad A
-	 */
 	public ArrayList<KeyValuePair<String,?>> getSearchParameters()
 	{
 		ArrayList<KeyValuePair<String,?>> searchParameters = new ArrayList<KeyValuePair<String,?>>();
