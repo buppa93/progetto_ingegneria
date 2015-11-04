@@ -1,11 +1,12 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
 
+import database.DAOTableAgency;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TableAgency;
 import view.AdminView;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -30,7 +31,7 @@ public class AdminDeleteAgencyController {
 	((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(AdminView.class.getResource("FXMLAdminView.fxml")));
 	}
 	
-	@FXML protected void onDeleteAction (Event event) throws DatabaseConnectionException, IOException
+	@FXML protected void onDeleteAction (Event event) throws DatabaseConnectionException, IOException, SQLException
 	{
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("ATTENZIONE!");
@@ -42,8 +43,8 @@ public class AdminDeleteAgencyController {
 		{
 			DbAccess db=new DbAccess();
 			db.initConnection();
-			TableAgency ta= new TableAgency(db);
-			ta.deleteAgencyById(id_field.getText());
+			DAOTableAgency ta= new DAOTableAgency(db);
+			ta.delete(id_field.getText());
 			
 		} else {
 			((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(AdminView.class.getResource("FXMLAdminView.fxml")));

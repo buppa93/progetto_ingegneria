@@ -9,7 +9,6 @@ import view.PayementDialog;
 import view.SQLWarning;
 import view.SummaryRentalView;
 import view.SalesManView;
-import database.CustomSQLException;
 import database.DAOTableAuto;
 import database.DAOTableTypeContract;
 import database.DatabaseConnectionException;

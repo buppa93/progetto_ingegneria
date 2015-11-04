@@ -1,11 +1,12 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import view.AdminView;
+import database.DAOTableAgency;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TableAgency;
 import entity.Agency;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,13 +24,13 @@ public class AdminNewAgencyController {
 @FXML	Button insert_bttn;
 @FXML	AnchorPane rootPane;
 	
-	@FXML protected void OnInsertAction(ActionEvent event) throws DatabaseConnectionException
+	@FXML protected void OnInsertAction(ActionEvent event) throws DatabaseConnectionException, SQLException
 	{	
 		Agency a=new Agency(number_field.getText(), name_field.getText(), address_field.getText());
 		DbAccess db=new DbAccess();
 		db.initConnection();
-		TableAgency ta= new TableAgency(db);
-		ta.insertAgency(a);
+		DAOTableAgency ta= new DAOTableAgency(db);
+		ta.insert(a);
 		
 	}
 	@FXML protected void OnCancelAction(ActionEvent event) throws IOException

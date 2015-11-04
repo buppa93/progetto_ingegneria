@@ -1,12 +1,13 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 import view.AdminView;
+import database.DAOTableClients;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TableClients;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -34,8 +35,13 @@ public class AdminDeleteClientController {
 		{
 			DbAccess db=new DbAccess();
 			db.initConnection();
-			TableClients tb= new TableClients(db);
-			tb.deleteClientByPhone(cell_field.getText());
+			DAOTableClients tb= new DAOTableClients(db);
+			try {
+				tb.delete(cell_field.getText());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		} else {
 			((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(AdminView.class.getResource("FXMLAdminView.fxml")));

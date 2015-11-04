@@ -1,11 +1,12 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import view.AdminView;
+import database.DAOTableAuto;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TableAuto;
 import entity.Auto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,8 +28,13 @@ public class AdminNewAutoController {
 		Auto a= new Auto(targa_field.getText(), modello_field.getText(), marca_field.getText(), (Integer.parseInt(kmpercorsi_field.getText())), 1);
 		DbAccess db=new DbAccess();
 		db.initConnection();
-		TableAuto taauto= new TableAuto(db);
-		taauto.insertAuto(a);
+		DAOTableAuto taauto= new DAOTableAuto(db);
+		try {
+			taauto.insert(a);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}	
 	
 	@FXML protected void OnCancelAction(ActionEvent event) throws IOException

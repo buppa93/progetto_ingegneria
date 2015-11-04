@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
 
+import database.DAOTableAuto;
 import database.DatabaseConnectionException;
 import database.DbAccess;
-import database.TableAuto;
 import view.AdminView;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -44,8 +44,8 @@ public class AdminDeleteCarController {
 		{
 			DbAccess db=new DbAccess();
 			db.initConnection();
-			TableAuto ta= new TableAuto(db);
-			ta.deleteAutoByTarga(targa_field.getText());
+			DAOTableAuto ta= new DAOTableAuto(db);
+			ta.deleteAutoByTargaAndAgency(targa_field.getText(),AdminView.session.filiale.getNumber());
 			
 		} else {
 			((BorderPane) rootPane.getParent()).setCenter(FXMLLoader.load(AdminView.class.getResource("FXMLAdminView.fxml")));

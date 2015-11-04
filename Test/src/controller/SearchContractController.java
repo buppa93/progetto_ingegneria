@@ -10,7 +10,6 @@ import utility.KeyValuePair;
 import view.GenericDialogView;
 import view.GenericWarning;
 import view.SalesManView;
-import view.SearchCarsResultView;
 import view.SearchContractResultView;
 import database.DAOTableContract;
 import database.DAOTableTypeContract;
