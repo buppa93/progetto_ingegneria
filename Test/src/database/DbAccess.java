@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import view.SQLWarning;
+
 public class DbAccess 
 {
 	private String DRIVER_CLASS_NAME = "org.gjt.mm.mysql.Driver";
@@ -24,7 +26,7 @@ public class DbAccess
 		} 
 		catch (Exception ex) 
 		{
-			System.out.println("Impossibile trovare il Driver: " + DRIVER_CLASS_NAME);
+			new SQLWarning();
 		}
 		try 
 		{
@@ -32,8 +34,7 @@ public class DbAccess
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println("Impossibile connettersi al DB");
-			e.printStackTrace();
+			new SQLWarning();
 		}
 	}
 	

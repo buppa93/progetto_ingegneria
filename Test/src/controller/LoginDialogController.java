@@ -40,7 +40,6 @@ public class LoginDialogController implements Initializable
 		String psswd = pwd_field.getText();
 		DbAccess db = new DbAccess();
 		db.initConnection();
-		System.out.println("sono qui");
 		DAOTableUsers user = new DAOTableUsers(db);
 
 		if(MyUtil.login(db, usr, psswd))
@@ -49,7 +48,6 @@ public class LoginDialogController implements Initializable
 			
 			if(gen.getType().equals("adm"))
 			{
-				System.out.println("sono admin");
 
 				AdminView adminview= new AdminView();
 				adminview.start(new Stage());
@@ -58,7 +56,6 @@ public class LoginDialogController implements Initializable
 			}
 			else if(gen.getType().equals("usr"))
 			{
-				System.out.println("sono user");
 				new SalesManView(gen).start(new Stage());
 				Stage stage = (Stage) cancel_bttn.getScene().getWindow();
 				stage.close();

@@ -3,12 +3,11 @@ package controller;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-
 import utility.KeyValuePair;
 import view.GenericDialogView;
 import view.GenericWarning;
+import view.SQLWarning;
 import view.SalesManView;
 import view.SearchContractResultView;
 import database.DAOTableContract;
@@ -28,10 +27,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/*
- * TODO migliorare come la ricerca auto
- * TODO passare in DAO
- */
 public class SearchContractController implements Initializable 
 {
 	@FXML private AnchorPane rootPane;
@@ -53,14 +48,13 @@ public class SearchContractController implements Initializable
         try 
         {db.initConnection();} 
         catch (DatabaseConnectionException e) 
-        {e.printStackTrace();}
+        {new SQLWarning();}
         
         DAOTableTypeContract ttc = null;
 		try {
 			ttc = new DAOTableTypeContract(db);
 		} catch (DatabaseConnectionException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			new SQLWarning();
 		}
         ArrayList<TypeContract> typeContract = new ArrayList<TypeContract>();
         
@@ -69,9 +63,10 @@ public class SearchContractController implements Initializable
         	typeContract = ttc.getAll();
         } 
         catch (SQLException e) 
-        {e.printStackTrace();}
+        {new SQLWarning();}
         ArrayList<String> typeContractString = new ArrayList<String>();
-        for(int i=0;i<typeContract.size();i++)
+        int size = typeContract.size();
+        for(int i=0;i<size;i++)
         {
         	typeContractString.add(typeContract.get(i).toString());
         }
@@ -83,19 +78,11 @@ public class SearchContractController implements Initializable
 	
 	@FXML protected void onSubmitAction(ActionEvent event) throws Exception
 	{	
-		System.out.println("nOrder_field -> "+nOrder_field.getText());
-		System.out.println("client_field -> "+client_field.getText());
-		System.out.println("targa_field -> "+targa_field.getText());
-		System.out.println("type_chbox -> "+type_chbox.getValue());
-		System.out.println("data_field -> "+data_field.getValue());
 		search();
-		
-		
 	}
 	
 	public void search() throws Exception
 	{
-		ArrayList<KeyValuePair<String,?>> params = getParameters();
 		
 		DbAccess db = new DbAccess();
 		db.initConnection();

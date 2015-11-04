@@ -7,21 +7,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
 
+import view.GenericWarning;
 import database.DbAccess;
-import database.DbString;
 
 public class MyUtil 
 {
 	private static final String query = "SELECT * FROM user WHERE (nome= ? AND password= ?);";
 	
-	MyUtil(){}
+	public MyUtil(){}
 	
 	/**
 	  * Crea una stringa codifica in md5 a partire dal parametro di 
@@ -31,23 +30,27 @@ public class MyUtil
 	  */
 	public static String getMD5(String input) 
 	{
-        try 
+		MessageDigest md = null;
+		try 
+		{
+			md = MessageDigest.getInstance("MD5");
+		} 
+		catch (NoSuchAlgorithmException e1) 
+		{
+			new GenericWarning("Errore Runtime", "Errore di Runtime").start();
+		}
+		byte[] messageDigest = md.digest(input.getBytes());
+        BigInteger number = new BigInteger(1, messageDigest);
+		StringBuffer hashtext = new StringBuffer(number.toString(16));
+        // Now we need to zero pad it if you actually want the full 32 chars.
+        int length = hashtext.length();
+        while (length < 32) 
         {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] messageDigest = md.digest(input.getBytes());
-            BigInteger number = new BigInteger(1, messageDigest);
-            String hashtext = number.toString(16);
-            // Now we need to zero pad it if you actually want the full 32 chars.
-            while (hashtext.length() < 32) 
-            {
-                hashtext = "0" + hashtext;
-            }
-            return hashtext;
+            StringBuffer tmp = new StringBuffer("0");
+            tmp.append(hashtext);
+            hashtext = tmp;
         }
-        catch (NoSuchAlgorithmException e) 
-        {
-            throw new RuntimeException(e);
-        }
+        return hashtext.toString();
     }
 	
 	/**
@@ -61,17 +64,11 @@ public class MyUtil
 	public static boolean login (DbAccess db, String name, String pwd) throws SQLException
 	{
 		//return true;
-		System.out.println("Sto per fare il login");
-		System.out.println("Ho creato lo statement");
 		Connection con = db.getConnection();
 		String md5 = MyUtil.getMD5(pwd);
-		System.out.println("Ho creato l' md5");
 		PreparedStatement stat = con.prepareStatement(query);
 		stat.setString(1, name);
 		stat.setString(2, md5);
-		System.out.println("Nome utente: "+name);
-		System.out.println("Password: "+md5);
-		System.out.println(stat.toString());
 		ResultSet rs = stat.executeQuery();
 		
 		if(rs.next())

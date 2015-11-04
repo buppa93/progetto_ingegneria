@@ -34,7 +34,6 @@ public final class SelectCarView
 	public void setCars(List<Auto> cars)
 	{
 		this.cars = cars;
-		System.out.println("Macchine: "+this.cars.size());
 	}
 	
 	public void setParameters(Map<String, String> parameters)

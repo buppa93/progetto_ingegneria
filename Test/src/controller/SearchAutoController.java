@@ -2,12 +2,9 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import database.DAOTableAuto;
-import database.DatabaseConnectionException;
 import database.DbAccess;
 import entity.Auto;
 import entity.TypeSection;
@@ -16,7 +13,6 @@ import view.GenericDialogView;
 import view.GenericWarning;
 import view.SalesManView;
 import view.SearchCarsResultView;
-import view.SearchContractResultView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,9 +25,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-/*
- * TODO passare in DAO
- */
 public class SearchAutoController implements Initializable
 {
 	@FXML private AnchorPane rootLayout;
@@ -73,10 +66,6 @@ public class SearchAutoController implements Initializable
 	@FXML protected void onCancelAction(ActionEvent event) throws IOException
 	{((BorderPane) rootLayout.getParent()).setCenter(FXMLLoader.load(SalesManView.class.getResource("NothingView.fxml")));}
 	
-	/*
-	 * TODO risolvere bug campo disponibilita' che e' sempre
-	 * uguale ad A
-	 */
 	public ArrayList<KeyValuePair<String,?>> getSearchParameters()
 	{
 		ArrayList<KeyValuePair<String,?>> searchParameters = new ArrayList<KeyValuePair<String,?>>();
@@ -96,7 +85,6 @@ public class SearchAutoController implements Initializable
 		{
 			char section = TypeSection.resolvType(type_chbox.getValue());
 			searchParameters.add(new KeyValuePair<String,Character>("fascia",section));
-			System.out.println("Fascia: "+ section);
 		}
 		
 		searchParameters.add(new KeyValuePair<String,String>("id_agenzia",SalesManView.session.filiale.getNumber()));

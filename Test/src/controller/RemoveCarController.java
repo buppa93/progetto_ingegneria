@@ -39,8 +39,7 @@ public class RemoveCarController
 			try {
 				result = ta.deleteAutoByTargaAndAgency(targa_field.getText(),SalesManView.session.filiale.getNumber());
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				new SQLWarning();
 			}
 
 			if(result!=0)

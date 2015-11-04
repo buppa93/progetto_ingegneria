@@ -69,12 +69,7 @@ public class LoginAlertView
 			return null;
 		});*/
 
-		Optional<Pair<String, String>> result = dialog.showAndWait();
-
-		result.ifPresent(usernamePassword -> {
-			System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
-		});
-		
+		Optional<Pair<String, String>> result = dialog.showAndWait();		
 		return result;
 	}
 }

@@ -20,8 +20,6 @@ public class SalesManView extends Application
 	public SalesManView(User usr) throws ParserConfigurationException, SAXException, IOException
 	{
 		session = new SESSION(usr);
-    	session.printAgencyProperties();
-    	session.printUsrProperties();
 	}
     
     public void start(Stage stage) throws Exception 

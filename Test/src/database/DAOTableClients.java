@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import utility.KeyValuePair;
+import view.SQLWarning;
 import entity.Client;
 
 public class DAOTableClients 
@@ -81,7 +82,6 @@ public class DAOTableClients
 				SEARCH_DYNAMIC.append(params.get(0).getKey()+"='"+params.get(0).getValue()+"';");
 				stat = con.prepareStatement(SEARCH_DYNAMIC.toString());
 				rs = stat.executeQuery();
-				System.out.println("Ecco la query: "+stat.toString());
 				while(rs.next())
 				{clients.add(new Client(rs.getString(1),rs.getString(2),rs.getString(3)));}
 				rs.close();
@@ -91,7 +91,6 @@ public class DAOTableClients
 				SEARCH_DYNAMIC.append("("+params.get(0).getKey()+"='"+params.get(0).getValue()+"' AND ");
 				SEARCH_DYNAMIC.append(params.get(1).getKey()+"='"+params.get(1).getValue()+"');");
 				stat = con.prepareStatement(SEARCH_DYNAMIC.toString());
-				System.out.println("Ecco la query: "+stat.toString());
 				rs = stat.executeQuery();
 				while(rs.next())
 				{clients.add(new Client(rs.getString(1),rs.getString(2),rs.getString(3)));}
@@ -103,12 +102,14 @@ public class DAOTableClients
 				SEARCH_DYNAMIC.append(params.get(1).getKey()+"='"+params.get(1).getValue()+"' AND ");
 				SEARCH_DYNAMIC.append(params.get(2).getKey()+"='"+params.get(2).getValue()+"');");
 				stat = con.prepareStatement(SEARCH_DYNAMIC.toString());
-				System.out.println("Ecco la query: "+stat.toString());
 				rs = stat.executeQuery();
 				while(rs.next())
 				{clients.add(new Client(rs.getString(1),rs.getString(2),rs.getString(3)));}
 				rs.close();
 				stat.close();
+				break;
+			default:
+				new SQLWarning();
 				break;
 		}
 		return clients;

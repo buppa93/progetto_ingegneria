@@ -28,17 +28,15 @@ public class FXMLExampleController
 		{
 			DbAccess db =  new DbAccess();
 			db.initConnection();
-			System.out.println(db.toString());
 			String name = pair.getKey();
 			String pwd = pair.getValue();
 			boolean login = MyUtil.login(db,name,pwd);
-			System.out.println(login);
 			if(login)
 			{
 				actiontarget.setText("login user ok");
 			}
 		}
-		catch(SQLException e){}
+		catch(SQLException e){new SQLException();}
 	}
 
 	@FXML protected void loginAdmin(ActionEvent event) 

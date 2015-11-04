@@ -40,7 +40,6 @@ public class RemoveContractController implements Initializable
 		
 		Contract contratto = tc.searchContract(phone, targa);
 		
-		System.out.println("------- Contratto --------: "+contratto.toLabel());
 		
 		SummaryRentalView.getInstance().setContract(contratto);
 		//TODO se il contratto non viene trovato, mostrare messagio errore
@@ -54,7 +53,6 @@ public class RemoveContractController implements Initializable
 	{
 		submit_bttn.setDisable(true);
 		
-		//TODO risolvere perche' non funziona correttamente
 		phoneClient_field.textProperty().addListener(new ChangeListener<String>()
         		{
 

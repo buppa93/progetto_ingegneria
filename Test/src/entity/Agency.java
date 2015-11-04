@@ -28,9 +28,9 @@ public class Agency
 	/**
 	 * Costruttore che inizializza gli attributi della classe 
 	 * Agency in accordo con i valori dei paramentri del costruttore.
-	 * @param number
-	 * @param name
-	 * @param address
+	 * @param number Stringa contenente il numero dell'agenzia
+	 * @param name	Stringa contenente il nome dell'agenzia
+	 * @param address Stringa contenente l'indirizzo dell'agenzia
 	 */
 	public Agency(String number, String name, String address)  
 	{
@@ -41,42 +41,42 @@ public class Agency
 	
 	/**
 	 * Metodo che ritorna il numero dell'agenzia
-	 * @return number
+	 * @return number ritorna il numero dell'agenzia
 	 */
 	public String getNumber()  
 	{return this.number;}
 	
 	/**
 	 * Metodo che ritorna il nome dell'agenzia
-	 * @return name
+	 * @return name ritorna il nome dell'agenzia
 	 */
 	public String getName() 
 	{return this.name;}
 	
 	/**
 	 * Metodo che ritorna l'indirizzo dell'agenzia
-	 * @return address
+	 * @return address ritorna l'indirizzo dell'agenzia
 	 */
 	public String getAddress()   
 	{return this.address;}
 	
 	/**
 	 * Metodo che setta il numero dell'agenzia
-	 * @param number
+	 * @param number il numero dell'agenzia
 	 */
 	public void setNumber(String number) 
 	{this.number=number;}
 	
 	/**
 	 * Metodo che setta il nome dell'agenzia
-	 * @param name
+	 * @param name il nome dell'agenzia
 	 */
 	public void setName(String name)  
 	{this.name=name;}
 	
 	/**
 	 * Metodo che setta l'indirizzo dell'agenzia
-	 * @param address
+	 * @param address l'indirizzo dell'agenzia
 	 */
 	public void setAddress(String address) 
 	{this.address=address;}
@@ -84,7 +84,7 @@ public class Agency
 	/**
 	 * Stabilisce se il numero dell'agenzia e' un numero
 	 * valido.
-	 * @return boolean
+	 * @return boolean vero se e' un numero valido, falso altrimenti
 	 */
 	public boolean isNumberValid() 
 	{
@@ -97,7 +97,7 @@ public class Agency
 	/**
 	 * Metodo che ritorna gli attributi dell'agenzia
 	 * sotto forma di stringa
-	 * @return tuple of agency
+	 * @return string: numero, + nome, + indirizzo
 	 */
 	public String toString() 
 	{return this.number + "," + this.name + "," + this.address;}
@@ -105,7 +105,7 @@ public class Agency
 	/**
 	 * Metodo che ritorna il numero di un agenzia da una
 	 * stringa formattata che ne rappresenta gli attributi
-	 * @param agency
+	 * @param agency stringa: numero, + nome, + indirizzo
 	 * @return numberOfAgency
 	 */
 	public static String getIdFromString(String agency)

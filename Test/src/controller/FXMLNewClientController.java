@@ -28,9 +28,6 @@ public class FXMLNewClientController implements Initializable
 	@FXML private Button submit_bttn;
 	@FXML private AnchorPane rootPane;
 	
-	/*
-	 * TODO passare in DAO
-	 */
 	@FXML protected void submit(ActionEvent event) throws Exception 
 	{
 		Client c = new Client(name_field.getText(), surname_field.getText(), phone_field.getText());
@@ -54,7 +51,6 @@ public class FXMLNewClientController implements Initializable
 	{
 		submit_bttn.setDisable(true);
 		
-		//TODO corregere bug
 		name_field.textProperty().addListener(new ChangeListener<String>()
 				{
 

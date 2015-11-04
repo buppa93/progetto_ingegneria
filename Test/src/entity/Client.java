@@ -1,18 +1,25 @@
 package entity;
 /**
- * it represents customer data
+ * Classe che astrae un cliente
  * @author Utente
  *
  */
 public class Client 
 {
+	/**
+	 * @param name il nome del cliente
+	 * @param surname il cognome del cliente
+	 * @param il numero di telefono del cliente
+	 */
 	private String name;
 	private String surname;
 	private String phone;
 
- /**
- * it initializes the client class to null
- */
+ 
+	/**
+	 * Costruttore che inizzializza gli attributi della classe 
+	 * a null
+	 */
 	public Client()
 	{
 		//this.id="NULL";
@@ -21,15 +28,12 @@ public class Client
 		this.phone="NULL";
 	}
 
- /**
- * it initializes client class to input parameters
- * @param id
- * @param name
- * @param surname
- * @param TelephoneNumber
- * @param type
- * @param pwd
- */
+	/**
+	 * Costruttore per la classe Client
+	 * @param name il nome del cliente
+	 * @param surname il cognome del cliente
+	 * @param TelephoneNumber il numero di telefono del cliente
+	 */
 	public Client(String name, String surname, String TelephoneNumber)
 	{
 		this.name=name;
@@ -38,49 +42,56 @@ public class Client
 	}
      
 	/**
-	* it gets customer's name
-	* @return name
+	* Metodo che ritorna il nome del 
+	* cliente
+	* @return name il nome del cliente
 	*/
 	public String getName()
 	{return this.name;}
 	
 	/**
-	 * it gets customer's surname
-	 * @return surname
+	 * Metodo che ritorna il cognome 
+	 * del cliente
+	 * @return surname il cognome del cliente
 	 */
 	public String getSurname()
 	{return this.surname;}
 	
 	/**
-	 * it gets customer's telephone number
-	 * @return number of telephone
+	 * Metodo che ritorna il numero di telefono
+	 * del cliente
+	 * @return phone il numero di telefono
 	 */
 	public String getPhone()
 	{return this.phone;}
 	
 	/**
-	 * sets customer's name through input parameter
-	 * @param name
+	 * Metodo che setta il nome del cliente
+	 * @param name nome del cliente
 	 */
 	public void setName(String name)
 	{this.name=name;}
 	
 	/**
-	 * sets customer's surname through input parameter
-	 * @param surname
+	 * Metodo che setta il cognome del
+	 * cliente
+	 * @param surname cognome del cliente
 	 */
 	public void setSurname(String surname)
 	{this.surname=surname;}
 	
 	/**
-	 * sets customer's telephone number through input parameter
-	 * @param TelephoneNumber
+	 * Metodo che setta il numero di telefono 
+	 * del cliente
+	 * @param TelephoneNumber numero di telefono del cliente
 	 */
 	public void setPhone(String TelephoneNumber)
 	{this.phone=TelephoneNumber;}
+	
 	/**
-	 * returns tuple of client
-	 * @return string of attribute of client
+	 * Metodo che ritorna una stringa rappresentante
+	 * il Cliente
+	 * @return string attributi del cliente
 	 */
 	public String toString()
 	{
@@ -88,14 +99,20 @@ public class Client
 				+ this.phone+ ". ";
 	}
 	
+	/**
+	 * Metodo che ritorna una stringa rappresentante
+	 * il Cliente 
+	 * @return string nome, cognome, telefono
+	 */
 	public String toLabel()
 	{
 		return this.name + ", " + this.surname + ", " + this.phone; 
 	}
 	
 	/**
-	 * establishes if customer's telephone number is valid. If his length is 10, it is valid
-	 * @return
+	 * Metodo che controlla se il numero di telefono e' 
+	 * valido
+	 * @return boolean vero se e' valido, false altrimenti
 	 */
 	public boolean isTelephoneValid()
 	{
