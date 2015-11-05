@@ -48,8 +48,8 @@ public class LoginDialogController implements Initializable
 			
 			if(gen.getType().equals("adm"))
 			{
-
-				AdminView adminview= new AdminView();
+				//new AdminView(gen).start(new Stage());
+				AdminView adminview= new AdminView(gen);
 				adminview.start(new Stage());
 				Stage stage = (Stage) cancel_bttn.getScene().getWindow();
 				stage.close();
