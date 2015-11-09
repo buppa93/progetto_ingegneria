@@ -40,11 +40,7 @@ public class MyUtil
             StringBuffer tmp = new StringBuffer("0");
             tmp.append(hashtext);
             hashtext = tmp;
-<<<<<<< HEAD
             length = hashtext.length();
-=======
-            length=hashtext.length();
->>>>>>> refs/remotes/origin/DAOImplementation
         }
         return hashtext.toString();
     }

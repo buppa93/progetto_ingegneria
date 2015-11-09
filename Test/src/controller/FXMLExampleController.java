@@ -1,4 +1,5 @@
 package controller;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public class FXMLExampleController
 {
 	@FXML private Label actiontarget;
 
-	@FXML protected void loginUser(ActionEvent event) throws DatabaseConnectionException 
+	@FXML protected void loginUser(ActionEvent event) throws DatabaseConnectionException, NoSuchAlgorithmException 
 	{
 		actiontarget.setText("login utente");
 		Optional<Pair<String, String>> opt;

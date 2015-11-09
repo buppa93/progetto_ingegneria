@@ -46,7 +46,6 @@ public class LoginDialogController implements Initializable
 		DbAccess db = new DbAccess();
 		try 
 		{
-<<<<<<< HEAD
 			db.initConnection();
 		} 
 		catch (DatabaseConnectionException e) 
@@ -66,19 +65,6 @@ public class LoginDialogController implements Initializable
 		try 
 		{
 			if(MyUtil.login(db, usr, psswd))
-=======
-			User gen = user.searchTypeUserByNamePass(usr, psswd);
-			
-			if(gen.getType().equals("adm"))
-			{
-				//new AdminView(gen).start(new Stage());
-				AdminView adminview= new AdminView(gen);
-				adminview.start(new Stage());
-				Stage stage = (Stage) cancel_bttn.getScene().getWindow();
-				stage.close();
-			}
-			else if(gen.getType().equals("usr"))
->>>>>>> refs/remotes/origin/DAOImplementation
 			{
 				User gen = user.searchTypeUserByNamePass(usr, psswd);
 				
