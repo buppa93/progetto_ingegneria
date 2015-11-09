@@ -10,6 +10,12 @@ import utility.KeyValuePair;
 import view.SQLWarning;
 import entity.Contract;
 
+/**
+ * Questa classe modella la tabella contratto del 
+ * database seguendo il pattern DAO
+ * @author giuseppe
+ *
+ */
 public class DAOTableContract 
 {
 	DbAccess db;
@@ -20,12 +26,22 @@ public class DAOTableContract
 	private static final String REMOVE  = "DELETE FROM contratto WHERE numero_ordine=?;";
 	private StringBuffer SEARCH_DYNAMIC = new StringBuffer("SELECT * FROM contratto WHERE ");
 	
+	/**
+	 * Costruttore per la classe
+	 * @param db
+	 * @throws DatabaseConnectionException
+	 */
 	public DAOTableContract(DbAccess db) throws DatabaseConnectionException
 	{
 		db.initConnection();
 		con = db.getConnection();
 	}
 	
+	/**
+	 * Inserisce un nuovo contratto nel database
+	 * @param contract contratto da inserire
+	 * @throws SQLException
+	 */
 	public void insert(Contract contract) throws SQLException
 	{
 		PreparedStatement stat = con.prepareStatement(INSERT);
@@ -44,6 +60,11 @@ public class DAOTableContract
 		stat.close();
 	}
 	
+	/**
+	 * Elimina un contratto dal database
+	 * @param id numero di contratto
+	 * @throws SQLException
+	 */
 	public void remove(String id) throws SQLException
 	{
 		PreparedStatement stat = con.prepareStatement(REMOVE);
@@ -52,6 +73,13 @@ public class DAOTableContract
 		stat.close();
 	}
 	
+	/**
+	 * Cerca un contratto
+	 * @param phoneCli numero telefono cliente
+	 * @param targa targa dell'auto noleggiata
+	 * @return Contract il contratto trovato
+	 * @throws SQLException
+	 */
 	public Contract searchContract (String phoneCli, String targa) throws SQLException
 	{
 		Contract contract = null;
@@ -71,6 +99,13 @@ public class DAOTableContract
 		return contract;
 	}
 	
+	/**
+	 * Funzione che effettua una ricerca attraverso una 
+	 * lista di campi passati come paramelista di campitro
+	 * @param params 
+	 * @return ArrayList<Contract> ArrayList contenente i contratti trovati
+	 * @throws SQLException
+	 */
 	public ArrayList<Contract> dynamicSearch(ArrayList<KeyValuePair<String,?>> params) throws SQLException
 	{
 		ArrayList<Contract> contracts = new ArrayList<Contract>();
@@ -167,6 +202,10 @@ public class DAOTableContract
 		return contracts;
 	}
 	
+	/**
+	 * Chiude la connessione
+	 * @throws SQLException
+	 */
 	public void closeConncetion() throws SQLException
 	{con.close();}
 }

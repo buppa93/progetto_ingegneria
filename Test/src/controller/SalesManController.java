@@ -3,6 +3,8 @@ package controller;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
+import view.GenericWarning;
+import view.LoginDialog;
 import view.SalesManView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -199,6 +201,28 @@ public final class SalesManController implements Initializable
 	public void initialize(java.net.URL arg0, ResourceBundle arg1) 
 	{
 		menuBar.setFocusTraversable(true);
+		/*if(SalesManView.session.validateUsr())
+		{}
+		else
+		{
+			new GenericWarning("Attenzione", "Non puoi loggarti in questa agenzia.").start();
+			//try {
+			LoginDialog login = new LoginDialog();
+				try {
+					login.start(new Stage());
+				} catch (IOException e) {
+					//TODO vedere perche' da eccezione
+					e.printStackTrace();
+					System.out.println("here");
+					new GenericWarning("Errore","GenericException").start();
+				}*/
+			//} catch (Exception e) {
+				
+			//}
+			//Stage stage = (Stage) mainPane.getScene().getWindow();
+			//stage.close();
+				
+		
 
 	}
 	

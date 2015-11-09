@@ -11,6 +11,12 @@ import view.SalesManView;
 import entity.Auto;
 import entity.TypeSection;
 
+/**
+ * Questa classe modella la tabella auto del 
+ * database seguendo il pattern DAO
+ * @author giuseppe
+ *
+ */
 public class DAOTableAuto 
 {
 	DbAccess db = new DbAccess();
@@ -27,13 +33,23 @@ public class DAOTableAuto
 	private static final String DELETE_BY_TARGA_AGENCY = "DELETE FROM auto WHERE (targa=? AND id_agenzia=?);";
 	private StringBuffer SEARCH_DYNAMIC = new StringBuffer("SELECT * FROM auto WHERE (");
 			
-	
+	/**
+	 * Costruttore per la classe
+	 * @param db
+	 * @throws DatabaseConnectionException
+	 */
 	public DAOTableAuto(DbAccess db) throws DatabaseConnectionException
 	{
 		db.initConnection();
 		con = db.getConnection();
 	}
 	
+	/**
+	 * Inserisce una nuova auto nel database
+	 * @param auto la nuova automobile
+	 * @return 1 se la query e' andata a buon fine
+	 * @throws SQLException
+	 */
 	public int insert(Auto auto) throws SQLException
 	{
 		PreparedStatement stat = con.prepareStatement(INSERT);
@@ -51,6 +67,13 @@ public class DAOTableAuto
 		return result;
 	}
 	
+	/**
+	 * Cerca le auto che saranno disponibili dopo 
+	 * x data
+	 * @param dataEnd data di riferimento
+	 * @return ArrayList<Auto> un ArrayList contenente le auto trovate
+	 * @throws SQLException
+	 */
 	public List<Auto> searchFreeAfterData(String dataEnd) throws SQLException
 	{
 		ResultSet rs = null;
@@ -81,6 +104,14 @@ public class DAOTableAuto
 		return auto;
 	}
 	
+	/**
+	 * Ricerca tutte le auto di una certa categoria disponibili
+	 * a partire da una x data
+	 * @param fascia la fascia dell'auto
+	 * @param dateStart data di riferimento
+	 * @return ArrayList<Auto> un ArrayList contenente tutte le auto trovate
+	 * @throws SQLException
+	 */
 	public List<Auto> searchFree(TypeSection fascia, String dateStart) throws SQLException
 	{
 		List<Auto> cars = new ArrayList<Auto>();
@@ -100,6 +131,12 @@ public class DAOTableAuto
 		return cars;
 	}
 	
+	/**
+	 * Aggiorna lo stato di un auto
+	 * @param state stato in cui settare
+	 * @param targa targa dell'auto di riferimento
+	 * @throws SQLException
+	 */
 	public void updateState(int state, String targa) throws SQLException
 	{
 		PreparedStatement stat = con.prepareStatement(UPDATE_STATE);
@@ -109,6 +146,12 @@ public class DAOTableAuto
 		stat.close();
 	}
 	
+	/**
+	 * Aggiorna i chilometri di un automobile
+	 * @param km km da settare
+	 * @param targa targa dell'auto di riferimento
+	 * @throws SQLException
+	 */
 	public void updateKm(int km, String targa) throws SQLException
 	{
 		PreparedStatement stat = con.prepareStatement(UPDATE_KM);
@@ -118,6 +161,12 @@ public class DAOTableAuto
 		stat.close();
 	}
 	
+	/**
+	 * Aggiorna l'agenzia in cui l'auto si trova
+	 * @param idAgency numero dell'agenzia da settare
+	 * @param targa targa dell'auto di riferimento
+	 * @throws SQLException
+	 */
 	public void updateAgency(String idAgency, String targa) throws SQLException
 	{
 		PreparedStatement stat = con.prepareStatement(UPDATE_AGENCY);
@@ -127,6 +176,13 @@ public class DAOTableAuto
 		stat.close();
 	}
 	
+	/**
+	 * Seleziona un auto in base alla targa
+	 * @param targa la targa dell'auto
+	 * @return Auto oggetto di tipo Auto
+	 * @throws SQLException
+	 * @throws DatabaseConnectionException
+	 */
 	public Auto selectByTarga(String targa) throws SQLException, DatabaseConnectionException
 	{
 		Auto auto = null;
@@ -145,6 +201,13 @@ public class DAOTableAuto
 		return auto;
 	}
 	
+	/**
+	 * Cancella un auto dal database
+	 * @param targa targa dell'auto
+	 * @param agency numero di agenzia in cui si trova l'auto
+	 * @return 1 se la query e' andata a buon fine
+	 * @throws SQLException
+	 */
 	public int deleteAutoByTargaAndAgency(String targa, String agency) throws SQLException
 	{
 			int result = 0;
@@ -156,6 +219,14 @@ public class DAOTableAuto
 			return result;
 	}
 	
+	/**
+	 * Funzione che effettua una ricerca con una 
+	 * lista di campi passati come parametro
+	 * @param params lista di campi
+	 * @return ArrayList<Auto> ArrayList contenente i clienti trovati
+	 * @throws SQLException
+	 * @throws DatabaseConnectionException
+	 */
 	public ArrayList<Auto> dynamicSearch(ArrayList<KeyValuePair<String,?>> params) throws SQLException, DatabaseConnectionException
 	{
 		ArrayList<Auto> cars = new ArrayList<Auto>();

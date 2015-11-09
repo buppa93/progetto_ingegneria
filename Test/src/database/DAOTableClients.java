@@ -10,6 +10,12 @@ import utility.KeyValuePair;
 import view.SQLWarning;
 import entity.Client;
 
+/**
+ * Questa classe modella la tabella clienti del 
+ * database seguendo il pattern DAO
+ * @author giuseppe
+ *
+ */
 public class DAOTableClients 
 {
 	DbAccess db;
@@ -20,13 +26,23 @@ public class DAOTableClients
 	private static final String REMOVE = "DELETE FROM clienti WHERE telefono = ?;";
 	private StringBuffer SEARCH_DYNAMIC = new StringBuffer("SELECT * FROM clienti WHERE ");
 	
-	
+	/**
+	 * Costruttore per la classe
+	 * @param db
+	 * @throws DatabaseConnectionException
+	 */
 	public DAOTableClients(DbAccess db) throws DatabaseConnectionException
 	{
 		db.initConnection();
 		con = db.getConnection();
 	}
 	
+	/**
+	 * Inserisce un nuovo cliente nel database
+	 * @param c cliente da inserire
+	 * @return 1 se la query e' andata a buon fine
+	 * @throws SQLException
+	 */
 	public int insert(Client c) throws SQLException
 	{
 		int result = 0;
@@ -39,6 +55,14 @@ public class DAOTableClients
 		return result;
 	}
 	
+	/**
+	 * Ricerca di un cliente
+	 * @param name nome cliente
+	 * @param surname cognome cliente
+	 * @param phone telefono cliente
+	 * @return il cliente trivato
+	 * @throws SQLException
+	 */
 	public Client search(String name, String surname, String phone) throws SQLException
 	{
 		Client c = null;
@@ -55,6 +79,13 @@ public class DAOTableClients
 		return c;
 	}
 	
+	/**
+	 * Cerca un cliente in base al numero
+	 * di telefono
+	 * @param phone numero di telefono del cliente
+	 * @return il cliente trovato
+	 * @throws SQLException
+	 */
 	public Client searchClientByPhone(String phone) throws SQLException
 	{
 		Client client = null;
@@ -68,7 +99,13 @@ public class DAOTableClients
 		stat.close();
 		return client;
 	}
-	
+	/**
+	 * Funzione che effettua una ricerca attraverso una 
+	 * lista di campi passati come parametro
+	 * @param params lista di campi
+	 * @return ArrayList<Client> ArrayList contenente i clienti trovati
+	 * @throws SQLException
+	 */
 	public ArrayList<Client> dynamicSearch(ArrayList<KeyValuePair<String,String>> params) throws SQLException
 	{
 		ArrayList<Client> clients = new ArrayList<Client>();
@@ -115,6 +152,11 @@ public class DAOTableClients
 		return clients;
 	}
 	
+	/**
+	 * Elimina un cliente dal database
+	 * @param phone numero telefono cliente
+	 * @throws SQLException
+	 */
 	public void delete(String phone) throws SQLException
 	{
 		PreparedStatement stat = con.prepareStatement(REMOVE);

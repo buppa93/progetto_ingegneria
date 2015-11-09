@@ -6,6 +6,11 @@ import java.sql.SQLException;
 
 import view.SQLWarning;
 
+/**
+ * Classe che implementa la connesione al database
+ * @author giuseppe
+ *
+ */
 public class DbAccess 
 {
 	private String DRIVER_CLASS_NAME = "org.gjt.mm.mysql.Driver";
@@ -17,6 +22,10 @@ public class DbAccess
 	private final String PASSWORD = "";
 	private Connection conn;
 	
+	/**
+	 * Inizia la connessione
+	 * @throws DatabaseConnectionException
+	 */
 	public void initConnection() throws DatabaseConnectionException
 	{
 		String connectionString = DBMS+"://" + SERVER + ":" + PORT + "/" + DATABASE;
@@ -38,11 +47,19 @@ public class DbAccess
 		}
 	}
 	
+	/**
+	 * Restituisce la connessione
+	 * @return Connection la connessione
+	 */
 	public Connection getConnection()
 	{
 		return this.conn;
 	}
 	
+	/**
+	 * Chiude la connessione
+	 * @throws SQLException
+	 */
 	public void closeConnection() throws SQLException
 	{
 		this.conn.close();

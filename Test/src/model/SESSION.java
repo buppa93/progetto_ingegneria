@@ -6,6 +6,9 @@ import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import utility.KeyValuePair;
+import view.GenericWarning;
+import view.LoginDialog;
+import javafx.stage.Stage;
 
 import javax.xml.parsers.*;
 
@@ -47,5 +50,14 @@ public class SESSION
         properties.add(indirizzo);
         
 		return properties;
+	}
+	
+	public boolean validateUsr()
+	{
+		if(usr.getIdAgency().equals(filiale.getNumber()))
+			return true;
+		else
+			return false;
+		
 	}
 }

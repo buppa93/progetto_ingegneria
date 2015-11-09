@@ -10,9 +10,15 @@ import java.util.StringTokenizer;
  */
 public class Agency 
 {
-	String number;
-	String name;
-	String address;
+	
+	/**
+	 * @param number numero dell'agenzia
+	 * @param name nome dell'agenzia
+	 * @param indirizzo dell'agenzia
+	 */
+	private String number;
+	private String name;
+	private String address;
 
 	/**
 	 *  Costruttore che inizializza gli attributi della 

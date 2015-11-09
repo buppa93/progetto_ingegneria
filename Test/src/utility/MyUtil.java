@@ -12,8 +12,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
-
-import view.GenericWarning;
 import database.DbAccess;
 
 public class MyUtil 
@@ -27,18 +25,11 @@ public class MyUtil
 	  * input
 	  * @param     input la stringa da trasformare
 	  * @return    stringa in codifica md5
+	 * @throws NoSuchAlgorithmException 
 	  */
-	public static String getMD5(String input) 
+	public static String getMD5(String input) throws NoSuchAlgorithmException 
 	{
-		MessageDigest md = null;
-		try 
-		{
-			md = MessageDigest.getInstance("MD5");
-		} 
-		catch (NoSuchAlgorithmException e1) 
-		{
-			new GenericWarning("Errore Runtime", "Errore di Runtime").start();
-		}
+		MessageDigest md = MessageDigest.getInstance("MD5");
 		byte[] messageDigest = md.digest(input.getBytes());
         BigInteger number = new BigInteger(1, messageDigest);
 		StringBuffer hashtext = new StringBuffer(number.toString(16));
@@ -49,7 +40,11 @@ public class MyUtil
             StringBuffer tmp = new StringBuffer("0");
             tmp.append(hashtext);
             hashtext = tmp;
+<<<<<<< HEAD
+            length = hashtext.length();
+=======
             length=hashtext.length();
+>>>>>>> refs/remotes/origin/DAOImplementation
         }
         return hashtext.toString();
     }
@@ -61,10 +56,10 @@ public class MyUtil
 	  * @param     name nome dell'utente
 	  * @param     pwd password dell'utente non in md5
 	  * @return    true se l'utente e' stato riconosciuto false altrimenti
+	 * @throws NoSuchAlgorithmException 
 	  */
-	public static boolean login (DbAccess db, String name, String pwd) throws SQLException
+	public static boolean login (DbAccess db, String name, String pwd) throws SQLException, NoSuchAlgorithmException
 	{
-		//return true;
 		Connection con = db.getConnection();
 		String md5 = MyUtil.getMD5(pwd);
 		PreparedStatement stat = con.prepareStatement(query);

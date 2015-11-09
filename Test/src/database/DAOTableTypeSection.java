@@ -8,6 +8,12 @@ import java.sql.ResultSet;
 
 import entity.TypeSection;
 
+/**
+ * Questa classe modella la tabella fascia del 
+ * database seguendo il pattern DAO
+ * @author giuseppe
+ *
+ */
 public class DAOTableTypeSection 
 {
 	DbAccess db;
@@ -16,6 +22,10 @@ public class DAOTableTypeSection
 	private static final String FIND_BY_TYPE = "SELECT * FROM fascia WHERE tipo_vettura = ? ;";
 	private static final String FIND_BY_NAME = "SELECT * FROM fascia WHERE nome = ? ;";
 	
+	/**
+	 * Costruttore per la classe
+	 * @throws DatabaseConnectionException
+	 */
 	public DAOTableTypeSection() throws DatabaseConnectionException
 	{
 		db = new DbAccess();
@@ -23,6 +33,11 @@ public class DAOTableTypeSection
 		con = db.getConnection();
 	}
 	
+	/**
+	 * Inserisce una nuova fascia nel database
+	 * @param section la fascia da inserire
+	 * @throws SQLException
+	 */
 	public void insert(TypeSection section) throws SQLException
 	{
 		PreparedStatement stat = null;
@@ -35,6 +50,12 @@ public class DAOTableTypeSection
 		stat.close();
 	}
 	
+	/**
+	 * Cerca una fascia in base al tipo
+	 * @param type utilitaria/berlina/autocarro/monovolume
+	 * @return la fascia trovata
+	 * @throws SQLException
+	 */
 	public TypeSection findByType(String type) throws SQLException 
 	{
 		PreparedStatement stat = null;
@@ -51,6 +72,12 @@ public class DAOTableTypeSection
 		return result;
 	}
 	
+	/**
+	 * Cerca una fascia in base al nome
+	 * @param name A/B/C/D
+	 * @return la fascia trovata
+	 * @throws SQLException
+	 */
 	public TypeSection findByName(String name) throws SQLException 
 	{
 		PreparedStatement stat = null;
@@ -67,26 +94,12 @@ public class DAOTableTypeSection
 		return result;
 	}
 	
+	/**
+	 * Chiude la connessione
+	 * @throws SQLException
+	 */
 	public void closeConncetion() throws SQLException
 	{
 		con.close();
 	}
-	
-	/*public static void main(String args[]) throws DatabaseConnectionException, SQLException
-	{
-		System.out.println("############## TEST FASCIA DAO ###########");
-		System.out.println("Inizializzo l'accesso al db.");
-		DbAccess db = new DbAccess();
-		db.initConnection();
-		System.out.println("Provo ad inserire un nuovo record.");
-		System.out.println("\"C - 9 - 9 - Test\"");
-		System.out.println("Creo un'istanza della classe DAO");
-		DAOTableTypeSection tts = new DAOTableTypeSection(db);
-		tts.insert(new TypeSection("C",9,9,"Test"));
-		System.out.println("Ricerco il record appena inserito.");
-		TypeSection ts = tts.findByType("Test");
-		System.out.println("Trovato: "+ts.toString());
-		tts.closeConncetion();
-		db.closeConnection();
-	}*/
 }

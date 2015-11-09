@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import utility.KeyValuePair;
 import entity.Agency;
 
+/**
+ * Questa classe modella la tabella agenzie del 
+ * database seguendo il pattern DAO
+ * @author giuseppe
+ *
+ */
 public class DAOTableAgency 
 {
 	DbAccess db;
@@ -19,12 +25,23 @@ public class DAOTableAgency
 	private static final String SEARCH_BY_NUMBER_NAME = "SELECT * FROM agenzie WHERE (numero=? AND nome=?);";
 	private StringBuffer SEARCH_DYNAMIC = new StringBuffer("SELECT * FROM clienti WHERE ");
 	
+	/**
+	 * Costruttore per la classe
+	 * @param db 
+	 * @throws DatabaseConnectionException
+	 */
 	public DAOTableAgency(DbAccess db) throws DatabaseConnectionException
 	{
 		db.initConnection();
 		con = db.getConnection();
 	}
 	
+	/**
+	 * Preleva tutte le agenzie presenti nella 
+	 * tabella
+	 * @return ArrayList<Agency> Lista contenente le agenzie																
+	 * @throws SQLException
+	 */
 	public ArrayList<Agency> getAllAgency() throws SQLException
 	{
 		ArrayList<Agency> agencies = new ArrayList<Agency>();

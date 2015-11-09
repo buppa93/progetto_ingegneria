@@ -7,6 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import entity.TypeContract;
 
+/**
+ * Questa classe modella la tabella tipo_contratto del 
+ * database seguendo il pattern DAO
+ * @author giuseppe
+ *
+ */
 public class DAOTableTypeContract 
 {
 	DbAccess db;
@@ -21,12 +27,22 @@ public class DAOTableTypeContract
 	private static final String SELECT_ALL = "SELECT * FROM tipo_contratto;";
 	private static final String SELECT_KM = "SELECT km FROM tipo_contratto WHERE id_tipo=?;";
 	
+	/**
+	 * Costruttore per la classe
+	 * @param db
+	 * @throws DatabaseConnectionException
+	 */
 	public DAOTableTypeContract(DbAccess db) throws DatabaseConnectionException
 	{
 		db.initConnection();
 		con = db.getConnection();
 	}
 	
+	/**
+	 * Inserisce un nuovo tipo di contratto
+	 * @param typeC tipo di contratto da inserire
+	 * @throws SQLException
+	 */
 	public void insert(TypeContract typeC) throws SQLException
 	{
 		PreparedStatement stat = con.prepareStatement(INSERT);
@@ -41,6 +57,12 @@ public class DAOTableTypeContract
 		stat.close();
 	}
 	
+	/**
+	 * Preleva tutti i tipi di contratto 
+	 * presenti sul database
+	 * @return ArrayList<TypeContract> ArrayList contenente i tipi di contratto presenti nel database
+	 * @throws SQLException
+	 */
 	public ArrayList<TypeContract> getAll() throws SQLException
 	{
 		ArrayList<TypeContract> all = new ArrayList<TypeContract>();
@@ -57,6 +79,15 @@ public class DAOTableTypeContract
 		return all;
 	}
 	
+	/**
+	 * Ricava un tipo di contratto cercato in base ai parametri
+	 * @param typeNol tipo di noleggio Giornaliero/settimanale
+	 * @param typeKm tipo di chilometraggio limitato/illimitato
+	 * @param fascia la fascia dell'automobile A/B/C/D
+	 * @param km massimi km percorribili
+	 * @return il tipo di contratto trovato
+	 * @throws SQLException
+	 */
 	public TypeContract selectTypeContract(String typeNol, String typeKm, String fascia, int km) throws SQLException
 	{
 		TypeContract typeC = null;
@@ -82,6 +113,12 @@ public class DAOTableTypeContract
 		return typeC;
 	}
 	
+	/**
+	 * Ritorna il nome del tipo di contratto 
+	 * @param id id del tipo di contratto
+	 * @return String stringa contenente il nome del tipo di contratto
+	 * @throws SQLException
+	 */
 	public String getTypeContractNameById(String id) throws SQLException
 	{
 		ResultSet rs = null;
@@ -96,6 +133,12 @@ public class DAOTableTypeContract
 		return tipoNol;
 	}
 	
+	/**
+	 * Ritorna il tipo di chilometraggio
+	 * @param id id del tipo di contratto
+	 * @return String limitato/illimitato
+	 * @throws SQLException
+	 */
 	public String getTypeKmById(String id) throws SQLException
 	{
 		ResultSet rs = null;
@@ -110,6 +153,12 @@ public class DAOTableTypeContract
 		return tipoKm;
 	}
 	
+	/**
+	 * Ritorma i massimi km percorribili
+	 * @param id id del tipo di contratto
+	 * @return int massimi km percorribili
+	 * @throws SQLException
+	 */
 	public int getKmById(String id) throws SQLException
 	{
 		ResultSet rs = null;
@@ -124,6 +173,12 @@ public class DAOTableTypeContract
 		return km;
 	}
 	
+	/**
+	 * Ritorna il prezzo per km 
+	 * @param id id del tipo di contratto
+	 * @return double il prezzo per km
+	 * @throws SQLException
+	 */
 	public double getPricePerKmById(String id) throws SQLException
 	{
 		double pricePerKm = 0;
@@ -138,6 +193,10 @@ public class DAOTableTypeContract
 		return pricePerKm;
 	}
 	
+	/**
+	 * Chiude la connessione
+	 * @throws SQLException
+	 */
 	public void closeConncetion() throws SQLException
 	{con.close();}
 }

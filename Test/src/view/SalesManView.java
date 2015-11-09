@@ -17,9 +17,25 @@ public class SalesManView extends Application
 {
 	public static SESSION session;
 	
-	public SalesManView(User usr) throws ParserConfigurationException, SAXException, IOException
+	public SalesManView(User usr) throws Exception
 	{
 		session = new SESSION(usr);
+		if(session.validateUsr())
+		{
+			start(new Stage());
+		}
+		else
+		{
+			new GenericWarning("Attenzione", "Non puoi loggarti in questa agenzia.").start();
+			LoginDialog login = new LoginDialog();
+			try 
+			{
+				login.start(new Stage());
+			} catch (IOException e) 
+			{
+				new GenericWarning("Errore","GenericException").start();
+			}
+		}
 	}
     
     public void start(Stage stage) throws Exception 
