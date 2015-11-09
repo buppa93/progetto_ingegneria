@@ -49,6 +49,7 @@ public class MyUtil
             StringBuffer tmp = new StringBuffer("0");
             tmp.append(hashtext);
             hashtext = tmp;
+            length=hashtext.length();
         }
         return hashtext.toString();
     }

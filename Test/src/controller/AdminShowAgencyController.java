@@ -2,7 +2,6 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import entity.Agency;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +18,6 @@ public class AdminShowAgencyController implements Initializable
 		Agency agency= new Agency();
 		showagency_list= new ListView<>();
 		ObservableList<String> items =FXCollections.observableArrayList(agency.toString());
-		showagency_list.setItems(items);
+		showagency_list.setItems(items);	
 	}
-
 }
