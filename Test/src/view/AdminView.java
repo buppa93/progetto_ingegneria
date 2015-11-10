@@ -1,9 +1,7 @@
 package view;
-
-<<<<<<< HEAD
-import java.io.IOException;import model.SESSION;
+import java.io.IOException;
+import model.SESSION;
 import entity.User;
-=======
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,7 +11,6 @@ import model.SESSION;
 import org.xml.sax.SAXException;
 
 import entity.User;
->>>>>>> refs/heads/DAOTableTypeSection
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,7 +18,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
  
 public class AdminView extends Application 
-<<<<<<< HEAD
 {
 public static SESSION session;
 	
@@ -45,33 +41,6 @@ public static SESSION session;
 			}
 		}
 	}
-	
-=======
-{
-public static SESSION session;
-	
-	public AdminView(User usr) throws Exception
-	{
-		session = new SESSION(usr);
-		if(session.validateUsr())
-		{
-			start(new Stage());
-		}
-		else
-		{
-			new GenericWarning("Attenzione", "Non puoi loggarti in questa agenzia.").start();
-			LoginDialog login = new LoginDialog();
-			try 
-			{
-				login.start(new Stage());
-			} catch (IOException e) 
-			{
-				new GenericWarning("Errore","GenericException").start();
-			}
-		}
-	}
-    
->>>>>>> refs/heads/DAOTableTypeSection
     public void start(Stage stage) throws Exception 
     {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLAdminView.fxml"));
